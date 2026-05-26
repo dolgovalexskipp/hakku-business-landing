@@ -13,7 +13,7 @@ const Hero = () => {
         @keyframes hakku-fade-up { from { opacity: 0; transform: translateY(16px) } to { opacity: 1; transform: translateY(0) } }
       `}</style>
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <div style={{ maxWidth: 920, animation: 'hakku-fade-up 600ms cubic-bezier(0.2, 0.8, 0.2, 1) both' }}>
+        <div style={{ maxWidth: 940, animation: 'hakku-fade-up 600ms cubic-bezier(0.2, 0.8, 0.2, 1) both' }}>
           <span style={{
             display: 'inline-flex', alignItems: 'center', gap: 10,
             fontSize: 13, color: 'rgba(0, 0, 0, .75)',
@@ -22,7 +22,7 @@ const Hero = () => {
             background: 'rgba(255,255,255,.6)',
           }}>
             <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#2A3EF4' }}/>
-            Первая когорта · старт 8 июня 2026
+            Открытие клуба · 8 июня 2026
           </span>
           <h1 style={{
             fontFamily: 'Tektur, sans-serif',
@@ -30,17 +30,19 @@ const Hero = () => {
             lineHeight: 0.98, letterSpacing: '-0.02em',
             margin: '0 0 32px', fontWeight: 400, color: '#000',
           }}>
-            Превратите компанию<br/>в <span style={{ color: '#2A3EF4' }}>AI-native</span> —<br/>не в одиночку.
+            Среда, где <span style={{ color: '#2A3EF4' }}>AI</span><br/>
+            работает на прибыль<br/>
+            Вашего бизнеса.
           </h1>
           <p style={{
-            fontSize: 20, color: 'rgba(0, 0, 0, .72)', lineHeight: 1.5,
-            maxWidth: 640, margin: '0 0 44px',
+            fontSize: 19, color: 'rgba(0, 0, 0, .72)', lineHeight: 1.55,
+            maxWidth: 680, margin: '0 0 44px',
           }}>
-            Закрытый клуб собственников малого и среднего бизнеса, которые делают это прямо сейчас. Методология та же, что мы поставили Яндексу и крупнейшим корпорациям России — формат для Вашего масштаба.
+            Закрытый клуб собственников. Каждую неделю практикующие профессионалы разбирают, где в бизнесе AI растит прибыль — а не просто экономит часы. По этой же методологии команда Hakku обучает Яндекс и крупнейшие корпорации России.
           </p>
           <a href="#cta">
             <button style={{ ...btnStyles.primary, fontSize: 16, padding: '18px 36px' }}>
-              Войти в первую когорту →
+              Войти в клуб →
             </button>
           </a>
         </div>
@@ -53,7 +55,7 @@ const Hero = () => {
         }}>
           <span style={{ fontFamily: 'Tektur, sans-serif', fontSize: 36, lineHeight: 1, letterSpacing: '-0.02em', color: '#000' }}>71%</span>
           <span style={{ fontSize: 15, color: 'rgba(0,0,0,.78)', lineHeight: 1.55 }}>
-            крупных компаний РФ уже применяют ИИ. Большинство — точечно, без эффекта на прибыль. Окно для перестройки бизнеса всё ещё открыто.
+            крупных компаний РФ уже применяют AI. Большинство — точечно, без эффекта на прибыль. Здесь Вы получаете методику и людей, которые помогают довести AI до результата в деньгах.
             <span style={{ display: 'block', fontSize: 12, color: 'rgba(0,0,0,.45)', marginTop: 4 }}>
               Яков и Партнёры × Yandex B2B Tech · 2025
             </span>

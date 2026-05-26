@@ -38,7 +38,7 @@ const Nav = () => {
           <a key={label} href={href} style={{ color: 'inherit' }}>{label}</a>
         ))}
       </div>
-      <a href="#cta"><button style={btnStyles.primary}>В первую когорту →</button></a>
+      <a href="#cta"><button style={btnStyles.primary}>Войти в клуб →</button></a>
     </nav>
   );
 };

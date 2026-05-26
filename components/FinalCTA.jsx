@@ -18,7 +18,7 @@ const FinalCTA = () => {
           fontSize: 14, color: 'rgba(0,0,0,.7)', lineHeight: 1.5,
           marginBottom: 28,
         }}>
-          ИИ — новый технологический цикл. Как ПК в 1993-м или iPhone в 2007-м. Окно для перестройки бизнеса всё ещё открыто.
+          AI меняется каждый месяц. Подписка обновляет методику в этом же темпе.
         </div>
         <h2 style={{
           fontFamily: 'Tektur, sans-serif',
@@ -26,18 +26,18 @@ const FinalCTA = () => {
           lineHeight: 1, letterSpacing: '-0.02em',
           margin: '0 auto 28px', fontWeight: 400, maxWidth: 1080, color: '#000',
         }}>
-          Запустите ИИ-трансформацию<br/>
-          <span style={{ color: '#FD7202' }}>в первой когорте.</span>
+          Откройте Hakku.ai / Бизнес<br/>
+          <span style={{ color: '#FD7202' }}>для своей компании.</span>
         </h2>
         <p style={{
           fontSize: 18, color: 'rgba(0,0,0,.7)', lineHeight: 1.55,
           margin: '0 auto 40px', maxWidth: 720,
         }}>
-          Первая когорта собственников малого и среднего бизнеса стартует 8 июня. Рядом — фаундеры Hakku и собственники, которые проходят тот же путь.
+          Клуб открывается 8 июня. С этого дня — еженедельные разборы, библиотека методик, доступ к команде Hakku и собственникам, которые делают свои компании AI-native. Подписка открыта в любой момент.
         </p>
-        <a href="#"><button style={{ ...btnStyles.primary, fontSize: 17, padding: '20px 40px' }}>Войти в первую когорту →</button></a>
+        <a href="#"><button style={{ ...btnStyles.primary, fontSize: 17, padding: '20px 40px' }}>Войти в клуб →</button></a>
         <div style={{ marginTop: 20, fontSize: 13, color: 'rgba(0,0,0,.55)' }}>
-          Открытый онбординг в Telegram-боте · без обязательств до запуска
+          Открытый онбординг в Telegram-боте · без обязательств до подписки
         </div>
       </div>
     </section>

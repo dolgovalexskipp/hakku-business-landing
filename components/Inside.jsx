@@ -52,17 +52,17 @@ const Inside = () => {
     <section id="inside" style={{ padding: '140px 0', borderTop: '1px solid rgba(0,0,0,.06)' }}>
       <div className="container">
         <div style={{ marginBottom: 64, maxWidth: 980 }}>
-          <div className="eyebrow-tag" style={{ marginBottom: 32 }}>Инфраструктура трансформации</div>
+          <div className="eyebrow-tag" style={{ marginBottom: 32 }}>Что Вы получаете</div>
           <h2 style={{
             fontFamily: 'Tektur, sans-serif',
             fontSize: 'clamp(2.4rem, 5vw, 4rem)',
             lineHeight: 1.05, letterSpacing: '-0.02em',
             margin: '0 0 24px', fontWeight: 400, color: '#000',
           }}>
-            На чём держится результат каждый месяц.
+            Каждый месяц — материалы и люди, которые приводят к прибыли.
           </h2>
           <p style={{ fontSize: 17, color: 'rgba(0,0,0,.6)', lineHeight: 1.55, margin: 0, maxWidth: 760 }}>
-            Не разовый курс и не «доступ к чату» — а постоянная инфраструктура: воркшопы под Ваши процессы, прикладные артефакты, прямой контакт с командой Hakku и собственниками, которые проходят тот же путь.
+            Не разовый курс и не «доступ к чату». Регулярные разборы, воркшопы под Ваши процессы и прямой контакт с командой Hakku и собственниками, которые проходят тот же путь.
           </p>
         </div>
 
