@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ru" data-brand="community">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hakku.ai / Бизнес — рост прибыли через ИИ-трансформацию</title>
+  <meta name="description" content="Закрытый клуб для собственников малого и среднего бизнеса, которые системно внедряют ИИ. Запуск 8 июня 2026.">
+  <link rel="stylesheet" href="./design_system/colors_and_type.css">
+  <style>
+    html, body { margin: 0; padding: 0; background: #000; color: #fff; }
+    * { box-sizing: border-box; }
+    a { color: inherit; text-decoration: none; }
+    section { position: relative; }
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 56px; }
+    .eyebrow-tag { font-size: 12px; color: rgba(255,255,255,.5); letter-spacing: 0.06em; text-transform: uppercase; }
+    @media (max-width: 768px) {
+      .container { padding: 0 24px; }
+    }
+  </style>
+  <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" src="./components/Nav.jsx"></script>
+  <script type="text/babel" src="./components/Hero.jsx"></script>
+  <script type="text/babel" src="./components/Idea.jsx"></script>
+  <script type="text/babel" src="./components/Inside.jsx"></script>
+  <script type="text/babel" src="./components/Program.jsx"></script>
+  <script type="text/babel" src="./components/Pricing.jsx"></script>
+  <script type="text/babel" src="./components/Founders.jsx"></script>
+  <script type="text/babel" src="./components/FinalCTA.jsx"></script>
+  <script type="text/babel" src="./components/Footer.jsx"></script>
+  <script type="text/babel">
+    const App = () => (
+      <>
+        <Nav/>
+        <Hero/>
+        <Idea/>
+        <Inside/>
+        <Program/>
+        <Pricing/>
+        <Founders/>
+        <FinalCTA/>
+        <Footer/>
+      </>
+    );
+    ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+  </script>
+</body>
+</html>
