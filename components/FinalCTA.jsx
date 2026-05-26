@@ -9,7 +9,15 @@ const FinalCTA = () => {
           animation: 'hakku-spin 110s linear infinite',
         }}/>
       <div className="container" style={{ position: 'relative', textAlign: 'center' }}>
-        <div className="eyebrow-tag" style={{ marginBottom: 32 }}>Запуск 8 июня 2026</div>
+        <div style={{
+          display: 'inline-block', maxWidth: 720,
+          padding: '14px 24px', borderRadius: 999,
+          background: 'rgba(0,0,0,.06)', border: '1px solid rgba(0,0,0,.1)',
+          fontSize: 14, color: 'rgba(0,0,0,.7)', lineHeight: 1.5,
+          marginBottom: 28,
+        }}>
+          ИИ — новый технологический цикл. Как ПК в 1993-м или iPhone в 2007-м.
+        </div>
         <h2 style={{
           fontFamily: 'Tektur, sans-serif',
           fontSize: 'clamp(2.6rem, 6vw, 5rem)',
