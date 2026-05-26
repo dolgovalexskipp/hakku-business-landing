@@ -34,11 +34,11 @@ const Nav = () => {
         </span>
       </a>
       <div style={{ display: 'flex', alignItems: 'center', gap: 28, fontSize: 14, color: 'rgba(0, 0, 0, .75)' }}>
-        {[['Идея', '#idea'], ['Что внутри', '#inside'], ['Тарифы', '#pricing'], ['Команда', '#founders']].map(([label, href]) => (
+        {[['Куда движетесь', '#direction'], ['Что помогает', '#inside'], ['Тарифы', '#pricing'], ['Команда', '#founders']].map(([label, href]) => (
           <a key={label} href={href} style={{ color: 'inherit' }}>{label}</a>
         ))}
       </div>
-      <a href="#cta"><button style={btnStyles.primary}>Войти →</button></a>
+      <a href="#cta"><button style={btnStyles.primary}>В первую когорту →</button></a>
     </nav>
   );
 };
