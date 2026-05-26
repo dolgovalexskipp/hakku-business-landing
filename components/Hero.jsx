@@ -47,11 +47,26 @@ const Hero = () => {
         <div style={{
           marginTop: 80, paddingTop: 32,
           borderTop: '1px solid rgba(0,0,0,.08)',
-          maxWidth: 880, display: 'flex', alignItems: 'center', gap: 16,
+          maxWidth: 940, display: 'grid',
+          gridTemplateColumns: 'auto 1fr',
+          columnGap: 48, rowGap: 28, alignItems: 'baseline',
         }}>
-          <span style={{ fontSize: 13, color: 'rgba(0,0,0,.5)', letterSpacing: '0.04em' }}>УЖЕ УЧИМ</span>
-          <span style={{ fontSize: 15, color: 'rgba(0,0,0,.85)' }}>
-            Яндекс и крупнейшие корпорации России — методология та же, формат для SMB.
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 14 }}>
+            <span style={{ fontFamily: 'Tektur, sans-serif', fontSize: 44, lineHeight: 1, letterSpacing: '-0.02em', color: '#000' }}>71%</span>
+            <span style={{ fontSize: 14, color: 'rgba(0,0,0,.5)', letterSpacing: '0.04em' }}>УЖЕ ЗДЕСЬ</span>
+          </div>
+          <span style={{ fontSize: 15, color: 'rgba(0,0,0,.78)', lineHeight: 1.5 }}>
+            крупных компаний РФ применяют ИИ хотя бы в одной бизнес-функции. Большинство — точечно, без эффекта на прибыль. Мы про оставшиеся проценты.
+            <span style={{ display: 'block', fontSize: 12, color: 'rgba(0,0,0,.45)', marginTop: 4 }}>
+              Яков и Партнёры × Yandex B2B Tech · «Искусственный интеллект в России — 2025»
+            </span>
+          </span>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 14 }}>
+            <span style={{ fontFamily: 'Tektur, sans-serif', fontSize: 22, lineHeight: 1, letterSpacing: '-0.01em', color: '#000' }}>Hakku</span>
+            <span style={{ fontSize: 14, color: 'rgba(0,0,0,.5)', letterSpacing: '0.04em' }}>УЖЕ УЧИТ</span>
+          </div>
+          <span style={{ fontSize: 15, color: 'rgba(0,0,0,.78)', lineHeight: 1.5 }}>
+            Яндекс и крупнейшие корпорации России. Методология та же — формат адаптирован для малого и среднего бизнеса.
           </span>
         </div>
       </div>
