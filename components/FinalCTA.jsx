@@ -3,12 +3,14 @@ const FinalCTA = () => {
     <section id="cta" style={{ padding: '160px 0', borderTop: '1px solid rgba(0,0,0,.06)', position: 'relative', overflow: 'hidden' }}>
       <img src="./design_system/assets/graphic-chrome-gear.png" alt=""
         style={{
-          position: 'absolute', left: '50%', top: '50%',
-          transform: 'translate(-50%, -50%)', width: 920, height: 920,
-          objectFit: 'contain', opacity: 0.85, pointerEvents: 'none',
+          position: 'absolute',
+          right: -260, bottom: -240,
+          width: 720, height: 720,
+          objectFit: 'contain', opacity: 0.18, pointerEvents: 'none',
           animation: 'hakku-spin 110s linear infinite',
+          zIndex: 0,
         }}/>
-      <div className="container" style={{ position: 'relative', textAlign: 'center' }}>
+      <div className="container" style={{ position: 'relative', textAlign: 'center', zIndex: 1 }}>
         <div style={{
           display: 'inline-block', maxWidth: 720,
           padding: '14px 24px', borderRadius: 999,

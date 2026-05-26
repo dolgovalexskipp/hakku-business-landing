@@ -3,15 +3,16 @@ const Hero = () => {
     <section style={{ position: 'relative', padding: '120px 0 140px', overflow: 'hidden', minHeight: '80vh' }}>
       <img src="./design_system/assets/graphic-chrome-wave.png" alt=""
         style={{
-          position: 'absolute', right: -240, top: -100, width: 900, height: 900,
-          objectFit: 'contain', opacity: .92, pointerEvents: 'none',
+          position: 'absolute', right: -240, top: -100, width: 820, height: 820,
+          objectFit: 'contain', opacity: .55, pointerEvents: 'none',
           animation: 'hakku-spin 90s linear infinite',
+          zIndex: 0,
         }}/>
       <style>{`
         @keyframes hakku-spin { to { transform: rotate(360deg) } }
         @keyframes hakku-fade-up { from { opacity: 0; transform: translateY(16px) } to { opacity: 1; transform: translateY(0) } }
       `}</style>
-      <div className="container" style={{ position: 'relative' }}>
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: 880, animation: 'hakku-fade-up 600ms cubic-bezier(0.2, 0.8, 0.2, 1) both' }}>
           <span style={{
             display: 'inline-flex', alignItems: 'center', gap: 10,
