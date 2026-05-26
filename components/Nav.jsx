@@ -34,7 +34,7 @@ const Nav = () => {
         </span>
       </a>
       <div style={{ display: 'flex', alignItems: 'center', gap: 28, fontSize: 14, color: 'rgba(0, 0, 0, .75)' }}>
-        {[['Куда движетесь', '#direction'], ['Что помогает', '#inside'], ['Тарифы', '#pricing'], ['Команда', '#founders']].map(([label, href]) => (
+        {[['Этапы', '#direction'], ['Инфраструктура', '#inside'], ['Тарифы', '#pricing'], ['Команда', '#founders']].map(([label, href]) => (
           <a key={label} href={href} style={{ color: 'inherit' }}>{label}</a>
         ))}
       </div>

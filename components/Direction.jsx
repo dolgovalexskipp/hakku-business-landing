@@ -23,7 +23,7 @@ const Direction = () => {
     <section id="direction" style={{ padding: '140px 0', borderTop: '1px solid rgba(0,0,0,.06)', background: '#fafafa' }}>
       <div className="container">
         <div style={{ marginBottom: 56, maxWidth: 980 }}>
-          <div className="eyebrow-tag" style={{ marginBottom: 32 }}>Куда Вы двигаетесь</div>
+          <div className="eyebrow-tag" style={{ marginBottom: 32 }}>Этапы трансформации</div>
           <h2 style={{
             fontFamily: 'Tektur, sans-serif',
             fontSize: 'clamp(2.4rem, 5vw, 4rem)',
