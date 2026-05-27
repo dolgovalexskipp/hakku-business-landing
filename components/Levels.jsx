@@ -3,7 +3,7 @@ const Levels = () => {
     {
       n: '01',
       title: 'Личный',
-      where: 'Здесь — Вы сейчас или Ваши сотрудники',
+      where: 'Здесь — вы сейчас или ваши сотрудники',
       body: 'Применяете ChatGPT и Claude для своих задач — пишете тексты, генерите идеи. Эффект — экономия времени, без влияния на бизнес-результат.',
       tone: 'muted',
     },
@@ -26,14 +26,14 @@ const Levels = () => {
     <section style={{ padding: '140px 0', borderTop: '1px solid rgba(0,0,0,.06)' }}>
       <div className="container">
         <div style={{ marginBottom: 56, maxWidth: 980 }}>
-          <div className="eyebrow-tag" style={{ marginBottom: 32 }}>Где Вы сейчас</div>
+          <div className="eyebrow-tag" style={{ marginBottom: 32 }}>Где вы сейчас</div>
           <h2 style={{
             fontFamily: 'Tektur, sans-serif',
             fontSize: 'clamp(2.4rem, 5vw, 4rem)',
             lineHeight: 1.05, letterSpacing: '-0.02em',
             margin: '0 0 28px', fontWeight: 400, color: '#000',
           }}>
-            На каком уровне применения ИИ находится Ваш бизнес?
+            На каком уровне применения ИИ находится ваш бизнес?
           </h2>
 
           <div style={{

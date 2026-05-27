@@ -2,7 +2,7 @@ const Founders = () => {
   const people = [
     { name: 'Николай Писаренко', role: 'co-founder',           bio: 'PwC, СИБУР, СберУниверситет. Спикер 100+ конференций.' },
     { name: 'Сергей Ершов',      role: 'co-founder',           bio: 'CPO/CEO Edutoria, директор по развитию Ultimate Education.' },
-    { name: 'Саша Долгов',       role: 'co-founder · бизнес',  bio: 'Фаундер VEYRA. Практикующий предприниматель по внедрению ИИ в собственные процессы.', link: 'https://dolgovalex.com/about' },
+    { name: 'Саша Долгов',       role: 'co-founder · бИИзнес', bio: 'Фаундер VEYRA. Практикующий предприниматель по внедрению ИИ в собственные процессы.', link: 'https://dolgovalex.com/about' },
   ];
   return (
     <section id="founders" style={{ padding: '140px 0', borderTop: '1px solid rgba(0,0,0,.06)' }}>
@@ -15,7 +15,7 @@ const Founders = () => {
             lineHeight: 1.05, letterSpacing: '-0.02em',
             margin: 0, fontWeight: 400, color: '#000',
           }}>
-            Фаундеры клуба.
+            Фаундеры сообщества.
           </h2>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>

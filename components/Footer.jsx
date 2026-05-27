@@ -6,7 +6,7 @@ const Footer = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <img src="./design_system/assets/logo-mark.png" alt="" style={{ width: 26, height: 26, objectFit: 'contain' }}/>
             <span style={{ fontFamily: 'Tektur, sans-serif', fontSize: 20, letterSpacing: '-0.01em' }}>
-              hakku.ai <span style={{ color: 'rgba(0,0,0,.45)' }}>/ бизнес</span>
+              hakku.ai <span style={{ color: 'rgba(0,0,0,.45)' }}>/ бИИзнес</span>
             </span>
           </div>
           <div style={{ display: 'flex', gap: 28, fontSize: 14, color: 'rgba(0,0,0,.65)' }}>

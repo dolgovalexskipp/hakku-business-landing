@@ -26,7 +26,7 @@ const FinalCTA = () => {
           lineHeight: 1, letterSpacing: '-0.02em',
           margin: '0 auto 28px', fontWeight: 400, maxWidth: 1080, color: '#000',
         }}>
-          Откройте Hakku.ai / Бизнес<br/>
+          Откройте hakku.ai / бИИзнес<br/>
           <span style={{ color: '#FD7202' }}>для своей компании.</span>
         </h2>
         <p style={{
@@ -35,7 +35,7 @@ const FinalCTA = () => {
         }}>
           Клуб открывается 8 июня. С этого дня — еженедельные разборы, библиотека методик, доступ к команде Hakku и собственникам, которые делают свои компании AI-native. Подписка открыта в любой момент.
         </p>
-        <a href="#"><button style={{ ...btnStyles.primary, fontSize: 17, padding: '20px 40px' }}>Войти в клуб →</button></a>
+        <a href="#"><button style={{ ...btnStyles.primary, fontSize: 17, padding: '20px 40px' }}>Войти в сообщество →</button></a>
         <div style={{ marginTop: 20, fontSize: 13, color: 'rgba(0,0,0,.55)' }}>
           Открытый онбординг в Telegram-боте · без обязательств до подписки
         </div>
