@@ -26,7 +26,7 @@ const FinalCTA = () => {
           lineHeight: 1, letterSpacing: '-0.02em',
           margin: '0 auto 28px', fontWeight: 400, maxWidth: 1080, color: '#000',
         }}>
-          Откройте hakku.ai / бИИзнес<br/>
+          Откройте Хакку.ии | бИИзнес<br/>
           <span style={{ color: '#FD7202' }}>для своей компании.</span>
         </h2>
         <p style={{

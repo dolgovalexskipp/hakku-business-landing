@@ -35,13 +35,16 @@ const Nav = () => {
           .hakku-nav .hakku-nav-links { display: none !important; }
           .hakku-nav .hakku-nav-cta { padding: 10px 16px !important; font-size: 13px !important; }
           .hakku-nav .hakku-nav-brand-mark { width: 22px !important; height: 22px !important; }
-          .hakku-nav .hakku-nav-brand-text { font-size: 17px !important; }
+          .hakku-nav .hakku-nav-brand-text { font-size: 17px !important; gap: 6px !important; }
+          .hakku-nav .hakku-nav-brand-en { display: none !important; }
         }
       `}</style>
       <a href="#" className="hakku-nav-brand" style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0, minWidth: 0 }}>
         <img src="./design_system/assets/logo-mark.png" alt="" className="hakku-nav-brand-mark" style={{ width: 26, height: 26, objectFit: 'contain', flexShrink: 0 }}/>
-        <span className="hakku-nav-brand-text" style={{ fontFamily: 'Tektur, sans-serif', fontSize: 20, letterSpacing: '-0.01em', whiteSpace: 'nowrap' }}>
-          hakku.ai <span style={{ color: 'rgba(0,0,0,.45)' }}>/ бИИзнес</span>
+        <span className="hakku-nav-brand-text" style={{ fontFamily: 'Tektur, sans-serif', fontSize: 20, letterSpacing: '-0.01em', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'baseline', gap: 8 }}>
+          Хакку.ии
+          <span className="hakku-nav-brand-en" style={{ fontSize: 13, color: 'rgba(0,0,0,.45)', letterSpacing: 0 }}>(hakku.ai)</span>
+          <span style={{ color: 'rgba(0,0,0,.45)' }}>| бИИзнес</span>
         </span>
       </a>
       <div className="hakku-nav-links" style={{ display: 'flex', alignItems: 'center', gap: 28, fontSize: 14, color: 'rgba(0, 0, 0, .75)' }}>

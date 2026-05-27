@@ -1,24 +1,23 @@
 const Pricing = () => {
   const [annual, setAnnual] = React.useState(false);
 
-  // Аватары клиентов / амбассадоров привязаны к тарифам.
-  // initials — пока используем как placeholder, заменить на реальные portrait.png когда придут.
+  // Аватары амбассадоров / клиентов на тарифе. Placeholder инициалы — заменим на портреты.
   const tiers = [
     {
-      name: 'Старт',
+      name: 'ПРО',
       regular: 4990, intro: 3990,
-      users: '1 пользователь',
-      desc: 'Доступ ко всему контенту сообщества для вас одного. Определите, где в вашем бизнесе AI даст прибыль, и запустите первый инструмент лично.',
+      users: 'Только собственник',
+      desc: 'Полный доступ к сообществу для вас одного. Определите, где в вашем бизнесе AI даст прибыль, и запустите первый инструмент лично.',
       avatars: [
         { initials: 'И-1', sub: 'Имя · Отрасль' },
         { initials: 'И-2', sub: 'Имя · Отрасль' },
       ],
     },
     {
-      name: 'Рост',
+      name: 'МАКС',
       regular: 7990, intro: 5990,
-      users: 'До 3 пользователей',
-      desc: 'Вы и ядро команды. Соберите первый AI-инструмент под одну функцию — продажи, документооборот, операции — с измеримым эффектом на её результат.',
+      users: 'Собственник + 1 ответственный за AI',
+      desc: 'Вы и человек, который будет вести AI-трансформацию изнутри компании. Соберите первый AI-инструмент под одну функцию с измеримым эффектом.',
       popular: true,
       avatars: [
         { initials: 'А-1', sub: 'Имя · Компания' },
@@ -27,21 +26,10 @@ const Pricing = () => {
       ],
     },
     {
-      name: 'Масштаб',
-      regular: 14990, intro: 8990,
-      users: 'До 10 пользователей',
-      desc: 'Операционная команда подключена целиком. AI работает в нескольких функциях — рентабельность бизнеса растёт системно.',
-      avatars: [
-        { initials: 'А-4', sub: 'Имя · Компания' },
-        { initials: 'А-5', sub: 'Имя · Компания' },
-        { initials: 'А-6', sub: 'Имя · Компания' },
-      ],
-    },
-    {
-      name: 'Стратегия',
+      name: 'Компания',
       regular: null, intro: null,
-      users: '10+ пользователей',
-      desc: 'Индивидуальный формат для крупных компаний — с интеграцией сообщества под конкретные процессы.',
+      users: 'Вся команда — по договорённости',
+      desc: 'Индивидуальный формат для компаний, которые подключают операционную команду целиком. Интеграция методики сообщества под конкретные процессы.',
       avatars: [],
     },
   ];
@@ -61,6 +49,11 @@ const Pricing = () => {
 
   return (
     <section id="pricing" style={{ padding: '140px 0', borderTop: '1px solid rgba(0,0,0,.06)' }}>
+      <style>{`
+        @media (max-width: 960px) {
+          .hakku-pricing-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
       <div className="container">
         <div style={{ marginBottom: 32, display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 32 }}>
           <div style={{ maxWidth: 720 }}>
@@ -71,7 +64,7 @@ const Pricing = () => {
               lineHeight: 1.05, letterSpacing: '-0.02em',
               margin: 0, fontWeight: 400, color: '#000',
             }}>
-              Тариф под охват вашей команды.
+              Сначала вы как собственник. Потом — команда.
             </h2>
           </div>
           <div style={{ display: 'inline-flex', padding: 4, background: 'rgba(0,0,0,.04)', border: '1px solid rgba(0,0,0,.1)', borderRadius: 999 }}>
@@ -86,17 +79,16 @@ const Pricing = () => {
           </div>
         </div>
 
-        <div style={{ marginBottom: 28, fontSize: 13, color: 'rgba(0,0,0,.55)' }}>
+        <div style={{ marginBottom: 28, fontSize: 13, color: 'rgba(0,0,0,.55)', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
           <span style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
             padding: '6px 12px', borderRadius: 999,
             background: '#FD7202', color: '#fff', fontSize: 12, letterSpacing: '0.02em',
-            marginRight: 12,
-          }}>Акция</span>
-          Первый месяц по сниженной цене для всех новых участников до 26 июня.
+          }}>Early-bird</span>
+          <span>Сниженная цена для всех, кто подпишется с 8 июня по 8 июля — первого месяца жизни сообщества.</span>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
+        <div className="hakku-pricing-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
           {tiers.map((t) => {
             const popular = t.popular;
             const introPrice = annual && t.regular ? Math.round(t.regular * 0.8) : t.intro;
@@ -109,7 +101,7 @@ const Pricing = () => {
                 background: popular ? '#000' : '#fff',
                 color: popular ? '#fff' : '#000',
                 display: 'flex', flexDirection: 'column', gap: 18, position: 'relative',
-                minHeight: 460,
+                minHeight: 480,
               }}>
                 {popular && (
                   <span style={{
@@ -131,7 +123,7 @@ const Pricing = () => {
                         <div style={{
                           fontSize: 11, color: popular ? '#FCBC60' : '#FD7202',
                           letterSpacing: '0.06em', marginBottom: 4, textTransform: 'uppercase',
-                        }}>первый месяц</div>
+                        }}>early-bird · до 8 июля</div>
                       )}
                       <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
                         <div style={{ fontFamily: 'Tektur, sans-serif', fontSize: 40, lineHeight: 1, letterSpacing: '-0.02em' }}>
