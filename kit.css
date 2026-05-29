@@ -1,6 +1,8 @@
 /* ===== UI Kit · landing-specific layout helpers ===== */
 .container { max-width: 1240px; margin: 0 auto; padding: 0 56px; }
 section { position: relative; }
+/* Якорная прокрутка не должна заезжать под sticky-навигацию */
+section[id] { scroll-margin-top: 88px; }
 .section-pad { padding: 88px 0; }
 .section-line { border-top: 1px solid rgba(0,0,0,.06); }
 

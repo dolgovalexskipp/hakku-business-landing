@@ -45,7 +45,10 @@ const Team = () => {
               <div className="team-photo" style={{
                 width: '100%', aspectRatio: '1 / 1', background: '#000', overflow: 'hidden',
               }}>
-                <img src={p.photo} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}/>
+                <img src={p.photo} alt={p.name} style={{
+                  width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top',
+                  filter: 'grayscale(1) contrast(1.05)',
+                }}/>
               </div>
               <div style={{ padding: '24px 24px 28px', display: 'flex', flexDirection: 'column', gap: 12 }}>
                 <div>
