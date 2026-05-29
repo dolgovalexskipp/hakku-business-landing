@@ -23,7 +23,7 @@ const FinalCTA = () => {
   ];
   return (
     <section id="cta" data-canvas="ink" style={{ background: '#000', color: '#fff', padding: '96px 0 104px', position: 'relative', overflow: 'hidden' }}>
-      <img src="assets/graphic-chrome-gear.png" alt="" style={{
+      <img src="assets/graphic-chrome-gear.webp" alt="" style={{
         position: 'absolute', right: -220, bottom: -220, width: 620, height: 620,
         objectFit: 'contain', opacity: .55, pointerEvents: 'none',
         animation: 'hakku-spin 110s linear infinite',

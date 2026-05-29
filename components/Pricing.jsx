@@ -111,6 +111,22 @@ const Pricing = () => {
             );
           })}
         </div>
+        {/* Lifetime — горизонтальная плашка под tier-cards */}
+        <div id="lifetime" style={{
+          marginTop: 22, display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          gap: 24, flexWrap: 'wrap', padding: '22px 26px', borderRadius: 16,
+          background: 'var(--ash, #f4f4f5)', border: '1px solid rgba(0,0,0,.08)',
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 18, flexWrap: 'wrap' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', padding: '7px 14px', borderRadius: 4, background: '#000', color: '#fff', fontSize: 11, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Lifetime · до 26 июня</span>
+            <div style={{ maxWidth: 620 }}>
+              <div style={{ fontFamily: 'Tektur, sans-serif', fontSize: 18, letterSpacing: '-0.01em', color: '#000', marginBottom: 4 }}>Зафиксировать тариф навсегда</div>
+              <div style={{ fontSize: 13.5, color: 'rgba(0,0,0,.6)', lineHeight: 1.5 }}>Цена не вырастет даже после общего повышения. Ограниченное число мест — обсуждаем индивидуально на созвоне.</div>
+            </div>
+          </div>
+          <a href="#cta" style={{ fontSize: 14, color: '#000', borderBottom: '1px solid rgba(0,0,0,.3)', paddingBottom: 2, whiteSpace: 'nowrap' }}>Узнать на созвоне →</a>
+        </div>
+
         <div style={{ marginTop: 22, fontSize: 13, color: 'rgba(0,0,0,.5)' }}>
           Для топ-менеджеров корпораций есть отдельный формат — <a href="https://hakku.ai" style={{ color: '#2A3EF4', borderBottom: '1px solid rgba(42,62,244,.3)' }}>hakku.ai / Community</a> · 1 290 ₽/мес на основном сайте.
         </div>

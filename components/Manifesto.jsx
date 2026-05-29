@@ -3,7 +3,7 @@
 const Manifesto = () => {
   return (
     <section id="manifesto" data-canvas="ink" style={{ background: '#000', color: '#fff', padding: '96px 0', overflow: 'hidden', position: 'relative' }}>
-      <img src="assets/graphic-holo-knot.png" alt="" style={{
+      <img src="assets/graphic-holo-knot.webp" alt="" style={{
         position: 'absolute', right: -120, top: '50%', transform: 'translateY(-50%)', width: 540, height: 540,
         objectFit: 'contain', opacity: .55, pointerEvents: 'none',
         animation: 'hakku-spin-rev 140s linear infinite',

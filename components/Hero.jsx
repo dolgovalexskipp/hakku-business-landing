@@ -3,7 +3,7 @@ const Hero = () => {
   return (
     <section style={{ position: 'relative', padding: '80px 0 72px', overflow: 'hidden' }}>
       {/* signature holographic object — bright + present */}
-      <img className="hero-holo" src="assets/graphic-holo-torus.png" alt="" style={{
+      <img className="hero-holo" src="assets/graphic-holo-torus.webp" alt="" style={{
         position: 'absolute', right: -170, top: 90, width: 540, height: 540,
         objectFit: 'contain', pointerEvents: 'none', zIndex: 0,
         animation: 'hakku-spin 120s linear infinite, hakku-float 9s ease-in-out infinite',

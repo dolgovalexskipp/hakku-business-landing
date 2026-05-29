@@ -73,7 +73,7 @@ const Staff = () => {
 
           {/* detail panel */}
           <div style={{ border: '1px solid rgba(0,0,0,.12)', borderRadius: 24, padding: '40px 40px 36px', position: 'relative', overflow: 'hidden', minHeight: 360, display: 'flex', flexDirection: 'column' }}>
-            <img src="assets/graphic-holo-ring.png" alt="" style={{ position: 'absolute', right: -90, top: -90, width: 340, height: 340, objectFit: 'contain', opacity: .85, pointerEvents: 'none' }}/>
+            <img src="assets/graphic-holo-ring.webp" alt="" style={{ position: 'absolute', right: -90, top: -90, width: 340, height: 340, objectFit: 'contain', opacity: .85, pointerEvents: 'none' }}/>
             <div style={{ position: 'relative', zIndex: 1 }}>
               <span style={{ display: 'inline-block', fontSize: 12, fontWeight: 500, color: '#2A3EF4', border: '1px solid rgba(42,62,244,.3)', borderRadius: 999, padding: '5px 13px', marginBottom: 20 }}>{cur.tag}</span>
               <h3 style={{ fontFamily: 'Tektur, sans-serif', fontSize: 30, lineHeight: 1.1, letterSpacing: '-0.01em', margin: '0 0 28px', fontWeight: 400, color: '#000', maxWidth: 520 }}>{cur.role}</h3>
