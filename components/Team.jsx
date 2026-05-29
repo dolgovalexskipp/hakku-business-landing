@@ -11,14 +11,14 @@ const Team = () => {
       name: 'Сергей Ершов',
       role: 'co-founder · hakku.ai',
       bio: 'CPO/CEO Edutoria (EdTech Сбера). Директор по развитию Ultimate Education. Автор каналов про AI и tech.',
-      photo: 'assets/founders/sergei.png',
+      photo: 'assets/founders/sergei.jpg',
     },
     {
       name: 'Саша Долгов',
       role: 'co-founder · бИИзнес',
       bio: 'Фаундер VEYRA (голосовые AI-агенты). McKinsey → Skyeng → собственная компания, построенная с нуля как AI-native.',
       link: 'https://dolgovalex.com/about',
-      photo: 'assets/founders/alexander.png',
+      photo: 'assets/founders/alexander.jpg',
     },
   ];
   return (
@@ -43,11 +43,10 @@ const Team = () => {
               background: 'var(--ash, #f4f4f5)', border: '1px solid rgba(0,0,0,.06)',
             }}>
               <div className="team-photo" style={{
-                width: '100%', aspectRatio: '1 / 1', background: '#000', overflow: 'hidden',
+                width: '100%', aspectRatio: '1 / 1', background: '#f4f4f5', overflow: 'hidden',
               }}>
                 <img src={p.photo} alt={p.name} style={{
                   width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top',
-                  filter: 'grayscale(1) contrast(1.05)',
                 }}/>
               </div>
               <div style={{ padding: '24px 24px 28px', display: 'flex', flexDirection: 'column', gap: 12 }}>
