@@ -1,0 +1,21 @@
+/* ===== UI Kit · landing-specific layout helpers ===== */
+.container { max-width: 1240px; margin: 0 auto; padding: 0 56px; }
+section { position: relative; }
+.section-pad { padding: 140px 0; }
+.section-line { border-top: 1px solid rgba(0,0,0,.06); }
+
+/* signature gradient hairline — used at key section breaks */
+.grad-rule { height: 2px; width: 100%; background: var(--grad-full); border: 0; margin: 0; }
+
+@keyframes hakku-spin { to { transform: rotate(360deg); } }
+@keyframes hakku-spin-rev { to { transform: rotate(-360deg); } }
+@keyframes hakku-fade-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes hakku-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-18px); } }
+.fade-up { animation: hakku-fade-up 700ms cubic-bezier(0.2,0.8,0.2,1) both; }
+
+@media (max-width: 900px) {
+  .container { padding: 0 24px; }
+  .section-pad { padding: 88px 0; }
+  .grid-3 { grid-template-columns: 1fr !important; }
+  .grid-2 { grid-template-columns: 1fr !important; }
+}

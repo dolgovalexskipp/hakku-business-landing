@@ -1,37 +1,30 @@
 <!doctype html>
-<html lang="ru" data-brand="community" data-theme="light">
+<html lang="ru" data-brand="b2c">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Хакку.ии (hakku.ai) | бИИзнес — рост прибыли через ИИ-трансформацию</title>
-  <meta name="description" content="Закрытое сообщество собственников малого и среднего бизнеса, которые системно внедряют ИИ. Запуск 8 июня 2026.">
+  <title>хакку.ии (hakku.ai) | бИИзнес — сообщество собственников бизнеса</title>
+  <meta name="description" content="Закрытое сообщество собственников SMB, которые системно внедряют AI как драйвер выручки и маржи. Запуск 8 июня 2026.">
   <link rel="stylesheet" href="./design_system/colors_and_type.css">
+  <link rel="stylesheet" href="kit.css">
   <style>
-    html, body { margin: 0; padding: 0; background: #fff; color: #000; }
-    * { box-sizing: border-box; }
-    a { color: inherit; text-decoration: none; }
-    section { position: relative; }
-    .container { max-width: 1240px; margin: 0 auto; padding: 0 56px; }
-    .eyebrow-tag { font-size: 12px; color: rgba(0,0,0,.55); letter-spacing: 0.06em; text-transform: uppercase; }
-    @media (max-width: 768px) {
-      .container { padding: 0 24px; }
-    }
+    html, body { margin: 0; background: #fff; color: #000; }
   </style>
-  <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 </head>
 <body>
   <div id="root"></div>
   <script type="text/babel" src="./components/Nav.jsx"></script>
   <script type="text/babel" src="./components/Hero.jsx"></script>
   <script type="text/babel" src="./components/TrustBar.jsx"></script>
-  <script type="text/babel" src="./components/Levels.jsx"></script>
-  <script type="text/babel" src="./components/Direction.jsx"></script>
-  <script type="text/babel" src="./components/Inside.jsx"></script>
+  <script type="text/babel" src="./components/Manifesto.jsx"></script>
+  <script type="text/babel" src="./components/Staff.jsx"></script>
+  <script type="text/babel" src="./components/Program.jsx"></script>
   <script type="text/babel" src="./components/Pricing.jsx"></script>
-  <script type="text/babel" src="./components/Founders.jsx"></script>
-  <script type="text/babel" src="./components/FinalCTA.jsx"></script>
+  <script type="text/babel" src="./components/Team.jsx"></script>
+  <script type="text/babel" src="./components/FAQ.jsx"></script>
   <script type="text/babel" src="./components/Footer.jsx"></script>
   <script type="text/babel">
     const App = () => (
@@ -39,11 +32,12 @@
         <Nav/>
         <Hero/>
         <TrustBar/>
-        <Levels/>
-        <Direction/>
-        <Inside/>
+        <Manifesto/>
+        <Staff/>
+        <Program/>
         <Pricing/>
-        <Founders/>
+        <Team/>
+        <FAQ/>
         <FinalCTA/>
         <Footer/>
       </>

@@ -1,69 +1,64 @@
+// Hero — «от → к» headline, prominent holographic accent, sourced stat.
 const Hero = () => {
   return (
-    <section style={{ position: 'relative', padding: '120px 0 140px', overflow: 'hidden', minHeight: '80vh' }}>
-      <img src="./design_system/assets/graphic-chrome-wave.png" alt=""
-        style={{
-          position: 'absolute', right: -240, top: -100, width: 820, height: 820,
-          objectFit: 'contain', opacity: .55, pointerEvents: 'none',
-          animation: 'hakku-spin 90s linear infinite',
-          zIndex: 0,
-        }}/>
+    <section style={{ position: 'relative', padding: '110px 0 120px', overflow: 'hidden', minHeight: '84vh' }}>
+      {/* signature holographic object — bright + present */}
+      <img className="hero-holo" src="assets/graphic-holo-torus.png" alt="" style={{
+        position: 'absolute', right: -170, top: 90, width: 540, height: 540,
+        objectFit: 'contain', pointerEvents: 'none', zIndex: 0,
+        animation: 'hakku-spin 120s linear infinite, hakku-float 9s ease-in-out infinite',
+        filter: 'drop-shadow(0 30px 80px rgba(42,62,244,.18))',
+      }}/>
       <style>{`
-        @keyframes hakku-spin { to { transform: rotate(360deg) } }
-        @keyframes hakku-fade-up { from { opacity: 0; transform: translateY(16px) } to { opacity: 1; transform: translateY(0) } }
+        @media (max-width: 900px) { .hero-holo { width: 320px !important; height: 320px !important; right: -90px !important; top: 8px !important; opacity: .5; } }
       `}</style>
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <div style={{ maxWidth: 940, animation: 'hakku-fade-up 600ms cubic-bezier(0.2, 0.8, 0.2, 1) both' }}>
+        <div style={{ maxWidth: 960 }}>
           <span style={{
             display: 'inline-flex', alignItems: 'center', gap: 10,
-            fontSize: 13, color: 'rgba(0, 0, 0, .75)',
-            border: '1px solid rgba(0, 0, 0, .15)',
-            padding: '8px 16px', borderRadius: 999, marginBottom: 36,
-            background: 'rgba(255,255,255,.6)',
+            fontSize: 13, color: 'rgba(0,0,0,.75)',
+            border: '1px solid rgba(0,0,0,.12)', padding: '8px 16px', borderRadius: 999,
+            marginBottom: 34, background: 'rgba(255,255,255,.6)', whiteSpace: 'nowrap',
           }}>
             <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#2A3EF4' }}/>
             Открытие сообщества · 8 июня 2026
           </span>
           <h1 style={{
             fontFamily: 'Tektur, sans-serif',
-            fontSize: 'clamp(3rem, 6.8vw, 5.6rem)',
-            lineHeight: 0.98, letterSpacing: '-0.02em',
-            margin: '0 0 32px', fontWeight: 400, color: '#000',
+            fontSize: 'clamp(2.6rem, 5.6vw, 4.6rem)',
+            lineHeight: 1.0, letterSpacing: '-0.025em',
+            margin: '0 0 30px', fontWeight: 400, color: '#000', maxWidth: 620,
           }}>
-            Среда, где <span style={{ color: '#2A3EF4' }}>AI</span><br/>
-            работает на прибыль<br/>
-            вашего бизнеса.
+            От разовых <span style={{ color: '#2A3EF4' }}>AI</span>-экспериментов<br/>
+            — к системному росту<br/>
+            <span style={{
+              background: 'linear-gradient(90deg,#2A3EF4 0%,#D51F75 70%)',
+              WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent',
+            }}>EBITDA вашего бизнеса.</span>
           </h1>
-          <p style={{
-            fontSize: 19, color: 'rgba(0, 0, 0, .72)', lineHeight: 1.55,
-            maxWidth: 680, margin: '0 0 44px',
-          }}>
-            Закрытое сообщество собственников. Каждую неделю практикующие профессионалы разбирают, где в бизнесе AI растит прибыль — а не просто экономит часы. По этой же методологии команда Hakku обучает Яндекс и крупнейшие корпорации России.
+          <p style={{ fontSize: 19, color: 'rgba(0,0,0,.72)', lineHeight: 1.55, maxWidth: 600, margin: '0 0 40px' }}>
+            Закрытое сообщество собственников бизнеса. Каждую неделю практики разбирают, где AI растит выручку и маржу — а не просто экономит часы. По этой методологии команда hakku обучает Яндекс и крупнейшие корпорации России.
           </p>
-          <a href="#cta">
-            <button style={{ ...btnStyles.primary, fontSize: 16, padding: '18px 36px' }}>
-              Войти в сообщество →
-            </button>
-          </a>
+          <div style={{ display: 'flex', gap: 22, flexWrap: 'wrap', alignItems: 'center' }}>
+            <a href="#cta"><button style={{ ...btnStyles.primary, fontSize: 16, padding: '18px 34px' }}
+              onMouseOver={e => e.currentTarget.style.filter = 'brightness(1.7)'} onMouseOut={e => e.currentTarget.style.filter = 'none'}>Войти в сообщество →</button></a>
+            <a href="#pricing" style={{ fontSize: 15, color: 'rgba(0,0,0,.6)', borderBottom: '1px solid rgba(0,0,0,.2)', paddingBottom: 2 }}>Тарифы от 3 990 ₽ — early-bird до 8 июля</a>
+          </div>
         </div>
+
         <div style={{
-          marginTop: 80, paddingTop: 32,
-          borderTop: '1px solid rgba(0,0,0,.08)',
-          maxWidth: 940, display: 'grid',
-          gridTemplateColumns: '120px 1fr',
+          marginTop: 76, paddingTop: 30, borderTop: '1px solid rgba(0,0,0,.08)',
+          maxWidth: 940, display: 'grid', gridTemplateColumns: '140px 1fr',
           columnGap: 48, rowGap: 24, alignItems: 'baseline',
         }}>
-          <span style={{ fontFamily: 'Tektur, sans-serif', fontSize: 36, lineHeight: 1, letterSpacing: '-0.02em', color: '#000' }}>71%</span>
-          <span style={{ fontSize: 15, color: 'rgba(0,0,0,.78)', lineHeight: 1.55 }}>
-            крупных компаний РФ уже применяют AI. Большинство — точечно, без эффекта на прибыль. Здесь вы получаете методику и людей, которые помогают довести AI до результата в деньгах.
-            <span style={{ display: 'block', fontSize: 12, color: 'rgba(0,0,0,.45)', marginTop: 4 }}>
-              Яков и Партнёры × Yandex B2B Tech · 2025
-            </span>
+          <span className="numeral" style={{ fontSize: 52, color: '#000' }}>71%</span>
+          <span style={{ fontSize: 15, color: 'rgba(0,0,0,.78)', lineHeight: 1.55, maxWidth: 560 }}>
+            крупных компаний РФ уже применяют AI. Большинство — точечно, без эффекта на прибыль. Здесь вы получаете методику и людей, которые доводят AI до результата в деньгах.
+            <span style={{ display: 'block', fontSize: 12, color: 'rgba(0,0,0,.45)', marginTop: 5 }}>Яков и Партнёры × Yandex B2B Tech · 2025</span>
           </span>
         </div>
       </div>
     </section>
   );
 };
-
 window.Hero = Hero;

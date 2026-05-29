@@ -1,181 +1,195 @@
 /* ============================================================
-   hakku.ai — Colors & Type
-   Two brand tracks share typography + tokens; swap via data attr.
-   [data-brand="b2c"] (default) — primary trio, bold & bright
-   [data-brand="b2b"]  — full rainbow spectrum, enterprise
+   Hakku.ai / бИИзнес — Colors & Type
+   B2C / business track. Light-first ("paper") foundation.
+   ----------------------------------------------------------------
+   The business community brand is PAPER-FIRST: white canvas, black
+   ink, a single hairline grey, three saturated accents used sparingly,
+   and two signature gradients reserved for key moments. Holographic
+   glass renders are the signature graphic. Dark sections exist but are
+   the exception (hero accent strips, CTA, brand guide).
+
+   Switch a region to the dark canvas with  [data-canvas="ink"].
    ============================================================ */
 
 /* ---- Fonts ------------------------------------------------- */
-/* Tektur + Inter come from Google Fonts (B2C track).
-   Halvar Breitschrift is the real brand face (business display) — loaded locally.
-   Halvar Mittelschrift stands in for Mazzard H (business body) until Mazzard H ships. */
-/* Tektur — standard width */
-@font-face { font-family: "Tektur"; font-weight: 400; src: url("fonts/Tektur-Regular.ttf") format("truetype"); font-display: swap; }
-@font-face { font-family: "Tektur"; font-weight: 500; src: url("fonts/Tektur-Medium.ttf") format("truetype"); font-display: swap; }
+/* Tektur — display / headings / numerals (LOCAL .ttf).
+   Brand rule: Tektur is used in Regular only. Heavier weights are
+   loaded for UI flexibility but the wordmark + display should stay 400. */
+@font-face { font-family: "Tektur"; font-weight: 400; src: url("fonts/Tektur-Regular.ttf")  format("truetype"); font-display: swap; }
+@font-face { font-family: "Tektur"; font-weight: 500; src: url("fonts/Tektur-Medium.ttf")   format("truetype"); font-display: swap; }
 @font-face { font-family: "Tektur"; font-weight: 600; src: url("fonts/Tektur-SemiBold.ttf") format("truetype"); font-display: swap; }
-@font-face { font-family: "Tektur"; font-weight: 700; src: url("fonts/Tektur-Bold.ttf") format("truetype"); font-display: swap; }
-@font-face { font-family: "Tektur"; font-weight: 800; src: url("fonts/Tektur-ExtraBold.ttf") format("truetype"); font-display: swap; }
-@font-face { font-family: "Tektur"; font-weight: 900; src: url("fonts/Tektur-Black.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "Tektur"; font-weight: 700; src: url("fonts/Tektur-Bold.ttf")     format("truetype"); font-display: swap; }
+@font-face { font-family: "Tektur"; font-weight: 800; src: url("fonts/Tektur-ExtraBold.ttf")format("truetype"); font-display: swap; }
+@font-face { font-family: "Tektur"; font-weight: 900; src: url("fonts/Tektur-Black.ttf")    format("truetype"); font-display: swap; }
 
-/* Inter — body / UI */
+/* Inter — body / UI. Allowed: Light 300, Regular 400, Medium 500,
+   SemiBold 600, Bold 700, ExtraBold 800. */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
 
-/* Note: Tektur Narrow/Tight, Mazzard H, Halvar Breitschrift, Halvar Mittelschrift
-   are intentionally omitted from this preview build (community track only). */
-
 :root {
-  /* ---- Core neutrals ---- */
-  --ink:         #000000;   /* absolute black — canvas of choice */
-  --paper:       #ffffff;   /* absolute white */
-  --paper-95:    rgba(255,255,255,.95);
-  --paper-80:    rgba(255,255,255,.80);
-  --paper-60:    rgba(255,255,255,.60);
-  --paper-40:    rgba(255,255,255,.40);
-  --paper-20:    rgba(255,255,255,.20);
-  --paper-10:    rgba(255,255,255,.10);
-  --paper-05:    rgba(255,255,255,.05);
-  --ink-80:      rgba(0,0,0,.80);
-  --ink-60:      rgba(0,0,0,.60);
-  --ink-40:      rgba(0,0,0,.40);
-  --ink-10:      rgba(0,0,0,.10);
-  --hairline:    #818181;   /* the only grey in the book — borders only */
+  /* ---- Core neutrals -------------------------------------- */
+  --paper:        #ffffff;   /* canvas — the default ground */
+  --ash:          #f4f4f5;   /* soft ashen — alternating section ground */
+  --ink:          #000000;   /* absolute black — text + ink surfaces */
+  --hairline:     #818181;   /* THE ONLY GREY. Borders/dividers only. */
 
-  /* ---- B2C palette (primary 3) ---- */
-  --c-blue:      #2A3EF4;   /* ultramarine */
-  --c-magenta:   #D51F75;   /* raspberry */
-  --c-orange:    #FD7202;   /* vivid orange */
+  /* Ink tints (text hierarchy on paper — by opacity, never new hues) */
+  --ink-90:       rgba(0,0,0,.90);
+  --ink-72:       rgba(0,0,0,.72);   /* body copy on paper */
+  --ink-55:       rgba(0,0,0,.55);   /* secondary / captions */
+  --ink-40:       rgba(0,0,0,.40);   /* faint / disabled */
+  --ink-12:       rgba(0,0,0,.12);   /* soft border on paper */
+  --ink-08:       rgba(0,0,0,.08);   /* divider / hairline-soft */
+  --ink-04:       rgba(0,0,0,.04);   /* tonal fill / chip ground */
 
-  /* ---- B2B palette (rainbow 8) ---- */
-  --b-royal:     #1956FF;
-  --b-cyan:      #02E8FF;
-  --b-mint:      #02FFAD;
-  --b-magenta:   #F002DB;
-  --b-violet:    #8277EC;
-  --b-peach:     #FCBC60;
-  --b-coral:     #F37168;
-  --b-plum:      #73008E;
+  /* Paper tints (text hierarchy on ink surfaces) */
+  --paper-90:     rgba(255,255,255,.90);
+  --paper-72:     rgba(255,255,255,.72);
+  --paper-55:     rgba(255,255,255,.55);
+  --paper-40:     rgba(255,255,255,.40);
+  --paper-16:     rgba(255,255,255,.16);
+  --paper-10:     rgba(255,255,255,.10);
 
-  /* ---- Signature gradients ---- */
-  --grad-b2c-a: linear-gradient(90deg, #2A3EF4 0%, #D51F75 100%);
-  --grad-b2c-b: linear-gradient(90deg, #D51F75 0%, #FD7202 100%);
-  --grad-b2b-cool:  linear-gradient(90deg, #1956FF 0%, #02E8FF 50%, #02FFAD 100%);
-  --grad-b2b-warm:  linear-gradient(90deg, #FCBC60 0%, #F37168 50%, #73008E 100%);
-  --grad-b2b-pop:   linear-gradient(90deg, #F002DB 0%, #8277EC 50%, #02E8FF 100%);
-  --grad-iridescent:     linear-gradient(90deg, #1956FF, #02E8FF, #02FFAD, #FCBC60, #F37168, #F002DB, #8277EC);
+  /* ---- Brand accents (B2C trio — use sparingly) ----------- */
+  --blue:         #2A3EF4;   /* ultramarine — primary accent / links */
+  --magenta:      #D51F75;   /* raspberry  — emphasis / highlights */
+  --orange:       #FD7202;   /* vivid orange — early-bird / urgency */
 
-  /* ---- Semantic (default = B2C/dark) ---- */
-  --bg:          var(--ink);
-  --bg-raised:   #0a0a0a;
-  --fg:          var(--paper);
-  --fg-muted:    var(--paper-60);
-  --fg-faint:    var(--paper-40);
-  --border:      var(--hairline);
-  --accent:      var(--c-blue);
-  --accent-2:    var(--c-magenta);
-  --accent-3:    var(--c-orange);
+  /* ---- Signature gradients (key moments only) ------------- */
+  --grad-cool:    linear-gradient(90deg, #2A3EF4 0%, #D51F75 100%); /* blue → magenta */
+  --grad-warm:    linear-gradient(90deg, #D51F75 0%, #FD7202 100%); /* magenta → orange */
+  --grad-full:    linear-gradient(90deg, #2A3EF4 0%, #D51F75 55%, #FD7202 100%);
 
-  /* ---- Radii ---- */
-  --r-xs:        4px;
-  --r-sm:        8px;
-  --r-md:        16px;
-  --r-lg:        24px;
-  --r-pill:      999px;      /* the shape language: pills & circles */
+  /* ---- Surfaces ------------------------------------------- */
+  --surface:       var(--paper);   /* page ground */
+  --surface-soft:  var(--ash);     /* alternating section ground */
+  --surface-ink:   var(--ink);     /* inverted card / CTA */
 
-  /* ---- Spacing (8pt base) ---- */
-  --s-1:         4px;
-  --s-2:         8px;
-  --s-3:         12px;
-  --s-4:         16px;
-  --s-5:         24px;
-  --s-6:         32px;
-  --s-7:         48px;
-  --s-8:         64px;
-  --s-9:         96px;
-  --s-10:        128px;
+  /* ---- Semantic text / border (paper context = default) --- */
+  --fg:           var(--ink);
+  --fg-muted:     var(--ink-72);
+  --fg-faint:     var(--ink-55);
+  --border:       var(--ink-12);   /* default soft border */
+  --border-strong:var(--ink);      /* "popular" / selected outline */
+  --accent:       var(--blue);
 
-  /* ---- Shadows (used sparingly — brand prefers flat + holographic) ---- */
-  --shadow-sm:   0 1px 2px rgba(0,0,0,.08);
-  --shadow-md:   0 8px 24px rgba(0,0,0,.16);
-  --shadow-lg:   0 24px 64px rgba(0,0,0,.24);
-  --glow-blue:   0 0 48px rgba(42,62,244,.45);
-  --glow-magenta:0 0 48px rgba(213,31,117,.45);
+  /* ---- Radii (4 / 8 / 16 scale + pill) -------------------- */
+  --r-xs:   4px;     /* chips, tags, inline marks */
+  --r-sm:   8px;     /* inputs, small controls */
+  --r-md:   16px;    /* default card */
+  --r-lg:   24px;    /* large card / pricing tier */
+  --r-pill: 999px;   /* buttons, badges, toggles */
 
-  /* ---- Type families ---- */
-  --font-display-b2c: "Tektur", system-ui, sans-serif;
-  --font-display-b2c-narrow: "Tektur Narrow", "Tektur", system-ui, sans-serif;
-  --font-display-b2c-tight: "Tektur Tight", "Tektur", system-ui, sans-serif;
-  --font-display-b2b:  "Halvar Breitschrift", "Inter", system-ui, sans-serif;
-  --font-body-b2c:    "Inter", system-ui, sans-serif;
-  --font-body-b2b:     "Mazzard H", "Halvar Mittelschrift", "Inter", system-ui, sans-serif;
+  /* ---- Spacing (8pt base) --------------------------------- */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px; --s-5: 24px;
+  --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 128px;
 
-  /* ---- Default semantic type (B2C) ---- */
-  --font-display: var(--font-display-b2c);
-  --font-body:    var(--font-body-b2c);
+  /* Layout */
+  --container:    1240px;
+  --gutter:       56px;
 
-  /* ---- Type scale ---- */
-  --t-hero:      clamp(3.5rem, 8vw, 6.5rem);   /* 56 → 104 */
-  --t-h1:        clamp(2.5rem, 5vw, 4rem);     /* 40 → 64 */
-  --t-h2:        clamp(2rem, 3.5vw, 3rem);     /* 32 → 48 */
-  --t-h3:        1.875rem;                     /* 30 */
-  --t-h4:        1.5rem;                       /* 24 */
-  --t-h5:        1.25rem;                      /* 20 */
-  --t-body:      1rem;                         /* 16 */
-  --t-small:     0.875rem;                     /* 14 */
-  --t-caption:   0.75rem;                      /* 12 */
+  /* ---- Shadows (rare — brand prefers flat + hairline) ----- */
+  --shadow-sm:    0 1px 2px rgba(0,0,0,.06);
+  --shadow-md:    0 12px 32px rgba(0,0,0,.10);
+  --glow-blue:    0 0 72px rgba(42,62,244,.20);
+  --glow-magenta: 0 0 72px rgba(213,31,117,.20);
+
+  /* ---- Type families -------------------------------------- */
+  --font-display: "Tektur", system-ui, sans-serif;       /* headings + numerals */
+  --font-body:    "Inter", system-ui, sans-serif;        /* body + UI */
+  --font-mono:    ui-monospace, "JetBrains Mono", Menlo, monospace;
+
+  /* ---- Type scale ----------------------------------------- */
+  --t-hero:    clamp(3rem, 6.8vw, 5.6rem);   /* 48 → 90  hero */
+  --t-h1:      clamp(2.4rem, 5vw, 4rem);     /* 38 → 64  section title */
+  --t-h2:      clamp(2rem, 3.5vw, 3rem);     /* 32 → 48 */
+  --t-h3:      1.75rem;                       /* 28  card title */
+  --t-h4:      1.375rem;                      /* 22  small card title */
+  --t-h5:      1.25rem;                       /* 20 */
+  --t-body-lg: 1.1875rem;                     /* 19  hero subcopy / lede */
+  --t-body:    1rem;                          /* 16  body */
+  --t-small:   0.875rem;                      /* 14  UI / secondary */
+  --t-caption: 0.75rem;                       /* 12  eyebrow / meta */
 }
 
-/* ---- Theme switches ---------------------------------------- */
-[data-brand="b2b"] {
-  --font-display: var(--font-display-b2b);
-  --font-body:    var(--font-body-b2b);
-  --accent:       var(--b-magenta);
-  --accent-2:     var(--b-violet);
-  --accent-3:     var(--b-cyan);
+/* ---- Dark canvas override (use on accent strips / CTA) ----- */
+[data-canvas="ink"] {
+  --surface:      var(--ink);
+  --surface-soft: #0a0a0a;
+  --fg:           var(--paper);
+  --fg-muted:     var(--paper-72);
+  --fg-faint:     var(--paper-55);
+  --border:       var(--paper-16);
+  --border-strong:var(--paper);
+  background: var(--ink);
+  color: var(--paper);
 }
 
-[data-theme="light"] {
-  --bg:          var(--paper);
-  --bg-raised:   #fafafa;
-  --fg:          var(--ink);
-  --fg-muted:    var(--ink-60);
-  --fg-faint:    var(--ink-40);
-}
-
-/* ---- Base semantic styles ---------------------------------- */
+/* ============================================================
+   Base element styles
+   ============================================================ */
 html, body {
-  background: var(--bg);
+  margin: 0;
+  background: var(--surface);
   color: var(--fg);
   font-family: var(--font-body);
   font-size: var(--t-body);
-  line-height: 1.55;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
+* { box-sizing: border-box; }
+a { color: inherit; text-decoration: none; }
 
+/* Headings — display face, tight, Regular weight (brand rule) */
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
   font-family: var(--font-display);
+  font-weight: 400;
   line-height: 1.05;
-  letter-spacing: -0.01em;
-  font-weight: 400;            /* display fonts carry their own weight */
+  letter-spacing: -0.02em;
   margin: 0;
+  color: var(--fg);
 }
-.hero { font-size: var(--t-hero); line-height: 0.95; letter-spacing: -0.02em; }
+.hero { font-size: var(--t-hero); line-height: 0.98; }
 h1, .h1 { font-size: var(--t-h1); }
 h2, .h2 { font-size: var(--t-h2); }
-h3, .h3 { font-size: var(--t-h3); }
-h4, .h4 { font-size: var(--t-h4); }
-h5, .h5 { font-size: var(--t-h5); }
+h3, .h3 { font-size: var(--t-h3); letter-spacing: -0.01em; }
+h4, .h4 { font-size: var(--t-h4); letter-spacing: -0.01em; }
+h5, .h5 { font-size: var(--t-h5); letter-spacing: -0.01em; }
 
-p, .body { font-size: var(--t-body); line-height: 1.6; }
-.small    { font-size: var(--t-small); }
-.caption  { font-size: var(--t-caption); letter-spacing: 0.02em; color: var(--fg-muted); }
-.eyebrow  { font-size: var(--t-small); font-weight: 500; letter-spacing: 0.04em; text-transform: none; color: var(--fg-muted); }
-.mono     { font-family: ui-monospace, "JetBrains Mono", Menlo, monospace; }
+p, .body { font-size: var(--t-body); line-height: 1.6; color: var(--fg-muted); }
+.lede    { font-size: var(--t-body-lg); line-height: 1.55; color: var(--fg-muted); }
+.small   { font-size: var(--t-small); }
+.caption { font-size: var(--t-caption); color: var(--fg-faint); letter-spacing: 0.02em; }
+.mono    { font-family: var(--font-mono); }
 
-/* A gradient text helper — used rarely, for "wow" numbers */
+/* Eyebrow — the recurring section label. UPPERCASE, tracked, faint. */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--t-caption);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+
+/* Numerals / stat figures — display face, very tight */
+.numeral {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Gradient text — reserved for a single "wow" figure per view */
 .grad-text {
-  background: var(--grad-b2b-pop);
+  background: var(--grad-cool);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
+
+/* Layout helper */
+.container { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+@media (max-width: 768px) { :root { --gutter: 24px; } }
