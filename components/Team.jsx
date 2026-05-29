@@ -3,20 +3,20 @@ const Team = () => {
   const people = [
     {
       name: 'Николай Писаренко',
-      role: 'co-founder · hakku.ai',
-      bio: 'PwC, СИБУР, СберУниверситет. Спикер 100+ конференций. 10+ лет в корпоративном обучении и AI-трансформации.',
+      role: 'сооснователь · hakku.ai',
+      bio: 'PwC, СИБУР, СберУниверситет. Спикер 100+ конференций. 10+ лет в корпоративном обучении и ИИ-трансформации.',
       photo: 'assets/founders/nikolai.jpg',
     },
     {
       name: 'Сергей Ершов',
-      role: 'co-founder · hakku.ai',
-      bio: 'CPO/CEO Edutoria (EdTech Сбера). Директор по развитию Ultimate Education. Автор каналов про AI и tech.',
+      role: 'сооснователь · hakku.ai',
+      bio: 'CPO/CEO Edutoria (образовательная платформа Сбера). Директор по развитию Ultimate Education. Автор каналов про ИИ и технологии.',
       photo: 'assets/founders/sergei.jpg',
     },
     {
       name: 'Саша Долгов',
-      role: 'co-founder · бИИзнес',
-      bio: 'Фаундер VEYRA (голосовые AI-агенты). McKinsey → Skyeng → собственная компания, построенная с нуля как AI-native.',
+      role: 'сооснователь · бИИзнес',
+      bio: 'Основатель VEYRA (голосовые ИИ-агенты). McKinsey → Skyeng → собственная компания, построенная с нуля вокруг ИИ.',
       link: 'https://dolgovalex.com/about',
       photo: 'assets/founders/alexander.jpg',
     },

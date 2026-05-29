@@ -1,17 +1,17 @@
-// Тарифы — 3 тарифа как на лендинге: ПРО / МАКС / Компания · early-bird · месяц↔год.
+// Тарифы — 3 тарифа: ПРО / МАКС / Компания · ранняя цена · месяц/год.
 const Pricing = () => {
   const [annual, setAnnual] = React.useState(false);
   const tiers = [
     {
-      name: 'ПРО', regular: 4990, intro: 3990,
+      name: 'ПРО', regular: 4900, intro: 3900,
       users: 'Только собственник',
-      desc: 'Полный доступ к сообществу для вас одного. Определите, где в вашем бизнесе AI даст прибыль, и запустите первый инструмент лично.',
+      desc: 'Полный доступ к сообществу для вас одного. Определите, где в вашем бизнесе ИИ даст прибыль, и запустите первый инструмент лично.',
       avatars: [{ initials: 'И-1' }, { initials: 'И-2' }],
     },
     {
-      name: 'МАКС', regular: 7990, intro: 5990,
-      users: 'Собственник + 1 ответственный за AI',
-      desc: 'Вы и человек, который будет вести AI-трансформацию изнутри компании. Соберите первый AI-инструмент под одну функцию с измеримым эффектом.',
+      name: 'МАКС', regular: 7900, intro: 5900,
+      users: 'Собственник + 1 ответственный за ИИ',
+      desc: 'Вы и человек, который будет вести ИИ-трансформацию изнутри компании. Соберите первый инструмент под одну функцию с измеримым ростом денег.',
       popular: true,
       avatars: [{ initials: 'А-1' }, { initials: 'А-2' }, { initials: 'А-3' }],
     },
@@ -57,7 +57,7 @@ const Pricing = () => {
         </div>
 
         <div style={{ marginBottom: 28, fontSize: 13, color: 'rgba(0,0,0,.55)', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '7px 13px', borderRadius: 4, background: '#FD7202', color: '#fff', fontSize: 11, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Early-bird</span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '7px 13px', borderRadius: 4, background: '#FD7202', color: '#fff', fontSize: 11, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Ранний тариф</span>
           <span>Сниженная цена для всех, кто подпишется с 8 июня по 8 июля — первого месяца жизни сообщества.</span>
         </div>
 
@@ -80,7 +80,7 @@ const Pricing = () => {
                 <div style={{ minHeight: 96 }}>
                   {t.regular !== null ? (
                     <>
-                      {!annual && <div style={{ fontSize: 11, color: popular ? '#FCBC60' : '#FD7202', letterSpacing: '0.06em', marginBottom: 4, textTransform: 'uppercase' }}>early-bird · до 8 июля</div>}
+                      {!annual && <div style={{ fontSize: 11, color: popular ? '#FCBC60' : '#FD7202', letterSpacing: '0.06em', marginBottom: 4, textTransform: 'uppercase' }}>ранний тариф · до 8 июля</div>}
                       <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
                         <div className="numeral" style={{ fontSize: 40 }}>{fmt(introPrice)} ₽</div>
                         {!annual && <div style={{ fontSize: 14, color: popular ? 'rgba(255,255,255,.5)' : 'rgba(0,0,0,.4)', textDecoration: 'line-through' }}>{fmt(t.regular)} ₽</div>}
@@ -107,18 +107,21 @@ const Pricing = () => {
                 <a href="#cta" style={{ width: '100%' }}>
                   <button style={{ width: '100%', padding: '14px 22px', fontSize: 15, fontFamily: 'Inter, sans-serif', fontWeight: 600, borderRadius: 8, cursor: 'pointer', background: popular ? '#fff' : '#000', color: popular ? '#000' : '#fff', border: 0 }}>{t.regular === null ? 'Связаться' : 'Выбрать →'}</button>
                 </a>
+                <div style={{ fontSize: 12, color: popular ? 'rgba(255,255,255,.5)' : 'rgba(0,0,0,.5)', textAlign: 'center', marginTop: -4 }}>
+                  заявка → знакомство с основателем → оплата
+                </div>
               </div>
             );
           })}
         </div>
-        {/* Lifetime — горизонтальная плашка под tier-cards */}
+        {/* Навсегда — горизонтальная плашка под карточками тарифов */}
         <div id="lifetime" style={{
           marginTop: 22, display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           gap: 24, flexWrap: 'wrap', padding: '22px 26px', borderRadius: 16,
           background: 'var(--ash, #f4f4f5)', border: '1px solid rgba(0,0,0,.08)',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 18, flexWrap: 'wrap' }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', padding: '7px 14px', borderRadius: 4, background: '#000', color: '#fff', fontSize: 11, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Lifetime · до 26 июня</span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', padding: '7px 14px', borderRadius: 4, background: '#000', color: '#fff', fontSize: 11, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Навсегда · до 26 июня</span>
             <div style={{ maxWidth: 620 }}>
               <div style={{ fontFamily: 'Tektur, sans-serif', fontSize: 18, letterSpacing: '-0.01em', color: '#000', marginBottom: 4 }}>Зафиксировать тариф навсегда</div>
               <div style={{ fontSize: 13.5, color: 'rgba(0,0,0,.6)', lineHeight: 1.5 }}>Цена не вырастет даже после общего повышения. Ограниченное число мест — обсуждаем индивидуально на созвоне.</div>

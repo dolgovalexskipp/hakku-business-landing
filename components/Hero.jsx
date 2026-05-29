@@ -29,20 +29,20 @@ const Hero = () => {
             lineHeight: 1.0, letterSpacing: '-0.025em',
             margin: '0 0 30px', fontWeight: 400, color: '#000', maxWidth: 620,
           }}>
-            От разовых <span style={{ color: '#2A3EF4' }}>AI</span>-экспериментов<br/>
+            От разовых <span style={{ color: '#2A3EF4' }}>ИИ</span>-экспериментов<br/>
             — к системному росту<br/>
             <span style={{
               background: 'linear-gradient(90deg,#2A3EF4 0%,#D51F75 70%)',
               WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent',
-            }}>EBITDA вашего бизнеса.</span>
+            }}>прибыли вашего бизнеса.</span>
           </h1>
           <p style={{ fontSize: 19, color: 'rgba(0,0,0,.72)', lineHeight: 1.55, maxWidth: 600, margin: '0 0 40px' }}>
-            Закрытое сообщество собственников бизнеса. Каждую неделю практики разбирают, где AI растит выручку и маржу — а не просто экономит часы. По этой методологии команда hakku обучает Яндекс и крупнейшие корпорации России.
+            Закрытое сообщество собственников малого и среднего бизнеса. Каждую неделю практики разбирают, где ИИ растит выручку и маржу — а не просто экономит часы. По этой методике команда hakku обучает Яндекс и крупнейшие компании страны.
           </p>
           <div style={{ display: 'flex', gap: 22, flexWrap: 'wrap', alignItems: 'center' }}>
             <a href="#cta"><button style={{ ...btnStyles.primary, fontSize: 16, padding: '18px 34px' }}
               onMouseOver={e => e.currentTarget.style.filter = 'brightness(1.7)'} onMouseOut={e => e.currentTarget.style.filter = 'none'}>Войти в сообщество →</button></a>
-            <a href="#pricing" style={{ fontSize: 15, color: 'rgba(0,0,0,.6)', borderBottom: '1px solid rgba(0,0,0,.2)', paddingBottom: 2 }}>Тарифы от 3 990 ₽ — early-bird до 8 июля</a>
+            <a href="#pricing" style={{ fontSize: 15, color: 'rgba(0,0,0,.6)', borderBottom: '1px solid rgba(0,0,0,.2)', paddingBottom: 2 }}>Тарифы от 3 900 ₽ — ранняя цена до 8 июля</a>
           </div>
         </div>
 
@@ -51,10 +51,10 @@ const Hero = () => {
           maxWidth: 940, display: 'grid', gridTemplateColumns: '140px 1fr',
           columnGap: 48, rowGap: 24, alignItems: 'baseline',
         }}>
-          <span className="numeral" style={{ fontSize: 52, color: '#000' }}>71%</span>
+          <span className="numeral" style={{ fontSize: 52, color: '#000' }}>−60%</span>
           <span style={{ fontSize: 15, color: 'rgba(0,0,0,.78)', lineHeight: 1.55, maxWidth: 560 }}>
-            крупных компаний РФ уже применяют AI. Большинство — точечно, без эффекта на прибыль. Здесь вы получаете методику и людей, которые доводят AI до результата в деньгах.
-            <span style={{ display: 'block', fontSize: 12, color: 'rgba(0,0,0,.45)', marginTop: 5 }}>Яков и Партнёры × Yandex B2B Tech · 2025</span>
+            времени на типовые задачи экономит сотрудник с генеративным ИИ. Но сэкономленные часы ещё не прибыль. Здесь — методика, которая доводит экономию до денег в кассе.
+            <span style={{ display: 'block', fontSize: 12, color: 'rgba(0,0,0,.45)', marginTop: 5 }}>Stanford × World Bank · 2025</span>
           </span>
         </div>
       </div>

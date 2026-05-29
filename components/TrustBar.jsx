@@ -21,7 +21,7 @@ const TrustBar = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: 24, marginBottom: 22 }}>
           <span style={{ fontSize: 11, color: 'rgba(255,255,255,.55)', letterSpacing: '0.08em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Та же методика, по которой команда hakku обучает крупнейших</span>
           <span style={{ flex: 1, height: 1, background: 'rgba(255,255,255,.12)' }}/>
-          <span style={{ fontSize: 11, color: '#FCBC60', letterSpacing: '0.04em', whiteSpace: 'nowrap' }}>Теперь — для собственников SMB</span>
+          <span style={{ fontSize: 11, color: '#FCBC60', letterSpacing: '0.04em', whiteSpace: 'nowrap' }}>Теперь — для собственников малого и среднего бизнеса</span>
         </div>
       </div>
       <div style={{ position: 'relative', overflow: 'hidden' }}>
