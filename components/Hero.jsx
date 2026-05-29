@@ -1,7 +1,7 @@
 // Hero — «от → к» headline, prominent holographic accent, sourced stat.
 const Hero = () => {
   return (
-    <section style={{ position: 'relative', padding: '110px 0 120px', overflow: 'hidden', minHeight: '84vh' }}>
+    <section style={{ position: 'relative', padding: '80px 0 72px', overflow: 'hidden' }}>
       {/* signature holographic object — bright + present */}
       <img className="hero-holo" src="assets/graphic-holo-torus.png" alt="" style={{
         position: 'absolute', right: -170, top: 90, width: 540, height: 540,
@@ -47,7 +47,7 @@ const Hero = () => {
         </div>
 
         <div style={{
-          marginTop: 76, paddingTop: 30, borderTop: '1px solid rgba(0,0,0,.08)',
+          marginTop: 56, paddingTop: 26, borderTop: '1px solid rgba(0,0,0,.08)',
           maxWidth: 940, display: 'grid', gridTemplateColumns: '140px 1fr',
           columnGap: 48, rowGap: 24, alignItems: 'baseline',
         }}>

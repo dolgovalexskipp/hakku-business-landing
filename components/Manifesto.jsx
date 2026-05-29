@@ -2,14 +2,14 @@
 // Dark canvas accent strip — a "key moment", so the signature gradient appears.
 const Manifesto = () => {
   return (
-    <section id="manifesto" data-canvas="ink" style={{ background: '#000', color: '#fff', padding: '130px 0', overflow: 'hidden', position: 'relative' }}>
+    <section id="manifesto" data-canvas="ink" style={{ background: '#000', color: '#fff', padding: '96px 0', overflow: 'hidden', position: 'relative' }}>
       <img src="assets/graphic-holo-knot.png" alt="" style={{
-        position: 'absolute', left: -180, bottom: -160, width: 560, height: 560,
-        objectFit: 'contain', opacity: .9, pointerEvents: 'none',
+        position: 'absolute', right: -120, top: '50%', transform: 'translateY(-50%)', width: 540, height: 540,
+        objectFit: 'contain', opacity: .55, pointerEvents: 'none',
         animation: 'hakku-spin-rev 140s linear infinite',
       }}/>
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <div style={{ maxWidth: 880, marginLeft: 'auto' }}>
+        <div style={{ maxWidth: 820 }}>
           <div style={{ fontSize: 11, color: 'rgba(255,255,255,.5)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 28 }}>Манифест</div>
           <h2 style={{ fontFamily: 'Tektur, sans-serif', fontSize: 'clamp(2.2rem,4.6vw,3.6rem)', lineHeight: 1.06, letterSpacing: '-0.02em', margin: '0 0 28px', fontWeight: 400 }}>
             AI — это драйвер <span style={{ background: 'linear-gradient(90deg,#D51F75,#FD7202)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>выручки и маржи</span>.<br/>Не «уберём бухгалтера».

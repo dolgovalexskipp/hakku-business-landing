@@ -1,7 +1,7 @@
 /* ===== UI Kit · landing-specific layout helpers ===== */
 .container { max-width: 1240px; margin: 0 auto; padding: 0 56px; }
 section { position: relative; }
-.section-pad { padding: 140px 0; }
+.section-pad { padding: 88px 0; }
 .section-line { border-top: 1px solid rgba(0,0,0,.06); }
 
 /* signature gradient hairline — used at key section breaks */
@@ -15,7 +15,7 @@ section { position: relative; }
 
 @media (max-width: 900px) {
   .container { padding: 0 24px; }
-  .section-pad { padding: 88px 0; }
+  .section-pad { padding: 56px 0; }
   .grid-3 { grid-template-columns: 1fr !important; }
   .grid-2 { grid-template-columns: 1fr !important; }
 }
