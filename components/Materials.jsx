@@ -52,8 +52,8 @@ const Materials = () => {
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginBottom: 20 }}>
                 <span style={{ display: 'inline-flex', fontFamily: 'Inter, sans-serif', fontSize: 11, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: m.catColor, background: `${m.catColor}14`, borderRadius: 999, padding: '6px 12px' }}>{m.cat}</span>
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, color: 'rgba(0,0,0,.45)' }}>
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-                  под паролем · участникам
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1b7a43' }}/>
+                  вступление открыто
                 </span>
               </div>
               <h3 style={{ fontFamily: 'Tektur, sans-serif', fontSize: 24, lineHeight: 1.14, letterSpacing: '-0.01em', margin: '0 0 14px', fontWeight: 400, color: '#000' }}>{m.title}</h3>
