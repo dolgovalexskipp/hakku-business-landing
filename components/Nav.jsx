@@ -35,7 +35,7 @@ const Wordmark = ({ light = false }) => {
 };
 
 const Nav = () => {
-  const links = [['Манифест', '#manifesto'], ['Программа', '#program'], ['Тарифы', '#pricing'], ['Команда', '#team']];
+  const links = [['Манифест', '#manifesto'], ['Программа', '#program'], ['Материалы', '#materials'], ['Тарифы', '#pricing'], ['Команда', '#team']];
   return (
     <nav className="hakku-nav" style={{
       position: 'sticky', top: 0, zIndex: 40,

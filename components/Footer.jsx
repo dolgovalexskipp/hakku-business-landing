@@ -64,7 +64,7 @@ const FinalCTA = () => {
         </div>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 22 }}>
-          <a href="https://t.me/hakku_ai_bot"><button style={{ fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 16, padding: '18px 34px', borderRadius: 8, border: 0, background: '#fff', color: '#000', cursor: 'pointer' }}>Оставить заявку в Telegram →</button></a>
+          <a href="https://t.me/hakkuai_business_bot"><button style={{ fontFamily: 'Inter, sans-serif', fontWeight: 600, fontSize: 16, padding: '18px 34px', borderRadius: 8, border: 0, background: '#fff', color: '#000', cursor: 'pointer' }}>Оставить заявку в Telegram →</button></a>
           <div style={{ fontSize: 13, color: 'rgba(255,255,255,.55)' }}>Без обязательств · отказаться можно на любом шаге</div>
         </div>
       </div>
