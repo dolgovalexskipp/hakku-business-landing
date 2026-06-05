@@ -82,7 +82,6 @@ const Footer = () => (
         </div>
         <div style={{ display: 'flex', gap: 26, fontSize: 14, color: 'rgba(255,255,255,.65)', flexWrap: 'wrap' }}>
           <a href="https://hakku.ai">основной сайт</a>
-          <a href="#">политика</a>
           <a href="mailto:hello@hakku.ai">hello@hakku.ai</a>
         </div>
       </div>
