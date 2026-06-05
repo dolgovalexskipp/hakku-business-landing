@@ -3,13 +3,13 @@ const Team = () => {
   const people = [
     {
       name: 'Николай Писаренко',
-      role: 'сооснователь · hakku.ai',
+      role: 'сооснователь · хакку.ии',
       bio: 'PwC, СИБУР, СберУниверситет. Спикер 100+ конференций. 10+ лет в корпоративном обучении и ИИ-трансформации.',
       photo: 'assets/founders/nikolai.jpg',
     },
     {
       name: 'Сергей Ершов',
-      role: 'сооснователь · hakku.ai',
+      role: 'сооснователь · хакку.ии',
       bio: 'CPO/CEO Edutoria (образовательная платформа Сбера). Директор по развитию Ultimate Education. Автор каналов про ИИ и технологии.',
       photo: 'assets/founders/sergei.jpg',
     },
@@ -27,7 +27,7 @@ const Team = () => {
         <div style={{ marginBottom: 44 }}>
           <div style={{ fontSize: 11, color: 'rgba(0,0,0,.5)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 22 }}>Кто за этим стоит</div>
           <h2 style={{ fontFamily: 'Tektur, sans-serif', fontSize: 'clamp(2.2rem,5vw,4rem)', lineHeight: 1.05, letterSpacing: '-0.02em', margin: 0, fontWeight: 400, color: '#000' }}>
-            Команда hakku.ai.
+            Команда хакку.ии.
           </h2>
         </div>
 

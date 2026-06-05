@@ -83,11 +83,10 @@ const Footer = () => (
         <div style={{ display: 'flex', gap: 26, fontSize: 14, color: 'rgba(255,255,255,.65)', flexWrap: 'wrap' }}>
           <a href="https://hakku.ai">основной сайт</a>
           <a href="#">политика</a>
-          <a href="#">оферта</a>
           <a href="mailto:hello@hakku.ai">hello@hakku.ai</a>
         </div>
       </div>
-      <div style={{ paddingTop: 22, borderTop: '1px solid rgba(255,255,255,.12)', fontSize: 12, color: 'rgba(255,255,255,.45)' }}>© 2026 ИП Писаренко Н.С. · hakku.ai / бИИзнес</div>
+      <div style={{ paddingTop: 22, borderTop: '1px solid rgba(255,255,255,.12)', fontSize: 12, color: 'rgba(255,255,255,.45)' }}>© 2026 ИП Писаренко Н.А. · хакку.ии | бИИзнес · hakku.ai | business</div>
     </div>
   </footer>
 );
