@@ -34,6 +34,13 @@ function App(){
 
   React.useEffect(()=>{ window.scrollTo(0, 0); }, [view]);
 
+  // ⌘K / Ctrl+K opens the knowledge base search
+  React.useEffect(()=>{
+    const onKey = (e)=>{ if ((e.metaKey||e.ctrlKey) && (e.key==='k'||e.key==='K')) { e.preventDefault(); setView('knowledge'); } };
+    window.addEventListener('keydown', onKey);
+    return ()=>window.removeEventListener('keydown', onKey);
+  }, []);
+
   const handleAuth = async (pw) => {
     const ok = await verifyPassword(pw);
     if (ok) {

@@ -1,6 +1,5 @@
 // faculty.jsx — lecturer profiles. Co-founders as practitioners.
 function Faculty({ nav = ()=>{} }) {
-  const alexMats = MATERIALS.filter(m=>m.auth==='alex' && m.status==='live').slice(0,3);
   return (
     <div className="os-frame">
       <Sidebar active="faculty" nav={nav}/>
@@ -39,27 +38,18 @@ function Faculty({ nav = ()=>{} }) {
 
       <aside className="os-rail">
         <div className="os-rail-block">
-          <div className="os-rail-h">Профиль</div>
-          <div className="os-card tight" style={{ padding: 0, overflow:'hidden' }}>
-            <img src={AV.alex} alt="" style={{ width:'100%', aspectRatio:'4/3', objectFit:'cover', display:'block' }}/>
-            <div style={{ padding: 16, display:'flex', flexDirection:'column', gap: 10 }}>
-              <div>
-                <div style={{ fontSize: 11, fontWeight: 600, letterSpacing:'0.08em', textTransform:'uppercase', color:'var(--magenta)' }}>co-founder · бИИзнес</div>
-                <div style={{ fontFamily:'var(--font-display)', fontSize: 22, marginTop: 4 }}>Саша Долгов</div>
-              </div>
-              <p style={{ fontSize: 13.5, color:'var(--ink-55)', lineHeight: 1.5, margin: 0 }}>Основатель VEYRA. Ведёт гайды по инфраструктуре и настройке инструментов.</p>
-              <a className="os-btn tg sm block" href="https://t.me/dolgovalex" target="_blank" rel="noopener" style={{ textDecoration:'none' }}>{Icons.tg()} Написать @dolgovalex</a>
+          <div className="os-rail-h">Команда на связи</div>
+          <div className="os-card tight" style={{ padding: 16, display:'flex', flexDirection:'column', gap: 12 }}>
+            <p style={{ fontSize: 13.5, color:'var(--ink-55)', lineHeight: 1.5, margin: 0 }}>
+              Основатели сами в чате сообщества — вопросы по материалам, разборы и нетворк. Отвечаем в течение дня.
+            </p>
+            <div style={{ display:'flex', alignItems:'center' }}>
+              {[AV.nikolai,AV.sergei,AV.alex].map((a,i)=>(
+                <img key={i} src={a} alt="" style={{ width: 30, height: 30, borderRadius:999, objectFit:'cover', objectPosition:'center top', marginLeft: i?-8:0, border:'2px solid #fff' }}/>
+              ))}
             </div>
+            <a className="os-btn tg sm block" href="https://t.me/hakkuai_business_bot" target="_blank" rel="noopener" style={{ textDecoration:'none' }}>{Icons.tg()} Перейти в чат</a>
           </div>
-        </div>
-        <div className="os-rail-block">
-          <div className="os-rail-h">Материалы Саши</div>
-          {alexMats.map((m,i)=>(
-            <a key={i} href={m.href} style={{ display:'flex', gap: 11, alignItems:'center', padding:'9px 0', borderTop: i?'1px solid var(--ink-08)':'0', textDecoration:'none', color:'inherit' }}>
-              <span style={{ color:'var(--ink-40)' }}>{Icons[m.k](' ')}</span>
-              <span style={{ fontSize: 13.5, lineHeight: 1.3 }}>{m.title}</span>
-            </a>
-          ))}
         </div>
       </aside>
     </div>

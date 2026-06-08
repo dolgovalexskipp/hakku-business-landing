@@ -64,8 +64,8 @@ function Schedule({ nav = ()=>{} }) {
                 <div style={{ position:'relative', zIndex: 2 }}>
                   <div className="eb" style={{ marginBottom: 8 }}><span className="os-dot orange" style={{ marginRight: 6 }}/>{u.dow} {u.d} июн · {u.time}</div>
                   <h4 style={{ fontFamily:'var(--font-display)', fontWeight: 400, fontSize: 18, color:'var(--paper)', lineHeight: 1.1 }}>{u.t}</h4>
-                  <p className="faint" style={{ fontSize: 12.5, margin:'6px 0 0' }}>{u.kind} · {u.who}</p>
-                  <a className="os-btn tg sm block" href={TG} target="_blank" rel="noopener" style={{ marginTop: 12, textDecoration:'none' }}>{Icons.tg()} Подключиться</a>
+                  <p className="faint" style={{ fontSize: 12.5, margin:'6px 0 0' }}>{u.kind} · {u.who} · эфир в Telegram</p>
+                  <a className="os-btn tg sm block" href={TG} target="_blank" rel="noopener" style={{ marginTop: 12, textDecoration:'none' }}>{Icons.tg()} Подключиться в Telegram</a>
                 </div>
               ) : (<>
                 <div style={{ textAlign:'center', width: 40, flexShrink: 0 }}>

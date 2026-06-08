@@ -20,8 +20,8 @@ function Knowledge({ nav = ()=>{} }) {
         <div className="ttl">{m.title}</div>
         <div className="sub">{m.sub}</div>
       </div>
-      <div className="auth"><img className="av" src={AV[m.auth]} alt=""/>{LECTURERS.find(l=>l.id===m.auth)?.name.split(' ')[1]}<span style={{ color:'var(--ink-12)' }}>·</span>{m.read}</div>
-      <div className="chev">{m.status==='live' ? Icons.chev(' ') : <span style={{ fontSize: 10.5, color:'var(--ink-40)', textTransform:'uppercase', letterSpacing:'.06em' }}>скоро</span>}</div>
+      <div className="auth"><img className="av" src={AV[m.auth]} alt=""/>{LECTURERS.find(l=>l.id===m.auth)?.name}<span style={{ color:'var(--ink-12)' }}>·</span>{m.read}</div>
+      <div className="chev">{m.status==='live' ? Icons.chev(' ') : null}</div>
     </>);
     return m.status==='live'
       ? <a className="os-mat-row" href={m.href} key={i} style={{ textDecoration:'none' }}>{inner}</a>
@@ -35,7 +35,7 @@ function Knowledge({ nav = ()=>{} }) {
         <Topbar crumbs={['бИИзнес','База знаний','Все материалы']} actions={
           <div className="os-search live" style={{ width: 240, height: 34 }}>
             {Icons.search()}
-            <input className="os-search-input" type="text" placeholder="Поиск по базе" value={q}
+            <input className="os-search-input" type="text" placeholder="Поиск по базе" value={q} autoFocus
                    onChange={e=>setQ(e.target.value)} autoComplete="off" spellCheck="false"/>
             {q && <span className="os-search-clear" onClick={()=>setQ('')}>×</span>}
           </div>
@@ -75,15 +75,6 @@ function Knowledge({ nav = ()=>{} }) {
       </div>
 
       <aside className="os-rail">
-        <div className="os-rail-block">
-          <div className="os-rail-h">Коллекции</div>
-          {[['С чего начать','2 материала','blue'],['Инфраструктура ИИ','3 материала','mag'],['Продажи и выручка','скоро','orange']].map(([t,c,col],i)=>(
-            <div key={i} className="os-card tight os-clickable" onClick={()=>nav('knowledge')} style={{ display:'flex', flexDirection:'column', gap: 4, padding:'13px 15px' }}>
-              <div style={{ display:'flex', alignItems:'center', gap: 8 }}><span className={`os-dot ${col}`}/><span style={{ fontSize: 14, fontWeight: 600 }}>{t}</span></div>
-              <span style={{ fontSize: 12, color:'var(--ink-40)' }}>{c}</span>
-            </div>
-          ))}
-        </div>
         <div className="os-rail-block">
           <div className="os-rail-h">Форматы</div>
           {[['book','Гайд','пошаговый разбор'],['video','Loom','видео-запись'],['prompt','Промпты','готовые шаблоны'],['cal','Вебинар','эфир + запись']].map(([ic,t,d],i)=>(

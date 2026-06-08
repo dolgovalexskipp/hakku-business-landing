@@ -48,7 +48,7 @@ function HomeA({ nav = ()=>{} }) {
                   </div>
                   <h4>{m.title}</h4>
                   <p style={{ fontSize: 13.5, color:'var(--ink-55)', margin: 0, lineHeight: 1.45 }}>{m.sub}</p>
-                  <div className="foot"><img className="av" src={AV[m.auth]} alt=""/> {LECTURERS.find(l=>l.id===m.auth)?.name.split(' ')[1]} · {m.read}</div>
+                  <div className="foot"><img className="av" src={AV[m.auth]} alt=""/> {LECTURERS.find(l=>l.id===m.auth)?.name} · {m.read}</div>
                 </a>
               ))}
             </div>

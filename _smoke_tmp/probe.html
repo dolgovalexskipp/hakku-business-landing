@@ -1,0 +1,23 @@
+<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>html,body{margin:0}#r{font:12px monospace;padding:8px;white-space:pre-wrap}iframe{width:1280px;height:900px;border:0}</style>
+<div id="r">run</div><iframe id="f"></iframe>
+<script>try{localStorage.setItem('hakku_os_pw','energy0f$');}catch(e){}
+const f=document.getElementById('f'); f.src='/os/';
+f.onload=()=>setTimeout(()=>{try{
+ const d=f.contentDocument,w=f.contentWindow;
+ const navItems=[...d.querySelectorAll('.os-nav-item')];
+ const kn=navItems.find(x=>/Все материалы/.test(x.textContent)); if(kn)kn.click();
+ setTimeout(()=>{
+   const rows=d.querySelectorAll('.os-mat-row').length;
+   const searchInput=!!d.querySelector('.os-search-input');
+   const fac=navItems.find(x=>/Лекторы/.test(x.textContent)); if(fac)fac.click();
+   setTimeout(()=>{
+     const cards=d.querySelectorAll('.os-fac-card').length;
+     const bios=d.querySelectorAll('.os-fac-card .bio').length;
+     d.documentElement.scrollWidth;
+     document.getElementById('r').textContent='knowledgeRows='+rows+' searchInput='+searchInput+' facCards='+cards+' facBios='+bios+' err='+(w.__err||'none');
+   },900);
+ },900);
+}catch(e){document.getElementById('r').textContent='ERR '+e;}},2500);
+window.addEventListener('message',e=>{});
+</script>
