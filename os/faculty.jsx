@@ -15,7 +15,7 @@ function Faculty({ nav = ()=>{} }) {
             </p>
           </div>
 
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap: 16 }}>
+          <div className="os-grid-3">
             {LECTURERS.map((l,i)=>(
               <div className="os-fac-card" key={i}>
                 <img className="ph" src={l.img} alt=""/>

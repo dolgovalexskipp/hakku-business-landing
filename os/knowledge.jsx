@@ -2,8 +2,13 @@
 // gated material pages (which auto-open thanks to the shared LMS password).
 function Knowledge({ nav = ()=>{} }) {
   const [filter, setFilter] = React.useState('Все');
+  const [q, setQ] = React.useState('');
   const KMAP = { 'Гайды':'Гайд', 'Подборки':'Подборка', 'Loom':'Loom', 'Промпты':'Промпты', 'Вебинары':'Вебинар' };
-  const list = filter==='Все' ? MATERIALS : MATERIALS.filter(m=>m.kind===KMAP[filter]);
+  const byCat = filter==='Все' ? MATERIALS : MATERIALS.filter(m=>m.kind===KMAP[filter]);
+  const query = q.trim().toLowerCase();
+  const list = !query ? byCat : byCat.filter(m=>(
+    (m.title+' '+m.sub+' '+m.kind+' '+(LECTURERS.find(l=>l.id===m.auth)?.name||'')).toLowerCase().includes(query)
+  ));
 
   const Row = (m, i) => {
     const inner = (<>
@@ -28,7 +33,12 @@ function Knowledge({ nav = ()=>{} }) {
       <Sidebar active="knowledge" nav={nav}/>
       <div className="os-main">
         <Topbar crumbs={['бИИзнес','База знаний','Все материалы']} actions={
-          <div className="os-search" style={{ width: 220, height: 34 }}>{Icons.search()} поиск по базе</div>
+          <div className="os-search live" style={{ width: 240, height: 34 }}>
+            {Icons.search()}
+            <input className="os-search-input" type="text" placeholder="Поиск по базе" value={q}
+                   onChange={e=>setQ(e.target.value)} autoComplete="off" spellCheck="false"/>
+            {q && <span className="os-search-clear" onClick={()=>setQ('')}>×</span>}
+          </div>
         }/>
         <div className="os-content">
           <div>
@@ -45,12 +55,16 @@ function Knowledge({ nav = ()=>{} }) {
                 <button key={t} className={filter===t?'on':''} onClick={()=>setFilter(t)}>{t}</button>
               ))}
             </div>
-            <span style={{ fontSize: 13, color:'var(--ink-40)' }}>{MATERIALS.length} материалов · {liveCount} доступно сейчас</span>
+            <span style={{ fontSize: 13, color:'var(--ink-40)' }}>{query ? `${list.length} найдено` : `${MATERIALS.length} материалов · ${liveCount} доступно сейчас`}</span>
           </div>
 
           {/* lattice list */}
           <div className="os-card" style={{ padding: 0, overflow:'hidden' }}>
-            {list.map(Row)}
+            {list.length ? list.map(Row) : (
+              <div style={{ padding:'40px 24px', textAlign:'center', color:'var(--ink-40)', fontSize: 14 }}>
+                Ничего не нашлось по запросу «{q}».
+              </div>
+            )}
           </div>
 
           <div style={{ display:'flex', alignItems:'center', gap: 12, fontSize: 13.5, color:'var(--ink-55)' }}>

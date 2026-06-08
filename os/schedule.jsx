@@ -2,8 +2,7 @@
 function Schedule({ nav = ()=>{} }) {
   const TG = 'https://t.me/hakkuai_business_bot';
   const ev = {
-    8:  { c:'ink',    t:'Инфраструктура ИИ · live 18:00' },
-    10: { c:'mag',    t:'Loom · company brain' },
+    8:  { c:'ink',    t:'Запуск · live 18:00' },
     15: { c:'orange', t:'Серия промптов' },
     22: { c:'mag',    t:'Loom · войсы' },
     23: { c:'blue',   t:'Вебинар · Excel' },
@@ -11,8 +10,7 @@ function Schedule({ nav = ()=>{} }) {
   const days = []; for (let i=1;i<=30;i++) days.push(i);
   const dows = ['ПН','ВТ','СР','ЧТ','ПТ','СБ','ВС'];
   const upcoming = [
-    { d:'8',  m:'июн', dow:'ПН', time:'18:00', kind:'Вебинар', c:'ink',    t:'Инфраструктура ИИ для бизнеса', who:'Саша Долгов', live:true },
-    { d:'10', m:'июн', dow:'СР', time:'—',     kind:'Loom',    c:'mag',    t:'Personal и company brain', who:'Саша Долгов' },
+    { d:'8',  m:'июн', dow:'ПН', time:'18:00', kind:'Запуск',  c:'ink',    t:'Запуск сообщества бИИзнес', who:'Саша Долгов', live:true },
     { d:'15', m:'июн', dow:'ПН', time:'—',     kind:'Промпты', c:'orange', t:'«Как ИИ забустит мой бизнес»', who:'Сергей Ершов' },
     { d:'22', m:'июн', dow:'ПН', time:'—',     kind:'Loom',    c:'mag',    t:'Цифровая трансформация войсов', who:'Николай Писаренко' },
     { d:'23', m:'июн', dow:'ВТ', time:'19:00', kind:'Вебинар', c:'blue',   t:'Цифровая революция в Excel', who:'Сергей Ершов', live:true },
@@ -21,12 +19,7 @@ function Schedule({ nav = ()=>{} }) {
     <div className="os-frame">
       <Sidebar active="schedule" nav={nav}/>
       <div className="os-main">
-        <Topbar crumbs={['бИИзнес','Расписание']} actions={
-          <div style={{ display:'flex', gap: 8 }}>
-            <div className="t-act">{Icons.cal(' ')} Google Календарь</div>
-            <div className="t-act">Apple / Outlook</div>
-          </div>
-        }/>
+        <Topbar crumbs={['бИИзнес','Расписание']} actions={null}/>
         <div className="os-content">
           <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between' }}>
             <div>

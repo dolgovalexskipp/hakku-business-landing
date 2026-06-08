@@ -31,6 +31,22 @@ html, body { margin: 0; background: var(--paper); }
 /* generic clickable affordance */
 .os-app .os-clickable { cursor: pointer; }
 
+/* responsive content grids (cards / faculty) — were fixed multi-col inline */
+.os-app .os-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.os-app .os-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.os-app .os-main { min-width: 0; }                 /* let flex child shrink, no overflow */
+.os-app .os-content > * { min-width: 0; }
+
+/* working search field in the knowledge topbar */
+.os-app .os-search.live { display: inline-flex; align-items: center; gap: 8px; cursor: text; }
+.os-app .os-search-input {
+  border: 0; outline: none; background: transparent; flex: 1; min-width: 0;
+  font-family: var(--font-body); font-size: 13.5px; color: var(--ink);
+}
+.os-app .os-search-input::placeholder { color: var(--ink-40); }
+.os-app .os-search-clear { cursor: pointer; color: var(--ink-40); font-size: 17px; line-height: 1; padding: 0 2px; }
+.os-app .os-search-clear:hover { color: var(--ink); }
+
 /* ---- login: real password field ---------------------------- */
 .os-login-form { display: flex; flex-direction: column; gap: 12px; }
 .os-login-input {
@@ -64,7 +80,9 @@ html, body { margin: 0; background: var(--paper); }
     align-items: center; gap: 12px; padding: 12px 16px; border-right: 0; border-bottom: 1px solid var(--ink-08);
   }
   .os-app .os-frame { flex-direction: column; }
-  .os-app .os-search, .os-app .os-side-foot { display: none; }
+  .os-app .os-sidebar .os-search, .os-app .os-side-foot { display: none; }
+  .os-app .os-grid-2, .os-app .os-grid-3 { grid-template-columns: 1fr; }
+  .os-app .os-ink .holo { width: 150px !important; right: -30px !important; opacity: .5 !important; }
   .os-app .os-nav { flex-direction: row; flex-wrap: wrap; gap: 8px; width: 100%; }
   .os-app .os-nav-group { flex-direction: row; flex-wrap: wrap; gap: 6px; }
   .os-app .os-nav-label { display: none; }
@@ -78,4 +96,7 @@ html, body { margin: 0; background: var(--paper); }
   .os-app .os-content { padding: 18px 14px; }
   .os-app .os-topbar { padding: 0 16px; }
   .os-app .t-act { display: none; }
+  .os-app .os-ink .holo { display: none; }          /* decorative ring — drop on phones */
+  .os-app .os-ink { padding: 22px !important; }
+  .os-app .os-frame { overflow-x: hidden; }
 }

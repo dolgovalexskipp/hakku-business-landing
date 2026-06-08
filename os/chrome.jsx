@@ -58,14 +58,14 @@ const MATERIALS = [
 const liveCount = MATERIALS.filter(m=>m.status==='live').length;
 
 const LECTURERS = [
-  { id:'nikolai', name:'Николай Писаренко', role:'co-founder', tg:'@npisarenko', img:AV.nikolai,
-    bio:'PwC, СИБУР, СберУниверситет. Отвечает за методологию и корпоративный контекст: как встроить ИИ в процессы компании системно.',
-    tags:['Методология','Корпоративный контекст','Процессы'], count:3 },
-  { id:'sergei', name:'Сергей Ершов', role:'co-founder', tg:'@sershov', img:AV.sergei,
-    bio:'CPO/CEO Edutoria, Ultimate Education. Продукт и образование. Ведёт серии промптов и вебинары с разбором кейсов выручки и маржи.',
+  { id:'nikolai', name:'Николай Писаренко', role:'сооснователь · хакку.ии', tg:'@npisarenko', img:AV.nikolai,
+    bio:'PwC, СИБУР, СберУниверситет. Спикер 100+ конференций, 10+ лет в корпоративном обучении и ИИ-трансформации. В сообществе отвечает за методологию и корпоративный контекст — как встроить ИИ в процессы компании системно, без хаоса в чатах.',
+    tags:['Методология','Корпоративный контекст','Процессы','Обучение'], count:3 },
+  { id:'sergei', name:'Сергей Ершов', role:'сооснователь · хакку.ии', tg:'@sershov', img:AV.sergei,
+    bio:'CPO/CEO Edutoria (образовательная платформа Сбера), директор по развитию Ultimate Education. Продукт и образование, автор каналов про ИИ и технологии. Ведёт серии промптов и вебинары с разбором кейсов выручки и маржи.',
     tags:['Продукт','Промпт-инжиниринг','Продажи','EdTech'], count:2 },
-  { id:'alex', name:'Саша Долгов', role:'co-founder · бИИзнес', tg:'@dolgovalex', img:AV.alex,
-    bio:'Основатель VEYRA, практик ИИ-интеграций. Ведёт гайды по инфраструктуре и настройке инструментов — от оплаты нейронок до второго мозга.',
+  { id:'alex', name:'Саша Долгов', role:'сооснователь · бИИзнес', tg:'@dolgovalex', img:AV.alex,
+    bio:'Основатель VEYRA (голосовые ИИ-агенты). McKinsey → Skyeng → собственная компания, построенная с нуля вокруг ИИ. Практик ИИ-интеграций: ведёт гайды по инфраструктуре и настройке инструментов — от оплаты нейронок до второго мозга.',
     tags:['ИИ-инфраструктура','Claude','Автоматизация'], count:2 },
 ];
 
@@ -97,7 +97,7 @@ function Sidebar({ active='home', nav=()=>{} }) {
         <Glyph size={26}/>
         <div><Wordmark/><small>образовательная среда</small></div>
       </div>
-      <div className="os-search">{Icons.search()} поиск<span className="kbd">⌘K</span></div>
+      <div className="os-search os-clickable" onClick={()=>nav('knowledge')}>{Icons.search()} поиск<span className="kbd">⌘K</span></div>
       <nav className="os-nav">
         {navData.map((g,gi)=>(
           <div className="os-nav-group" key={gi}>

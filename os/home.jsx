@@ -40,7 +40,7 @@ function HomeA({ nav = ()=>{} }) {
               <h2 className="os-h2">Новое в базе</h2>
               <span className="os-clickable" onClick={()=>nav('knowledge')} style={{ fontSize: 13.5, color:'var(--blue)', fontWeight: 500 }}>Все материалы →</span>
             </div>
-            <div style={{ display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap: 14 }}>
+            <div className="os-grid-2">
               {fresh.map((m,i)=>(
                 <a className="os-mat-card" key={i} href={m.href} style={{ textDecoration:'none' }}>
                   <div className="head">
