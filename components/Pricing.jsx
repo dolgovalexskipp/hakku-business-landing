@@ -45,14 +45,22 @@ const Pricing = () => {
               Сначала вы как собственник. Потом — команда.
             </h2>
           </div>
-          <div style={{ display: 'inline-flex', padding: 4, background: 'rgba(0,0,0,.04)', border: '1px solid rgba(0,0,0,.1)', borderRadius: 8 }}>
-            {[['Помесячно', false], ['Годовая · −20%', true]].map(([label, v]) => (
-              <button key={String(v)} onClick={() => setAnnual(v)} style={{
-                padding: '10px 22px', borderRadius: 5, border: 0, cursor: 'pointer',
-                background: annual === v ? '#000' : 'transparent', color: annual === v ? '#fff' : 'rgba(0,0,0,.7)',
-                fontFamily: 'Inter, sans-serif', fontSize: 14, fontWeight: 500, whiteSpace: 'nowrap',
-              }}>{label}</button>
-            ))}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+            <a href="/assets/hakku-biznes-tarify-2026.pdf" download
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 18px', borderRadius: 8, border: '1px solid rgba(0,0,0,.18)', background: 'transparent', color: '#000', fontFamily: 'Inter, sans-serif', fontSize: 14, fontWeight: 500, whiteSpace: 'nowrap' }}
+              onMouseOver={e => e.currentTarget.style.borderColor = '#000'} onMouseOut={e => e.currentTarget.style.borderColor = 'rgba(0,0,0,.18)'}>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+              Скачать тарифы PDF
+            </a>
+            <div style={{ display: 'inline-flex', padding: 4, background: 'rgba(0,0,0,.04)', border: '1px solid rgba(0,0,0,.1)', borderRadius: 8 }}>
+              {[['Помесячно', false], ['Годовая · −20%', true]].map(([label, v]) => (
+                <button key={String(v)} onClick={() => setAnnual(v)} style={{
+                  padding: '10px 22px', borderRadius: 5, border: 0, cursor: 'pointer',
+                  background: annual === v ? '#000' : 'transparent', color: annual === v ? '#fff' : 'rgba(0,0,0,.7)',
+                  fontFamily: 'Inter, sans-serif', fontSize: 14, fontWeight: 500, whiteSpace: 'nowrap',
+                }}>{label}</button>
+              ))}
+            </div>
           </div>
         </div>
 

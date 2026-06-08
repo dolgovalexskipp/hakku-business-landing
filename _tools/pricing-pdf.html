@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../design_system/colors_and_type.css">
+<style>
+  @page { size: A4; margin: 0; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
+  html, body { margin: 0; background: #fff; }
+  .page { width: 210mm; padding: 9mm 15mm 9mm; margin: 0 auto; background: var(--paper); color: var(--ink); }
+
+  .top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 11px; border-bottom: 1px solid var(--ink-12); }
+  .wm { font-family: var(--font-display); font-size: 19px; letter-spacing: -0.02em; display: inline-flex; align-items: center; gap: 9px; color: var(--ink); }
+  .wm .sep { color: var(--ink-40); }
+  .top .meta { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-55); }
+
+  h1 { font-family: var(--font-display); font-weight: 400; font-size: 24px; line-height: 1.07; letter-spacing: -0.02em; color: var(--ink); margin: 10px 0 5px; }
+  .sub { font-size: 12px; line-height: 1.45; color: var(--ink-72); margin: 0; max-width: 168mm; }
+
+  .sec { margin-top: 10px; }
+  .sech { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+  .sech .n { width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: #fff; font-family: var(--font-display); font-size: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .sech .t { font-family: var(--font-display); font-size: 18px; letter-spacing: -0.01em; color: var(--ink); }
+
+  /* tariff table */
+  .ptable { width: 100%; border-collapse: collapse; margin-top: 9px; }
+  .ptable th { text-align: left; font-size: 10px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-55); padding: 0 12px 8px; border-bottom: 1px solid var(--ink-12); vertical-align: bottom; line-height: 1.3; }
+  .ptable td { padding: 7px 12px; border-bottom: 1px solid var(--ink-08); color: var(--ink-72); font-size: 12.5px; line-height: 1.4; vertical-align: middle; }
+  .ptable tr:last-child td { border-bottom: 0; }
+  .ptable td.t { font-family: var(--font-display); font-size: 17px; color: var(--ink); letter-spacing: -0.01em; }
+  .ptable .big { font-family: var(--font-display); font-size: 16px; color: var(--ink); }
+  .ptable b { color: var(--ink); font-weight: 600; }
+  .note { margin-top: 8px; font-size: 11px; line-height: 1.42; color: var(--ink-72); padding: 8px 12px; background: var(--ink-04); border: 1px solid var(--ink-08); border-radius: 10px; }
+  .note b { color: var(--ink); font-weight: 600; }
+
+  /* what's included */
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 9px; }
+  .panel { border: 1px solid var(--ink-12); border-radius: 13px; padding: 11px 13px; background: #fff; }
+  .ptag { font-family: var(--font-display); font-size: 15px; letter-spacing: -0.01em; color: var(--ink); }
+  .psub { font-size: 10.5px; color: var(--ink-55); margin: 3px 0 11px; }
+  .weeks { display: flex; flex-direction: column; gap: 6px; }
+  .wk { display: grid; grid-template-columns: 19px 1fr; gap: 9px; font-size: 11.5px; line-height: 1.38; color: var(--ink-72); }
+  .wk .wn { width: 19px; height: 19px; border-radius: 50%; background: var(--ink-08); color: var(--ink); font-family: var(--font-display); font-size: 11px; display: flex; align-items: center; justify-content: center; }
+  .wk b { color: var(--ink); font-weight: 600; }
+  .perm { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .perm li { font-size: 11.5px; line-height: 1.4; color: var(--ink-72); padding-left: 16px; position: relative; }
+  .perm li::before { content: "—"; position: absolute; left: 0; color: var(--ink-40); }
+  .perm b { color: var(--ink); font-weight: 600; }
+
+  /* value / proof — compact stat band */
+  .bigstats { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; margin-top: 10px; border: 1px solid var(--ink-12); border-radius: 13px; overflow: hidden; background: var(--ink-12); }
+  .bigstats > div { background: #fff; padding: 11px 11px; }
+  .bigstats b { display: block; font-family: var(--font-display); font-weight: 400; font-size: 21px; color: var(--ink); letter-spacing: -0.02em; line-height: 1; }
+  .bigstats span { display: block; font-size: 9.5px; color: var(--ink-55); margin-top: 5px; line-height: 1.3; }
+  .proofcap { margin-top: 9px; font-size: 11px; line-height: 1.5; color: var(--ink-72); }
+
+  .foot { margin-top: 11px; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; padding-top: 9px; border-top: 1px solid var(--ink-12); }
+  .foot .l { font-size: 12px; color: var(--ink-72); }
+  .foot .l b { color: var(--ink); font-weight: 600; }
+  .foot .r { font-size: 10.5px; color: var(--ink-40); text-align: right; line-height: 1.5; }
+  .grad { height: 3px; width: 220px; max-width: 100%; background: var(--grad-full); border-radius: 2px; margin-top: 6px; }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="top">
+      <span class="wm">
+        <svg width="23" height="19" viewBox="0 0 75.947 63.746" fill="#000">
+          <g transform="translate(52.456,1.459)"><path d="M 12.389 59.989 L 23.491 48.887 C 18.463 43.859 15.701 37.15 15.701 29.994 C 15.701 22.822 18.463 16.113 23.491 11.102 L 12.389 0 C 4.41 7.979 0 18.635 0 29.994 C 0 41.354 4.393 52.01 12.389 59.989 Z"/></g>
+          <g transform="translate(0,21.328)"><path fill-rule="evenodd" d="M 42.418 0 L 42.418 0.001 L 48.578 0.001 L 48.578 15.702 L 39.403 15.702 C 33.149 31.34 17.844 42.418 0 42.418 L 0 26.718 C 14.723 26.718 26.717 14.74 26.717 0 L 42.418 0 Z"/></g>
+          <g transform="translate(26.734,0)"><path d="M 7.859 15.718 C 12.199 15.718 15.718 12.199 15.718 7.859 C 15.718 3.519 12.199 0 7.859 0 C 3.519 0 0 3.519 0 7.859 C 0 12.199 3.519 15.718 7.859 15.718 Z"/></g>
+        </svg>
+        <span>хакку.ии</span><span class="sep">|</span><span>б<span style="color:#D51F75">ИИ</span>знес</span>
+      </span>
+      <span class="meta">Тарифы · 2026</span>
+    </div>
+
+    <h1>Тарифы и состав подписки</h1>
+    <p class="sub">хакку.ии | бИИзнес — закрытое сообщество и контентная подписка для собственников малого и среднего бизнеса: системное внедрение ИИ в операционные процессы компании. Запуск — 8 июня 2026.</p>
+
+    <!-- 1 · TARIFFS -->
+    <div class="sec">
+      <div class="sech"><span class="n">1</span><span class="t">Тарифы</span></div>
+      <table class="ptable">
+        <thead>
+          <tr><th style="width:16%">Тариф</th><th style="width:27%">Для кого</th><th style="width:19%">Ранняя цена<br>до 8 июля</th><th style="width:16%">Обычная<br>цена</th><th style="width:22%">Годовая подписка −20%</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="t">ПРО</td>
+            <td>Собственник</td>
+            <td><span class="big">3 900 ₽</span>/мес</td>
+            <td>4 900 ₽/мес</td>
+            <td>3 120 ₽/мес · <b>37 440 ₽/год</b></td>
+          </tr>
+          <tr>
+            <td class="t">МАКС</td>
+            <td>Собственник + ответственный за ИИ</td>
+            <td><span class="big">5 900 ₽</span>/мес</td>
+            <td>7 900 ₽/мес</td>
+            <td>4 720 ₽/мес · <b>56 640 ₽/год</b></td>
+          </tr>
+          <tr>
+            <td class="t">Компания</td>
+            <td>Вся команда</td>
+            <td colspan="3">По запросу — интеграция методики сообщества под процессы компании</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note"><b>Окно раннего тарифа: покупка с 8 июня по 8 июля.</b> При оформлении в окне ранняя цена закрепляется за подписчиком до 31 декабря 2026. С 1 января 2027 — обычная цена. При оформлении после 8 июля действует обычная цена. Годовая подписка — на 20% дешевле помесячной.</div>
+    </div>
+
+    <!-- 2 · WHAT'S INCLUDED -->
+    <div class="sec">
+      <div class="sech"><span class="n">2</span><span class="t">Что входит в подписку</span></div>
+      <div class="two">
+        <div class="panel">
+          <div class="ptag">Программа первого месяца</div>
+          <div class="psub">Прогрессия из 4 недель — от инфраструктуры до первого ИИ-сотрудника в компании</div>
+          <div class="weeks">
+            <div class="wk"><span class="wn">1</span><div><b>Инфраструктура.</b> Оплата нейросетей из России, настройка рабочего ИИ, вводный эфир с командой.</div></div>
+            <div class="wk"><span class="wn">2</span><div><b>Личная польза собственнику.</b> Разгрузка рабочего дня, три готовых промпта личного ассистента.</div></div>
+            <div class="wk"><span class="wn">3</span><div><b>Первый ИИ-помощник в компании.</b> Гайд по сборке и разбор кейса одного из участников.</div></div>
+            <div class="wk"><span class="wn">4</span><div><b>Передача в команду.</b> Доступы, регламент, безопасность данных. Вебинар с итогами когорты.</div></div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="ptag">Постоянная часть подписки</div>
+          <div class="psub">Доступ к сообществу, базе и команде сохраняется на весь срок</div>
+          <ul class="perm">
+            <li><b>Каталог из 5 ИИ-сотрудников</b> — ассистент собственника, финаналитик, документовед, бухгалтерия, продажи. Каждый месяц раскрывается одна роль: гайд, промпты, шаблон.</li>
+            <li><b>Разбор вашего бизнеса</b> на созвоне с основателями — где в процессах ИИ даёт измеримый результат.</li>
+            <li><b>Закрытое сообщество</b> собственников 50–500 млн: база знаний, обмен гипотезами, ответы команды в течение дня.</li>
+            <li><b>Поддержка и безопасность данных</b> — еженедельный разбор вопросов, материалы по корпоративному VPN и работе с базой знаний.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 · VALUE / PROOF -->
+    <div class="sec">
+      <div class="sech"><span class="n">3</span><span class="t">Чем подкреплено</span></div>
+      <div class="bigstats">
+        <div><b>100+</b><span>проектов внедрения ИИ</span></div>
+        <div><b>5 000+</b><span>обучённых сотрудников</span></div>
+        <div><b>27+</b><span>крупнейших компаний</span></div>
+        <div><b>70</b><span>платящих в enterprise-версии</span></div>
+        <div><b>5+ млн ₽</b><span>сэкономлено участниками</span></div>
+        <div><b>3</b><span>ИИ-проекта участников</span></div>
+      </div>
+      <div class="proofcap">Та же методика, по которой команда hakku обучает крупнейшие компании страны (Газпром нефть, X5, Ростелеком, Альфа-Банк) и преподаёт в Корпоративном университете Сбербанка и Сколково. Версия сообщества для сотрудников enterprise запущена в марте 2026.</div>
+    </div>
+
+    <div class="foot">
+      <div class="l">Заявка и доступ: <b>@hakkuai_business_bot</b> · business.hakku.ai<div class="grad"></div></div>
+      <div class="r">© 2026 ИП Писаренко Н.А.<br>хакку.ии | бИИзнес · hakku.ai | business</div>
+    </div>
+  </div>
+</body>
+</html>
