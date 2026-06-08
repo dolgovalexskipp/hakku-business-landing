@@ -21,15 +21,14 @@ function HomeA({ nav = ()=>{} }) {
             <img className="holo" src="/assets/graphic-holo-ring.webp" alt=""
                  style={{ width: 230, right: -36, top: -46, opacity: .92 }}/>
             <div style={{ position:'relative', zIndex: 2, maxWidth: 560 }}>
-              <div className="eb" style={{ marginBottom: 14 }}>Ближайшее событие · сегодня 18:00 МСК</div>
-              <h3 style={{ fontSize: 32, lineHeight: 1.04, marginBottom: 12 }}>Запуск: инфраструктура ИИ для бизнеса.</h3>
+              <div className="eb" style={{ marginBottom: 14 }}>Старт сообщества · сегодня 18:00 МСК</div>
+              <h3 style={{ fontSize: 32, lineHeight: 1.04, marginBottom: 12 }}>Запуск сообщества бИИзнес.</h3>
               <p className="muted" style={{ fontSize: 15, lineHeight: 1.55, margin: 0, maxWidth: 480 }}>
-                Как совместить зарубежный и российский софт и собрать единый корпоративный контекст. Ведёт Саша Долгов.
+                Открываем закрытую среду: база знаний, расписание и команда на связи. Дальше — новые материалы и разборы каждую неделю.
               </p>
               <div style={{ display:'flex', gap: 10, marginTop: 22, alignItems:'center', flexWrap:'wrap' }}>
-                <a className="os-btn tg" href={TG} target="_blank" rel="noopener">{Icons.tg()} Подключиться</a>
-                <button className="os-btn ghost" onClick={()=>nav('schedule')} style={{ color:'#fff', borderColor:'rgba(255,255,255,.24)' }}>В расписание</button>
-                <span className="faint" style={{ fontSize: 13, marginLeft: 6 }}>запись останется в базе</span>
+                <a className="os-btn tg" href={TG} target="_blank" rel="noopener">{Icons.tg()} В Telegram-чат</a>
+                <button className="os-btn ghost" onClick={()=>nav('knowledge')} style={{ color:'#fff', borderColor:'rgba(255,255,255,.24)' }}>Открыть базу</button>
               </div>
             </div>
           </div>
