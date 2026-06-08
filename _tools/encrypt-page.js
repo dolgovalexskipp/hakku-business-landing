@@ -69,10 +69,11 @@ function gateBlock(payloadJson) {
         setTimeout(function () { btn.innerText = o; }, 1500);
       });
     };
-    async function unlock() {
-      var pwd = document.getElementById('pwd').value, err = document.getElementById('err');
-      err.classList.remove('show'); if (!pwd) return;
-      var b64 = function (s) { var bin = atob(s); var out = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i); return out; };
+    function b64(s) { var bin = atob(s); var out = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i); return out; }
+    async function doUnlock(pwd, silent) {
+      var err = document.getElementById('err');
+      if (err) err.classList.remove('show');
+      if (!pwd) return false;
       try {
         var enc = new TextEncoder();
         var km = await crypto.subtle.importKey('raw', enc.encode(pwd), 'PBKDF2', false, ['deriveKey']);
@@ -83,11 +84,17 @@ function gateBlock(payloadJson) {
         var buf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64(PAYLOAD.iv) }, key, b64(PAYLOAD.ct));
         document.getElementById('gated-content').innerHTML = new TextDecoder().decode(buf);
         var lw = document.getElementById('lockwrap'); if (lw) lw.remove();
-        try { localStorage.setItem('hakku_unlocked', '1'); } catch (e) {}
+        // share the community password so the LMS and every other material auto-open
+        try { localStorage.setItem('hakku_os_pw', pwd); } catch (e) {}
+        return true;
       } catch (e) {
-        err.classList.add('show'); document.getElementById('pwd').select();
+        if (!silent) { if (err) err.classList.add('show'); var p = document.getElementById('pwd'); if (p) p.select(); }
+        return false;
       }
     }
+    function unlock() { var p = document.getElementById('pwd'); doUnlock(p ? p.value : '', false); }
+    // auto-unlock from a community password stored by the LMS login (or a prior manual unlock)
+    (function () { try { var s = localStorage.getItem('hakku_os_pw'); if (s) doUnlock(s, true); } catch (e) {} })();
   </script>`;
 }
 
