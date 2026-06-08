@@ -31,6 +31,11 @@ html, body { margin: 0; background: var(--paper); }
 /* generic clickable affordance */
 .os-app .os-clickable { cursor: pointer; }
 
+/* portraits: anchor to top so heads aren't cropped */
+.os-app .os-fac-card .ph { object-position: center top; }
+.os-app .os-rail .os-card img { object-position: center top; }
+.os-app .av { object-position: center top; }
+
 /* responsive content grids (cards / faculty) — were fixed multi-col inline */
 .os-app .os-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
 .os-app .os-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
