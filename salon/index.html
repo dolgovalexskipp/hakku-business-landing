@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Паттерны управления командой — в разработку полностью на AI · Саша Долгов</title>
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/design_system/colors_and_type.css">
+<style>
+  html, body { height: 100%; overflow: hidden; }
+
+  .deck { position: fixed; inset: 0; }
+
+  .slide {
+    position: absolute; inset: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4.5vw 6vw;
+    background: var(--surface);
+    color: var(--fg);
+  }
+  .slide.active { display: flex; }
+
+  /* ---- deck-scale type (projector-friendly) ---- */
+  .d-hero  { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.6rem, 5.6vw, 6rem); line-height: 1.02; letter-spacing: -0.02em; }
+  .d-h1    { font-family: var(--font-display); font-weight: 400; font-size: clamp(2rem, 4.2vw, 4.4rem); line-height: 1.06; letter-spacing: -0.02em; }
+  .d-h2    { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.4rem, 2.4vw, 2.5rem); line-height: 1.15; letter-spacing: -0.01em; }
+  .d-lede  { font-size: clamp(1.05rem, 1.7vw, 1.7rem); line-height: 1.5; color: var(--fg-muted); }
+  .d-body  { font-size: clamp(0.95rem, 1.35vw, 1.4rem); line-height: 1.5; color: var(--fg-muted); }
+  .d-small { font-size: clamp(0.8rem, 1vw, 1.05rem); color: var(--fg-faint); }
+  .d-eyebrow {
+    font-size: clamp(0.75rem, 1vw, 1rem); font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint);
+    margin-bottom: 2.2vw;
+  }
+  .d-mono { font-family: var(--font-mono); font-size: 0.92em; background: var(--ink-04); padding: 0.05em 0.35em; border-radius: var(--r-xs); }
+  [data-canvas="ink"] .d-mono { background: var(--paper-10); }
+
+  .accent-bar { width: 4.5vw; height: 4px; background: var(--grad-cool); border-radius: 2px; margin-bottom: 2.4vw; }
+
+  .slide-foot {
+    position: absolute; left: 6vw; right: 6vw; bottom: 3vh;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: clamp(0.7rem, 0.9vw, 0.95rem); color: var(--fg-faint);
+  }
+  .slide-foot .brand { font-family: var(--font-display); letter-spacing: 0.02em; }
+
+  /* ---- title slide ---- */
+  .title-wrap { display: flex; align-items: center; gap: 4vw; }
+  .title-holo { width: 26vw; max-width: 460px; flex: none; }
+  .title-holo img { width: 100%; height: auto; display: block; }
+  @media (max-aspect-ratio: 6/5) { .title-holo { display: none; } }
+
+  /* ---- stat row ---- */
+  .stats { display: flex; gap: 3.5vw; margin-top: 3vw; flex-wrap: wrap; }
+  .stat { min-width: 16vw; }
+  .stat .num {
+    font-family: var(--font-display); font-size: clamp(2.6rem, 5.4vw, 5.6rem);
+    line-height: 1; letter-spacing: -0.02em; font-feature-settings: "tnum" 1;
+  }
+  .stat .lbl { margin-top: 0.8vw; }
+
+  /* ---- transfer table ---- */
+  .xfer { display: grid; grid-template-columns: 1fr 1.25fr; margin-top: 1vw; }
+  .xfer > div {
+    padding: 1.15vw 1.4vw; border-bottom: 1px solid var(--ink-08);
+    font-size: clamp(0.95rem, 1.45vw, 1.5rem); line-height: 1.35;
+    display: flex; align-items: center; gap: 0.8em;
+  }
+  .xfer .human { color: var(--fg-faint); }
+  .xfer .ai { color: var(--fg); }
+  .xfer .ai b { font-weight: 600; }
+  .xfer .head { border-bottom: 2px solid var(--ink); padding-bottom: 0.7vw; }
+
+  /* ---- pipeline diagram ---- */
+  .pipe { display: flex; align-items: stretch; gap: 1vw; margin-top: 2.5vw; }
+  .pipe .step {
+    flex: 1; border: 1px solid var(--ink-12); border-radius: var(--r-md);
+    padding: 1.4vw 1.2vw; display: flex; flex-direction: column; gap: 0.7vw;
+    background: var(--paper);
+  }
+  .pipe .step.gate { border: 2px solid var(--ink); background: var(--ash); }
+  .pipe .step .nm { font-family: var(--font-display); font-size: clamp(1rem, 1.55vw, 1.6rem); letter-spacing: -0.01em; }
+  .pipe .step .ds { font-size: clamp(0.78rem, 1.05vw, 1.1rem); line-height: 1.4; color: var(--fg-muted); }
+  .pipe .arrow { align-self: center; color: var(--fg-faint); font-size: clamp(1rem, 1.6vw, 1.7rem); flex: none; }
+  .pipe .roles { display: flex; flex-wrap: wrap; gap: 0.4vw; }
+  .pipe .roles span {
+    font-size: clamp(0.68rem, 0.9vw, 0.95rem); border: 1px solid var(--ink-12);
+    border-radius: var(--r-pill); padding: 0.15em 0.7em; color: var(--fg-muted); white-space: nowrap;
+  }
+
+  /* ---- principle slides ---- */
+  .princ-num {
+    font-family: var(--font-display); font-size: clamp(1rem, 1.4vw, 1.4rem);
+    color: var(--fg-faint); margin-bottom: 1vw;
+  }
+  .princ-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4vw; align-items: center; }
+  .codecard {
+    border: 1px solid var(--ink-12); border-radius: var(--r-md);
+    background: var(--ash); padding: 1.8vw 2vw;
+    font-family: var(--font-mono); font-size: clamp(0.78rem, 1.1vw, 1.15rem);
+    line-height: 1.7; color: var(--ink-72); white-space: pre; overflow: hidden;
+  }
+  .codecard .ok { color: var(--blue); }
+  .codecard .bad { color: var(--magenta); }
+
+  /* ---- patterns slide ---- */
+  .patterns { display: flex; gap: 1.6vw; margin-top: 2.5vw; }
+  .pat {
+    flex: 1; border: 1px solid var(--ink-12); border-radius: var(--r-lg);
+    padding: 1.8vw 1.8vw; display: flex; flex-direction: column; gap: 1vw;
+  }
+  .pat .verdict { font-size: clamp(0.75rem, 1vw, 1rem); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+  .pat.no  .verdict { color: var(--magenta); }
+  .pat.yes .verdict { color: var(--blue); }
+  .pat .nm { font-family: var(--font-display); font-size: clamp(1.05rem, 1.7vw, 1.8rem); line-height: 1.15; }
+  .pat .ds { font-size: clamp(0.82rem, 1.15vw, 1.2rem); line-height: 1.45; color: var(--fg-muted); }
+  .pat.no { background: var(--ash); }
+  .pat.hero-pat { border: 2px solid var(--ink); }
+
+  /* ---- takeaway list ---- */
+  .takes { display: grid; grid-template-columns: 1fr 1fr; gap: 2vw 4vw; margin-top: 3vw; }
+  .take .t-nm { font-family: var(--font-display); font-size: clamp(1.3rem, 2.2vw, 2.3rem); line-height: 1.15; margin-bottom: 0.6vw; }
+  .take .t-ds { font-size: clamp(0.9rem, 1.25vw, 1.3rem); line-height: 1.45; color: var(--fg-muted); }
+
+  /* ---- demo watchlist ---- */
+  .watch { margin-top: 2.5vw; display: flex; flex-direction: column; gap: 1.2vw; }
+  .watch .w {
+    display: flex; gap: 1.2vw; align-items: baseline;
+    font-size: clamp(1rem, 1.6vw, 1.65rem); line-height: 1.4; color: var(--paper-72);
+  }
+  .watch .w b { color: var(--paper); font-weight: 600; }
+  .watch .dot { color: var(--paper-40); flex: none; font-family: var(--font-mono); }
+
+  /* ---- chrome: progress + counter ---- */
+  .progress { position: fixed; left: 0; top: 0; height: 3px; background: var(--grad-cool); width: 0; transition: width .25s ease; z-index: 10; }
+  .counter {
+    position: fixed; right: 1.6vw; top: 1.6vw; z-index: 10;
+    font-family: var(--font-mono); font-size: clamp(0.7rem, 0.9vw, 0.95rem); color: var(--fg-faint);
+  }
+  .slide[data-canvas="ink"] ~ .counter { color: var(--paper-55); }
+
+  .hint {
+    position: fixed; left: 50%; transform: translateX(-50%); bottom: 1.4vh; z-index: 10;
+    font-size: 0.75rem; color: var(--fg-faint); opacity: 0.8; transition: opacity 1s;
+  }
+  .hint.gone { opacity: 0; }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="counter" id="counter"></div>
+<div class="hint" id="hint">← → стрелки или клик</div>
+
+<div class="deck" id="deck">
+
+  <!-- 1 · TITLE -->
+  <section class="slide" data-canvas="ink">
+    <div class="title-wrap">
+      <div>
+        <div class="d-eyebrow">R Founders · вайбкодинг-салон · Москва · 10.06.2026</div>
+        <h1 class="d-hero">Паттерны управления командой&nbsp;— в&nbsp;разработку полностью на&nbsp;AI</h1>
+        <p class="d-lede" style="margin-top:2.2vw">Саша Долгов · co-founder VEYRA (Voice AI)<br>ex-Skyeng · ex-Skipp</p>
+      </div>
+      <div class="title-holo"><img src="/assets/graphic-holo-torus.webp" alt=""></div>
+    </div>
+    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>business.hakku.ai/salon</span></div>
+  </section>
+
+  <!-- 2 · WHO -->
+  <section class="slide">
+    <div class="d-eyebrow">Откуда фактура</div>
+    <div class="accent-bar"></div>
+    <h2 class="d-h1">VEYRA — голосовые AI-агенты,<br>которые звонят за бизнес</h2>
+    <div class="stats">
+      <div class="stat"><div class="num">0</div><div class="lbl d-body">разработчиков-людей в команде</div></div>
+      <div class="stat"><div class="num">100%</div><div class="lbl d-body">кода платформы написано AI:<br>backend, frontend, телефония, инфраструктура</div></div>
+      <div class="stat"><div class="num grad-text">prod</div><div class="lbl d-body">в проде у Аптек 36,6, Т-Банка, Туту<br>— тысячи реальных звонков</div></div>
+    </div>
+    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>Саша Долгов · @dolgovalex</span></div>
+  </section>
+
+  <!-- 3 · FAIL -->
+  <section class="slide">
+    <div class="d-eyebrow">Где наивный вайбкодинг ломается</div>
+    <div class="accent-bar"></div>
+    <h2 class="d-h1">Реальный фейл из моей практики</h2>
+    <div style="margin-top:2.5vw; max-width:62vw">
+      <p class="d-lede">Задача: «сделай фичу с интеграцией внешнего API».<br>
+      Через час: фронтенд готов, красивый. <b style="color:var(--ink)">Интеграции — нет.</b></p>
+      <p class="d-lede" style="margin-top:1.5vw">Токен лежал в <span class="d-mono">~/.secrets</span>. Документация была в памяти.<br>
+      Модель «забыла» — потому что <b style="color:var(--ink)">никто явно не написал</b>.</p>
+      <p class="d-body" style="margin-top:2.5vw; color:var(--fg-faint)">Диагноз: план прозой + контекст рассыпан по файлам → критические детали теряются между фазами.</p>
+    </div>
+    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>03</span></div>
+  </section>
+
+  <!-- 4 · INSIGHT -->
+  <section class="slide" data-canvas="ink">
+    <div class="d-eyebrow" style="color:var(--paper-55)">Инсайт</div>
+    <h2 class="d-hero" style="max-width:78vw">Это не проблема модели.<br>Это проблема <span class="grad-text">управления</span>.</h2>
+    <p class="d-lede" style="margin-top:2.5vw; max-width:60vw; color:var(--paper-72)">Команды людей решают ровно это — не наймом гениев, а процессом: аналитик, архитектор, ревью, ретроспектива. Эти паттерны переносятся в AI один в один.</p>
+    <div class="slide-foot" style="color:var(--paper-40)"><span class="brand">хакку.ии | бИИзнес</span><span>04</span></div>
+  </section>
+
+  <!-- 5 · TRANSFER TABLE -->
+  <section class="slide">
+    <div class="d-eyebrow">Перенос паттернов</div>
+    <div class="xfer">
+      <div class="head d-small" style="text-transform:uppercase; letter-spacing:.08em">Команда людей</div>
+      <div class="head d-small" style="text-transform:uppercase; letter-spacing:.08em">AI-команда</div>
+      <div class="human">Онбординг новичка в контекст</div>
+      <div class="ai"><b>Scout</b> — разведка токенов, доков, кода до планирования</div>
+      <div class="human">Спека от архитектора</div>
+      <div class="ai"><b>Структурный план</b> — 8 обязательных слотов вместо прозы</div>
+      <div class="human">Ревью плана тимлидом</div>
+      <div class="ai"><b>Gate</b> — независимый агент: PASS / FAIL</div>
+      <div class="human">Делегирование с контекстом</div>
+      <div class="ai"><b>Инжекция контекста</b> — каждая роль получает свой срез</div>
+      <div class="human">Дизайн-ревью</div>
+      <div class="ai"><b>Литеральные чеки</b> — grep по спеке вместо «глянь глазами»</div>
+      <div class="human">Ретроспектива</div>
+      <div class="ai"><b>Персистентная память</b> — post-mortem каждого фейла</div>
+    </div>
+    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>05</span></div>
+  </section>
+
+  <!-- 6 · PIPELINE -->
+  <section class="slide">
+    <div class="d-eyebrow">Как это выглядит у меня · пайплайн /dev-team</div>
+    <div class="accent-bar"></div>
+    <h2 class="d-h1">Одна команда — пять фаз</h2>
+    <div class="pipe">
+      <div class="step">
+        <div class="nm">Scout</div>
+        <div class="ds">Собирает токены, доки, существующий код — до того, как кто-то начал планировать</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="step">
+        <div class="nm">Architect</div>
+        <div class="ds">План не прозой: 8 обязательных слотов с цитатами из разведки</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="step gate">
+        <div class="nm">Gate-A</div>
+        <div class="ds">Новый агент с чистым контекстом проверяет план. PASS / FAIL. 2 фейла → эскалация к человеку</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="step">
+        <div class="nm">Spawn</div>
+        <div class="ds">Роли получают спеку модуля + срез разведки</div>
+        <div class="roles"><span>Backend</span><span>Frontend</span><span>QA</span><span>Art Director</span></div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="step gate">
+        <div class="nm">Gate-B</div>
+        <div class="ds">Литеральные чеки дизайн-спеки: jq / grep, не «впечатление»</div>
+      </div>
+    </div>
+    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>06</span></div>
+  </section>
+
+  <!-- 7 · PRINCIPLE 1 -->
+  <section class="slide">
+    <div class="princ-num">Принцип 1 / 3</div>
+    <div class="princ-grid">
+      <div>
+        <h2 class="d-h1">Запретить прозу</h2>
+        <p class="d-lede" style="margin-top:1.8vw">План — это слоты, где должна стоять цитата из источника: путь к токену, имя модуля, endpoint.</p>
+        <p class="d-lede" style="margin-top:1.2vw">Слот пуст — план не проходит.<br><b style="color:var(--ink)">Проза скрывает пробелы. Схема их обнажает.</b></p>
+      </div>
+      <div class="codecard">## structured_plan.md
+
+api_token:
+  <span class="ok">~/.secrets/provider_token.txt</span>
+existing_module:
+  <span class="ok">services/telephony/bridge.py</span>
+endpoint:
+  <span class="bad">[ПУСТО] → GATE: FAIL</span></div>
+    </div>
+    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>07</span></div>
+  </section>
+
+  <!-- 8 · PRINCIPLE 2 -->
+  <section class="slide">
+    <div class="princ-num">Принцип 2 / 3</div>
+    <div class="princ-grid">
+      <div>
+        <h2 class="d-h1">Ревьюер ≠ автор</h2>
+        <p class="d-lede" style="margin-top:1.8vw">Gate — всегда новый агент с чистым контекстом. Автор «влюблён» в свой план и проверяет его сквозь пальцы — ровно как человек.</p>
+        <p class="d-lede" style="margin-top:1.2vw"><b style="color:var(--ink)">Свежий контекст = свежий взгляд.</b> Самопроверка в том же чате не работает.</p>
+      </div>
+      <div class="codecard">GATE-A · независимый прогон
+
+[UI-1] полнота плана      <span class="ok">PASS</span>
+[UI-2] покрытие разведки  <span class="ok">PASS</span>
+[UI-3] ресурсы в слотах   <span class="bad">FAIL</span>
+       → план вернулся Architect
+       → 2× FAIL → человек</div>
+    </div>
+    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>08</span></div>
+  </section>
+
+  <!-- 9 · PRINCIPLE 3 -->
+  <section class="slide">
+    <div class="princ-num">Принцип 3 / 3</div>
+    <div class="princ-grid">
+      <div>
+        <h2 class="d-h1">Ретро, которое не забывается</h2>
+        <p class="d-lede" style="margin-top:1.8vw">Каждый фейл → post-mortem → запись в персистентную память. Она автоматически подгружается в новые сессии.</p>
+        <p class="d-lede" style="margin-top:1.2vw"><b style="color:var(--ink)">Одна ошибка случается один раз.</b></p>
+      </div>
+      <div>
+        <div class="stats" style="margin-top:0">
+          <div class="stat"><div class="num">217</div><div class="lbl d-body">записей в памяти моего AI<br>за полгода работы</div></div>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="num grad-text">99</div><div class="lbl d-body">из них — выводы из фейлов:<br>что пошло не так и как теперь делать</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>09</span></div>
+  </section>
+
+  <!-- 10 · PATTERNS -->
+  <section class="slide">
+    <div class="d-eyebrow">Чтобы не наступить на чужие грабли</div>
+    <div class="accent-bar"></div>
+    <h2 class="d-h1">Три паттерна мульти-агентности</h2>
+    <div class="patterns">
+      <div class="pat no">
+        <div class="verdict">✕ Ловушка</div>
+        <div class="nm">«Команда агентов общается сама»</div>
+        <div class="ds">Persistent-агенты, координация сообщениями. Тонут в overhead: у людей есть общий контекст и дедлайны, у LLM — нет. Реальный кейс знакомого: половина подписки за неделю, 0 merged PR.</div>
+      </div>
+      <div class="pat yes">
+        <div class="verdict">✓ Работает</div>
+        <div class="nm">Один агент + инструменты</div>
+        <div class="ds">Персональный ассистент: skills, cron, мессенджеры. State в одном месте, нулевой overhead координации. Для фоновых операций — да; для большой разработки — мало.</div>
+      </div>
+      <div class="pat yes hero-pat">
+        <div class="verdict">✓ Для разработки</div>
+        <div class="nm">Оркестратор + эфемерные агенты + типизированные артефакты</div>
+        <div class="ds">Агент живёт одну фазу, передаёт дальше не «чат», а артефакт со схемой. Crash на любой фазе — продолжаем с того же места. Это и есть /dev-team.</div>
+      </div>
+    </div>
+    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>10</span></div>
+  </section>
+
+  <!-- 11 · DEMO -->
+  <section class="slide" data-canvas="ink">
+    <div class="d-eyebrow" style="color:var(--paper-55)">Live</div>
+    <h2 class="d-hero">Демо: фича на проде VEYRA<br>— <span class="grad-text">от тикета до кода</span></h2>
+    <div class="watch">
+      <div class="w"><span class="dot">01</span><span><b>Scout</b> сам найдёт токены, доки и существующие модули</span></div>
+      <div class="w"><span class="dot">02</span><span><b>Architect</b> сдаст план слотами — и <b>Gate</b> завернёт его, если слоты пусты</span></div>
+      <div class="w"><span class="dot">03</span><span><b>Роли</b> получат каждый свой срез контекста — и напишут код</span></div>
+    </div>
+    <div class="slide-foot" style="color:var(--paper-40)"><span class="brand">хакку.ии | бИИзнес</span><span>11</span></div>
+  </section>
+
+  <!-- 12 · TAKEAWAYS -->
+  <section class="slide">
+    <div class="d-eyebrow">Забрать с собой</div>
+    <div class="accent-bar"></div>
+    <div class="takes">
+      <div class="take"><div class="t-nm">Процесс &gt; промпт</div><div class="t-ds">Управляйте AI как командой, а не как автокомплитом. Хороший процесс прощает среднюю модель; плохой — губит лучшую.</div></div>
+      <div class="take"><div class="t-nm">Схема &gt; проза</div><div class="t-ds">Слоты с цитатами из источника вместо свободного плана. Пустой слот виден, пропуск в прозе — нет.</div></div>
+      <div class="take"><div class="t-nm">Свежий контекст &gt; самопроверка</div><div class="t-ds">Ревьюер — всегда отдельный агент с чистым контекстом. PASS / FAIL, два фейла — к человеку.</div></div>
+      <div class="take"><div class="t-nm">Память &gt; повторение</div><div class="t-ds">Ретро записывается, а не вспоминается. Каждый фейл становится правилом для следующих сессий.</div></div>
+    </div>
+    <p class="d-lede" style="margin-top:3.5vw">Саша Долгов · <b style="color:var(--ink)">@dolgovalex</b></p>
+    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>спасибо</span></div>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var progress = document.getElementById('progress');
+  var counter = document.getElementById('counter');
+  var hint = document.getElementById('hint');
+  var i = Math.min(slides.length - 1, Math.max(0, (parseInt(location.hash.slice(1), 10) || 1) - 1));
+
+  function show(n) {
+    i = Math.min(slides.length - 1, Math.max(0, n));
+    slides.forEach(function (s, k) { s.classList.toggle('active', k === i); });
+    progress.style.width = ((i + 1) / slides.length * 100) + '%';
+    counter.textContent = (i + 1) + ' / ' + slides.length;
+    counter.style.color = slides[i].hasAttribute('data-canvas') ? 'rgba(255,255,255,.55)' : '';
+    history.replaceState(null, '', '#' + (i + 1));
+  }
+
+  function next() { show(i + 1); dismissHint(); }
+  function prev() { show(i - 1); dismissHint(); }
+  function dismissHint() { hint.classList.add('gone'); }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+    if (e.key === 'Home') show(0);
+    if (e.key === 'End') show(slides.length - 1);
+  });
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('a')) return;
+    (e.clientX > window.innerWidth / 3) ? next() : prev();
+  });
+  var tx = null;
+  document.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; });
+  document.addEventListener('touchend', function (e) {
+    if (tx === null) return;
+    var dx = e.changedTouches[0].clientX - tx;
+    if (dx < -40) next(); else if (dx > 40) prev();
+    tx = null;
+  });
+
+  show(i);
+  setTimeout(dismissHint, 6000);
+})();
+</script>
+</body>
+</html>
