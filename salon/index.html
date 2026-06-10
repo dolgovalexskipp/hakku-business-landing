@@ -155,6 +155,23 @@
   .watch .w b { color: var(--paper); font-weight: 600; }
   .watch .dot { color: var(--paper-40); flex: none; font-family: var(--font-mono); }
 
+  /* ---- community / QR slide ---- */
+  .qr-card {
+    background: var(--paper); border-radius: var(--r-lg); padding: 1.8vw;
+    flex: none; text-align: center;
+  }
+  .qr-card img { width: 17vw; max-width: 300px; min-width: 160px; display: block; margin: 0 auto; }
+  .qr-card .qr-cap {
+    margin-top: 1vw; font-size: clamp(0.72rem, 0.95vw, 1rem);
+    color: var(--ink-72); line-height: 1.45; font-family: var(--font-mono);
+  }
+  .chips-row { display: flex; flex-wrap: wrap; gap: 0.5vw; margin-top: 2vw; max-width: 46vw; }
+  .chips-row span {
+    border: 1px solid var(--paper-16); border-radius: var(--r-pill);
+    padding: 0.18em 0.85em; font-size: clamp(0.75rem, 1vw, 1.05rem);
+    color: var(--paper-72); white-space: nowrap;
+  }
+
   /* ---- chrome: progress + counter ---- */
   .progress { position: fixed; left: 0; top: 0; height: 3px; background: var(--grad-cool); width: 0; transition: width .25s ease; z-index: 10; }
   .counter {
@@ -422,7 +439,25 @@ endpoint:
       <div class="take"><div class="t-nm">Память &gt; повторение</div><div class="t-ds">Ретро записывается, а не вспоминается. Каждый фейл становится правилом для следующих сессий.</div></div>
     </div>
     <p class="d-lede" style="margin-top:3.5vw">Саша Долгов · <b style="color:var(--ink)">@dolgovalex</b></p>
-    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>спасибо</span></div>
+    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>13</span></div>
+  </section>
+
+  <!-- 14 · COMMUNITY -->
+  <section class="slide" data-canvas="ink">
+    <div class="title-wrap">
+      <div style="flex:1">
+        <div class="d-eyebrow" style="color:var(--paper-55)">Где продолжить</div>
+        <h2 class="d-hero">хакку.ии | <span class="grad-text">бИИзнес</span></h2>
+        <p class="d-lede" style="margin-top:2vw; max-width:46vw; color:var(--paper-72)">Сообщество про внедрение ИИ для собственников малого и среднего бизнеса: прикладные гайды, разборы инструментов, закрытые материалы.</p>
+        <div class="chips-row"><span>Как оплатить нейронки</span><span>Как настроить Claude</span><span>ИИ-инфраструктура</span><span>Второй мозг</span></div>
+        <p class="d-lede" style="margin-top:2.2vw"><b style="color:var(--paper)">business.hakku.ai</b></p>
+      </div>
+      <div class="qr-card">
+        <img src="/salon/qr-bot.svg" alt="QR: @hakkuai_business_bot">
+        <div class="qr-cap">бот сообщества<br>@hakkuai_business_bot</div>
+      </div>
+    </div>
+    <div class="slide-foot" style="color:var(--paper-40)"><span class="brand">хакку.ии | бИИзнес</span><span>спасибо</span></div>
   </section>
 
 </div>
