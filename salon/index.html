@@ -62,6 +62,27 @@
   }
   .stat .lbl { margin-top: 0.8vw; }
 
+  /* ---- system scale slide ---- */
+  .sysgrid { display: grid; grid-template-columns: 0.85fr 1.5fr; gap: 4vw; margin-top: 2.2vw; align-items: start; }
+  .sys-stats { display: flex; flex-direction: column; gap: 1.8vw; }
+  .sys-stats .stat { min-width: 0; }
+  .repos {
+    margin-top: 1.2vw; font-family: var(--font-mono);
+    font-size: clamp(0.68rem, 0.92vw, 0.98rem); color: var(--fg-faint); line-height: 1.9;
+  }
+  .arch { display: flex; flex-direction: column; }
+  .arch .layer {
+    display: grid; grid-template-columns: minmax(10vw, 13vw) 1fr; gap: 1.4vw;
+    padding: 1.05vw 0; border-bottom: 1px solid var(--ink-08); align-items: baseline;
+  }
+  .arch .layer:first-child { border-top: 2px solid var(--ink); }
+  .arch .lname { font-family: var(--font-display); font-size: clamp(0.92rem, 1.3vw, 1.35rem); letter-spacing: -0.01em; }
+  .arch .chips { display: flex; flex-wrap: wrap; gap: 0.4vw; }
+  .arch .chips span {
+    font-size: clamp(0.7rem, 0.95vw, 1rem); border: 1px solid var(--ink-12);
+    border-radius: var(--r-pill); padding: 0.12em 0.7em; color: var(--fg-muted); white-space: nowrap;
+  }
+
   /* ---- transfer table ---- */
   .xfer { display: grid; grid-template-columns: 1fr 1.25fr; margin-top: 1vw; }
   .xfer > div {
@@ -183,7 +204,34 @@
     <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>Саша Долгов · @dolgovalex</span></div>
   </section>
 
-  <!-- 3 · FAIL -->
+  <!-- 3 · SYSTEM SCALE -->
+  <section class="slide">
+    <div class="d-eyebrow">Масштаб системы · цифры из git, пересчитаны сегодня</div>
+    <div class="accent-bar"></div>
+    <h2 class="d-h1">Это не «сайт». Это платформа</h2>
+    <div class="sysgrid">
+      <div>
+        <div class="sys-stats">
+          <div class="stat"><div class="num">6</div><div class="lbl d-body">репозиториев</div></div>
+          <div class="stat"><div class="num">175<span style="font-size:.55em">&thinsp;тыс</span></div><div class="lbl d-body">строк кода</div></div>
+          <div class="stat"><div class="num grad-text">785</div><div class="lbl d-body">коммитов за 9 месяцев</div></div>
+        </div>
+        <div class="repos">veyra-backend · veyra-frontend<br>app · terraform · supabase · admin</div>
+      </div>
+      <div class="arch">
+        <div class="layer"><div class="lname">Клиент</div><div class="chips"><span>myveyra.ai</span><span>Next.js</span><span>личный кабинет</span><span>конструктор агентов</span></div></div>
+        <div class="layer"><div class="lname">API</div><div class="chips"><span>FastAPI</span><span>PostgreSQL</span><span>биллинг</span><span>мульти-тенантность</span></div></div>
+        <div class="layer"><div class="lname">Голос</div><div class="chips"><span>LiveKit-агенты</span><span>STT / LLM / TTS</span><span>realtime-пайплайны</span></div></div>
+        <div class="layer"><div class="lname">Телефония</div><div class="chips"><span>Asterisk</span><span>SIP-транки</span><span>входящие + исходящие кампании</span></div></div>
+        <div class="layer"><div class="lname">Инфра</div><div class="chips"><span>Terraform</span><span>Kubernetes</span><span>10 VM</span><span>GitLab CI/CD</span></div></div>
+        <div class="layer"><div class="lname">Observability</div><div class="chips"><span>Grafana · 26 дашбордов</span><span>Sentry</span><span>алерты в Telegram</span></div></div>
+      </div>
+    </div>
+    <p class="d-small" style="margin-top:1.6vw">+ 6 собственных MCP-серверов для операционки: CRM, финмодель, юрдоки, записи звонков — тоже написаны AI</p>
+    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>03</span></div>
+  </section>
+
+  <!-- 4 · FAIL -->
   <section class="slide">
     <div class="d-eyebrow">Где наивный вайбкодинг ломается</div>
     <div class="accent-bar"></div>
@@ -195,18 +243,18 @@
       Модель «забыла» — потому что <b style="color:var(--ink)">никто явно не написал</b>.</p>
       <p class="d-body" style="margin-top:2.5vw; color:var(--fg-faint)">Диагноз: план прозой + контекст рассыпан по файлам → критические детали теряются между фазами.</p>
     </div>
-    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>03</span></div>
+    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>04</span></div>
   </section>
 
-  <!-- 4 · INSIGHT -->
+  <!-- 5 · INSIGHT -->
   <section class="slide" data-canvas="ink">
     <div class="d-eyebrow" style="color:var(--paper-55)">Инсайт</div>
     <h2 class="d-hero" style="max-width:78vw">Это не проблема модели.<br>Это проблема <span class="grad-text">управления</span>.</h2>
     <p class="d-lede" style="margin-top:2.5vw; max-width:60vw; color:var(--paper-72)">Команды людей решают ровно это — не наймом гениев, а процессом: аналитик, архитектор, ревью, ретроспектива. Эти паттерны переносятся в AI один в один.</p>
-    <div class="slide-foot" style="color:var(--paper-40)"><span class="brand">хакку.ии | бИИзнес</span><span>04</span></div>
+    <div class="slide-foot" style="color:var(--paper-40)"><span class="brand">хакку.ии | бИИзнес</span><span>05</span></div>
   </section>
 
-  <!-- 5 · TRANSFER TABLE -->
+  <!-- 6 · TRANSFER TABLE -->
   <section class="slide">
     <div class="d-eyebrow">Перенос паттернов</div>
     <div class="xfer">
@@ -225,10 +273,10 @@
       <div class="human">Ретроспектива</div>
       <div class="ai"><b>Персистентная память</b> — post-mortem каждого фейла</div>
     </div>
-    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>05</span></div>
+    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>06</span></div>
   </section>
 
-  <!-- 6 · PIPELINE -->
+  <!-- 7 · PIPELINE -->
   <section class="slide">
     <div class="d-eyebrow">Как это выглядит у меня · пайплайн /dev-team</div>
     <div class="accent-bar"></div>
@@ -260,10 +308,10 @@
         <div class="ds">Литеральные чеки дизайн-спеки: jq / grep, не «впечатление»</div>
       </div>
     </div>
-    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>06</span></div>
+    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>07</span></div>
   </section>
 
-  <!-- 7 · PRINCIPLE 1 -->
+  <!-- 8 · PRINCIPLE 1 -->
   <section class="slide">
     <div class="princ-num">Принцип 1 / 3</div>
     <div class="princ-grid">
@@ -281,10 +329,10 @@ existing_module:
 endpoint:
   <span class="bad">[ПУСТО] → GATE: FAIL</span></div>
     </div>
-    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>07</span></div>
+    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>08</span></div>
   </section>
 
-  <!-- 8 · PRINCIPLE 2 -->
+  <!-- 9 · PRINCIPLE 2 -->
   <section class="slide">
     <div class="princ-num">Принцип 2 / 3</div>
     <div class="princ-grid">
@@ -301,10 +349,10 @@ endpoint:
        → план вернулся Architect
        → 2× FAIL → человек</div>
     </div>
-    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>08</span></div>
+    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>09</span></div>
   </section>
 
-  <!-- 9 · PRINCIPLE 3 -->
+  <!-- 10 · PRINCIPLE 3 -->
   <section class="slide">
     <div class="princ-num">Принцип 3 / 3</div>
     <div class="princ-grid">
@@ -322,10 +370,10 @@ endpoint:
         </div>
       </div>
     </div>
-    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>09</span></div>
+    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>10</span></div>
   </section>
 
-  <!-- 10 · PATTERNS -->
+  <!-- 11 · PATTERNS -->
   <section class="slide">
     <div class="d-eyebrow">Чтобы не наступить на чужие грабли</div>
     <div class="accent-bar"></div>
@@ -347,10 +395,10 @@ endpoint:
         <div class="ds">Агент живёт одну фазу, передаёт дальше не «чат», а артефакт со схемой. Crash на любой фазе — продолжаем с того же места. Это и есть /dev-team.</div>
       </div>
     </div>
-    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>10</span></div>
+    <div class="slide-foot"><span class="brand">хакку.ии | бИИзнес</span><span>11</span></div>
   </section>
 
-  <!-- 11 · DEMO -->
+  <!-- 12 · DEMO -->
   <section class="slide" data-canvas="ink">
     <div class="d-eyebrow" style="color:var(--paper-55)">Live</div>
     <h2 class="d-hero">Демо: фича на проде VEYRA<br>— <span class="grad-text">от тикета до кода</span></h2>
@@ -359,10 +407,10 @@ endpoint:
       <div class="w"><span class="dot">02</span><span><b>Architect</b> сдаст план слотами — и <b>Gate</b> завернёт его, если слоты пусты</span></div>
       <div class="w"><span class="dot">03</span><span><b>Роли</b> получат каждый свой срез контекста — и напишут код</span></div>
     </div>
-    <div class="slide-foot" style="color:var(--paper-40)"><span class="brand">хакку.ии | бИИзнес</span><span>11</span></div>
+    <div class="slide-foot" style="color:var(--paper-40)"><span class="brand">хакку.ии | бИИзнес</span><span>12</span></div>
   </section>
 
-  <!-- 12 · TAKEAWAYS -->
+  <!-- 13 · TAKEAWAYS -->
   <section class="slide">
     <div class="d-eyebrow">Забрать с собой</div>
     <div class="accent-bar"></div>
