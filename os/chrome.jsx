@@ -50,6 +50,7 @@ const MATERIALS = [
   { kind:'Гайд',     k:'book',   title:'Как настроить Claude',        sub:'Учётка, оплата и настройка — с видео-разбором',  auth:'nikolai', read:'10 мин', status:'live', href:'/materials/kak-nastroit-claude/' },
   { kind:'Гайд',     k:'book',   title:'Инфраструктура ИИ',           sub:'Как совместить зарубежный и российский софт',    auth:'alex',    read:'12 мин', status:'live', href:'/materials/infrastruktura-ii/' },
   { kind:'Гайд',     k:'book',   title:'Второй мозг',                 sub:'Контекст о вас, который читает любая нейросеть', auth:'alex',    read:'10 мин', status:'live', href:'/materials/second-brain/' },
+  { kind:'Гайд',     k:'book',   title:'Единый мозг компании',        sub:'Один контекст для всех ваших ИИ',                auth:'alex',    read:'10 мин', status:'live', href:'/materials/company-brain/' },
   { kind:'Подборка', k:'prompt', title:'Запись и расшифровка встреч', sub:'20+ инструментов, матрица выбора, 152-ФЗ',       auth:'nikolai', read:'8 мин',  status:'live', href:'/materials/zapis-rasshifrovka-vstrech/' },
   { kind:'Промпты',  k:'prompt', title:'«Как ИИ забустит мой бизнес»', sub:'Серия промптов · рутина · продажи',             auth:'sergei',  read:'серия', status:'soon', date:'15 июн', d:'15.06' },
   { kind:'Loom',     k:'video',  title:'Цифровая трансформация войсов', sub:'От хаоса в чатах — к системе',                 auth:'nikolai', read:'Loom',  status:'soon', date:'22 июн', d:'22.06' },
@@ -66,14 +67,14 @@ const LECTURERS = [
     tags:['Продукт','Промпт-инжиниринг','Продажи','EdTech'], count:2 },
   { id:'alex', name:'Саша Долгов', role:'сооснователь · бИИзнес', tg:'@dolgovalex', img:AV.alex,
     bio:'Основатель VEYRA (голосовые ИИ-агенты). McKinsey → Skyeng → собственная компания, построенная с нуля вокруг ИИ. Практик ИИ-интеграций: ведёт гайды по инфраструктуре и настройке инструментов — от оплаты нейронок до второго мозга.',
-    tags:['ИИ-инфраструктура','Claude','Автоматизация'], count:2 },
+    tags:['ИИ-инфраструктура','Claude','Автоматизация'], count:3 },
 ];
 
 const navData = [
   { label:'', items:[ { ic:'home', t:'Главная', view:'home' } ] },
   { label:'База знаний', items:[
     { ic:'book', t:'Все материалы', count:String(MATERIALS.length), view:'knowledge' },
-    { sub:true, t:'Гайды', count:'4', view:'knowledge' },
+    { sub:true, t:'Гайды', count:'5', view:'knowledge' },
     { sub:true, t:'Подборки', count:'1', view:'knowledge' },
     { sub:true, t:'Loom-разборы', count:'1', view:'knowledge' },
     { sub:true, t:'Серии промптов', count:'1', view:'knowledge' },
