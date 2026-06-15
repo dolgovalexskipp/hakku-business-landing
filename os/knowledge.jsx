@@ -24,6 +24,13 @@ function Knowledge({ nav = ()=>{}, kbTrack = null }) {
   const visTracks = track==='all' ? TRACKS : TRACKS.filter(t=>t.id===track);
   const total = (track==='all' ? filtered : filtered.filter(m=>m.track===track)).length;
 
+  // download the skill-ready .md without triggering the row's link navigation
+  const dlMd = (e, href) => {
+    e.preventDefault(); e.stopPropagation();
+    const a = document.createElement('a'); a.href = href; a.download = href.split('/').pop();
+    document.body.appendChild(a); a.click(); a.remove();
+  };
+
   const Row = (m, i) => {
     const locked = m.status==='live' && !canAccess(m);
     const tierChip = m.tier && m.tier!=='pro'
@@ -36,8 +43,11 @@ function Knowledge({ nav = ()=>{}, kbTrack = null }) {
       <div>
         <div className="ttl">{m.title}{tierChip}</div>
         <div className="sub">{m.sub}</div>
-        {(m.topics||[]).length>0 && (
-          <div className="os-row-tags">{m.topics.slice(0,3).map((t,j)=><span className="os-tag" key={j} onClick={(e)=>{ e.preventDefault(); setTopic(t); }}>{t}</span>)}</div>
+        {((m.topics||[]).length>0 || m.md) && (
+          <div className="os-row-tags">
+            {(m.topics||[]).slice(0,3).map((t,j)=><span className="os-tag" key={j} onClick={(e)=>{ e.preventDefault(); setTopic(t); }}>{t}</span>)}
+            {m.md && <span className="os-tag md" onClick={(e)=>dlMd(e,m.md)} title="Скачать .md — отдайте своему ИИ, чтобы собрать навык">{Icons.dl(' ')} .md для ИИ</span>}
+          </div>
         )}
       </div>
       <div className="auth"><img className="av" src={AV[m.auth]} alt=""/>{LECTURERS.find(l=>l.id===m.auth)?.name}<span style={{ color:'var(--ink-12)' }}>·</span>{m.read}</div>
