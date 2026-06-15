@@ -26,6 +26,10 @@ function App(){
   const [ready, setReady]   = React.useState(false);
   const [authed, setAuthed] = React.useState(false);
   const [view, setView]     = React.useState('home');
+  const [kbTrack, setKbTrack] = React.useState(null); // preselected knowledge-base track
+
+  // nav(view, opts?) — opts.track deep-links the knowledge base to a track stage
+  const go = (v, opts) => { if (opts && 'track' in opts) setKbTrack(opts.track); setView(v); };
 
   React.useEffect(()=>{ (async()=>{
     try { var pw = localStorage.getItem('hakku_os_pw'); if (pw && await verifyPassword(pw)) setAuthed(true); } catch(e){}
@@ -36,7 +40,7 @@ function App(){
 
   // ⌘K / Ctrl+K opens the knowledge base search
   React.useEffect(()=>{
-    const onKey = (e)=>{ if ((e.metaKey||e.ctrlKey) && (e.key==='k'||e.key==='K')) { e.preventDefault(); setView('knowledge'); } };
+    const onKey = (e)=>{ if ((e.metaKey||e.ctrlKey) && (e.key==='k'||e.key==='K')) { e.preventDefault(); setKbTrack(null); setView('knowledge'); } };
     window.addEventListener('keydown', onKey);
     return ()=>window.removeEventListener('keydown', onKey);
   }, []);
@@ -54,7 +58,7 @@ function App(){
   if (!authed) return <div className="os-app"><Login onAuth={handleAuth}/></div>;
 
   const Screen = ({ home:HomeA, knowledge:Knowledge, schedule:Schedule, faculty:Faculty }[view]) || HomeA;
-  return <div className="os-app"><Screen nav={setView}/></div>;
+  return <div className="os-app"><Screen nav={go} kbTrack={kbTrack}/></div>;
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);

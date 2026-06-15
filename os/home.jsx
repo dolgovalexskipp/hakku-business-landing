@@ -33,6 +33,26 @@ function HomeA({ nav = ()=>{} }) {
             </div>
           </div>
 
+          {/* learning track — "с чего начать" */}
+          <div>
+            <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', marginBottom: 16 }}>
+              <h2 className="os-h2">С чего начать</h2>
+              <span className="os-clickable" onClick={()=>nav('knowledge',{track:null})} style={{ fontSize: 13.5, color:'var(--blue)', fontWeight: 500 }}>Весь маршрут →</span>
+            </div>
+            <div className="os-grid-2">
+              {TRACKS.map(tr=>(
+                <div className="os-mat-card os-clickable" key={tr.id} onClick={()=>nav('knowledge',{track:tr.id})}>
+                  <div className="head">
+                    <span className="os-badge ink">Этап {tr.n}</span>
+                    <span style={{ fontSize: 12.5, color:'var(--ink-40)' }}>{countByTrack(tr.id)} мат.</span>
+                  </div>
+                  <h4>{tr.t}</h4>
+                  <p style={{ fontSize: 13.5, color:'var(--ink-55)', margin: 0, lineHeight: 1.45 }}>{tr.d}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* new materials */}
           <div>
             <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', marginBottom: 16 }}>

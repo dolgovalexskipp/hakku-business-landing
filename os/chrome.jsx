@@ -35,6 +35,7 @@ const Icons = {
   play:   (c)=><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>,
   dl:     (c)=><I c={c}><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5"/><path d="M5 19h14"/></I>,
   check:  (c)=><I c={c}><path d="M5 12.5 10 17.5 19 7"/></I>,
+  lock:   (c)=><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={c}><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg>,
   tg:     (c)=><svg width={16} height={16} viewBox="0 0 24 24" fill="currentColor" className={c}><path d="M21.9 4.3 18.6 20c-.25 1.1-.9 1.37-1.82.85l-5.03-3.7-2.43 2.34c-.27.27-.5.5-1 .5l.36-5.13L17.1 7.1c.4-.36-.09-.56-.62-.2L6.9 13.1l-4.96-1.55c-1.08-.34-1.1-1.08.23-1.6L20.5 2.6c.9-.33 1.69.2 1.4 1.7z"/></svg>,
 };
 
@@ -44,19 +45,41 @@ const AV = {
   nikolai: '/assets/founders/nikolai.jpg',
   sergei:  '/assets/founders/sergei.jpg',
 };
-// live = ready material page (gated, auto-opens after LMS login); soon = on the June plan
+// Material model:
+//   kind/k  — format (badge only, secondary axis)
+//   track   — learning-progression stage (PRIMARY nav axis): infra→personal→first-agent→team
+//   topics  — function/theme tags (real filter; seeds the "AI-сотрудники" catalog)
+//   tier    — access level (pro|max|company); wired to the real gate when Telegram auth lands
+//   status  — live = ready gated page (auto-opens after LMS login); soon = on the June plan
 const MATERIALS = [
-  { kind:'Гайд',     k:'book',   title:'Как оплатить нейронки',       sub:'Карты, посредники, обход ограничений из России', auth:'nikolai', read:'5 мин',  status:'live', href:'/materials/kak-oplatit-nejronki/' },
-  { kind:'Гайд',     k:'book',   title:'Как настроить Claude',        sub:'Учётка, оплата и настройка — с видео-разбором',  auth:'nikolai', read:'10 мин', status:'live', href:'/materials/kak-nastroit-claude/' },
-  { kind:'Гайд',     k:'book',   title:'Инфраструктура ИИ',           sub:'Как совместить зарубежный и российский софт',    auth:'alex',    read:'12 мин', status:'live', href:'/materials/infrastruktura-ii/' },
-  { kind:'Гайд',     k:'book',   title:'Второй мозг',                 sub:'Контекст о вас, который читает любая нейросеть', auth:'alex',    read:'10 мин', status:'live', href:'/materials/second-brain/' },
-  { kind:'Гайд',     k:'book',   title:'Единый мозг компании',        sub:'Один контекст для всех ваших ИИ',                auth:'alex',    read:'10 мин', status:'live', href:'/materials/company-brain/' },
-  { kind:'Подборка', k:'prompt', title:'Запись и расшифровка встреч', sub:'20+ инструментов, матрица выбора, 152-ФЗ',       auth:'nikolai', read:'8 мин',  status:'live', href:'/materials/zapis-rasshifrovka-vstrech/' },
-  { kind:'Промпты',  k:'prompt', title:'«Как ИИ забустит мой бизнес»', sub:'Серия промптов · рутина · продажи',             auth:'sergei',  read:'серия', status:'soon', date:'15 июн', d:'15.06' },
-  { kind:'Loom',     k:'video',  title:'Цифровая трансформация войсов', sub:'От хаоса в чатах — к системе',                 auth:'nikolai', read:'Loom',  status:'soon', date:'22 июн', d:'22.06' },
-  { kind:'Вебинар',  k:'cal',    title:'Цифровая революция в Excel',  sub:'Нетворк + контентная часть',                     auth:'sergei',  read:'эфир',  status:'soon', date:'23 июн', d:'23.06' },
+  { kind:'Гайд',     k:'book',   title:'Как оплатить нейронки',       sub:'Карты, посредники, обход ограничений из России', auth:'nikolai', read:'5 мин',  status:'live', track:'infra',       topics:['Инфраструктура','Доступ'],        tier:'pro', href:'/materials/kak-oplatit-nejronki/' },
+  { kind:'Гайд',     k:'book',   title:'Как настроить Claude',        sub:'Учётка, оплата и настройка — с видео-разбором',  auth:'nikolai', read:'10 мин', status:'live', track:'infra',       topics:['Инфраструктура','Claude'],        tier:'pro', href:'/materials/kak-nastroit-claude/' },
+  { kind:'Гайд',     k:'book',   title:'Инфраструктура ИИ',           sub:'Как совместить зарубежный и российский софт',    auth:'alex',    read:'12 мин', status:'live', track:'infra',       topics:['Инфраструктура','Безопасность'],  tier:'pro', href:'/materials/infrastruktura-ii/' },
+  { kind:'Гайд',     k:'book',   title:'Второй мозг',                 sub:'Контекст о вас, который читает любая нейросеть', auth:'alex',    read:'10 мин', status:'live', track:'personal',    topics:['Контекст','Личная польза'],       tier:'pro', href:'/materials/second-brain/' },
+  { kind:'Гайд',     k:'book',   title:'Единый мозг компании',        sub:'Один контекст для всех ваших ИИ',                auth:'alex',    read:'10 мин', status:'live', track:'team',        topics:['Контекст','Компания'],            tier:'max', href:'/materials/company-brain/' },
+  { kind:'Подборка', k:'prompt', title:'Запись и расшифровка встреч', sub:'20+ инструментов, матрица выбора, 152-ФЗ',       auth:'nikolai', read:'8 мин',  status:'live', track:'personal',    topics:['Продуктивность','Безопасность'],  tier:'pro', href:'/materials/zapis-rasshifrovka-vstrech/' },
+  { kind:'Промпты',  k:'prompt', title:'«Как ИИ забустит мой бизнес»', sub:'Серия промптов · рутина · продажи',             auth:'sergei',  read:'серия', status:'soon', track:'first-agent', topics:['Продажи','Рутина'],               tier:'pro', date:'15 июн', d:'15.06' },
+  { kind:'Loom',     k:'video',  title:'Цифровая трансформация войсов', sub:'От хаоса в чатах — к системе',                 auth:'nikolai', read:'Loom',  status:'soon', track:'first-agent', topics:['Кейс','Автоматизация'],           tier:'max', date:'22 июн', d:'22.06' },
+  { kind:'Вебинар',  k:'cal',    title:'Цифровая революция в Excel',  sub:'Нетворк + контентная часть',                     auth:'sergei',  read:'эфир',  status:'soon', track:'personal',    topics:['Кейс','Эфир'],                    tier:'pro', date:'23 июн', d:'23.06' },
 ];
 const liveCount = MATERIALS.filter(m=>m.status==='live').length;
+
+/* ---- taxonomy: learning track (primary) + access tiers ------ */
+const TRACKS = [
+  { id:'infra',       n:1, t:'Базовая инфраструктура', short:'Инфраструктура',  d:'Оплата, доступ и настройка инструментов' },
+  { id:'personal',    n:2, t:'Личная польза',          short:'Личная польза',   d:'Разгрузить свой день с ИИ' },
+  { id:'first-agent', n:3, t:'Первый ИИ-помощник',     short:'Первый помощник', d:'Первая рабочая роль — продажи, рутина' },
+  { id:'team',        n:4, t:'Передача в команду',     short:'В команду',       d:'Единый контекст и доступы для сотрудников' },
+];
+const TIERS = { pro:'ПРО', max:'МАКС', company:'Компания' };
+const TIER_RANK = { pro:1, max:2, company:3 };
+// Access tier of the current viewer. Hard-coded while the shared password is the
+// only gate (everyone sees everything). Wire to the real Telegram/billing auth later.
+const USER_TIER = 'company';
+const canAccess = (m) => TIER_RANK[USER_TIER] >= TIER_RANK[m.tier || 'pro'];
+const trackById = (id) => TRACKS.find(t => t.id === id);
+const countByTrack = (id) => MATERIALS.filter(m => m.track === id).length;
+const ALL_TOPICS = [...new Set(MATERIALS.flatMap(m => m.topics || []))];
 
 const LECTURERS = [
   { id:'nikolai', name:'Николай Писаренко', role:'сооснователь · хакку.ии', tg:'@npisarenko', img:AV.nikolai,
@@ -73,12 +96,8 @@ const LECTURERS = [
 const navData = [
   { label:'', items:[ { ic:'home', t:'Главная', view:'home' } ] },
   { label:'База знаний', items:[
-    { ic:'book', t:'Все материалы', count:String(MATERIALS.length), view:'knowledge' },
-    { sub:true, t:'Гайды', count:'5', view:'knowledge' },
-    { sub:true, t:'Подборки', count:'1', view:'knowledge' },
-    { sub:true, t:'Loom-разборы', count:'1', view:'knowledge' },
-    { sub:true, t:'Серии промптов', count:'1', view:'knowledge' },
-    { sub:true, t:'Вебинары', count:'1', view:'knowledge' },
+    { ic:'book', t:'Все материалы', count:String(MATERIALS.length), view:'knowledge', track:null },
+    ...TRACKS.map(tr => ({ sub:true, t:`${tr.n} · ${tr.short}`, count:String(countByTrack(tr.id)), view:'knowledge', track:tr.id })),
   ]},
   { label:'Среда', items:[
     { ic:'cal', t:'Расписание', view:'schedule' },
@@ -106,7 +125,7 @@ function Sidebar({ active='home', nav=()=>{} }) {
             {g.items.map((it,ii)=>{
               const on = !it.sub && it.view===active;
               return (
-                <div key={ii} className={`os-nav-item${it.sub?' sub':''}${on?' active':''}`} onClick={()=>nav(it.view)}>
+                <div key={ii} className={`os-nav-item${it.sub?' sub':''}${on?' active':''}`} onClick={()=>nav(it.view, ('track' in it)?{track:it.track}:undefined)}>
                   {it.sub ? <span className="dot"/> : <span className="ic">{Icons[it.ic]?.()}</span>}
                   <span>{it.t}</span>
                   {it.count && <span className="count">{it.count}</span>}
@@ -151,4 +170,4 @@ function Topbar({ crumbs, actions }) {
   );
 }
 
-Object.assign(window, { Glyph, Wordmark, Icons, AV, MATERIALS, LECTURERS, liveCount, Sidebar, Topbar, osLogout });
+Object.assign(window, { Glyph, Wordmark, Icons, AV, MATERIALS, LECTURERS, liveCount, TRACKS, TIERS, USER_TIER, canAccess, trackById, countByTrack, ALL_TOPICS, Sidebar, Topbar, osLogout });

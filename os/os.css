@@ -105,3 +105,34 @@ html, body { margin: 0; background: var(--paper); }
   .os-app .os-ink { padding: 22px !important; }
   .os-app .os-frame { overflow-x: hidden; }
 }
+
+/* ---- knowledge base: topic chips, tier chip, track sections ---- */
+.os-app .os-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+.os-app .os-chips button {
+  font: inherit; font-size: 12.5px; line-height: 1; cursor: pointer;
+  padding: 7px 12px; border-radius: var(--r-pill);
+  border: 1px solid var(--ink-12); background: transparent; color: var(--ink-55);
+  transition: background .12s, color .12s, border-color .12s;
+}
+.os-app .os-chips button:hover { border-color: var(--ink-40); color: var(--ink); }
+.os-app .os-chips button.on { background: var(--ink-04); border-color: var(--ink); color: var(--ink); font-weight: 600; }
+
+.os-app .os-tier {
+  display: inline-flex; align-items: center; gap: 3px; vertical-align: middle;
+  margin-left: 8px; padding: 2px 7px; border-radius: var(--r-pill);
+  font-size: 9.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+  border: 1px solid rgba(213,31,117,.24); color: var(--magenta); background: rgba(213,31,117,.07);
+}
+.os-app .os-tier.company { border-color: rgba(42,62,244,.24); color: var(--blue); background: rgba(42,62,244,.07); }
+
+.os-app .os-track-sec { display: flex; flex-direction: column; gap: 12px; }
+.os-app .os-track-sec + .os-track-sec { margin-top: 8px; }
+.os-app .os-track-head { display: flex; align-items: center; gap: 13px; }
+.os-app .os-track-head .n {
+  width: 28px; height: 28px; flex-shrink: 0; border-radius: 999px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 14px; color: var(--paper); background: var(--ink);
+}
+.os-app .os-track-head .t { font-size: 15px; font-weight: 600; line-height: 1.2; }
+.os-app .os-track-head .d { font-size: 12.5px; color: var(--ink-40); margin-top: 2px; }
+.os-app .os-track-head .c { margin-left: auto; font-size: 13px; color: var(--ink-40); }
