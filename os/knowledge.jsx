@@ -35,7 +35,10 @@ function Knowledge({ nav = ()=>{}, kbTrack = null }) {
       <div><span className={`os-badge ${m.k==='video'?'mag':m.k==='prompt'?'orange':m.k==='cal'?'blue':''}`}>{Icons[m.k](' ')}{m.kind}</span></div>
       <div>
         <div className="ttl">{m.title}{tierChip}</div>
-        <div className="sub">{(m.topics||[]).join(' · ')}{m.sub ? ' — '+m.sub : ''}</div>
+        <div className="sub">{m.sub}</div>
+        {(m.topics||[]).length>0 && (
+          <div className="os-row-tags">{m.topics.slice(0,3).map((t,j)=><span className="os-tag" key={j} onClick={(e)=>{ e.preventDefault(); setTopic(t); }}>{t}</span>)}</div>
+        )}
       </div>
       <div className="auth"><img className="av" src={AV[m.auth]} alt=""/>{LECTURERS.find(l=>l.id===m.auth)?.name}<span style={{ color:'var(--ink-12)' }}>·</span>{m.read}</div>
       <div className="chev">{m.status==='live' && !locked ? Icons.chev(' ') : null}</div>
