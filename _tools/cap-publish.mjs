@@ -26,12 +26,13 @@ const VDIR = path.join(REPO, 'v');
 
 // ---- args -------------------------------------------------------------
 const argv = process.argv.slice(2);
-const opts = { storage: null, private: false, push: false };
+const opts = { storage: null, private: false, push: false, deploy: false };
 let src = null;
 for (let i = 0; i < argv.length; i++) {
   const a = argv[i];
   if (a === '--private') opts.private = true;
   else if (a === '--push') opts.push = true;
+  else if (a === '--deploy') opts.deploy = true;
   else if (a === '--title') opts.title = argv[++i];
   else if (a === '--slug') opts.slug = argv[++i];
   else if (a === '--desc') opts.desc = argv[++i];
@@ -242,12 +243,27 @@ console.log(`\n✓ страница готова: v/${slug}/index.html`);
 console.log(`  предпросмотр:  cd ${REPO} && python3 -m http.server 8080  →  http://localhost:8080/v/${slug}/`);
 console.log(`  ссылка после публикации:  ${pageUrl}`);
 
-if (opts.push) {
-  console.log('\n• git add/commit/push…');
-  execFileSync('git', ['-C', REPO, 'add', `v/${slug}`, 'v/_registry.json'], { stdio: 'inherit' });
+// ВАЖНО: сайт раздаётся НЕ с GitHub Pages, а с Яндекс-сервера (git-клон).
+// Поэтому деплой = git push В GitHub + git reset --hard НА сервере по SSH.
+if (opts.push || opts.deploy) {
+  console.log('\n• git add/commit/push → GitHub…');
+  execFileSync('git', ['-C', REPO, 'add', `v/${slug}`, 'v/_registry.json', 'os/chrome.jsx'], { stdio: 'inherit' });
   execFileSync('git', ['-C', REPO, 'commit', '-m', `cap: ${opts.title}`], { stdio: 'inherit' });
   execFileSync('git', ['-C', REPO, 'push'], { stdio: 'inherit' });
-  console.log(`\n✓ опубликовано → ${pageUrl} (GitHub Pages обновится за ~1 мин)`);
+}
+
+if (opts.deploy) {
+  const d = cfg?.deploy;
+  if (!d?.host) die('--deploy требует блок "deploy" в _tools/cap.config.json (host/user/path[/key/branch]).');
+  const key = (d.key || '~/.ssh/id_ed25519').replace(/^~/, process.env.HOME);
+  const branch = d.branch || 'main';
+  console.log(`\n• деплой на сервер ${d.user}@${d.host}…`);
+  execFileSync('ssh', ['-i', key, `${d.user}@${d.host}`,
+    `cd ${d.path} && git fetch origin -q && git reset --hard origin/${branch}`], { stdio: 'inherit' });
+  console.log(`\n✓ опубликовано и задеплоено → ${pageUrl}`);
+} else if (opts.push) {
+  console.log(`\n✓ запушено в GitHub. ДЕПЛОЙ НЕ АВТОМАТ: добавь --deploy или вручную`);
+  console.log(`  ssh ... 'cd /var/www/hakkuai/business-landing && git reset --hard origin/main'`);
 } else {
-  console.log('\n→ когда проверишь локально, опубликуй:  --push  (или git add v/ && git commit && git push)');
+  console.log('\n→ проверь локально, затем опубликуй:  --deploy  (push в GitHub + git reset на Яндекс-сервере)');
 }

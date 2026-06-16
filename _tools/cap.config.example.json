@@ -1,8 +1,17 @@
 {
-  "_comment": "Скопируй в cap.config.json и заполни, когда заведёшь Cloudflare R2. До этого скрипт работает в режиме storage=repo (видео коммитится рядом со страницей).",
+  "_comment": "Скопируй в cap.config.json и заполни. cap.config.json в .gitignore — реальные адреса не попадут в публичный репо.",
+  "_r2_comment": "R2 нужен только для закрытых (--private) и крупных роликов. До этого работает storage=repo.",
   "r2": {
     "bucket": "hakku-loom",
     "endpoint": "https://<ACCOUNT_ID>.r2.cloudflarestorage.com",
     "publicBase": "https://video.hakku.ai"
+  },
+  "_deploy_comment": "Сайт раздаётся с Яндекс-сервера (git-клон), НЕ с GitHub Pages. --deploy делает push + git reset --hard на сервере.",
+  "deploy": {
+    "host": "<SERVER_IP>",
+    "user": "<SSH_USER>",
+    "path": "/var/www/hakkuai/business-landing",
+    "key": "~/.ssh/id_ed25519",
+    "branch": "main"
   }
 }
