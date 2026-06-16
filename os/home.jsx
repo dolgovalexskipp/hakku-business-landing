@@ -1,7 +1,9 @@
 // home.jsx — Dashboard (light). Next-event hero + new materials + context rail.
 function HomeA({ nav = ()=>{} }) {
-  const fresh = MATERIALS.filter(m=>m.status==='live').slice(0, 4);
+  const featured = MATERIALS.find(m=>m.k==='video' && m.status==='live') || MATERIALS.find(m=>m.status==='live');
+  const fresh = MATERIALS.filter(m=>m.status==='live' && m!==featured).slice(0, 4);
   const TG = 'https://t.me/hakkuai_business_bot';
+  const today = new Date().toLocaleDateString('ru-RU', { weekday:'long', day:'numeric', month:'long' });
   return (
     <div className="os-frame">
       <Sidebar active="home" nav={nav}/>
@@ -11,27 +13,34 @@ function HomeA({ nav = ()=>{} }) {
         }/>
         <div className="os-content">
           <div>
-            <div className="os-eyebrow" style={{ marginBottom: 10 }}>Понедельник · 8 июня</div>
+            <div className="os-eyebrow" style={{ marginBottom: 10 }}>{today}</div>
             <h1 className="os-h1">С возвращением.</h1>
-            <p className="os-sub" style={{ marginTop: 8 }}>Старт сообщества сегодня. В базе — {liveCount} материалов, дальше выходят новые каждую неделю.</p>
+            <p className="os-sub" style={{ marginTop: 8 }}>В базе — {liveCount} материалов, новые выходят каждую неделю.</p>
           </div>
 
-          {/* next-event hero — dark accent zone */}
-          <div className="os-ink" style={{ padding: 30 }}>
-            <img className="holo" src="/assets/graphic-holo-ring.webp" alt=""
-                 style={{ width: 230, right: -36, top: -46, opacity: .92 }}/>
-            <div style={{ position:'relative', zIndex: 2, maxWidth: 560 }}>
-              <div className="eb" style={{ marginBottom: 14 }}>Старт сообщества · сегодня 18:00 МСК</div>
-              <h3 style={{ fontSize: 32, lineHeight: 1.04, marginBottom: 12 }}>Запуск сообщества бИИзнес.</h3>
-              <p className="muted" style={{ fontSize: 15, lineHeight: 1.55, margin: 0, maxWidth: 480 }}>
-                Открываем закрытую среду: база знаний, расписание и команда на связи. Дальше — новые материалы и разборы каждую неделю.
-              </p>
-              <div style={{ display:'flex', gap: 10, marginTop: 22, alignItems:'center', flexWrap:'wrap' }}>
-                <a className="os-btn tg" href={TG} target="_blank" rel="noopener">{Icons.tg()} В Telegram-чат</a>
-                <button className="os-btn ghost" onClick={()=>nav('knowledge')} style={{ color:'#fff', borderColor:'rgba(255,255,255,.24)' }}>Открыть базу</button>
+          {/* featured video hero — dark accent zone */}
+          {featured && (
+          <a className="os-ink os-clickable" href={featured.href}
+             style={{ padding: 0, display:'flex', flexWrap:'wrap', textDecoration:'none' }}>
+            <div style={{ flex:'1 1 320px', minWidth: 0, padding: 30, alignSelf:'center' }}>
+              <div className="eb" style={{ marginBottom: 14 }}>Начни отсюда · Loom · {featured.read}</div>
+              <h3 style={{ fontSize: 30, lineHeight: 1.05, marginBottom: 12 }}>{featured.title}</h3>
+              <p className="muted" style={{ fontSize: 15, lineHeight: 1.55, margin: 0, maxWidth: 460 }}>{featured.sub}</p>
+              <span className="os-btn" style={{ marginTop: 22, background:'#fff', color:'#000', borderColor:'#fff' }}>
+                <span style={{ display:'inline-block', borderStyle:'solid', borderWidth:'6px 0 6px 10px', borderColor:'transparent transparent transparent #000', marginRight: 9 }}/>
+                Смотреть разбор
+              </span>
+            </div>
+            <div style={{ flex:'1 1 280px', position:'relative', minHeight: 240,
+                          backgroundImage:`url(${featured.href}poster.jpg)`, backgroundSize:'cover', backgroundPosition:'center' }}>
+              <div style={{ position:'absolute', inset: 0, background:'linear-gradient(90deg, var(--ink) 0%, rgba(0,0,0,.35) 28%, rgba(0,0,0,0) 62%)' }}/>
+              <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', width: 62, height: 62, borderRadius: 999,
+                            background:'rgba(255,255,255,.94)', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 10px 34px rgba(0,0,0,.4)' }}>
+                <span style={{ display:'inline-block', marginLeft: 5, borderStyle:'solid', borderWidth:'10px 0 10px 16px', borderColor:'transparent transparent transparent #0a0a0b' }}/>
               </div>
             </div>
-          </div>
+          </a>
+          )}
 
           {/* learning track — "с чего начать" */}
           <div>
