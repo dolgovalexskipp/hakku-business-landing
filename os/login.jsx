@@ -46,9 +46,19 @@ function Login({ onAuth }) {
           <div className={`os-login-err${err?' show':''}`}>Код не подошёл. Проверьте раскладку и попробуйте ещё раз.</div>
         </form>
 
-        <div style={{ display:'flex', alignItems:'center', gap: 9, fontSize: 13, color:'var(--ink-40)', marginTop: 2 }}>
-          <span className="os-dot mag"/> Нет доступа? Напишите команде —{' '}
-          <a href="https://t.me/hakkuai_business_bot" target="_blank" rel="noopener" style={{ color:'var(--blue)', fontWeight: 500 }}>@hakkuai_business_bot</a>
+        <div style={{ marginTop: 20, paddingTop: 20, borderTop: '1px solid var(--ink-12)' }}>
+          <div style={{ fontSize: 15, fontWeight: 600, marginBottom: 6 }}>Ещё не в сообществе?</div>
+          <p style={{ fontSize: 13.5, color:'var(--ink-55)', lineHeight: 1.5, margin: '0 0 14px', maxWidth: 400 }}>
+            бИИзнес — закрытый клуб собственников, которые внедряют ИИ как драйвер выручки и маржи. Программа, условия и тарифы — на странице сообщества.
+          </p>
+          <div style={{ display:'flex', gap: 10, flexWrap:'wrap' }}>
+            <a className="os-btn tg" href="https://t.me/hakkuai_business_bot" target="_blank" rel="noopener" style={{ textDecoration:'none' }}>{Icons.tg()} Вступить в сообщество</a>
+            <a className="os-btn ghost" href="/" style={{ textDecoration:'none' }}>Все условия и тарифы →</a>
+          </div>
+          <div style={{ display:'flex', alignItems:'center', gap: 9, fontSize: 12.5, color:'var(--ink-40)', marginTop: 16 }}>
+            <span className="os-dot mag"/> Уже участник, но нет кода? Напишите —{' '}
+            <a href="https://t.me/hakkuai_business_bot" target="_blank" rel="noopener" style={{ color:'var(--blue)', fontWeight: 500 }}>@hakkuai_business_bot</a>
+          </div>
         </div>
       </div>
 
