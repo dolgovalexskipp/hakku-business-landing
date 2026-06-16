@@ -52,6 +52,7 @@ const AV = {
 //   tier    — access level (pro|max|company); wired to the real gate when Telegram auth lands
 //   status  — live = ready gated page (auto-opens after LMS login); soon = on the June plan
 const MATERIALS = [
+  { kind:'Loom',     k:'video',  title:'Как устроена база знаний',    sub:'Короткий обзор: где что лежит и как искать',     auth:'alex',    read:'4 мин',  status:'live', track:'infra',       topics:['Старт','Навигация'],              tier:'pro', href:'/v/kak-ustroena-baza-znaniy-soobschestva/' },
   { kind:'Гайд',     k:'book',   title:'Как оплатить нейронки',       sub:'Карты, посредники, обход ограничений из России', auth:'nikolai', read:'5 мин',  status:'live', track:'infra',       topics:['Инфраструктура','Доступ'],        tier:'pro', href:'/materials/kak-oplatit-nejronki/' },
   { kind:'Гайд',     k:'book',   title:'Как настроить Claude',        sub:'Учётка, оплата и настройка — с видео-разбором',  auth:'nikolai', read:'10 мин', status:'live', track:'infra',       topics:['Инфраструктура','Claude'],        tier:'pro', href:'/materials/kak-nastroit-claude/' },
   { kind:'Гайд',     k:'book',   title:'Инфраструктура ИИ',           sub:'Как совместить зарубежный и российский софт',    auth:'alex',    read:'12 мин', status:'live', track:'infra',       topics:['Инфраструктура','Безопасность'],  tier:'pro', href:'/materials/infrastruktura-ii/' },

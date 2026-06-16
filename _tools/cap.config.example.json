@@ -1,0 +1,8 @@
+{
+  "_comment": "Скопируй в cap.config.json и заполни, когда заведёшь Cloudflare R2. До этого скрипт работает в режиме storage=repo (видео коммитится рядом со страницей).",
+  "r2": {
+    "bucket": "hakku-loom",
+    "endpoint": "https://<ACCOUNT_ID>.r2.cloudflarestorage.com",
+    "publicBase": "https://video.hakku.ai"
+  }
+}
