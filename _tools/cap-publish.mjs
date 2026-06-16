@@ -105,6 +105,64 @@ if (storage === 'repo') {
   posterUrl = `${cfg.r2.publicBase.replace(/\/$/,'')}/${slug}-poster.jpg`;
 }
 
+// ---- длительность (для подписи) + брендовая OG-карточка 1200×630 ------
+let durLabel = 'Loom-разбор';
+try {
+  const d = execFileSync('ffprobe', ['-v','error','-show_entries','format=duration','-of','csv=p=0', src], { encoding:'utf8' }).trim();
+  const min = Math.round(parseFloat(d) / 60);
+  if (min >= 1) durLabel = `Loom-разбор · ${min} мин`;
+} catch {}
+
+function ogCardHTML(title, eyebrow) {
+  const e = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const F = `file://${path.join(REPO,'design_system','fonts')}`;
+  const tSize = title.length <= 22 ? 92 : title.length <= 34 ? 74 : 58;
+  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><style>
+@font-face{font-family:'Tektur';src:url('${F}/Tektur-Bold.ttf');font-weight:700;font-display:block}
+@font-face{font-family:'Tektur';src:url('${F}/Tektur-Black.ttf');font-weight:900;font-display:block}
+@font-face{font-family:'Tektur';src:url('${F}/Tektur-Medium.ttf');font-weight:500;font-display:block}
+*{margin:0;padding:0;box-sizing:border-box}html,body{width:1200px;height:630px;overflow:hidden}
+.card{position:relative;width:1200px;height:630px;background:#0a0a0b;color:#fff;font-family:'Inter',-apple-system,system-ui,sans-serif;padding:64px 68px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.glow{position:absolute;width:820px;height:820px;right:-260px;top:-300px;border-radius:50%;background:radial-gradient(circle,rgba(42,62,244,.60) 0%,rgba(213,31,117,.28) 42%,rgba(10,10,11,0) 70%)}
+.bar{position:absolute;left:0;top:0;width:100%;height:8px;background:linear-gradient(90deg,#2A3EF4 0%,#D51F75 55%,#FD7202 100%)}
+.z{position:relative;z-index:2}
+.top{display:flex;align-items:center;gap:13px;font-family:'Tektur';font-weight:700;font-size:27px}
+.dim{color:rgba(255,255,255,.30)}.mag{color:#D51F75}
+.eyebrow{font-weight:600;font-size:19px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.52);margin-bottom:20px}
+.title{font-family:'Tektur';font-weight:900;font-size:${tSize}px;line-height:.99;letter-spacing:-.015em;max-width:1010px}
+.bottom{display:flex;align-items:center;justify-content:space-between}
+.left{display:flex;align-items:center;gap:24px}
+.play{width:104px;height:104px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 16px 50px rgba(0,0,0,.5);flex-shrink:0}
+.tri{margin-left:9px;border-style:solid;border-width:19px 0 19px 31px;border-color:transparent transparent transparent #0a0a0b}
+.sub{font-size:30px;color:rgba(255,255,255,.70);max-width:560px;line-height:1.25}
+.url{font-family:'Tektur';font-weight:500;font-size:25px;color:rgba(255,255,255,.46);white-space:nowrap}
+</style></head><body><div class="card">
+<div class="glow"></div><div class="bar"></div>
+<div class="top z"><span>хакку.ии</span><span class="dim">|</span><span>б<span class="mag">ИИ</span>знес</span></div>
+<div class="z"><div class="eyebrow">${e(eyebrow)}</div><div class="title">${e(title)}</div></div>
+<div class="bottom z"><div class="left"><div class="play"><span class="tri"></span></div>${desc?`<div class="sub">${e(desc)}</div>`:''}</div><div class="url">business.hakku.ai</div></div>
+</div></body></html>`;
+}
+
+let ogImageUrl = posterUrl; // фолбэк — постер, если Chrome недоступен
+try {
+  const chromeBin = cfg?.chrome || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+  if (!fs.existsSync(chromeBin)) throw new Error('Chrome не найден');
+  const ogHtml = path.join(pageDir, '_ogcard.html');
+  const ogPng  = path.join(pageDir, 'og.png');
+  fs.writeFileSync(ogHtml, ogCardHTML(opts.title, durLabel));
+  execFileSync(chromeBin, ['--headless=new','--disable-gpu','--hide-scrollbars','--allow-file-access-from-files','--window-size=1200,630',`--screenshot=${ogPng}`,`file://${ogHtml}`], { stdio:'ignore' });
+  fs.unlinkSync(ogHtml);
+  if (!fs.existsSync(ogPng)) throw new Error('png не создан');
+  if (storage === 'r2') {
+    execFileSync('aws', ['s3','cp', ogPng, `s3://${cfg.r2.bucket}/${slug}-og.png`,'--endpoint-url', cfg.r2.endpoint], { stdio:'ignore' });
+    ogImageUrl = `${cfg.r2.publicBase.replace(/\/$/,'')}/${slug}-og.png`;
+  } else {
+    ogImageUrl = `${SITE}/v/${slug}/og.png`;
+  }
+  console.log('• OG-карточка сгенерирована (og.png)');
+} catch (e) { console.warn('⚠ OG-карточка не сделана ('+e.message+'), беру постер'); }
+
 // ---- AUTH_PROBE из LMS (единый source of truth) -----------------------
 function authProbe() {
   const appjs = fs.readFileSync(path.join(REPO, 'os', 'app.jsx'), 'utf8');
@@ -178,7 +236,10 @@ function buildHTML() {
   <meta property="og:url" content="${pageUrl}">
   <meta property="og:title" content="${esc(opts.title)}">
   <meta property="og:description" content="${esc(desc)}">
-  <meta property="og:image" content="${posterUrl}">
+  <meta property="og:image" content="${ogImageUrl}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:image" content="${ogImageUrl}">
   <meta property="og:site_name" content="хакку.ии | бИИзнес">
   <meta property="og:locale" content="ru_RU">${ogVideo}
   <link rel="stylesheet" href="/design_system/colors_and_type.css">
