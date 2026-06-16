@@ -30,7 +30,7 @@ function Login({ onAuth }) {
 
         <div style={{ marginTop: 14 }}>
           <div className="os-eyebrow" style={{ marginBottom: 12 }}>Закрытая среда · по приглашению</div>
-          <h1 className="os-h1" style={{ fontSize: 40, marginBottom: 14 }}>Вход в образовательную среду.</h1>
+          <h1 className="os-h1" style={{ fontSize: 'clamp(30px, 9vw, 40px)', marginBottom: 14, overflowWrap: 'break-word' }}>Вход в образовательную среду.</h1>
           <p className="os-sub" style={{ maxWidth: 400 }}>
             База знаний сообщества: гайды, Loom-разборы, серии промптов и расписание событий. Доступ — участникам бИИзнес.
           </p>
@@ -60,10 +60,10 @@ function Login({ onAuth }) {
             <a href="https://t.me/hakkuai_business_bot" target="_blank" rel="noopener" style={{ color:'var(--blue)', fontWeight: 500 }}>@hakkuai_business_bot</a>
           </div>
         </div>
-      </div>
 
-      <div style={{ position:'absolute', bottom: 28, left: 0, right: 0, textAlign:'center', fontSize: 12.5, color:'var(--ink-40)' }}>
-        хакку.ии (hakku.ai) · бИИзнес — сообщество собственников бизнеса
+        <div style={{ marginTop: 18, fontSize: 12, color:'var(--ink-40)', lineHeight: 1.4 }}>
+          хакку.ии (hakku.ai) · бИИзнес — сообщество собственников бизнеса
+        </div>
       </div>
     </div>
   );
