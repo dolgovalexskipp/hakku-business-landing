@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="ru" data-brand="b2c">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>ИИ для среднего бизнеса · Hakku · бИИзнес</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/design_system/colors_and_type.css">
+  <meta property="og:title" content="ИИ для среднего бизнеса — Hakku">
+  <meta property="og:description" content="От разовых попыток ChatGPT — к системе, которая считается в деньгах. Диагностика → эксперименты → самостоятельность.">
+  <style>
+    /* ============================================================
+       SMB Transformation Deck — paper-first бИИзнес, 16:9 слайды
+       ============================================================ */
+    html, body { margin:0; background:#e9e9ec; }
+    body { font-family: var(--font-body); color: var(--ink); -webkit-font-smoothing: antialiased; }
+
+    /* ---- Deck container: vertical scroll-snap of 16:9 frames ---- */
+    .deck { height:100vh; overflow-y:scroll; scroll-snap-type:y mandatory; scroll-behavior:smooth; }
+
+    .slide {
+      position:relative;
+      width:min(96vw, calc((100vh - 40px) * 16 / 9));
+      aspect-ratio:16/9;
+      margin:20px auto;
+      background:var(--paper);
+      border:1px solid var(--ink-08);
+      border-radius:18px;
+      box-shadow:0 24px 70px rgba(16,16,15,.10);
+      scroll-snap-align:center;
+      overflow:hidden;
+      container-type:inline-size;
+      display:flex; flex-direction:column;
+    }
+    .slide[data-canvas="ink"]{ background:var(--ink); border-color:rgba(255,255,255,.10); }
+
+    /* content area + footer band */
+    .s-body { flex:1; padding:3.8cqw 5.2cqw 2.4cqw; display:flex; flex-direction:column; min-height:0; position:relative; z-index:1; }
+    .s-foot {
+      height:5.6cqh; flex:0 0 auto;
+      border-top:1px solid var(--ink-08);
+      background:var(--ink-04);
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 6cqw; font-size:1.45cqw; color:var(--fg-faint); letter-spacing:.02em;
+    }
+    [data-canvas="ink"] .s-foot{ border-top-color:rgba(255,255,255,.12); background:rgba(255,255,255,.03); color:var(--paper-55); }
+    .s-foot .fbrand{ display:inline-flex; align-items:center; gap:.5em; font-family:var(--font-display); color:var(--fg-muted); }
+    [data-canvas="ink"] .s-foot .fbrand{ color:var(--paper-72); }
+    .s-foot .ii{ color:var(--magenta); }
+
+    /* ---- typographic scale relative to slide width (cqw) ---- */
+    .eyebrow-line{ display:inline-flex; align-items:center; gap:.7em; margin-bottom:1.8cqw; }
+    .eyebrow-line .bar{ width:2.4cqw; height:.35cqw; min-height:2px; background:var(--grad-full); border-radius:2px; }
+    .eyebrow-line .eyebrow{ font-size:1.5cqw; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--fg-faint); }
+    [data-canvas="ink"] .eyebrow-line .eyebrow{ color:var(--paper-55); }
+
+    .s-title{ font-family:var(--font-display); font-weight:400; line-height:1.04; letter-spacing:-.02em; color:var(--ink); font-size:4.4cqw; margin:0 0 1.3cqw; }
+    [data-canvas="ink"] .s-title{ color:var(--paper); }
+    .s-lede{ font-size:2.0cqw; line-height:1.4; color:var(--ink-72); max-width:62cqw; margin:0; }
+    [data-canvas="ink"] .s-lede{ color:var(--paper-72); }
+    .grad-text{ background:var(--grad-cool); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .grad-warm-text{ background:var(--grad-warm); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .mag{ color:var(--magenta); }
+    b, strong{ font-weight:600; color:inherit; }
+
+    /* ---- generic helpers ---- */
+    .grow{ flex:1; min-height:0; }
+    .row{ display:flex; }
+    .between{ justify-content:space-between; }
+    .center{ align-items:center; }
+    .mt-auto{ margin-top:auto; }
+    .pill{ display:inline-flex; align-items:center; gap:.5em; font-size:1.5cqw; font-weight:500; padding:.7em 1.2em; border-radius:999px; border:1px solid var(--ink-12); color:var(--ink-72); background:#fff; }
+    .pill.b{ border-color:var(--blue); color:var(--blue); }
+
+    /* cards grid */
+    .grid{ display:grid; gap:1.2cqw; }
+    .g2{ grid-template-columns:1fr 1fr; }
+    .g3{ grid-template-columns:repeat(3,1fr); }
+    .g4{ grid-template-columns:repeat(4,1fr); }
+    .card{ border:1px solid var(--ink-12); border-radius:1.2cqw; padding:1.7cqw 1.6cqw; background:#fff; display:flex; flex-direction:column; }
+    .card .k{ font-size:1.35cqw; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--blue); margin:0 0 .7cqw; }
+    .card h3{ font-family:var(--font-display); font-weight:400; font-size:2.0cqw; letter-spacing:-.01em; line-height:1.08; color:var(--ink); margin:0 0 .6cqw; }
+    .card p{ font-size:1.48cqw; line-height:1.4; color:var(--ink-72); margin:0; }
+    .card p + p{ margin-top:.7cqw; }
+    .card .cap{ font-size:1.4cqw; color:var(--ink-55); margin-top:auto; padding-top:1cqw; }
+
+    .stat{ font-family:var(--font-display); font-weight:400; letter-spacing:-.02em; line-height:1; font-feature-settings:"tnum" 1; }
+
+    /* number badge */
+    .lvl{ font-family:var(--font-display); font-size:3.4cqw; line-height:1; color:#fff; width:2em; height:2em; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
+
+    /* check / cross lists */
+    .list{ display:flex; flex-direction:column; gap:1cqw; }
+    .list li{ list-style:none; display:flex; gap:.9em; font-size:1.55cqw; line-height:1.36; color:var(--ink-72); }
+    .list .m{ flex:0 0 auto; font-weight:700; width:1.3em; }
+    .list .ok .m{ color:#0f9d58; } .list .no .m{ color:var(--magenta); }
+    ul{ margin:0; padding:0; }
+
+    /* hero render */
+    .render{ position:absolute; pointer-events:none; user-select:none; object-fit:contain; z-index:0; }
+
+    /* dark callout block */
+    .callout{ background:var(--ink); color:#fff; border-radius:1.6cqw; padding:2.6cqw 2.8cqw; position:relative; overflow:hidden; }
+    .callout p{ font-size:1.9cqw; line-height:1.45; color:rgba(255,255,255,.82); margin:0; max-width:74cqw; position:relative; z-index:1; }
+    .callout b{ color:#fff; }
+
+    /* flow steps */
+    .flow{ display:flex; align-items:stretch; gap:1.1cqw; }
+    .flow .step{ flex:1; border:1px solid var(--ink-12); border-radius:1.2cqw; padding:1.8cqw 1.4cqw; background:#fff; }
+    .flow .step .n{ font-size:1.3cqw; font-weight:700; letter-spacing:.1em; color:var(--blue); text-transform:uppercase; }
+    .flow .step .t{ font-family:var(--font-display); font-size:1.9cqw; line-height:1.1; margin:.5cqw 0 .6cqw; color:var(--ink); }
+    .flow .step p{ font-size:1.42cqw; line-height:1.4; color:var(--ink-72); margin:0; }
+    .flow .arr{ align-self:center; color:var(--blue); font-size:2.4cqw; }
+
+    /* maturity ladder */
+    .ladder{ display:flex; flex-direction:column; gap:1cqw; }
+    .rung{ display:flex; align-items:center; gap:1.6cqw; border:1px solid var(--ink-12); border-radius:1.2cqw; padding:1.25cqw 1.8cqw; background:#fff; }
+    .rung .meta h3{ font-family:var(--font-display); font-weight:400; font-size:2.1cqw; line-height:1.05; color:var(--ink); margin:0 0 .3cqw; }
+    .rung .meta p{ font-size:1.45cqw; line-height:1.32; color:var(--ink-72); margin:0; }
+    .rung .prod{ margin-left:auto; text-align:right; flex:0 0 30cqw; }
+    .rung .prod .pl{ display:inline-block; font-size:1.55cqw; font-weight:600; color:var(--blue); background:rgba(42,62,244,.08); border:1px solid rgba(42,62,244,.25); border-radius:999px; padding:.5em 1em; }
+    .rung .prod .sub{ font-size:1.35cqw; color:var(--ink-55); margin-top:.5cqw; }
+
+    /* checklist */
+    .check{ display:grid; grid-template-columns:1fr 1fr; gap:1cqw 3cqw; }
+    .check div{ display:flex; gap:.8em; font-size:1.66cqw; color:var(--ink-72); align-items:center; }
+    .check .box{ width:1.4em; height:1.4em; border:1.5px solid var(--ink-40); border-radius:5px; flex:0 0 auto; }
+
+    /* contact */
+    .photo{ width:11cqw; height:11cqw; border-radius:50%; object-fit:cover; border:1px solid var(--ink-12); }
+
+    /* ---- on-screen navigation ---- */
+    .nav{ position:fixed; left:0; right:0; bottom:0; z-index:50; display:flex; align-items:center; justify-content:center; gap:14px; padding:12px; pointer-events:none; }
+    .nav button{ pointer-events:auto; width:40px; height:40px; border-radius:999px; border:1px solid var(--ink-12); background:rgba(255,255,255,.92); backdrop-filter:blur(10px); color:var(--ink); font-size:17px; cursor:pointer; box-shadow:0 6px 20px rgba(0,0,0,.12); transition:transform .12s; }
+    .nav button:hover{ transform:translateY(-2px); }
+    .nav .count{ pointer-events:none; font-size:13px; color:var(--ink-55); background:rgba(255,255,255,.92); border:1px solid var(--ink-12); border-radius:999px; padding:9px 14px; backdrop-filter:blur(10px); font-variant-numeric:tabular-nums; }
+    .topbar{ position:fixed; top:0; left:0; right:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:14px 22px; pointer-events:none; }
+    .topbar .wm{ pointer-events:auto; font-family:var(--font-display); font-size:15px; letter-spacing:-.02em; color:var(--ink-72); background:rgba(255,255,255,.85); border:1px solid var(--ink-08); border-radius:999px; padding:7px 14px; backdrop-filter:blur(10px); }
+    .topbar .wm .ii{ color:var(--magenta); } .topbar .wm .sep{ color:var(--ink-40); margin:0 .3em; }
+    .topbar .back{ pointer-events:auto; font-size:13px; color:var(--ink-55); background:rgba(255,255,255,.85); border:1px solid var(--ink-08); border-radius:999px; padding:8px 14px; backdrop-filter:blur(10px); }
+
+    .cta{ display:inline-flex; align-items:center; gap:.6em; font-size:1.9cqw; font-weight:600; color:#fff; background:var(--blue); border-radius:999px; padding:.85em 1.6em; }
+    .cta.lg{ font-size:2.1cqw; }
+
+    /* ---- mobile: stack, let frames flow ---- */
+    @media (max-width:760px){
+      .deck{ scroll-snap-type:y proximity; }
+      .slide{ width:96vw; }
+    }
+
+    /* ---- print: one slide per page, no chrome ---- */
+    @media print{
+      @page{ size:1280px 720px; margin:0; }
+      html,body{ background:#fff; }
+      .deck{ height:auto; overflow:visible; }
+      .topbar,.nav{ display:none !important; }
+      .slide{ width:1280px; height:720px; aspect-ratio:auto; margin:0; border:0; border-radius:0; box-shadow:none; break-after:page; page-break-after:always; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="wm">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span>
+  <a class="back" href="https://business.hakku.ai/">business.hakku.ai ↗</a>
+</div>
+
+<div class="deck" id="deck">
+
+  <!-- ░░ 1 · ТИТУЛ ░░ -->
+  <section class="slide">
+    <img class="render" src="/assets/graphic-holo-torus.webp" alt="" style="right:-6cqw; top:50%; transform:translateY(-50%); width:46cqw; opacity:.95;">
+    <div class="s-body">
+      <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">ИИ-трансформация для среднего бизнеса · 2026</span></div>
+      <h1 class="s-title" style="font-size:7cqw; max-width:62cqw; margin-top:1cqw;">ИИ, который<br>работает<br>на ваш бизнес</h1>
+      <p class="s-lede" style="margin-top:2cqw; max-width:50cqw;">От разовых попыток «потыкать ChatGPT» — к системе, которая считается в деньгах. Понятным языком, без ИТ-отдела и без иностранных карт.</p>
+      <div class="row mt-auto" style="gap:1cqw; padding-top:2cqw;">
+        <span class="pill b">0 · Диагностика</span>
+        <span class="pill b">1 · Эксперименты</span>
+        <span class="pill b">2 · Самостоятельность</span>
+      </div>
+    </div>
+    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>01 / 13</span><span>Обучение · Консалтинг · Разработка</span></div>
+  </section>
+
+  <!-- ░░ 2 · ЗАЧЕМ СЕЙЧАС ░░ -->
+  <section class="slide">
+    <div class="s-body">
+      <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Контекст · зачем именно сейчас</span></div>
+      <h1 class="s-title">ИИ внедряют все.<br><span class="mag">Эффект получают единицы.</span></h1>
+      <div class="grid g2" style="margin-top:1.8cqw; grid-auto-rows:1fr;">
+        <div class="card">
+          <div class="stat" style="font-size:5.6cqw; color:var(--blue);">71%</div>
+          <p style="margin-top:.7cqw; font-size:1.6cqw;">крупных компаний России уже применяют генеративный ИИ хотя бы в одной функции.</p>
+          <div class="cap">Яков и Партнёры × Яндекс, B2B Tech, 2025</div>
+        </div>
+        <div class="card">
+          <div class="stat" style="font-size:5.6cqw; color:var(--magenta);">95%</div>
+          <p style="margin-top:.7cqw; font-size:1.6cqw;">корпоративных ИИ-пилотов в мире <b>не дают измеримого эффекта на прибыль</b> — потому что остаются игрушкой, а не процессом.</p>
+          <div class="cap">MIT NANDA, The GenAI Divide, 2025</div>
+        </div>
+      </div>
+      <div class="callout mt-auto" style="margin-top:1.6cqw; padding:1.5cqw 2.2cqw;">
+        <p style="font-size:1.7cqw;">У среднего бизнеса нет бюрократии корпораций и долгих согласований. Решение принимает собственник — <b>и завтра уже работает</b>. Окно возможностей сейчас именно у вас.</p>
+      </div>
+    </div>
+    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>02 / 13</span><span>Контекст рынка</span></div>
+  </section>
+
+  <!-- ░░ 3 · ПОЧЕМУ ЗАСТРЕВАЮТ ░░ -->
+  <section class="slide">
+    <div class="s-body">
+      <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Главная причина провалов</span></div>
+      <h1 class="s-title">Дело не в технологии.<br>Дело в <span class="grad-text">системе внедрения</span>.</h1>
+      <div class="row grow" style="gap:2.6cqw; margin-top:2.4cqw;">
+        <div style="flex:1.05;">
+          <p class="s-lede" style="font-size:1.85cqw; margin-bottom:1.4cqw;">Что мы слышим от собственников чаще всего:</p>
+          <ul class="list">
+            <li class="no"><span class="m">✗</span><span>«Купили доступ к ChatGPT — пользуются полтора человека»</span></li>
+            <li class="no"><span class="m">✗</span><span>«У нас нет ИТ-отдела, кто это будет тянуть?»</span></li>
+            <li class="no"><span class="m">✗</span><span>«Не понимаем, какие процессы вообще менять»</span></li>
+            <li class="no"><span class="m">✗</span><span>«Запустили пилот — окупаемости не видно»</span></li>
+            <li class="no"><span class="m">✗</span><span>«Сотрудники не умеют и сопротивляются»</span></li>
+          </ul>
+        </div>
+        <div style="flex:1; display:flex; align-items:center;">
+          <div class="callout" style="width:100%;">
+            <div class="stat" style="font-size:6.5cqw; color:#fff;">90%+</div>
+            <p style="margin-top:1.2cqw;">ИИ-проектов проваливаются <b>не из-за технологии, а из-за неумения управлять изменениями</b> в людях и процессах.</p>
+            <p style="margin-top:1.4cqw; color:var(--grad-warm); font-weight:600;" class="grad-warm-text">Мы решаем эту задачу 10+ лет — в change-management крупнейших компаний.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>03 / 13</span><span>Почему большинство застревает</span></div>
+  </section>
+
+  <!-- ░░ 4 · НАШ ПОДХОД: 3 УРОВНЯ ░░ -->
+  <section class="slide">
+    <div class="s-body">
+      <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Наш подход · путь из трёх шагов</span></div>
+      <h1 class="s-title">От «непонятно» — к ИИ-системе</h1>
+      <div class="ladder grow" style="margin-top:1.6cqw; justify-content:center;">
+        <div class="rung">
+          <div class="lvl" style="background:var(--ink);">0</div>
+          <div class="meta"><h3>Диагностика и погружение</h3><p>Разбираем бизнес по узким местам и находим, где ИИ принесёт деньги. Собственник уходит с ясной картой.</p></div>
+          <div class="prod"><span class="pl">Стратегическая сессия</span><div class="sub">2 недели · карта точек роста</div></div>
+        </div>
+        <div class="rung">
+          <div class="lvl" style="background:var(--blue);">1</div>
+          <div class="meta"><h3>Внедрение экспериментов</h3><p>Запускаем 2–3 пилота на реальных процессах, обучаем людей, замеряем эффект. Человек всегда подтверждает действия.</p></div>
+          <div class="prod"><span class="pl">Обучение + пилоты</span><div class="sub">4–8 недель · первые метрики</div></div>
+        </div>
+        <div class="rung" style="border-color:var(--magenta);">
+          <div class="lvl" style="background:var(--magenta);">2</div>
+          <div class="meta"><h3>Полная самостоятельность</h3><p>Внутренние чемпионы развивают ИИ сами, без подрядчика. ИИ встроен в процессы и влияет на каждую строчку прибыли.</p></div>
+          <div class="prod"><span class="pl" style="color:var(--magenta); background:rgba(213,31,117,.08); border-color:rgba(213,31,117,.3);">Трансформация</span><div class="sub">3–6 месяцев · ИИ-ready бизнес</div></div>
+        </div>
+      </div>
+      <p class="s-lede mt-auto" style="font-size:1.55cqw; padding-top:1.1cqw;">Можно двигаться поэтапно, а можно пройти весь путь под нашим сопровождением.</p>
+    </div>
+    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>04 / 13</span><span>Карта пути</span></div>
+  </section>
+
+  <!-- ░░ 5 · УРОВЕНЬ 0 ░░ -->
+  <section class="slide">
+    <img class="render" src="/assets/graphic-holo-ring.webp" alt="" style="right:-8cqw; bottom:-8cqw; width:34cqw; opacity:.5;">
+    <div class="s-body">
+      <div class="row center" style="gap:1.4cqw; margin-bottom:1.8cqw;">
+        <div class="lvl" style="background:var(--ink); font-size:2.6cqw; width:2.4em; height:2.4em;">0</div>
+        <div><div class="eyebrow" style="font-size:1.5cqw; letter-spacing:.14em; text-transform:uppercase; color:var(--fg-faint);">Уровень 0</div><h1 class="s-title" style="font-size:4.4cqw;">Диагностика и погружение</h1></div>
+      </div>
+      <p class="s-lede" style="max-width:74cqw;">Тот самый формат, который мы проводим для собственников на выездных стратегических сессиях. Сначала разбираемся, <b>где у бизнеса реально болит</b> — и только потом говорим про ИИ.</p>
+      <div class="grid g2 grow" style="margin-top:2.2cqw; align-content:center;">
+        <div class="card">
+          <div class="k">Что делаем</div>
+          <ul class="list" style="gap:.8cqw;">
+            <li class="ok"><span class="m">→</span><span>Интервью с собственником и ключевыми людьми</span></li>
+            <li class="ok"><span class="m">→</span><span>Находим узкое место, которое ограничивает рост</span></li>
+            <li class="ok"><span class="m">→</span><span>Показываем, где ИИ даёт деньги, а где — нет</span></li>
+            <li class="ok"><span class="m">→</span><span>Погружаем первое лицо: чтобы решения были осознанными</span></li>
+          </ul>
+        </div>
+        <div class="card" style="border-color:var(--blue);">
+          <div class="k">Что получаете</div>
+          <ul class="list" style="gap:.8cqw;">
+            <li class="ok"><span class="m">✓</span><span>Карту точек роста с приоритетами</span></li>
+            <li class="ok"><span class="m">✓</span><span>Топ-3 процесса, где ИИ окупится быстрее всего</span></li>
+            <li class="ok"><span class="m">✓</span><span>Понятный план на 90 дней</span></li>
+            <li class="ok"><span class="m">✓</span><span>Уверенность собственника, а не слепую веру в хайп</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>05 / 13</span><span>Уровень 0 · Диагностика</span></div>
+  </section>
+
+  <!-- ░░ 6 · УРОВЕНЬ 1 ░░ -->
+  <section class="slide">
+    <img class="render" src="/assets/graphic-holo-knot.webp" alt="" style="right:-8cqw; bottom:-8cqw; width:34cqw; opacity:.5;">
+    <div class="s-body">
+      <div class="row center" style="gap:1.4cqw; margin-bottom:1.8cqw;">
+        <div class="lvl" style="background:var(--blue); font-size:2.6cqw; width:2.4em; height:2.4em;">1</div>
+        <div><div class="eyebrow" style="font-size:1.5cqw; letter-spacing:.14em; text-transform:uppercase; color:var(--fg-faint);">Уровень 1</div><h1 class="s-title" style="font-size:4.4cqw;">Внедрение экспериментов</h1></div>
+      </div>
+      <p class="s-lede" style="max-width:74cqw;">Берём 2–3 процесса из карты Уровня 0 и запускаем на них живые пилоты. <b>Учимся на реальных задачах</b>, а не на абстрактных курсах — и сразу считаем эффект.</p>
+      <div class="grid g2 grow" style="margin-top:2.2cqw; align-content:center;">
+        <div class="card">
+          <div class="k">Что делаем</div>
+          <ul class="list" style="gap:.8cqw;">
+            <li class="ok"><span class="m">→</span><span>Запускаем пилоты на реальных процессах</span></li>
+            <li class="ok"><span class="m">→</span><span>Обучаем сотрудников работать с ИИ в их роли</span></li>
+            <li class="ok"><span class="m">→</span><span>Настраиваем так, что человек подтверждает действия</span></li>
+            <li class="ok"><span class="m">→</span><span>Замеряем «было / стало» в часах и в деньгах</span></li>
+          </ul>
+        </div>
+        <div class="card" style="border-color:var(--blue);">
+          <div class="k">Что получаете</div>
+          <ul class="list" style="gap:.8cqw;">
+            <li class="ok"><span class="m">✓</span><span>Первые работающие ИИ-помощники в деле</span></li>
+            <li class="ok"><span class="m">✓</span><span>Метрики эффекта — что окупается, что нет</span></li>
+            <li class="ok"><span class="m">✓</span><span>Команду, которая умеет и больше не боится</span></li>
+            <li class="ok"><span class="m">✓</span><span>Доказательство на ваших данных, а не на слайдах</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>06 / 13</span><span>Уровень 1 · Эксперименты</span></div>
+  </section>
+
+  <!-- ░░ 7 · УРОВЕНЬ 2 ░░ -->
+  <section class="slide" data-canvas="ink">
+    <img class="render" src="/assets/graphic-chrome-wave.webp" alt="" style="right:-9cqw; bottom:-12cqw; width:32cqw; opacity:.6;">
+    <div class="s-body">
+      <div class="row center" style="gap:1.4cqw; margin-bottom:1.8cqw;">
+        <div class="lvl" style="background:var(--magenta); font-size:2.6cqw; width:2.4em; height:2.4em;">2</div>
+        <div><div class="eyebrow" style="font-size:1.5cqw; letter-spacing:.14em; text-transform:uppercase; color:var(--paper-55);">Уровень 2</div><h1 class="s-title" style="font-size:4.4cqw;">Полная самостоятельность</h1></div>
+      </div>
+      <p class="s-lede" style="max-width:66cqw;">Цель — чтобы компания развивала ИИ <b>без нас</b>. Внутри появляются свои чемпионы, ИИ встроен в процессы, а не висит сбоку.</p>
+      <div class="grid g2 grow" style="margin-top:2.2cqw; align-content:center;">
+        <div class="card" style="background:#141417; border-color:rgba(255,255,255,.16);">
+          <div class="k" style="color:#7d8cff;">Что делаем</div>
+          <ul class="list" style="gap:.8cqw;">
+            <li class="ok"><span class="m" style="color:#02ffad;">→</span><span style="color:var(--paper-72);">Готовим внутренних ИИ-чемпионов</span></li>
+            <li class="ok"><span class="m" style="color:#02ffad;">→</span><span style="color:var(--paper-72);">Встраиваем ИИ в процессы и роли</span></li>
+            <li class="ok"><span class="m" style="color:#02ffad;">→</span><span style="color:var(--paper-72);">Передаём методологию и инструменты «насовсем»</span></li>
+          </ul>
+        </div>
+        <div class="card" style="background:#1c0f15; border-color:var(--magenta);">
+          <div class="k" style="color:#ff7ab0;">Что получаете</div>
+          <ul class="list" style="gap:.8cqw;">
+            <li class="ok"><span class="m" style="color:#02ffad;">✓</span><span style="color:var(--paper-72);">ИИ-ready бизнес, который растёт сам</span></li>
+            <li class="ok"><span class="m" style="color:#02ffad;">✓</span><span style="color:var(--paper-72);">Независимость от подрядчиков</span></li>
+            <li class="ok"><span class="m" style="color:#02ffad;">✓</span><span style="color:var(--paper-72);">Преимущество, которое конкурентам не догнать</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>07 / 13</span><span>Уровень 2 · Самостоятельность</span></div>
+  </section>
+
+  <!-- ░░ 8 · ЧТО ИИ ДЕЛАЕТ ░░ -->
+  <section class="slide">
+    <div class="s-body">
+      <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Конкретика · на понятных примерах</span></div>
+      <h1 class="s-title">Что ИИ делает в обычном бизнесе</h1>
+      <div class="grid g3 grow" style="margin-top:1.6cqw; align-content:start; grid-auto-rows:1fr;">
+        <div class="card"><div class="k">Продажи</div><p>Обзванивает и квалифицирует заявки, не теряет лиды ночью и в выходные, готовит коммерческие и follow-up по сделкам.</p></div>
+        <div class="card"><div class="k">Документы и тендеры</div><p>Проверяет договоры, собирает заявки на тендер, готовит КП и спецификации по шаблону — за минуты вместо часов.</p></div>
+        <div class="card"><div class="k">Диспетчерская и поставки</div><p>Принимает заявки, сводит графики отгрузок и доставки, отслеживает остатки и сроки, предупреждает о срывах.</p></div>
+        <div class="card"><div class="k">Найм</div><p>Скринит резюме, проводит первичный отбор линейного персонала, готовит онбординг — закрывает вакансии быстрее.</p></div>
+        <div class="card"><div class="k">Финансы</div><p>Сводит закрытие месяца, ищет отклонения, готовит сводку по деньгам — собственник видит картину без бухгалтерского квеста.</p></div>
+        <div class="card"><div class="k">Поддержка клиентов</div><p>Отвечает на типовые вопросы в мессенджерах и по телефону, фиксирует обращения, эскалирует сложное человеку.</p></div>
+      </div>
+      <p class="s-lede mt-auto" style="font-size:1.6cqw; padding-top:1.4cqw; color:var(--ink-55);">Под каждую функцию — отдельный ИИ-помощник, встроенный в ваши системы. Какие именно нужны вам — определяем на диагностике.</p>
+    </div>
+    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>08 / 13</span><span>Применение по функциям</span></div>
+  </section>
+
+  <!-- ░░ 9 · КАК ВЫГЛЯДИТ НА ПРАКТИКЕ ░░ -->
+  <section class="slide">
+    <div class="s-body">
+      <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Как это выглядит на практике</span></div>
+      <h1 class="s-title">Один звонок закрывает всю рутину</h1>
+      <p class="s-lede" style="margin-top:1.2cqw;">Пример: менеджер просто разговаривает с клиентом. Пока идёт разговор, ИИ делает остальное.</p>
+      <div class="flow" style="margin-top:2cqw; align-items:stretch;">
+        <div class="step"><div class="n">Шаг 1</div><div class="t">Слушает звонок</div><p>Расшифровывает разговор и протоколирует договорённости.</p></div>
+        <div class="arr">→</div>
+        <div class="step"><div class="n">Шаг 2</div><div class="t">Заносит в CRM</div><p>Создаёт и заполняет карточку сделки без ручного ввода.</p></div>
+        <div class="arr">→</div>
+        <div class="step"><div class="n">Шаг 3</div><div class="t">Ставит задачи</div><p>Распределяет задачи по команде и проставляет сроки.</p></div>
+        <div class="arr">→</div>
+        <div class="step"><div class="n">Шаг 4</div><div class="t">Готовит документы</div><p>Собирает КП, спецификацию или письмо по итогам.</p></div>
+      </div>
+      <div class="callout mt-auto" style="margin-top:1.6cqw; padding:1.5cqw 2.2cqw;">
+        <p style="font-size:1.65cqw;">То, что раньше занимало 2–3 часа после каждого разговора, <b>происходит само, пока идёт этот разговор</b>. Это не демо — так мы работаем у себя каждый день.</p>
+      </div>
+    </div>
+    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>09 / 13</span><span>Сценарий в действии</span></div>
+  </section>
+
+  <!-- ░░ 10 · КОНТРОЛЬ И БЕЗОПАСНОСТЬ ░░ -->
+  <section class="slide">
+    <div class="s-body">
+      <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Контроль · безопасность · простой старт</span></div>
+      <h1 class="s-title">Вы остаётесь главным. Всегда.</h1>
+      <div class="grid g4 grow" style="margin-top:2.4cqw; align-content:center; grid-auto-rows:1fr;">
+        <div class="card"><h3>Человек подтверждает</h3><p>ИИ предлагает — решение за вашим сотрудником. Ничего не уходит клиенту без подтверждения.</p></div>
+        <div class="card"><h3>Данные у вас</h3><p>Работаем в вашем контуре. По запросу — on-prem, данные не покидают компанию.</p></div>
+        <div class="card"><h3>Без VPN и карт</h3><p>Не требует иностранных карт, VPN и плясок с доступами. Работает из России.</p></div>
+        <div class="card"><h3>Старт за 1 день</h3><p>Первый полезный сценарий запускается сразу, без долгого внедрения «на полгода».</p></div>
+      </div>
+      <p class="s-lede mt-auto" style="font-size:1.7cqw; padding-top:1.6cqw;">Мы не отдаём бизнес «на откуп роботам». Мы даём людям инструмент, который снимает с них рутину.</p>
+    </div>
+    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>10 / 13</span><span>Контроль и безопасность</span></div>
+  </section>
+
+  <!-- ░░ 11 · ПОЧЕМУ НАМ МОЖНО ДОВЕРЯТЬ ░░ -->
+  <section class="slide">
+    <div class="s-body">
+      <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Почему нам можно доверять</span></div>
+      <h1 class="s-title">Мы не рассказываем «как надо».<br>Мы <span class="grad-text">внедряем ИИ</span> — себе и клиентам.</h1>
+      <div class="grid g4" style="margin-top:2.6cqw;">
+        <div style="text-align:center;"><div class="stat" style="font-size:5.4cqw; color:var(--ink);">35+</div><div style="font-size:1.5cqw; color:var(--ink-55); margin-top:.5cqw;">клиентов</div></div>
+        <div style="text-align:center;"><div class="stat" style="font-size:5.4cqw; color:var(--ink);">100+</div><div style="font-size:1.5cqw; color:var(--ink-55); margin-top:.5cqw;">проектов</div></div>
+        <div style="text-align:center;"><div class="stat" style="font-size:5.4cqw; color:var(--ink);">5000+</div><div style="font-size:1.5cqw; color:var(--ink-55); margin-top:.5cqw;">обученных сотрудников</div></div>
+        <div style="text-align:center;"><div class="stat" style="font-size:5.4cqw; color:var(--blue);">10+ лет</div><div style="font-size:1.5cqw; color:var(--ink-55); margin-top:.5cqw;">в change-management</div></div>
+      </div>
+      <div class="grow" style="display:flex; flex-direction:column; justify-content:center; margin-top:1.6cqw;">
+        <div style="display:flex; flex-wrap:wrap; gap:.9cqw;">
+          <span class="pill">Газпром нефть</span><span class="pill">Альфа-Банк</span><span class="pill">Ростелеком</span><span class="pill">Билайн</span><span class="pill">СИБУР</span><span class="pill">X5 Group</span><span class="pill">Росатом</span><span class="pill">МегаФон</span><span class="pill">OZON</span><span class="pill">Яндекс</span><span class="pill">ФосАгро</span><span class="pill">Askona</span><span class="pill">BORK</span><span class="pill">Банк России</span>
+        </div>
+      </div>
+      <p class="s-lede mt-auto" style="font-size:1.7cqw; padding-top:1.2cqw;">За плечами команды — внедрение изменений в крупнейших компаниях страны. Ту же дисциплину мы приносим в средний бизнес.</p>
+    </div>
+    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>11 / 13</span><span>Доверие и опыт</span></div>
+  </section>
+
+  <!-- ░░ 12 · С ЧЕГО НАЧАТЬ ░░ -->
+  <section class="slide">
+    <div class="s-body">
+      <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Следующий шаг</span></div>
+      <h1 class="s-title">На каком уровне вы сейчас?</h1>
+      <div class="row grow" style="gap:2.6cqw; margin-top:2.2cqw;">
+        <div style="flex:1;">
+          <p class="s-lede" style="font-size:1.8cqw; margin-bottom:1.4cqw;">Быстрый тест — отметьте, что про вас:</p>
+          <div class="check">
+            <div><span class="box"></span><span>Есть понятная ИИ-стратегия</span></div>
+            <div><span class="box"></span><span>Сотрудники реально пользуются ИИ</span></div>
+            <div><span class="box"></span><span>ИИ подключён к нашим системам</span></div>
+            <div><span class="box"></span><span>Есть внутренние ИИ-чемпионы</span></div>
+            <div><span class="box"></span><span>Считаем окупаемость ИИ</span></div>
+            <div><span class="box"></span><span>ИИ участвует в операционных решениях</span></div>
+          </div>
+          <p style="font-size:1.5cqw; color:var(--ink-55); margin-top:1.6cqw;">Меньше трёх галочек — вам на Уровень 0. Это нормально: там начинают почти все.</p>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; gap:1.2cqw; justify-content:center;">
+          <div class="card" style="border-color:var(--blue);"><div class="k">15 минут честного разговора</div><p style="font-size:1.7cqw;">Разберём вашу ситуацию и три вопроса:</p>
+            <p style="font-size:1.6cqw; margin-top:1cqw;">1 · Где вы сейчас — и почему?<br>2 · Куда хотите и в какой срок?<br>3 · Что мешает внедрять ИИ?</p>
+          </div>
+          <a class="cta lg" href="https://business.hakku.ai/">Записаться на диагностику →</a>
+        </div>
+      </div>
+    </div>
+    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>12 / 13</span><span>С чего начать</span></div>
+  </section>
+
+  <!-- ░░ 13 · КОНТАКТЫ ░░ -->
+  <section class="slide" data-canvas="ink">
+    <img class="render" src="/assets/graphic-holo-knot.webp" alt="" style="right:-6cqw; top:50%; transform:translateY(-50%); width:44cqw; opacity:.9;">
+    <div class="s-body" style="justify-content:center;">
+      <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow" style="color:var(--paper-55);">Контакты</span></div>
+      <h1 class="s-title" style="font-size:5.4cqw; max-width:56cqw;">Разберём ваш бизнес и точки роста за 15 минут</h1>
+      <div class="row center" style="gap:2cqw; margin-top:3cqw;">
+        <img class="photo" src="/assets/founders/sergei.jpg" alt="">
+        <div>
+          <div style="font-family:var(--font-display); font-size:2.6cqw; color:#fff;">Сергей Ершов</div>
+          <div style="font-size:1.7cqw; color:var(--paper-55); margin-top:.4cqw;">Разработка и внедрение · Hakku</div>
+          <div style="font-size:1.8cqw; color:#fff; margin-top:1cqw;">Telegram: <b>@hakku_ai</b> · business.hakku.ai</div>
+        </div>
+      </div>
+      <a class="cta lg" href="https://business.hakku.ai/" style="margin-top:3cqw; align-self:flex-start;">business.hakku.ai →</a>
+    </div>
+    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>13 / 13</span><span>Связаться</span></div>
+  </section>
+
+</div>
+
+<div class="nav">
+  <button id="prev" aria-label="Назад">←</button>
+  <span class="count" id="count">01 / 13</span>
+  <button id="next" aria-label="Вперёд">→</button>
+</div>
+
+<script>
+  const deck = document.getElementById('deck');
+  const slides = [...deck.querySelectorAll('.slide')];
+  const count = document.getElementById('count');
+  const pad = n => String(n).padStart(2,'0');
+  let cur = 0;
+  function go(i){ cur = Math.max(0, Math.min(slides.length-1, i)); slides[cur].scrollIntoView({behavior:'smooth', block:'center'}); }
+  document.getElementById('prev').onclick = ()=>go(cur-1);
+  document.getElementById('next').onclick = ()=>go(cur+1);
+  document.addEventListener('keydown', e=>{
+    if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){ e.preventDefault(); go(cur+1); }
+    if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){ e.preventDefault(); go(cur-1); }
+  });
+  const io = new IntersectionObserver(es=>{
+    es.forEach(en=>{ if(en.isIntersecting){ cur = slides.indexOf(en.target); count.textContent = pad(cur+1)+' / '+slides.length; }});
+  }, {root:deck, threshold:0.55});
+  slides.forEach(s=>io.observe(s));
+</script>
+</body>
+</html>
