@@ -34,8 +34,12 @@ const FinalCTA = () => {
             Сначала <span style={{ background: 'linear-gradient(90deg,#2A3EF4,#D51F75,#FD7202)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>созвон с основателем</span>.<br/>Потом — оплата.
           </h2>
           <p style={{ fontSize: 17, color: 'rgba(255,255,255,.72)', lineHeight: 1.55, margin: 0, maxWidth: 660 }}>
-            Сообщество не продаётся через корзину. Первый шаг — короткое знакомство с одним из нас, чтобы понимать, кто рядом и зачем. Запуск — 8 июня.
+            Сообщество не продаётся через корзину. Первый шаг — короткое знакомство с одним из нас, чтобы понимать, кто рядом и зачем. Сообщество уже работает — первые когорты внутри.
           </p>
+          <a href="https://business.hakku.ai/v/kak-ustroena-baza-znaniy-soobschestva/" target="_blank" rel="noopener" style={{
+            display: 'inline-flex', alignItems: 'center', gap: 8, marginTop: 20,
+            fontSize: 15, color: '#fff', borderBottom: '1px solid rgba(255,255,255,.3)', paddingBottom: 3,
+          }}>Как устроена база знаний сообщества →</a>
         </div>
 
         <style>{`
