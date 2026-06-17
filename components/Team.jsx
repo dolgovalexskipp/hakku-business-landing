@@ -21,6 +21,12 @@ const Team = () => {
       photo: 'assets/founders/alexander.jpg',
     },
   ];
+  const ambassadors = [
+    { name: 'Анастасия Федорова', photo: 'assets/ambassadors/fedorova.jpg' },
+    { name: 'Александр Потапенко', photo: 'assets/ambassadors/potapenko.jpg' },
+    { name: 'Андрей Ларионов', photo: 'assets/ambassadors/larionov.jpg' },
+    { name: 'Марина Курганова', photo: 'assets/ambassadors/kurganova.jpg' },
+  ];
   return (
     <section id="team" className="section-pad section-line">
       <div className="container">
@@ -35,6 +41,9 @@ const Team = () => {
           @media (max-width: 980px) { #team .team-grid { grid-template-columns: 1fr !important; } #team .team-photo { aspect-ratio: 16/10 !important; } }
           #team .team-card { transition: transform .25s cubic-bezier(0.2,0.8,0.2,1); }
           #team .team-card:hover { transform: translateY(-4px); }
+          #team .amb-card { transition: transform .25s cubic-bezier(0.2,0.8,0.2,1); }
+          #team .amb-card:hover { transform: translateY(-4px); }
+          @media (max-width: 760px) { #team .amb-grid { grid-template-columns: repeat(2,1fr) !important; } }
         `}</style>
         <div className="team-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18, marginBottom: 36 }}>
           {people.map((p) => (
@@ -61,19 +70,24 @@ const Team = () => {
           ))}
         </div>
 
-        {/* Амбассадоры — компактный тизер без силуэтов */}
-        <div style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 20,
-          flexWrap: 'wrap', padding: '20px 24px',
-          border: '1px solid rgba(0,0,0,.1)', borderRadius: 16, background: '#fff',
-        }}>
-          <div>
-            <div style={{ fontFamily: 'Tektur, sans-serif', fontSize: 18, letterSpacing: '-0.01em', color: '#000', marginBottom: 4 }}>
-              + 7 амбассадоров — собственники бизнеса, которые уже идут с нами
-            </div>
-            <div style={{ fontSize: 13.5, color: 'rgba(0,0,0,.55)' }}>Имена и компании откроем 8 июня, к старту сообщества.</div>
+        {/* Амбассадоры — собственники бизнеса, которые уже идут с нами */}
+        <div style={{ marginBottom: 18 }}>
+          <div style={{ fontFamily: 'Tektur, sans-serif', fontSize: 18, letterSpacing: '-0.01em', color: '#000', marginBottom: 4 }}>
+            Амбассадоры — собственники бизнеса, которые уже идут с нами
           </div>
-          <span style={{ fontSize: 12, color: 'rgba(0,0,0,.55)', border: '1px solid rgba(0,0,0,.15)', borderRadius: 999, padding: '7px 14px', whiteSpace: 'nowrap' }}>Скоро · 08.06.2026</span>
+          <div style={{ fontSize: 13.5, color: 'rgba(0,0,0,.55)' }}>Те, кто внедряет ИИ в своих компаниях и присоединился к сообществу одним из первых.</div>
+        </div>
+        <div className="amb-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14 }}>
+          {ambassadors.map((a) => (
+            <div key={a.name} className="amb-card" style={{
+              borderRadius: 16, overflow: 'hidden', background: '#000',
+              aspectRatio: '1 / 1', border: '1px solid rgba(0,0,0,.08)',
+            }}>
+              <img src={a.photo} alt={a.name} style={{
+                width: '100%', height: '100%', objectFit: 'cover', display: 'block',
+              }}/>
+            </div>
+          ))}
         </div>
       </div>
     </section>
