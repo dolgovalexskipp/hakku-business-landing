@@ -17,7 +17,6 @@ const FinalCTA = () => {
     {
       n: '03',
       title: 'Попадаете в лист ожидания',
-      time: 'до 8 июня',
       body: 'За день до открытия — ссылка на оплату по тарифу. Ядро первой когорты — 50 собственников.',
     },
   ];
@@ -51,7 +50,7 @@ const FinalCTA = () => {
               }}>
                 <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 12 }}>
                   <span style={{ fontFamily: 'Tektur, sans-serif', fontSize: 32, letterSpacing: '-0.02em', color: '#fff' }}>{s.n}</span>
-                  <span style={{ fontSize: 12, color: 'rgba(255,255,255,.5)', border: '1px solid rgba(255,255,255,.14)', borderRadius: 999, padding: '4px 10px', whiteSpace: 'nowrap' }}>{s.time}</span>
+                  {s.time && <span style={{ fontSize: 12, color: 'rgba(255,255,255,.5)', border: '1px solid rgba(255,255,255,.14)', borderRadius: 999, padding: '4px 10px', whiteSpace: 'nowrap' }}>{s.time}</span>}
                 </div>
                 <h3 style={{ fontFamily: 'Tektur, sans-serif', fontSize: 22, lineHeight: 1.15, letterSpacing: '-0.01em', margin: 0, fontWeight: 400, color: '#fff' }}>{s.title}</h3>
                 <p style={{ fontSize: 14.5, color: 'rgba(255,255,255,.7)', lineHeight: 1.55, margin: 0 }}>{s.body}</p>
