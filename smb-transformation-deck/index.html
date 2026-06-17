@@ -145,10 +145,71 @@
     .cta{ display:inline-flex; align-items:center; gap:.6em; font-size:1.9cqw; font-weight:600; color:#fff; background:var(--blue); border-radius:999px; padding:.85em 1.6em; }
     .cta.lg{ font-size:2.1cqw; }
 
-    /* ---- mobile: stack, let frames flow ---- */
+    /* ---- mobile: reflow 16:9 frames into readable portrait cards ---- */
     @media (max-width:760px){
-      .deck{ scroll-snap-type:y proximity; }
-      .slide{ width:96vw; }
+      html,body{ background:#fff; overflow-x:hidden; }
+      .topbar{ position:static; padding:12px 16px; }
+      .topbar .wm,.topbar .back{ background:transparent; border:0; padding:0; }
+      .nav{ display:none; }
+
+      .deck{ height:auto; overflow:visible; overflow-x:hidden; scroll-snap-type:none; }
+      .slide{
+        width:100%; aspect-ratio:auto; min-height:auto;
+        margin:0; border:0; border-top:8px solid var(--ash); border-radius:0;
+        box-shadow:none; container-type:normal; overflow:visible;
+      }
+      .render{ display:none !important; }
+      .grow{ flex:none !important; min-height:auto; }
+      .mt-auto{ margin-top:16px; }
+
+      .s-body{ padding:24px 18px 20px; overflow-wrap:break-word; }
+      .s-body *{ max-width:100%; }
+      .s-foot{ height:auto; min-height:0; padding:11px 18px; font-size:11px; gap:10px; }
+      .s-foot span:last-child{ display:none; }
+
+      /* readable type (override cqw + inline cqw) */
+      .eyebrow-line{ display:flex; flex-wrap:wrap; align-items:center; margin-bottom:14px; }
+      .eyebrow-line .bar{ width:22px; height:3px; flex:0 0 auto; }
+      .eyebrow-line .eyebrow,.eyebrow{ font-size:11px !important; white-space:normal; min-width:0; }
+      .s-title{ font-size:27px !important; margin-bottom:12px; }
+      .s-lede{ font-size:15px !important; max-width:none !important; }
+      .card{ padding:18px 16px; border-radius:14px; }
+      .card .k{ font-size:12px !important; }
+      .card h3{ font-size:17px !important; }
+      .card p{ font-size:14px !important; }
+      .card .cap{ font-size:12px !important; }
+      .list li{ font-size:14px !important; }
+      .stat{ font-size:40px !important; }
+      .lvl{ font-size:22px !important; width:1.9em; height:1.9em; }
+      .rung{ flex-wrap:wrap; gap:12px; padding:16px; }
+      .rung .meta h3{ font-size:17px !important; }
+      .rung .meta p{ font-size:13.5px !important; }
+      .rung .prod{ margin-left:0; text-align:left; flex-basis:100%; width:100%; margin-top:4px; }
+      .rung .prod .pl{ font-size:13px !important; }
+      .rung .prod .sub{ font-size:12px !important; }
+      .flow .step{ padding:16px; }
+      .flow .step .n{ font-size:12px !important; }
+      .flow .step .t{ font-size:17px !important; }
+      .flow .step p{ font-size:13.5px !important; }
+      .callout{ padding:20px 18px !important; border-radius:16px; }
+      .callout p{ font-size:15px !important; max-width:none !important; }
+      .pill{ font-size:13px !important; align-self:flex-start; }
+      .cta,.cta.lg{ font-size:16px !important; }
+      .grid.g4 > div > div:last-child{ font-size:13px !important; }
+      .cta + span{ font-size:13px !important; }
+      .photo{ width:84px; height:84px; }
+      .cname{ font-size:22px !important; }
+      .crole{ font-size:14px !important; }
+      .ctg{ font-size:15px !important; }
+
+      /* stack multi-column layouts */
+      .g2,.g3,.g4{ grid-template-columns:minmax(0,1fr) !important; }
+      .row{ flex-direction:column; }
+      .row > div[style*="flex:1"]{ width:100%; }
+      .row > *,.eyebrow-line > *,.flow > *,.s-foot > *{ min-width:0; }
+      .s-body img,.s-body svg{ max-width:100%; }
+      .flow{ flex-direction:column; }
+      .flow .arr{ transform:rotate(90deg); align-self:flex-start; margin:2px 0 2px 16px; font-size:20px; }
     }
 
     /* ---- print: one slide per page, no chrome ---- */
@@ -465,9 +526,9 @@
       <div class="row center" style="gap:2cqw; margin-top:3cqw;">
         <img class="photo" src="/assets/founders/sergei.jpg" alt="">
         <div>
-          <div style="font-family:var(--font-display); font-size:2.6cqw; color:#fff;">Сергей Ершов</div>
-          <div style="font-size:1.7cqw; color:var(--paper-55); margin-top:.4cqw;">Со-основатель Hakku</div>
-          <div style="font-size:1.8cqw; color:#fff; margin-top:1cqw;">Telegram: <b>@hakku_ai</b> · business.hakku.ai</div>
+          <div class="cname" style="font-family:var(--font-display); font-size:2.6cqw; color:#fff;">Сергей Ершов</div>
+          <div class="crole" style="font-size:1.7cqw; color:var(--paper-55); margin-top:.4cqw;">Со-основатель Hakku</div>
+          <div class="ctg" style="font-size:1.8cqw; color:#fff; margin-top:1cqw;">Telegram: <b>@hakku_ai</b> · business.hakku.ai</div>
         </div>
       </div>
       <a class="cta lg" href="https://business.hakku.ai/" style="margin-top:3cqw; align-self:flex-start;">business.hakku.ai →</a>
