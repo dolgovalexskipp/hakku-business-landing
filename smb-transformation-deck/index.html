@@ -45,8 +45,10 @@
       padding:0 6cqw; font-size:1.45cqw; color:var(--fg-faint); letter-spacing:.02em;
     }
     [data-canvas="ink"] .s-foot{ border-top-color:rgba(255,255,255,.12); background:rgba(255,255,255,.03); color:var(--paper-55); }
-    .s-foot .fbrand{ display:inline-flex; align-items:center; gap:.5em; font-family:var(--font-display); color:var(--fg-muted); }
+    .s-foot .fbrand{ font-family:var(--font-display); color:var(--fg-muted); letter-spacing:normal; }
     [data-canvas="ink"] .s-foot .fbrand{ color:var(--paper-72); }
+    .s-foot .fbrand .sep{ color:var(--ink-40); margin:0 .4em; }
+    [data-canvas="ink"] .s-foot .fbrand .sep{ color:var(--paper-40); }
     .s-foot .ii{ color:var(--magenta); }
 
     /* ---- typographic scale relative to slide width (cqw) ---- */
@@ -94,7 +96,7 @@
     .list{ display:flex; flex-direction:column; gap:1cqw; }
     .list li{ list-style:none; display:flex; gap:.9em; font-size:1.55cqw; line-height:1.36; color:var(--ink-72); }
     .list .m{ flex:0 0 auto; font-weight:700; width:1.3em; }
-    .list .ok .m{ color:#0f9d58; } .list .no .m{ color:var(--magenta); }
+    .list .ok .m{ color:var(--blue); } .list .no .m{ color:var(--magenta); }
     ul{ margin:0; padding:0; }
 
     /* hero render */
@@ -181,7 +183,7 @@
         <span class="pill b">2 · Самостоятельность</span>
       </div>
     </div>
-    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>01 / 13</span><span>Обучение · Консалтинг · Разработка</span></div>
+    <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>01 / 12</span><span>Обучение · Консалтинг · Разработка</span></div>
   </section>
 
   <!-- ░░ 2 · ЗАЧЕМ СЕЙЧАС ░░ -->
@@ -205,7 +207,7 @@
         <p style="font-size:1.7cqw;">У среднего бизнеса нет бюрократии корпораций и долгих согласований. Решение принимает собственник — <b>и завтра уже работает</b>. Окно возможностей сейчас именно у вас.</p>
       </div>
     </div>
-    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>02 / 13</span><span>Контекст рынка</span></div>
+    <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>02 / 12</span><span>Контекст рынка</span></div>
   </section>
 
   <!-- ░░ 3 · ПОЧЕМУ ЗАСТРЕВАЮТ ░░ -->
@@ -218,6 +220,7 @@
           <p class="s-lede" style="font-size:1.85cqw; margin-bottom:1.4cqw;">Что мы слышим от собственников чаще всего:</p>
           <ul class="list">
             <li class="no"><span class="m">✗</span><span>«Купили доступ к ChatGPT — пользуются полтора человека»</span></li>
+            <li class="no"><span class="m">✗</span><span>«Я сам не хочу в этом разбираться — на это нет времени»</span></li>
             <li class="no"><span class="m">✗</span><span>«У нас нет ИТ-отдела, кто это будет тянуть?»</span></li>
             <li class="no"><span class="m">✗</span><span>«Не понимаем, какие процессы вообще менять»</span></li>
             <li class="no"><span class="m">✗</span><span>«Запустили пилот — окупаемости не видно»</span></li>
@@ -228,12 +231,12 @@
           <div class="callout" style="width:100%;">
             <div class="stat" style="font-size:6.5cqw; color:#fff;">90%+</div>
             <p style="margin-top:1.2cqw;">ИИ-проектов проваливаются <b>не из-за технологии, а из-за неумения управлять изменениями</b> в людях и процессах.</p>
-            <p style="margin-top:1.4cqw; color:var(--grad-warm); font-weight:600;" class="grad-warm-text">Мы решаем эту задачу 10+ лет — в change-management крупнейших компаний.</p>
+            <p style="margin-top:1.4cqw; font-weight:600; color:#fff;">Мы 10+ лет занимаемся управлением изменениями и трансформацией в крупнейших компаниях страны.</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>03 / 13</span><span>Почему большинство застревает</span></div>
+    <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>03 / 12</span><span>Почему большинство застревает</span></div>
   </section>
 
   <!-- ░░ 4 · НАШ ПОДХОД: 3 УРОВНЯ ░░ -->
@@ -260,7 +263,7 @@
       </div>
       <p class="s-lede mt-auto" style="font-size:1.55cqw; padding-top:1.1cqw;">Можно двигаться поэтапно, а можно пройти весь путь под нашим сопровождением.</p>
     </div>
-    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>04 / 13</span><span>Карта пути</span></div>
+    <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>04 / 12</span><span>Карта пути</span></div>
   </section>
 
   <!-- ░░ 5 · УРОВЕНЬ 0 ░░ -->
@@ -271,7 +274,7 @@
         <div class="lvl" style="background:var(--ink); font-size:2.6cqw; width:2.4em; height:2.4em;">0</div>
         <div><div class="eyebrow" style="font-size:1.5cqw; letter-spacing:.14em; text-transform:uppercase; color:var(--fg-faint);">Уровень 0</div><h1 class="s-title" style="font-size:4.4cqw;">Диагностика и погружение</h1></div>
       </div>
-      <p class="s-lede" style="max-width:74cqw;">Тот самый формат, который мы проводим для собственников на выездных стратегических сессиях. Сначала разбираемся, <b>где у бизнеса реально болит</b> — и только потом говорим про ИИ.</p>
+      <p class="s-lede" style="max-width:74cqw;">Тот самый формат, который мы проводим для собственника и ключевой команды на выездных стратегических сессиях. Сначала разбираемся, <b>где у бизнеса реально болит</b> — и только потом говорим про ИИ.</p>
       <div class="grid g2 grow" style="margin-top:2.2cqw; align-content:center;">
         <div class="card">
           <div class="k">Что делаем</div>
@@ -279,7 +282,7 @@
             <li class="ok"><span class="m">→</span><span>Интервью с собственником и ключевыми людьми</span></li>
             <li class="ok"><span class="m">→</span><span>Находим узкое место, которое ограничивает рост</span></li>
             <li class="ok"><span class="m">→</span><span>Показываем, где ИИ даёт деньги, а где — нет</span></li>
-            <li class="ok"><span class="m">→</span><span>Погружаем первое лицо: чтобы решения были осознанными</span></li>
+            <li class="ok"><span class="m">→</span><span>Погружаем первое лицо и ключевую команду — решения принимаются осознанно</span></li>
           </ul>
         </div>
         <div class="card" style="border-color:var(--blue);">
@@ -288,12 +291,12 @@
             <li class="ok"><span class="m">✓</span><span>Карту точек роста с приоритетами</span></li>
             <li class="ok"><span class="m">✓</span><span>Топ-3 процесса, где ИИ окупится быстрее всего</span></li>
             <li class="ok"><span class="m">✓</span><span>Понятный план на 90 дней</span></li>
-            <li class="ok"><span class="m">✓</span><span>Уверенность собственника, а не слепую веру в хайп</span></li>
+            <li class="ok"><span class="m">✓</span><span>Собственник и команда уверены — а не слепо верят в хайп</span></li>
           </ul>
         </div>
       </div>
     </div>
-    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>05 / 13</span><span>Уровень 0 · Диагностика</span></div>
+    <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>05 / 12</span><span>Уровень 0 · Диагностика</span></div>
   </section>
 
   <!-- ░░ 6 · УРОВЕНЬ 1 ░░ -->
@@ -326,38 +329,38 @@
         </div>
       </div>
     </div>
-    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>06 / 13</span><span>Уровень 1 · Эксперименты</span></div>
+    <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>06 / 12</span><span>Уровень 1 · Эксперименты</span></div>
   </section>
 
   <!-- ░░ 7 · УРОВЕНЬ 2 ░░ -->
-  <section class="slide" data-canvas="ink">
-    <img class="render" src="/assets/graphic-chrome-wave.webp" alt="" style="right:-9cqw; bottom:-12cqw; width:32cqw; opacity:.6;">
+  <section class="slide">
+    <img class="render" src="/assets/graphic-holo-torus.webp" alt="" style="right:-9cqw; bottom:-9cqw; width:30cqw; opacity:.42;">
     <div class="s-body">
       <div class="row center" style="gap:1.4cqw; margin-bottom:1.8cqw;">
         <div class="lvl" style="background:var(--magenta); font-size:2.6cqw; width:2.4em; height:2.4em;">2</div>
-        <div><div class="eyebrow" style="font-size:1.5cqw; letter-spacing:.14em; text-transform:uppercase; color:var(--paper-55);">Уровень 2</div><h1 class="s-title" style="font-size:4.4cqw;">Полная самостоятельность</h1></div>
+        <div><div class="eyebrow" style="font-size:1.5cqw; letter-spacing:.14em; text-transform:uppercase; color:var(--fg-faint);">Уровень 2</div><h1 class="s-title" style="font-size:4.4cqw;">Полная самостоятельность</h1></div>
       </div>
-      <p class="s-lede" style="max-width:66cqw;">Цель — чтобы компания развивала ИИ <b>без нас</b>. Внутри появляются свои чемпионы, ИИ встроен в процессы, а не висит сбоку.</p>
+      <p class="s-lede" style="max-width:74cqw;">Цель — чтобы компания развивала ИИ <b>без нас</b>. Внутри появляются свои чемпионы, ИИ встроен в процессы, а не висит сбоку.</p>
       <div class="grid g2 grow" style="margin-top:2.2cqw; align-content:center;">
-        <div class="card" style="background:#141417; border-color:rgba(255,255,255,.16);">
-          <div class="k" style="color:#7d8cff;">Что делаем</div>
+        <div class="card">
+          <div class="k">Что делаем</div>
           <ul class="list" style="gap:.8cqw;">
-            <li class="ok"><span class="m" style="color:#02ffad;">→</span><span style="color:var(--paper-72);">Готовим внутренних ИИ-чемпионов</span></li>
-            <li class="ok"><span class="m" style="color:#02ffad;">→</span><span style="color:var(--paper-72);">Встраиваем ИИ в процессы и роли</span></li>
-            <li class="ok"><span class="m" style="color:#02ffad;">→</span><span style="color:var(--paper-72);">Передаём методологию и инструменты «насовсем»</span></li>
+            <li class="ok"><span class="m">→</span><span>Готовим внутренних ИИ-чемпионов</span></li>
+            <li class="ok"><span class="m">→</span><span>Встраиваем ИИ в процессы и роли</span></li>
+            <li class="ok"><span class="m">→</span><span>Передаём методологию и инструменты «насовсем»</span></li>
           </ul>
         </div>
-        <div class="card" style="background:#1c0f15; border-color:var(--magenta);">
-          <div class="k" style="color:#ff7ab0;">Что получаете</div>
+        <div class="card" style="border-color:var(--magenta);">
+          <div class="k" style="color:var(--magenta);">Что получаете</div>
           <ul class="list" style="gap:.8cqw;">
-            <li class="ok"><span class="m" style="color:#02ffad;">✓</span><span style="color:var(--paper-72);">ИИ-ready бизнес, который растёт сам</span></li>
-            <li class="ok"><span class="m" style="color:#02ffad;">✓</span><span style="color:var(--paper-72);">Независимость от подрядчиков</span></li>
-            <li class="ok"><span class="m" style="color:#02ffad;">✓</span><span style="color:var(--paper-72);">Преимущество, которое конкурентам не догнать</span></li>
+            <li class="ok"><span class="m" style="color:var(--magenta);">✓</span><span>ИИ-ready бизнес, который растёт сам</span></li>
+            <li class="ok"><span class="m" style="color:var(--magenta);">✓</span><span>Независимость от подрядчиков</span></li>
+            <li class="ok"><span class="m" style="color:var(--magenta);">✓</span><span>Преимущество, которое конкурентам не догнать</span></li>
           </ul>
         </div>
       </div>
     </div>
-    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>07 / 13</span><span>Уровень 2 · Самостоятельность</span></div>
+    <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>07 / 12</span><span>Уровень 2 · Самостоятельность</span></div>
   </section>
 
   <!-- ░░ 8 · ЧТО ИИ ДЕЛАЕТ ░░ -->
@@ -375,7 +378,7 @@
       </div>
       <p class="s-lede mt-auto" style="font-size:1.6cqw; padding-top:1.4cqw; color:var(--ink-55);">Под каждую функцию — отдельный ИИ-помощник, встроенный в ваши системы. Какие именно нужны вам — определяем на диагностике.</p>
     </div>
-    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>08 / 13</span><span>Применение по функциям</span></div>
+    <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>08 / 12</span><span>Применение по функциям</span></div>
   </section>
 
   <!-- ░░ 9 · КАК ВЫГЛЯДИТ НА ПРАКТИКЕ ░░ -->
@@ -397,26 +400,10 @@
         <p style="font-size:1.65cqw;">То, что раньше занимало 2–3 часа после каждого разговора, <b>происходит само, пока идёт этот разговор</b>. Это не демо — так мы работаем у себя каждый день.</p>
       </div>
     </div>
-    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>09 / 13</span><span>Сценарий в действии</span></div>
+    <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>09 / 12</span><span>Сценарий в действии</span></div>
   </section>
 
-  <!-- ░░ 10 · КОНТРОЛЬ И БЕЗОПАСНОСТЬ ░░ -->
-  <section class="slide">
-    <div class="s-body">
-      <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Контроль · безопасность · простой старт</span></div>
-      <h1 class="s-title">Вы остаётесь главным. Всегда.</h1>
-      <div class="grid g4 grow" style="margin-top:2.4cqw; align-content:center; grid-auto-rows:1fr;">
-        <div class="card"><h3>Человек подтверждает</h3><p>ИИ предлагает — решение за вашим сотрудником. Ничего не уходит клиенту без подтверждения.</p></div>
-        <div class="card"><h3>Данные у вас</h3><p>Работаем в вашем контуре. По запросу — on-prem, данные не покидают компанию.</p></div>
-        <div class="card"><h3>Без VPN и карт</h3><p>Не требует иностранных карт, VPN и плясок с доступами. Работает из России.</p></div>
-        <div class="card"><h3>Старт за 1 день</h3><p>Первый полезный сценарий запускается сразу, без долгого внедрения «на полгода».</p></div>
-      </div>
-      <p class="s-lede mt-auto" style="font-size:1.7cqw; padding-top:1.6cqw;">Мы не отдаём бизнес «на откуп роботам». Мы даём людям инструмент, который снимает с них рутину.</p>
-    </div>
-    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>10 / 13</span><span>Контроль и безопасность</span></div>
-  </section>
-
-  <!-- ░░ 11 · ПОЧЕМУ НАМ МОЖНО ДОВЕРЯТЬ ░░ -->
+  <!-- ░░ 10 · ПОЧЕМУ НАМ МОЖНО ДОВЕРЯТЬ ░░ -->
   <section class="slide">
     <div class="s-body">
       <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Почему нам можно доверять</span></div>
@@ -425,7 +412,7 @@
         <div style="text-align:center;"><div class="stat" style="font-size:5.4cqw; color:var(--ink);">35+</div><div style="font-size:1.5cqw; color:var(--ink-55); margin-top:.5cqw;">клиентов</div></div>
         <div style="text-align:center;"><div class="stat" style="font-size:5.4cqw; color:var(--ink);">100+</div><div style="font-size:1.5cqw; color:var(--ink-55); margin-top:.5cqw;">проектов</div></div>
         <div style="text-align:center;"><div class="stat" style="font-size:5.4cqw; color:var(--ink);">5000+</div><div style="font-size:1.5cqw; color:var(--ink-55); margin-top:.5cqw;">обученных сотрудников</div></div>
-        <div style="text-align:center;"><div class="stat" style="font-size:5.4cqw; color:var(--blue);">10+ лет</div><div style="font-size:1.5cqw; color:var(--ink-55); margin-top:.5cqw;">в change-management</div></div>
+        <div style="text-align:center;"><div class="stat" style="font-size:5.4cqw; color:var(--blue);">10+ лет</div><div style="font-size:1.5cqw; color:var(--ink-55); margin-top:.5cqw;">в управлении изменениями</div></div>
       </div>
       <div class="grow" style="display:flex; flex-direction:column; justify-content:center; margin-top:1.6cqw;">
         <div style="display:flex; flex-wrap:wrap; gap:.9cqw;">
@@ -434,36 +421,39 @@
       </div>
       <p class="s-lede mt-auto" style="font-size:1.7cqw; padding-top:1.2cqw;">За плечами команды — внедрение изменений в крупнейших компаниях страны. Ту же дисциплину мы приносим в средний бизнес.</p>
     </div>
-    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>11 / 13</span><span>Доверие и опыт</span></div>
+    <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>10 / 12</span><span>Доверие и опыт</span></div>
   </section>
 
-  <!-- ░░ 12 · С ЧЕГО НАЧАТЬ ░░ -->
+  <!-- ░░ 11 · С ЧЕГО НАЧАТЬ ░░ -->
   <section class="slide">
     <div class="s-body">
       <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Следующий шаг</span></div>
-      <h1 class="s-title">На каком уровне вы сейчас?</h1>
-      <div class="row grow" style="gap:2.6cqw; margin-top:2.2cqw;">
-        <div style="flex:1;">
-          <p class="s-lede" style="font-size:1.8cqw; margin-bottom:1.4cqw;">Быстрый тест — отметьте, что про вас:</p>
-          <div class="check">
-            <div><span class="box"></span><span>Есть понятная ИИ-стратегия</span></div>
-            <div><span class="box"></span><span>Сотрудники реально пользуются ИИ</span></div>
-            <div><span class="box"></span><span>ИИ подключён к нашим системам</span></div>
-            <div><span class="box"></span><span>Есть внутренние ИИ-чемпионы</span></div>
-            <div><span class="box"></span><span>Считаем окупаемость ИИ</span></div>
-            <div><span class="box"></span><span>ИИ участвует в операционных решениях</span></div>
-          </div>
-          <p style="font-size:1.5cqw; color:var(--ink-55); margin-top:1.6cqw;">Меньше трёх галочек — вам на Уровень 0. Это нормально: там начинают почти все.</p>
+      <h1 class="s-title">Начните с Уровня 0 — диагностики</h1>
+      <p class="s-lede" style="margin-top:1.2cqw;">Один разговор на 15 минут — и у вас есть ясность: где вы сейчас и куда двигаться дальше.</p>
+      <div class="grid g2 grow" style="margin-top:2.2cqw; align-content:center;">
+        <div class="card">
+          <div class="k">За 15 минут разберём</div>
+          <ul class="list" style="gap:1cqw;">
+            <li class="ok"><span class="m" style="color:var(--blue);">1</span><span>Где вы сейчас на пути 0 → 1 → 2 и почему</span></li>
+            <li class="ok"><span class="m" style="color:var(--blue);">2</span><span>Куда хотите прийти и в какой срок</span></li>
+            <li class="ok"><span class="m" style="color:var(--blue);">3</span><span>Что мешает внедрять ИИ именно у вас</span></li>
+          </ul>
         </div>
-        <div style="flex:1; display:flex; flex-direction:column; gap:1.2cqw; justify-content:center;">
-          <div class="card" style="border-color:var(--blue);"><div class="k">15 минут честного разговора</div><p style="font-size:1.7cqw;">Разберём вашу ситуацию и три вопроса:</p>
-            <p style="font-size:1.6cqw; margin-top:1cqw;">1 · Где вы сейчас — и почему?<br>2 · Куда хотите и в какой срок?<br>3 · Что мешает внедрять ИИ?</p>
-          </div>
-          <a class="cta lg" href="https://business.hakku.ai/">Записаться на диагностику →</a>
+        <div class="card" style="border-color:var(--blue);">
+          <div class="k">С чем вы уйдёте</div>
+          <ul class="list" style="gap:1cqw;">
+            <li class="ok"><span class="m">✓</span><span>Понимание вашего уровня ИИ-зрелости</span></li>
+            <li class="ok"><span class="m">✓</span><span>Первые точки, где ИИ окупится быстрее всего</span></li>
+            <li class="ok"><span class="m">✓</span><span>Понятный следующий шаг — без обязательств</span></li>
+          </ul>
         </div>
       </div>
+      <div class="row center mt-auto" style="gap:1.4cqw; padding-top:1.6cqw;">
+        <a class="cta lg" href="https://business.hakku.ai/">Записаться на диагностику →</a>
+        <span style="font-size:1.5cqw; color:var(--ink-55);">15 минут · бесплатно · без презентаций ради презентаций</span>
+      </div>
     </div>
-    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>12 / 13</span><span>С чего начать</span></div>
+    <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>11 / 12</span><span>С чего начать</span></div>
   </section>
 
   <!-- ░░ 13 · КОНТАКТЫ ░░ -->
@@ -482,14 +472,14 @@
       </div>
       <a class="cta lg" href="https://business.hakku.ai/" style="margin-top:3cqw; align-self:flex-start;">business.hakku.ai →</a>
     </div>
-    <div class="s-foot"><span class="fbrand">хакку.ии · б<span class="ii">ИИ</span>знес</span><span>13 / 13</span><span>Связаться</span></div>
+    <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>12 / 12</span><span>Связаться</span></div>
   </section>
 
 </div>
 
 <div class="nav">
   <button id="prev" aria-label="Назад">←</button>
-  <span class="count" id="count">01 / 13</span>
+  <span class="count" id="count">01 / 12</span>
   <button id="next" aria-label="Вперёд">→</button>
 </div>
 
