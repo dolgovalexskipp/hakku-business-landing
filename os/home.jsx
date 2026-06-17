@@ -8,9 +8,7 @@ function HomeA({ nav = ()=>{} }) {
     <div className="os-frame">
       <Sidebar active="home" nav={nav}/>
       <div className="os-main">
-        <Topbar crumbs={['бИИзнес','Главная']} actions={
-          <a className="t-act" href="/materials/kak-oplatit-nejronki/" style={{ textDecoration:'none' }}>{Icons.dl(' ')} Гайд для новичка</a>
-        }/>
+        <Topbar crumbs={['бИИзнес','Главная']}/>
         <div className="os-content">
           <div>
             <div className="os-eyebrow" style={{ marginBottom: 10 }}>{today}</div>
