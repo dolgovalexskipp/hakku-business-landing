@@ -18,6 +18,16 @@ function HomeA({ nav = ()=>{} }) {
             <p className="os-sub" style={{ marginTop: 8 }}>В базе — {liveCount} материалов, новые выходят каждую неделю.</p>
           </div>
 
+          {/* trajectory CTA — "не знаете с чего начать?" */}
+          <div className="os-tj-cta os-clickable" onClick={()=>nav('trajectory')}>
+            <span className="ic">{Icons.route(' ')}</span>
+            <div className="tx">
+              <div className="t">Не знаете, с чего начать?</div>
+              <div className="d">Пройдите короткую диагностику — соберём персональный маршрут под ваш уровень и цели.</div>
+            </div>
+            <span className="os-btn sm">Пройти диагностику {Icons.chev(' ')}</span>
+          </div>
+
           {/* featured video hero — dark accent zone */}
           {featured && (
           <a className="os-ink os-clickable" href={featured.href}

@@ -31,6 +31,8 @@ const Icons = {
   search: (c)=><I c={c}><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></I>,
   star:   (c)=><I c={c}><path d="M12 3.5 14.6 9l6 .5-4.5 4 1.4 5.9L12 16.4 6.5 19.4 7.9 13.5 3.4 9.5l6-.5z"/></I>,
   clock:  (c)=><I c={c}><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></I>,
+  route:  (c)=><I c={c}><circle cx="6" cy="19" r="2.4"/><circle cx="18" cy="5" r="2.4"/><path d="M8.4 5H15a3 3 0 0 1 0 6H9a3 3 0 0 0 0 6h6.6"/></I>,
+  flag:   (c)=><I c={c}><path d="M5 21V4"/><path d="M5 4h12l-2.5 3.5L17 11H5"/></I>,
   chev:   (c)=><I c={c}><path d="m9 6 6 6-6 6"/></I>,
   play:   (c)=><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>,
   dl:     (c)=><I c={c}><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5"/><path d="M5 19h14"/></I>,
@@ -97,7 +99,10 @@ const LECTURERS = [
 ];
 
 const navData = [
-  { label:'', items:[ { ic:'home', t:'Главная', view:'home' } ] },
+  { label:'', items:[
+    { ic:'home', t:'Главная', view:'home' },
+    { ic:'route', t:'Траектория', view:'trajectory' },
+  ] },
   { label:'База знаний', items:[
     { ic:'book', t:'Все материалы', count:String(MATERIALS.length), view:'knowledge', track:null },
     ...TRACKS.map(tr => ({ sub:true, t:`${tr.n} · ${tr.short}`, count:String(countByTrack(tr.id)), view:'knowledge', track:tr.id })),
