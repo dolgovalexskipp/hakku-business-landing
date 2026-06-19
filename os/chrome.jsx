@@ -81,7 +81,7 @@ const TIER_RANK = { pro:1, max:2, company:3 };
 // Access tier of the current viewer. Hard-coded while the shared password is the
 // only gate (everyone sees everything). Wire to the real Telegram/billing auth later.
 const USER_TIER = 'company';
-const canAccess = (m) => TIER_RANK[USER_TIER] >= TIER_RANK[m.tier || 'pro'];
+const canAccess = (m) => TIER_RANK[window.__SESSION_TIER || USER_TIER] >= TIER_RANK[m.tier || 'pro'];
 const trackById = (id) => TRACKS.find(t => t.id === id);
 const countByTrack = (id) => MATERIALS.filter(m => m.track === id).length;
 const ALL_TOPICS = [...new Set(MATERIALS.flatMap(m => m.topics || []))];
@@ -115,7 +115,8 @@ const navData = [
 
 function osLogout() {
   try { localStorage.removeItem('hakku_os_pw'); localStorage.removeItem('hakku_os_authed'); } catch (e) {}
-  location.reload();
+  try { fetch('/api/auth/logout', { method:'POST', credentials:'same-origin' }).catch(function(){}).finally(function(){ location.reload(); }); }
+  catch (e) { location.reload(); }
 }
 
 function Sidebar({ active='home', nav=()=>{} }) {

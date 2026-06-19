@@ -1,8 +1,9 @@
 // app.jsx — auth gate + view router for the LMS.
-// Password is verified by decrypting a probe blob (the password itself is never
-// stored in plaintext anywhere). On success it's saved to localStorage, which
-// also auto-opens every gated material page. Telegram auth is intentionally
-// absent until paid-user accounts exist.
+// Two auth paths:
+//   1. Telegram session (os.business.hakku.ai): /api/auth/me cookie -> tier from the
+//      paid-members sheet. window.__SESSION_TIER drives canAccess() in chrome.jsx.
+//   2. Legacy shared password (fallback): PBKDF2 probe stored in localStorage; such
+//      users have no __SESSION_TIER so canAccess() defaults them to 'company'.
 
 const AUTH_PROBE = { "salt":"ULERfbQ7eP7hM5rcJs2SRA==", "iv":"dmM/z52LaNMJQvFE", "ct":"hszrx7qxp71upJ2qnSwKX1UZxs/+MJupR7Yb" };
 
@@ -22,6 +23,22 @@ async function verifyPassword(pwd){
   } catch(e){ return false; }
 }
 
+// Telegram Login Widget callback — invoked by telegram-widget.js via data-onauth.
+window.onTelegramAuth = async function(user){
+  try {
+    const r = await fetch('/api/auth/telegram', {
+      method:'POST', credentials:'same-origin',
+      headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify(user)
+    });
+    if (r.ok) { location.reload(); return; }
+    const j = await r.json().catch(()=>({}));
+    window.dispatchEvent(new CustomEvent('hakku-tg-error', { detail: (j && j.error) || 'error' }));
+  } catch(e){
+    window.dispatchEvent(new CustomEvent('hakku-tg-error', { detail: 'network' }));
+  }
+};
+
 function App(){
   const [ready, setReady]   = React.useState(false);
   const [authed, setAuthed] = React.useState(false);
@@ -32,6 +49,15 @@ function App(){
   const go = (v, opts) => { if (opts && 'track' in opts) setKbTrack(opts.track); setView(v); };
 
   React.useEffect(()=>{ (async()=>{
+    // 1) Telegram session via backend cookie
+    try {
+      const r = await fetch('/api/auth/me', { credentials:'same-origin' });
+      if (r.ok) {
+        const j = await r.json();
+        if (j && j.ok) { window.__SESSION_TIER = j.tier || 'pro'; window.__SESSION = j; setAuthed(true); setReady(true); return; }
+      }
+    } catch(e){}
+    // 2) Legacy shared password
     try { var pw = localStorage.getItem('hakku_os_pw'); if (pw && await verifyPassword(pw)) setAuthed(true); } catch(e){}
     setReady(true);
   })(); }, []);
