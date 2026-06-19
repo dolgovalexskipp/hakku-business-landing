@@ -9,3 +9,6 @@ _materials_src/
 
 # cap-publish: реальные адреса сервера/R2 (репо публичный)
 _tools/cap.config.json
+
+# cap-server-publish: тяжёлые видео не в git (заливаются на сервер по scp), GitHub лимит 100MB
+v/**/video.mp4
