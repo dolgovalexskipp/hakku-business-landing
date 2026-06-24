@@ -43,6 +43,10 @@ function gateBlock(payloadJson) {
     #lockwrap .lock-err.show { display: block; }
     #lockwrap .lock-join { display: inline-block; margin-top: 18px; font-size: 13.5px; color: var(--ink-55); border-bottom: 1px solid var(--ink-12); padding-bottom: 2px; }
     #lockwrap .lock-join:hover { color: var(--ink); }
+    .mdbtn { display: inline-flex; align-items: center; gap: 9px; margin-top: 4px; font-family: var(--font-body); font-size: 14.5px; font-weight: 500; color: var(--ink); background: #fff; border: 1px solid var(--ink-12); border-radius: 999px; padding: 11px 18px; cursor: pointer; transition: border-color .15s, background .15s; }
+    .mdbtn:hover { border-color: var(--ink); background: var(--ink-04); }
+    .mdbtn b { font-family: var(--font-mono); font-weight: 600; }
+    .mdbtn svg { color: var(--blue); }
   </style>
   <div id="lockwrap">
     <div class="lock-fade"></div>
@@ -68,6 +72,16 @@ function gateBlock(payloadJson) {
         var o = btn.innerText; btn.innerText = 'Скопировано';
         setTimeout(function () { btn.innerText = o; }, 1500);
       });
+    };
+    // .md для ИИ — собирается в браузере из вшитого (зашифрованного) #md-skill,
+    // публичного статик-файла нет. || existing — не перетираем кастомный dlMd материала.
+    window.dlMd = window.dlMd || function () {
+      var el = document.getElementById('md-skill'); if (!el) return;
+      var blob = new Blob([el.textContent.replace(/^\\s+/, '')], { type: 'text/markdown;charset=utf-8' });
+      var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+      a.download = (el.getAttribute('data-name') || 'konspekt') + '.md';
+      document.body.appendChild(a); a.click();
+      setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
     };
     function b64(s) { var bin = atob(s); var out = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i); return out; }
     async function doUnlock(pwd, silent) {
@@ -98,13 +112,32 @@ function gateBlock(payloadJson) {
   </script>`;
 }
 
+// Блок «Скачать .md для ИИ» — вставляется в НАЧАЛО gated-части при --md.
+// Конспект вшит в <script type="text/markdown"> (raw text: бэктики/& — литералы),
+// кнопка зовёт глобальный dlMd (определён в gateBlock). Публичного .md-файла нет.
+function mdSection(md, name) {
+  return `
+  <section style="padding:48px 0;border-top:1px solid var(--ink-08)">
+    <div style="max-width:880px;margin:0 auto;padding:0 28px">
+      <div style="font-family:var(--font-body);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:10px">Для вашего ИИ</div>
+      <h2 style="font-family:var(--font-display);font-weight:400;font-size:clamp(1.6rem,3.5vw,2.2rem);line-height:1.12;letter-spacing:-.02em;color:var(--ink);margin:0 0 12px">Конспект для ИИ-агента</h2>
+      <p style="font-size:16px;line-height:1.6;color:var(--ink-72);margin:0 0 16px;max-width:680px">Короткий .md-брифинг материала — приложите его в чат своему ИИ и попросите помочь применить это у себя.</p>
+      <button class="mdbtn" type="button" onclick="dlMd()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Скачать конспект <b>.md</b> — отдайте своему ИИ-агенту</button>
+    </div>
+    <script type="text/markdown" id="md-skill" data-name="${name}">${md}</script>
+  </section>
+`;
+}
+
 async function main() {
   const args = process.argv.slice(2);
   if (args.length < 3) {
-    console.error('Usage: node _tools/encrypt-page.js <source.html> <password> <output.html> [--title "Title"]');
+    console.error('Usage: node _tools/encrypt-page.js <source.html> <password> <output.html> [--md <skill.md>]');
     process.exit(1);
   }
   const [source, password, output] = args;
+  const mdIdx = args.indexOf('--md');
+  const mdPath = mdIdx >= 0 ? args[mdIdx + 1] : null;
   const src = fs.readFileSync(path.resolve(source), 'utf-8');
   if (!src.includes('<!--GATE-->')) {
     console.error('ERROR: source has no <!--GATE--> marker (need exactly one to split open vs gated).');
@@ -116,7 +149,14 @@ async function main() {
     process.exit(1);
   }
   const openPart = parts[0];
-  const gatedInner = parts[1].replace(/<\/body>\s*<\/html>\s*$/i, '');
+  let gatedInner = parts[1].replace(/<\/body>\s*<\/html>\s*$/i, '');
+  if (mdPath) {
+    const md = fs.readFileSync(path.resolve(mdPath), 'utf-8');
+    if (md.includes('</script')) { console.error('ERROR: .md содержит "</script" — нельзя вшить в raw-text <script>.'); process.exit(1); }
+    const name = path.basename(mdPath).replace(/\.md$/i, '');
+    gatedInner = mdSection(md, name) + gatedInner;
+    console.log(`+ .md вшит в gated-блок (${(md.length / 1024).toFixed(1)} KB) — публичного файла нет`);
+  }
   const payload = await encrypt(gatedInner, password);
   const out = openPart + gateBlock(JSON.stringify(payload)) + '\n</body>\n</html>\n';
   fs.writeFileSync(path.resolve(output), out, 'utf-8');
