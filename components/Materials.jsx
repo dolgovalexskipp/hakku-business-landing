@@ -21,30 +21,6 @@ const Materials = () => {
       peek: ['Контур 1 — Hysteria2, устойчивый узел…', 'Контур 2 — российские модели по API…', 'Резерв и маршрутизация на случай блока'],
     },
     {
-      cat: 'Доступ', catColor: '#2A3EF4',
-      title: 'Как завести и настроить Claude из России',
-      teaser: 'Рабочая учётка без блокировок: правильный Google, оплата, приложение и расширение. С видео-разбором по шагам.',
-      author: 'Николай Писаренко', photo: 'assets/founders/nikolai.jpg', meta: 'Гайд · с видео',
-      href: '/materials/kak-nastroit-claude/',
-      peek: ['Шаг 1 — «американский» Google под учётку…', 'Шаг 2 — claude.ai, оплата, без СМС…', 'Видео-разбор настройки · 16 минут'],
-    },
-    {
-      cat: 'Доступ', catColor: '#2A3EF4',
-      title: 'Как оплатить нейросети из России',
-      teaser: 'Карты, посредники и обходы — всё рабочее на 2026. Чтобы платить за зарубежный ИИ без танцев с бубном.',
-      author: 'Николай Писаренко', photo: 'assets/founders/nikolai.jpg', meta: 'Гайд',
-      href: '/materials/kak-oplatit-nejronki/',
-      peek: ['Способ 1 — карта зарубежного банка…', 'Способ 2 — платёжный посредник…', 'Цены, комиссии, что реально работает'],
-    },
-    {
-      cat: 'Контекст', catColor: '#FD7202',
-      title: 'Второй мозг: контекст о вас для любой нейросети',
-      teaser: 'Один файл, который читает любая модель и сразу знает ваш бизнес, стиль и приоритеты. С готовым шаблоном.',
-      author: 'Александр Долгов', photo: 'assets/author-dolgov.jpg', meta: 'Гайд · с шаблоном',
-      href: '/materials/second-brain/',
-      peek: ['Кто вы, как принимаете решения, что важно…', 'Шаблон «второго мозга» под копипаст…', 'Подключается к любому ИИ за минуту'],
-    },
-    {
       cat: 'Продуктивность', catColor: '#D51F75',
       title: 'ИИ-ассистент собственника',
       teaser: 'Из диктофона и записей встреч — готовая повестка, поручения и недельный дайджест. Четыре роли, готовые промпты.',
@@ -53,36 +29,12 @@ const Materials = () => {
       peek: ['Роль 1 — повестка до встречи…', 'Роль 2 — разбор записи на поручения…', '4 готовых промпта · собрать за вечер'],
     },
     {
-      cat: 'Безопасность', catColor: '#D51F75',
-      title: 'Где ИИ врёт — и как не попасться',
-      teaser: 'Эхо-камера, выдумки, ложная уверенность. Как проверять ответы и не принять галлюцинацию за факт.',
-      author: 'Александр Долгов', photo: 'assets/author-dolgov.jpg', meta: 'Разбор',
-      href: '/materials/gde-ii-vret/',
-      peek: ['Почему модель уверенно выдумывает…', 'Приёмы проверки на доверие…', 'Чек-лист: где не верить с первого раза'],
-    },
-    {
       cat: 'Контекст', catColor: '#FD7202',
-      title: 'Единый мозг компании',
-      teaser: 'Один контекст для всех ИИ-сотрудников: термины, процессы, правила. Чтобы агенты говорили на языке вашей компании.',
-      author: 'Александр Долгов', photo: 'assets/author-dolgov.jpg', meta: 'Гайд · уровень Макс',
-      href: '/materials/company-brain/',
-      peek: ['Словарь статусов и терминов компании…', 'Процессы и правила для всех агентов…', 'Один источник правды для ИИ'],
-    },
-    {
-      cat: 'Инструменты', catColor: '#D51F75',
-      title: 'Запись и расшифровка встреч в 2026',
-      teaser: '20+ инструментов по пяти типам — российские и зарубежные. Матрица выбора под задачу, отметки по 152-ФЗ, цены.',
-      author: 'Николай Писаренко', photo: 'assets/founders/nikolai.jpg', meta: 'Подборка · 20+ сервисов',
-      href: '/materials/zapis-rasshifrovka-vstrech/',
-      peek: ['5 типов инструментов записи…', 'Матрица выбора + отметки 152-ФЗ…', 'Цены и что брать под вашу задачу'],
-    },
-    {
-      cat: 'Старт', catColor: '#2A3EF4',
-      title: 'Как устроена база знаний сообщества',
-      teaser: 'Короткий Loom-обзор: где что лежит и как искать. С него начинают новые участники.',
-      author: 'Александр Долгов', photo: 'assets/author-dolgov.jpg', meta: 'Loom · 5 минут',
-      href: '/v/kak-ustroena-baza-znaniy-soobschestva/',
-      peek: ['Где лежат разборы, записи, промпты…', 'Как искать по трекам и темам…', 'Видео-обзор · 5 минут'],
+      title: 'Второй мозг: контекст о вас для любой нейросети',
+      teaser: 'Один файл, который читает любая модель и сразу знает ваш бизнес, стиль и приоритеты. С готовым шаблоном.',
+      author: 'Александр Долгов', photo: 'assets/author-dolgov.jpg', meta: 'Гайд · с шаблоном',
+      href: '/materials/second-brain/',
+      peek: ['Кто вы, как принимаете решения, что важно…', 'Шаблон «второго мозга» под копипаст…', 'Подключается к любому ИИ за минуту'],
     },
   ];
 
@@ -106,15 +58,14 @@ const Materials = () => {
         </div>
 
         <style>{`
-          @media (max-width: 1080px) { #materials .mat-grid { grid-template-columns: repeat(2,1fr) !important; } }
-          @media (max-width: 720px)  { #materials .mat-grid { grid-template-columns: 1fr !important; } }
+          @media (max-width: 720px) { #materials .mat-grid { grid-template-columns: 1fr !important; } }
           #materials .mat-card { transition: transform .25s cubic-bezier(0.2,0.8,0.2,1), border-color .25s, box-shadow .25s; }
           #materials .mat-card:hover { transform: translateY(-4px); border-color: rgba(0,0,0,.30); box-shadow: 0 18px 44px rgba(0,0,0,.07); }
           #materials .mat-card:hover .mat-go { gap: 12px; }
           #materials .mat-peek .blur { filter: blur(5px); }
         `}</style>
 
-        <div className="mat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16 }}>
+        <div className="mat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 16 }}>
           {items.map((m, i) => (
             <a key={i} href={m.href} className="mat-card" style={{
               display: 'flex', flexDirection: 'column', background: '#fff',
