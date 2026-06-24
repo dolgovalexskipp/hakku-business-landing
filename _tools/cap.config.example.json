@@ -1,6 +1,15 @@
 {
-  "_comment": "Скопируй в cap.config.json и заполни. cap.config.json в .gitignore — реальные адреса не попадут в публичный репо.",
-  "_r2_comment": "R2 нужен только для закрытых (--private) и крупных роликов. До этого работает storage=repo.",
+  "_comment": "Скопируй в cap.config.json и заполни. cap.config.json в .gitignore — реальные ключи не попадут в публичный репо.",
+  "_yc_comment": "АКТУАЛЬНО: видео-бакет = YC Object Storage (публичный). Если задан yc_storage — cap-publish по умолчанию льёт сюда (storage=yc), видео в git НЕ попадает. Заливка через boto3 (uv run, нужен uv в PATH). publicBase — path-style, т.к. имя бакета с точками.",
+  "yc_storage": {
+    "bucket": "video.business.hakku.ai",
+    "endpoint": "https://storage.yandexcloud.net",
+    "region": "ru-central1",
+    "accessKeyId": "<YC_STATIC_KEY_ID>",
+    "secretAccessKey": "<YC_STATIC_SECRET>",
+    "publicBase": "https://storage.yandexcloud.net/video.business.hakku.ai"
+  },
+  "_r2_comment": "Альтернатива (Cloudflare R2) — НЕ используется (требует aws cli). Оставлено как опция.",
   "r2": {
     "bucket": "hakku-loom",
     "endpoint": "https://<ACCOUNT_ID>.r2.cloudflarestorage.com",

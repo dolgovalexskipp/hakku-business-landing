@@ -59,13 +59,26 @@ const desc = opts.desc || '';
 // ---- storage backend --------------------------------------------------
 const cfgPath = path.join(REPO, '_tools', 'cap.config.json');
 const cfg = fs.existsSync(cfgPath) ? JSON.parse(fs.readFileSync(cfgPath, 'utf8')) : null;
-let storage = opts.storage || (cfg?.r2 ? 'r2' : 'repo');
+// по умолчанию: YC-бакет (если настроен yc_storage), затем R2, иначе repo
+let storage = opts.storage || (cfg?.yc_storage ? 'yc' : (cfg?.r2 ? 'r2' : 'repo'));
 
 if (storage === 'repo' && opts.private)
   die('--private с repo-storage невозможен: файл в публичном репозитории всё равно публичный.\n' +
-      '  Закрытые ролики — только через R2 (заполни _tools/cap.config.json). Сейчас сделай публичный или жди Этап 2.');
+      '  Закрытые ролики — только через бакет (заполни _tools/cap.config.json).');
 if (storage === 'r2' && !cfg?.r2)
-  die('storage=r2, но нет _tools/cap.config.json. Скопируй cap.config.example.json и заполни R2-доступы.');
+  die('storage=r2, но нет блока r2 в _tools/cap.config.json.');
+if (storage === 'yc' && !cfg?.yc_storage)
+  die('storage=yc, но нет блока yc_storage в _tools/cap.config.json.');
+
+// загрузка в YC Object Storage через boto3 (uv run, без системных зависимостей).
+// Возвращает публичный URL объекта.
+function ycUpload(file, key, ctype) {
+  const uv = cfg?.uv || 'uv';
+  const out = execFileSync(uv, ['run', '--with', 'boto3', 'python',
+    path.join(REPO, '_tools', 'yc-upload.py'), file, key, ctype || 'application/octet-stream'],
+    { encoding: 'utf8' });
+  return out.trim().split('\n').pop();
+}
 
 // ---- размеры видео + постер (best-effort через ffprobe/ffmpeg) --------
 let vw = 1280, vh = 720;
@@ -95,6 +108,13 @@ if (storage === 'repo') {
   if (mb > 95) console.warn(`⚠ видео ${mb.toFixed(0)}MB — GitHub лимит 100MB/файл. Это сигнал переходить на R2.`);
   videoUrl = `${SITE}/v/${slug}/video.mp4`;
   console.log(`• видео скопировано в репо (${mb.toFixed(1)}MB)`);
+} else if (storage === 'yc') {
+  // YC Object Storage (boto3 через uv)
+  console.log(`• заливаю видео в бакет ${cfg.yc_storage.bucket}…`);
+  videoUrl = ycUpload(src, `${slug}.mp4`, 'video/mp4');
+  if (fs.existsSync(posterFile))
+    posterUrl = ycUpload(posterFile, `${slug}-poster.jpg`, 'image/jpeg');
+  console.log(`• видео в бакете: ${videoUrl}`);
 } else {
   // R2: aws s3 cp (S3-совместимый endpoint)
   const key = `${slug}.mp4`;
@@ -154,7 +174,9 @@ try {
   execFileSync(chromeBin, ['--headless=new','--disable-gpu','--hide-scrollbars','--allow-file-access-from-files','--window-size=1200,630',`--screenshot=${ogPng}`,`file://${ogHtml}`], { stdio:'ignore' });
   fs.unlinkSync(ogHtml);
   if (!fs.existsSync(ogPng)) throw new Error('png не создан');
-  if (storage === 'r2') {
+  if (storage === 'yc') {
+    ogImageUrl = ycUpload(ogPng, `${slug}-og.png`, 'image/png');
+  } else if (storage === 'r2') {
     execFileSync('aws', ['s3','cp', ogPng, `s3://${cfg.r2.bucket}/${slug}-og.png`,'--endpoint-url', cfg.r2.endpoint], { stdio:'ignore' });
     ogImageUrl = `${cfg.r2.publicBase.replace(/\/$/,'')}/${slug}-og.png`;
   } else {
