@@ -65,7 +65,7 @@ const MATERIALS = [
   { kind:'Подборка', k:'prompt', title:'Запись и расшифровка встреч', sub:'20+ инструментов, матрица выбора, 152-ФЗ',       auth:'nikolai', read:'8 мин',  status:'live', track:'personal',    topics:['Продуктивность','Безопасность'],  tier:'pro', md:'/materials/zapis-rasshifrovka-vstrech/zapis-rasshifrovka-vstrech-skill.md', href:'/materials/zapis-rasshifrovka-vstrech/' },
   { kind:'Промпты',  k:'prompt', title:'«Как ИИ забустит мой бизнес»', sub:'Серия промптов · рутина · продажи',             auth:'sergei',  read:'серия', status:'soon', track:'first-agent', topics:['Продажи','Рутина'],               tier:'pro', date:'15 июн', d:'15.06' },
   { kind:'Loom',     k:'video',  title:'Цифровая трансформация войсов', sub:'От хаоса в чатах — к системе',                 auth:'nikolai', read:'Loom',  status:'soon', track:'first-agent', topics:['Кейс','Автоматизация'],           tier:'max', date:'22 июн', d:'22.06' },
-  { kind:'Вебинар',  k:'book',   title:'Революция в Excel',           sub:'Конспект эфира: ИИ внутри таблицы, демо, промпты', auth:'alex',   read:'10 мин', status:'live', track:'personal',    topics:['Кейс','Продуктивность'],          tier:'pro', href:'/materials/revolyuciya-v-excel/' },
+  { kind:'Вебинар',  k:'book',   title:'Революция в Excel',           sub:'Конспект эфира: ИИ внутри таблицы, демо, промпты', auth:'alex',   read:'10 мин', status:'live', track:'personal',    topics:['Кейс','Продуктивность'],          tier:'pro', md:'/materials/revolyuciya-v-excel/revolyuciya-v-excel-skill.md', href:'/materials/revolyuciya-v-excel/' },
 ];
 const liveCount = MATERIALS.filter(m=>m.status==='live').length;
 
