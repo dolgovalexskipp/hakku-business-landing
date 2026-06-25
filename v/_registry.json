@@ -1,5 +1,14 @@
 [
   {
+    "slug": "tsifrovaya-transformatsiya-voysov",
+    "title": "Цифровая трансформация войсов",
+    "desc": "От хаоса в чатах — к системе. Plaud и диаризация, расшифровка голосовых, диктовка Wisprflow, Granola и Zoom — что подключать и как.",
+    "url": "https://business.hakku.ai/v/tsifrovaya-transformatsiya-voysov/",
+    "private": true,
+    "storage": "yc",
+    "poster": "https://storage.yandexcloud.net/video.business.hakku.ai/tsifrovaya-transformatsiya-voysov-poster.jpg"
+  },
+  {
     "slug": "kak-ustroena-baza-znaniy-soobschestva",
     "title": "Как устроена база знаний сообщества",
     "desc": "Короткий обзор: где что лежит и как искать в базе знаний бИИзнес.",

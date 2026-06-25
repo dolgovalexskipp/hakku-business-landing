@@ -36,6 +36,7 @@ for (let i = 0; i < argv.length; i++) {
   else if (a === '--title') opts.title = argv[++i];
   else if (a === '--slug') opts.slug = argv[++i];
   else if (a === '--desc') opts.desc = argv[++i];
+  else if (a === '--transcript') opts.transcript = argv[++i];
   else if (a === '--storage') opts.storage = argv[++i];
   else if (!a.startsWith('--')) src = a;
   else die(`Неизвестная опция: ${a}`);
@@ -197,6 +198,38 @@ function authProbe() {
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const pageUrl = `${SITE}/v/${slug}/`;
 
+// ---- транскрипт (опц.) ------------------------------------------------
+// Формат файла: строки "## MM:SS Заголовок" = глава (кликабельный тайм-код,
+// перематывает видео); остальные непустые строки = абзацы расшифровки.
+function parseTranscript(file) {
+  const raw = fs.readFileSync(file.replace(/^~(?=\/)/, process.env.HOME), 'utf8');
+  const toSec = ts => ts.split(':').map(Number).reduce((a, n) => a * 60 + n, 0);
+  const chapters = [];
+  let body = '';
+  for (const line of raw.split(/\r?\n/)) {
+    const t = line.trim();
+    if (!t) continue;
+    const m = t.match(/^##\s+(\d{1,2}:\d{2}(?::\d{2})?)\s+(.+)$/);
+    if (m) {
+      const sec = toSec(m[1]);
+      chapters.push({ ts: m[1], sec, title: m[2] });
+      body += `<h3 class="tr-h"><button type="button" class="tr-seek" data-t="${sec}">${esc(m[1])}</button> ${esc(m[2])}</h3>`;
+    } else {
+      body += `<p>${esc(t)}</p>`;
+    }
+  }
+  const nav = chapters.length
+    ? `<nav class="tr-nav">${chapters.map(c => `<button type="button" class="tr-seek tr-chip" data-t="${c.sec}"><span class="tr-ts">${esc(c.ts)}</span>${esc(c.title)}</button>`).join('')}</nav>`
+    : '';
+  return `
+    <section class="transcript">
+      <div class="tr-bar"><h2>Расшифровка</h2><span class="tr-note">Текстовая версия ролика — для чтения и поиска</span></div>
+      ${nav}
+      <div class="tr-body">${body}</div>
+    </section>`;
+}
+const transcriptHTML = opts.transcript ? parseTranscript(opts.transcript) : '';
+
 function buildHTML() {
   const ogVideo = opts.private ? '' : `
   <meta property="og:type" content="video.other">
@@ -290,6 +323,20 @@ function buildHTML() {
     .err{color:var(--magenta,#D51F75);font-size:13.5px;margin-top:10px}
     .hint{color:var(--ink-40,rgba(0,0,0,.4));font-size:13px;margin-top:14px}
     .hint a{color:var(--blue,#2A3EF4);text-decoration:none}
+    .transcript{margin-top:38px}
+    .tr-bar{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px;margin-bottom:16px}
+    .transcript h2{font-family:var(--font-display,Tektur,sans-serif);font-size:clamp(20px,2.6vw,26px);margin:0}
+    .tr-note{color:var(--ink-40,rgba(0,0,0,.4));font-size:13px}
+    .tr-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+    .tr-chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ink-12,rgba(0,0,0,.12));background:var(--paper,#fff);color:var(--ink-72,rgba(0,0,0,.72));border-radius:999px;padding:7px 13px;font-size:13px;line-height:1;cursor:pointer;transition:border-color .15s,color .15s}
+    .tr-chip:hover{border-color:var(--blue,#2A3EF4);color:var(--ink,#000)}
+    .tr-chip .tr-ts{font-variant-numeric:tabular-nums;font-weight:600;color:var(--blue,#2A3EF4)}
+    .tr-body{max-width:720px}
+    .tr-body p{color:var(--ink-72,rgba(0,0,0,.78));font-size:16px;line-height:1.7;margin:0 0 16px}
+    .tr-h{font-family:var(--font-display,Tektur,sans-serif);font-size:18px;line-height:1.3;margin:30px 0 12px;scroll-margin-top:20px}
+    .tr-seek{font:inherit;border:0;background:none;padding:0;cursor:pointer}
+    .tr-h .tr-seek{color:var(--blue,#2A3EF4);font-variant-numeric:tabular-nums;margin-right:6px}
+    .tr-h .tr-seek:hover{text-decoration:underline}
   </style>
 </head>
 <body>
@@ -300,12 +347,22 @@ function buildHTML() {
     <h1>${esc(opts.title)}</h1>
     ${desc ? `<p class="desc">${esc(desc)}</p>` : ''}
     <div class="stage">${videoTag}</div>
+    ${transcriptHTML}
     <div class="foot">
       <span>хакку.ии (hakku.ai) · бИИзнес — сообщество собственников бизнеса</span>
       <a href="/os/">← в базу знаний</a>
     </div>
   </div>
   ${gateScript}
+  ${transcriptHTML ? `<script>
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tr-seek'); if(!b)return;
+    var v=document.getElementById('v'); if(!v)return;
+    var t=parseFloat(b.getAttribute('data-t'))||0;
+    try{v.currentTime=t;v.play&&v.play();}catch(_){}
+    v.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  </script>` : ''}
 </body>
 </html>
 `;

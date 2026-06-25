@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ru" data-brand="b2c">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Цифровая трансформация войсов · хакку.ии бИИзнес</title>
+  <meta name="description" content="От хаоса в чатах — к системе. Plaud и диаризация, расшифровка голосовых, диктовка Wisprflow, Granola и Zoom — что подключать и как.">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <meta property="og:url" content="https://business.hakku.ai/v/tsifrovaya-transformatsiya-voysov/">
+  <meta property="og:title" content="Цифровая трансформация войсов">
+  <meta property="og:description" content="От хаоса в чатах — к системе. Plaud и диаризация, расшифровка голосовых, диктовка Wisprflow, Granola и Zoom — что подключать и как.">
+  <meta property="og:image" content="https://storage.yandexcloud.net/video.business.hakku.ai/tsifrovaya-transformatsiya-voysov-og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:image" content="https://storage.yandexcloud.net/video.business.hakku.ai/tsifrovaya-transformatsiya-voysov-og.png">
+  <meta property="og:site_name" content="хакку.ии | бИИзнес">
+  <meta property="og:locale" content="ru_RU">
+  <link rel="stylesheet" href="/design_system/colors_and_type.css">
+  <style>
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--paper,#fff);color:var(--ink,#000);font-family:var(--font-body,Inter,system-ui,sans-serif);-webkit-font-smoothing:antialiased}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 20px 60px}
+    .top{display:flex;align-items:center;gap:10px;margin-bottom:22px}
+    .top .mark{font-family:var(--font-display,Tektur,sans-serif);font-weight:700;letter-spacing:.02em;font-size:18px}
+    .top .sep{color:var(--ink-40,rgba(0,0,0,.4))}
+    .top .muted{color:var(--ink-55,rgba(0,0,0,.55))}
+    .eyebrow{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-40,rgba(0,0,0,.4));margin-bottom:10px}
+    h1{font-family:var(--font-display,Tektur,sans-serif);font-size:clamp(24px,3.4vw,38px);line-height:1.12;margin:0 0 10px}
+    .desc{color:var(--ink-72,rgba(0,0,0,.72));max-width:680px;font-size:16px;line-height:1.55;margin:0 0 22px}
+    .stage{border:1px solid var(--ink-12,rgba(0,0,0,.12));border-radius:16px;overflow:hidden;background:#000;box-shadow:0 18px 50px rgba(0,0,0,.14)}
+    video{display:block;width:100%;height:auto;background:#000;aspect-ratio:1664/1080}
+    .foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-top:18px;padding-top:16px;border-top:1px solid var(--ink-08,rgba(0,0,0,.08));color:var(--ink-40,rgba(0,0,0,.4));font-size:13.5px}
+    .foot a{color:var(--blue,#2A3EF4);text-decoration:none;font-weight:500}
+    .gate{position:fixed;inset:0;background:var(--paper,#fff);display:flex;align-items:center;justify-content:center;padding:24px;z-index:10}
+    .gate-card{width:100%;max-width:420px;border:1px solid var(--ink-12,rgba(0,0,0,.12));border-radius:18px;padding:30px;background:var(--paper,#fff);box-shadow:0 18px 50px rgba(0,0,0,.08)}
+    .gate-card h2{font-family:var(--font-display,Tektur,sans-serif);font-size:26px;margin:0 0 8px}
+    .gate-card p{color:var(--ink-55,rgba(0,0,0,.55));font-size:14.5px;line-height:1.5;margin:0 0 18px}
+    .gate-card input{width:100%;height:48px;border:1px solid var(--ink-12,rgba(0,0,0,.12));background:var(--paper,#fff);color:var(--ink,#000);border-radius:11px;padding:0 14px;font-size:15px;outline:none}
+    .gate-card input:focus{border-color:var(--blue,#2A3EF4)}
+    .gate-card button{width:100%;height:48px;margin-top:12px;border:0;border-radius:11px;background:var(--ink,#000);color:#fff;font-size:15px;font-weight:600;cursor:pointer}
+    .err{color:var(--magenta,#D51F75);font-size:13.5px;margin-top:10px}
+    .hint{color:var(--ink-40,rgba(0,0,0,.4));font-size:13px;margin-top:14px}
+    .hint a{color:var(--blue,#2A3EF4);text-decoration:none}
+    .transcript{margin-top:38px}
+    .tr-bar{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px;margin-bottom:16px}
+    .transcript h2{font-family:var(--font-display,Tektur,sans-serif);font-size:clamp(20px,2.6vw,26px);margin:0}
+    .tr-note{color:var(--ink-40,rgba(0,0,0,.4));font-size:13px}
+    .tr-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+    .tr-chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ink-12,rgba(0,0,0,.12));background:var(--paper,#fff);color:var(--ink-72,rgba(0,0,0,.72));border-radius:999px;padding:7px 13px;font-size:13px;line-height:1;cursor:pointer;transition:border-color .15s,color .15s}
+    .tr-chip:hover{border-color:var(--blue,#2A3EF4);color:var(--ink,#000)}
+    .tr-chip .tr-ts{font-variant-numeric:tabular-nums;font-weight:600;color:var(--blue,#2A3EF4)}
+    .tr-body{max-width:720px}
+    .tr-body p{color:var(--ink-72,rgba(0,0,0,.78));font-size:16px;line-height:1.7;margin:0 0 16px}
+    .tr-h{font-family:var(--font-display,Tektur,sans-serif);font-size:18px;line-height:1.3;margin:30px 0 12px;scroll-margin-top:20px}
+    .tr-seek{font:inherit;border:0;background:none;padding:0;cursor:pointer}
+    .tr-h .tr-seek{color:var(--blue,#2A3EF4);font-variant-numeric:tabular-nums;margin-right:6px}
+    .tr-h .tr-seek:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  
+    <form id="gate" class="gate" onsubmit="return submitGate(event)" style="display:none">
+      <div class="gate-card">
+        <div class="eyebrow">Закрытая среда · по приглашению</div>
+        <h2>Разбор для участников бИИзнес</h2>
+        <p>Введите код доступа из чата сообщества, чтобы открыть видео.</p>
+        <input id="pw" type="password" placeholder="Код доступа из чата" autocomplete="off" autofocus>
+        <button type="submit">Открыть →</button>
+        <div id="err" class="err" style="display:none">Код не подошёл. Проверьте раскладку.</div>
+        <div class="hint">Нет доступа? <a href="https://t.me/hakkuai_business_bot" target="_blank" rel="noopener">@hakkuai_business_bot</a></div>
+      </div>
+    </form>
+  <div class="wrap" id="stage" style="display:none">
+    <div class="top"><span class="mark">хакку.ии</span><span class="sep">·</span><span class="muted">бИИзнес</span></div>
+    <div class="eyebrow">Loom-разбор</div>
+    <h1>Цифровая трансформация войсов</h1>
+    <p class="desc">От хаоса в чатах — к системе. Plaud и диаризация, расшифровка голосовых, диктовка Wisprflow, Granola и Zoom — что подключать и как.</p>
+    <div class="stage"><video id="v" controls playsinline preload="none" poster="https://storage.yandexcloud.net/video.business.hakku.ai/tsifrovaya-transformatsiya-voysov-poster.jpg"></video></div>
+    
+    <section class="transcript">
+      <div class="tr-bar"><h2>Расшифровка</h2><span class="tr-note">Текстовая версия ролика — для чтения и поиска</span></div>
+      <nav class="tr-nav"><button type="button" class="tr-seek tr-chip" data-t="0"><span class="tr-ts">00:00</span>Вступление: что такое цифровая трансформация войсов</button><button type="button" class="tr-seek tr-chip" data-t="63"><span class="tr-ts">01:03</span>Plaud — диктофон с диаризацией + подключение через MCP к Claude Code</button><button type="button" class="tr-seek tr-chip" data-t="252"><span class="tr-ts">04:12</span>Расшифровка голосовых: бот Founder OS (локальный Whisper V3 Large + Gemini)</button><button type="button" class="tr-seek tr-chip" data-t="294"><span class="tr-ts">04:54</span>MacWhisper: локальная расшифровка и сравнение нормализации</button><button type="button" class="tr-seek tr-chip" data-t="469"><span class="tr-ts">07:49</span>Диктовка: почему встроенная плохая — и Wisprflow</button><button type="button" class="tr-seek tr-chip" data-t="723"><span class="tr-ts">12:03</span>Granola — заметки по встречам без бота</button><button type="button" class="tr-seek tr-chip" data-t="854"><span class="tr-ts">14:14</span>Zoom: кастомный коннектор вместо встроенной транскрипции</button></nav>
+      <div class="tr-body"><h3 class="tr-h"><button type="button" class="tr-seek" data-t="0">00:00</button> Вступление: что такое цифровая трансформация войсов</h3><p>Всем привет, с вами Саша, один из основателей сообщества хакку.ии для бизнеса. Сегодня тема живая, которую мы ещё не записывали, — цифровая трансформация войсов. Всё, что связано с голосовыми сообщениями, транскрибацией встреч, записью и последующей расшифровкой. Тема обширная, поэтому покажу базовые вещи: что и как подключается.</p><h3 class="tr-h"><button type="button" class="tr-seek" data-t="63">01:03</button> Plaud — диктофон с диаризацией + подключение через MCP к Claude Code</h3><p>Начнём с физического мира. Если вы участвуете в совещаниях, где нужно записывать встречи, а потом подключать своих ИИ-ассистентов к расшифровке и постановке задач по итогам, — здесь есть нюансы. По сути это диктофон плюс коннектор к вашему ИИ.</p><p>Проще всего — через устройство Plaud: это диктофон и диаризатор в одном. Диаризация — это разделение по спикерам: система понимает речь спикера 1 и спикера 2, разделяет дорожки и потом скармливает их в ИИ.</p><p>Подключается просто. Нужен кастомный коннектор в Claude Code: открываете Claude Code → настройки → коннекторы → Customize → «+» → Add Custom Connector. Добавляете официальный Remote MCP Plaud, называете его, скажем, «Plaud MCP», жмёте Add — дальше он пробрасывает вас на страницу авторизации.</p><p>Как альтернатива — через терминал: открываете документацию Plaud, копируете строку установки, запускаете в терминале. Он спросит, куда подключить (Claude Desktop, Claude Code), отвечаете Y/N. На «Login in Claude now, open browser?» отвечаете Y — открывается официальная авторизация Plaud. То же самое работает с Codex (если используете GPT-модели) и с другими нейро-средами — Antigravity, Perplexity.</p><h3 class="tr-h"><button type="button" class="tr-seek" data-t="252">04:12</button> Расшифровка голосовых: бот Founder OS (локальный Whisper V3 Large + Gemini)</h3><p>У меня установлен полный набор инструментов. Покажу на примере распознавания войсов. Представьте: вам присылают голосовые сообщения, либо вы записываете их сами. Я сделал коннектор, который распознаёт речь в голосовом, делает транскрибацию и затем — саммари сообщения.</p><p>Лидер нашего сообщества Настя прислала голосовое — я пересылаю его в своего Telegram-бота «Founder OS» (это бот с моей операционной системой). Сообщение начинает расшифровываться. Так же можно расшифровывать и видеокружки — от коллег-зумеров, если они у вас есть.</p><p>Технология: в боте стоит локальная модель Whisper V3 Large — она ничего не отправляет в облако, всё происходит на моём компьютере. А саммаризацию и нормализацию делает модель Gemini 2.5 Flash от Google. Я сам занимаюсь голосовыми агентами и большой фанат этой модели — связка работает очень круто: если вам неудобно слушать чужие голосовые, вы просто пересылаете их и получаете чистый текст.</p><h3 class="tr-h"><button type="button" class="tr-seek" data-t="294">04:54</button> MacWhisper: локальная расшифровка и сравнение нормализации</h3><p>То же самое умеет программа MacWhisper (для Mac; на Windows есть аналоги). Загружаете аудиофайл — она расшифровывает локально, в реальном времени. Тоже локальная модель.</p><p>Сравним. MacWhisper выдаёт сплошную «простыню» — вроде всё то же самое. Но в моём боте структура значительно чище за счёт нормализации. Пример: Настя в войсе говорит «last but not least» — MacWhisper передаёт это коряво, а нормализованная версия выдаёт чисто и структурно, плюс даёт саммари. Достигается это локальной моделью Whisper V3 Large, синхронизированной с ботом, и нормализацией через Gemini.</p><h3 class="tr-h"><button type="button" class="tr-seek" data-t="469">07:49</button> Диктовка: почему встроенная плохая — и Wisprflow</h3><p>Ещё одна сильно недооценённая штука — диктовка (dictation). Если диктовать через встроенную системную диктовку прямо в среде (например, в Claude Code или в десктопном Claude), качество будет так себе — сами увидите.</p><p>Для этого есть отдельный инструмент: для Mac (и для Windows) — Wisprflow (Whisper Flow). Зажимаю горячие клавиши и диктую — причём даже в терминале, который ещё менее «нативен» для диктовки. Вы видите, как прямо в моменте сохраняется надиктованный текст: распознаёт очень точно, потом можно дочистить — и отправлять команду. Wisprflow — эффективный инструмент, когда нужно наговорить текст голосом в средах, где это обычно не принято (тот же терминал).</p><h3 class="tr-h"><button type="button" class="tr-seek" data-t="723">12:03</button> Granola — заметки по встречам без бота</h3><p>Последняя классная штука — Granola App (Mac). Минус один: стоит денег (около 14 $/мес), хотя ходят слухи о возможном open-source. Granola коннектится к вашему календарю и видит встречи. Главное отличие — работает без бота в звонке: вы начинаете встречу, и она сразу пишет, что происходит, а затем буквально в реальном времени выдаёт очень качественное summary — после нажатия «Generate notes» она анализирует транскрипт и структурирует заметки. Похоже на магию. По сути это аналог Plaud, но для любых онлайн-встреч.</p><h3 class="tr-h"><button type="button" class="tr-seek" data-t="854">14:14</button> Zoom: кастомный коннектор вместо встроенной транскрипции</h3><p>Альтернатива ботам (MyMeet и подобным) — коннектор внутри Zoom. У меня написан кастомный коннектор: он записывает встречу, транскрибирует её не транскриптом Zoom, а моделью Whisper, дальше нормализует через Gemini и отдаёт мне расшифровку, транскрибацию и summary целиком. Я почти никогда не использую готовое summary от ботов, хотя оно неплохое: беру сырой транскрипт и прогоняю его через свои правила нормализации.</p><p>Тема реально обширная — сегодня успел рассказать самые базовые вещи, дальше будем её постоянно раскрывать и донастраивать. Материал появится в базе знаний — переходите, смотрите, комментируйте. Надеюсь, будет полезно. Спасибо, хорошего вечера!</p></div>
+    </section>
+    <div class="foot">
+      <span>хакку.ии (hakku.ai) · бИИзнес — сообщество собственников бизнеса</span>
+      <a href="/os/">← в базу знаний</a>
+    </div>
+  </div>
+  
+  <script>
+  const AUTH_PROBE = { "salt":"ULERfbQ7eP7hM5rcJs2SRA==", "iv":"dmM/z52LaNMJQvFE", "ct":"hszrx7qxp71upJ2qnSwKX1UZxs/+MJupR7Yb" };
+  const VIDEO_URL = "https://storage.yandexcloud.net/video.business.hakku.ai/tsifrovaya-transformatsiya-voysov.mp4";
+  function _b64(s){var b=atob(s),o=new Uint8Array(b.length);for(var i=0;i<b.length;i++)o[i]=b.charCodeAt(i);return o;}
+  async function verify(pwd){if(!pwd)return false;try{var e=new TextEncoder();var km=await crypto.subtle.importKey('raw',e.encode(pwd),'PBKDF2',false,['deriveKey']);var k=await crypto.subtle.deriveKey({name:'PBKDF2',salt:_b64(AUTH_PROBE.salt),iterations:100000,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);var buf=await crypto.subtle.decrypt({name:'AES-GCM',iv:_b64(AUTH_PROBE.iv)},k,_b64(AUTH_PROBE.ct));return new TextDecoder().decode(buf)==='hakku-os-ok';}catch(e){return false;}}
+  function reveal(){var v=document.getElementById('v');v.src=VIDEO_URL;document.getElementById('gate').style.display='none';document.getElementById('stage').style.display='block';}
+  (async()=>{try{var pw=localStorage.getItem('hakku_os_pw');if(pw&&await verify(pw)){reveal();return;}}catch(e){}document.getElementById('gate').style.display='flex';})();
+  async function submitGate(e){e.preventDefault();var i=document.getElementById('pw'),err=document.getElementById('err');var ok=await verify(i.value);if(ok){try{localStorage.setItem('hakku_os_pw',i.value);localStorage.setItem('hakku_os_authed','1');}catch(e){}reveal();}else{err.style.display='block';}return false;}
+  </script>
+  <script>
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.tr-seek'); if(!b)return;
+    var v=document.getElementById('v'); if(!v)return;
+    var t=parseFloat(b.getAttribute('data-t'))||0;
+    try{v.currentTime=t;v.play&&v.play();}catch(_){}
+    v.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  </script>
+</body>
+</html>
