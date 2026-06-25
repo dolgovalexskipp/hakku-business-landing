@@ -70,6 +70,13 @@ const Program = () => {
           <span style={{ width: 22, height: 3, background: 'var(--grad-cool, linear-gradient(90deg,#2A3EF4,#D51F75))' }}/>
           Стартуем 8 июня. Каждую неделю — новый материал. Каждый месяц — новый ИИ-сотрудник.
         </div>
+
+        <a href="/programma-iyulya/" style={{ marginTop: 22, display: 'inline-flex', alignItems: 'center', gap: 10, padding: '13px 22px', borderRadius: 999, border: '1px solid rgba(0,0,0,.18)', background: '#fff', color: '#000', fontFamily: 'Inter, sans-serif', fontSize: 14.5, fontWeight: 500, textDecoration: 'none', alignSelf: 'flex-start' }}
+          onMouseOver={(e) => { e.currentTarget.style.borderColor = '#000'; }}
+          onMouseOut={(e) => { e.currentTarget.style.borderColor = 'rgba(0,0,0,.18)'; }}>
+          <span>Смотреть программу на июль</span>
+          <span style={{ fontSize: 16 }}>→</span>
+        </a>
       </div>
     </section>
   );

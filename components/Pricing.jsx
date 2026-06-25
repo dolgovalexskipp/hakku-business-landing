@@ -6,14 +6,20 @@ const Pricing = () => {
       name: 'ПРО', regular: 4900, intro: 3900,
       users: 'Только собственник',
       desc: 'Полный доступ к сообществу для вас одного. Определите, где в вашем бизнесе ИИ даст прибыль, и запустите первый инструмент лично.',
-      avatars: [{ initials: 'И-1' }, { initials: 'И-2' }],
+      avatars: [
+        { name: 'Ольга', photo: 'assets/members/olga.jpg' },
+        { name: 'Николай', photo: 'assets/members/nikolay.jpg' },
+        { name: 'Андрей', photo: 'assets/members/andrey.jpg' },
+      ],
     },
     {
       name: 'МАКС', regular: 7900, intro: 5900,
       users: 'Собственник + 1 ответственный за ИИ',
       desc: 'Вы и человек, который будет вести ИИ-трансформацию изнутри компании. Соберите первый инструмент под одну функцию с измеримым ростом денег.',
       popular: true,
-      avatars: [{ initials: 'А-1' }, { initials: 'А-2' }, { initials: 'А-3' }],
+      avatars: [
+        { name: 'Егор', photo: 'assets/members/egor.jpg' },
+      ],
     },
     {
       name: 'Компания', regular: null, intro: null,
@@ -26,13 +32,13 @@ const Pricing = () => {
 
   const Avatar = ({ a, popular }) => (
     <div style={{
-      width: 32, height: 32, borderRadius: '50%',
+      width: 36, height: 36, borderRadius: '50%', overflow: 'hidden',
       background: popular ? 'rgba(255,255,255,.12)' : 'rgba(0,0,0,.06)',
-      border: `1px solid ${popular ? 'rgba(255,255,255,.25)' : 'rgba(0,0,0,.15)'}`,
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-      fontFamily: 'Tektur, sans-serif', fontSize: 11,
-      color: popular ? 'rgba(255,255,255,.85)' : 'rgba(0,0,0,.55)',
-    }}>{a.initials}</div>
+      border: `2px solid ${popular ? '#000' : '#fff'}`,
+      boxShadow: `0 0 0 1px ${popular ? 'rgba(255,255,255,.28)' : 'rgba(0,0,0,.14)'}`,
+    }}>
+      <img src={a.photo} alt={a.name} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}/>
+    </div>
   );
 
   return (
@@ -105,10 +111,12 @@ const Pricing = () => {
                 <p style={{ fontSize: 14, color: popular ? 'rgba(255,255,255,.78)' : 'rgba(0,0,0,.7)', lineHeight: 1.55, margin: 0 }}>{t.desc}</p>
                 {t.avatars.length > 0 ? (
                   <div style={{ marginTop: 'auto', paddingTop: 18, borderTop: `1px solid ${popular ? 'rgba(255,255,255,.15)' : 'rgba(0,0,0,.08)'}` }}>
-                    <div style={{ fontSize: 11, color: popular ? 'rgba(255,255,255,.55)' : 'rgba(0,0,0,.5)', letterSpacing: '0.06em', marginBottom: 10, textTransform: 'uppercase' }}>На этом тарифе</div>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
-                      {t.avatars.map((a, i) => (<div key={i} style={{ marginLeft: i === 0 ? 0 : -8 }}><Avatar a={a} popular={popular}/></div>))}
-                      {t.avatars.length >= 3 && <span style={{ marginLeft: 10, fontSize: 12, color: popular ? 'rgba(255,255,255,.55)' : 'rgba(0,0,0,.45)' }}>и другие</span>}
+                    <div style={{ fontSize: 11, color: popular ? 'rgba(255,255,255,.55)' : 'rgba(0,0,0,.5)', letterSpacing: '0.06em', marginBottom: 10, textTransform: 'uppercase' }}>Уже на этом тарифе</div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 11, flexWrap: 'wrap' }}>
+                      <div style={{ display: 'flex' }}>
+                        {t.avatars.map((a, i) => (<div key={i} style={{ marginLeft: i === 0 ? 0 : -9 }}><Avatar a={a} popular={popular}/></div>))}
+                      </div>
+                      <span style={{ fontSize: 12.5, color: popular ? 'rgba(255,255,255,.7)' : 'rgba(0,0,0,.62)', lineHeight: 1.3 }}>{t.avatars.map((a) => a.name).join(', ')}</span>
                     </div>
                   </div>
                 ) : <div style={{ marginTop: 'auto' }}/>}

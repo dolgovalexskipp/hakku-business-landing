@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ru" data-brand="b2c">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Программа июля · бИИзнес</title>
+  <meta name="description" content="Программа сообщества хакку.ии | бИИзнес на июль 2026: операционное управление с ИИ. По две вещи в неделю — гайды, видео-разборы и вебинар с Q&A.">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="stylesheet" href="/design_system/colors_and_type.css">
+  <style>
+    body { background: var(--paper); color: var(--ink); margin: 0; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 28px; }
+    .mat-nav {
+      position: sticky; top: 0; z-index: 40;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 16px 28px; background: rgba(255,255,255,.9);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--ink-08);
+    }
+    .wm { font-family: var(--font-display); font-size: 18px; letter-spacing: -0.02em; display: inline-flex; align-items: center; gap: 9px; color: var(--ink); }
+    .wm .sep { color: var(--ink-40); }
+    .back { font-size: 13px; color: var(--ink-55); transition: color .15s; text-decoration: none; }
+    .back:hover { color: var(--ink); }
+
+    .hero { padding: 64px 0 40px; }
+    .eyebrow-line { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+    .eyebrow-line .bar { width: 22px; height: 3px; background: var(--grad-full, linear-gradient(90deg,#2A3EF4,#D51F75)); border-radius: 2px; }
+    .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-55); }
+    h1.ttl { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.2rem, 5.4vw, 3.8rem); line-height: 1.05; letter-spacing: -0.02em; color: var(--ink); margin: 0 0 22px; max-width: 880px; }
+    .lede { font-size: 18px; line-height: 1.6; color: var(--ink-72); max-width: 760px; margin: 0; }
+
+    .weeks { display: flex; flex-direction: column; gap: 16px; padding-bottom: 8px; }
+    .week { display: grid; grid-template-columns: 180px 1fr 1fr; gap: 14px; align-items: start; }
+    .wlabel { padding-top: 6px; }
+    .wlabel .wn { font-family: var(--font-display); font-size: 19px; color: var(--ink); letter-spacing: -0.01em; }
+    .wlabel .wd { font-size: 13px; color: var(--ink-50, rgba(0,0,0,.5)); margin-top: 2px; }
+    .card { background: #fff; border: 1px solid var(--ink-12); border-radius: 18px; padding: 22px 24px 24px; display: flex; flex-direction: column; gap: 10px; min-height: 150px; transition: transform .25s cubic-bezier(.2,.8,.2,1), border-color .25s; }
+    .card:hover { transform: translateY(-3px); border-color: var(--ink-40); }
+    .badge { display: inline-flex; align-self: flex-start; font-family: var(--font-body); font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-72); background: var(--ink-04); border: 1px solid var(--ink-08); border-radius: 999px; padding: 5px 11px; }
+    .badge.video { color: #2A3EF4; }
+    .badge.web { color: #D51F75; }
+    .card h3 { font-family: var(--font-display); font-weight: 400; font-size: 20px; line-height: 1.15; letter-spacing: -0.01em; margin: 0; color: var(--ink); }
+    .card p { font-size: 14px; color: var(--ink-72); line-height: 1.55; margin: 0; }
+
+    .deadline { margin: 30px 0 0; display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--ink-60, rgba(0,0,0,.6)); flex-wrap: wrap; }
+    .deadline .bar { width: 22px; height: 3px; background: var(--grad-cool, linear-gradient(90deg,#2A3EF4,#D51F75)); }
+
+    .cta { margin: 56px 0 72px; }
+    .cta .box { background: #000; color: #fff; border-radius: 24px; padding: clamp(32px,5vw,52px); }
+    .cta .k { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: 16px; }
+    .cta h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.7rem,3.6vw,2.5rem); line-height: 1.12; letter-spacing: -.02em; margin: 0 0 16px; max-width: 640px; }
+    .cta p { font-size: 16.5px; line-height: 1.62; color: rgba(255,255,255,.74); margin: 0 0 28px; max-width: 640px; }
+    .cta .row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+    .cta .btn { display: inline-flex; align-items: center; gap: 9px; background: #fff; color: #000; font-weight: 600; font-size: 15px; padding: 15px 26px; border-radius: 999px; text-decoration: none; }
+    .cta .lnk { display: inline-flex; align-items: center; color: #fff; font-size: 14.5px; border-bottom: 1px solid rgba(255,255,255,.35); padding-bottom: 2px; text-decoration: none; }
+    .pgfoot { padding: 28px; text-align: center; font-size: 13px; color: var(--ink-50, rgba(0,0,0,.5)); border-top: 1px solid var(--ink-08); }
+
+    @media (max-width: 860px) {
+      .week { grid-template-columns: 1fr; }
+      .wlabel { padding-top: 0; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="mat-nav">
+    <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+      <svg width="24" height="20" viewBox="0 0 75.947 63.746" fill="#000">
+        <g transform="translate(52.456,1.459)"><path d="M 12.389 59.989 L 23.491 48.887 C 18.463 43.859 15.701 37.15 15.701 29.994 C 15.701 22.822 18.463 16.113 23.491 11.102 L 12.389 0 C 4.41 7.979 0 18.635 0 29.994 C 0 41.354 4.393 52.01 12.389 59.989 Z"/></g>
+        <g transform="translate(0,21.328)"><path fill-rule="evenodd" d="M 42.418 0 L 42.418 0.001 L 48.578 0.001 L 48.578 15.702 L 39.403 15.702 C 33.149 31.34 17.844 42.418 0 42.418 L 0 26.718 C 14.723 26.718 26.717 14.74 26.717 0 L 42.418 0 Z"/></g>
+        <g transform="translate(26.734,0)"><path d="M 7.859 15.718 C 12.199 15.718 15.718 12.199 15.718 7.859 C 15.718 3.519 12.199 0 7.859 0 C 3.519 0 0 3.519 0 7.859 C 0 12.199 3.519 15.718 7.859 15.718 Z"/></g>
+      </svg>
+      <span class="wm"><span>хакку.ии</span><span class="sep">|</span><span>б<span style="color:#D51F75">ИИ</span>знес</span></span>
+    </a>
+    <a href="/" class="back">← на сайт сообщества</a>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Программа · июль 2026</span></div>
+      <h1 class="ttl">Июль: как перестать быть узким местом своей компании.</h1>
+      <p class="lede">Тема месяца — операционное управление с ИИ. По две вещи в неделю: гайды, видео-разборы и вебинар с Q&amp;A. Собственник по очереди отдаёт ИИ три роли — делать рутину, проверять и видеть картину.</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap">
+      <div class="weeks">
+
+        <div class="week">
+          <div class="wlabel"><div class="wn">Неделя 1</div><div class="wd">1–7 июля</div></div>
+          <div class="card">
+            <span class="badge">Гайд</span>
+            <h3>Каталог ИИ-сотрудников</h3>
+            <p>Кого из ИИ-сотрудников можно собрать уже в июле: ассистент собственника, финаналитик, документовед, ассистент бухгалтерии и продаж — карточками «боль → кейс → решение».</p>
+          </div>
+          <div class="card">
+            <span class="badge">Гайд</span>
+            <h3>Промпт-аудитор решений</h3>
+            <p>Какие решения вы держите на себе зря. ИИ выкладывает их списком и по каждому советует: закодировать в правило, отдать ассистенту или оставить за вами.</p>
+          </div>
+        </div>
+
+        <div class="week">
+          <div class="wlabel"><div class="wn">Неделя 2</div><div class="wd">8–14 июля</div></div>
+          <div class="card">
+            <span class="badge video">Видео-разбор</span>
+            <h3>Персональный ассистент собственника</h3>
+            <p>От диктофона до повестки: как перестать тонуть во встречах и держать решения не в голове, а в системе.</p>
+          </div>
+          <div class="card">
+            <span class="badge">Гайд</span>
+            <h3>Регламент за 20 минут</h3>
+            <p>Найм, согласование бюджета, ответы клиентам. Не просто текст регламента, а правило, которое исполняет ассистент — иначе собственник снова узкое место.</p>
+          </div>
+        </div>
+
+        <div class="week">
+          <div class="wlabel"><div class="wn">Неделя 3</div><div class="wd">15–21 июля</div></div>
+          <div class="card">
+            <span class="badge video">Видео-разбор</span>
+            <h3>ИИ — это отдел, а не кнопка</h3>
+            <p>Разведчик → проектировщик → контролёр. Независимый контролёр ловит дыры до исполнения — и вы перестаёте быть единственным, кто всё проверяет.</p>
+          </div>
+          <div class="card">
+            <span class="badge video">Видео-разбор</span>
+            <h3>Где ИИ врёт</h3>
+            <p>Живая демонстрация: один каверзный вопрос трём ИИ — и как не попасться. Перекрёстная сверка двумя моделями как защита.</p>
+          </div>
+        </div>
+
+        <div class="week">
+          <div class="wlabel"><div class="wn">Неделя 4</div><div class="wd">22–28 июля</div></div>
+          <div class="card">
+            <span class="badge web">Вебинар + Q&amp;A</span>
+            <h3>Оперативка без созвонов</h3>
+            <p>Как собственник видит компанию — кассу, маржу, статус — в реальном времени, без бесконечных созвонов. Разбор кейсов участников вживую + 30 минут вопросов. Запись и AI-саммари.</p>
+          </div>
+          <div class="card">
+            <span class="badge">Гайд</span>
+            <h3>ОС компании на одной странице</h3>
+            <p>Шаблон + пример: как компания работает каждый день без собственника в каждом решении.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="deadline">
+        <span class="bar"></span>
+        Ранний доступ закрывается 16 июля — после этого тарифы фиксируются по обычной цене.
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <div class="box">
+        <div class="k">Сообщество хакку.ии · бИИзнес</div>
+        <h2>Получить всю программу июля — внутри сообщества.</h2>
+        <p>Разборы реальных внедрений, новый ИИ-сотрудник каждый месяц, закрытый чат собственников малого и среднего бизнеса и еженедельные созвоны с командой хакку. Шаблоны и промпты остаются у вас навсегда.</p>
+        <div class="row">
+          <a href="https://t.me/hakkuai_business_bot" class="btn">Вступить в сообщество →</a>
+          <a href="/#pricing" class="lnk">Тарифы и условия</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="pgfoot">хакку.ии · бИИзнес · программа обновляется каждый месяц</footer>
+</body>
+</html>
