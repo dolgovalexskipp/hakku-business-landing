@@ -72,7 +72,7 @@ const Pricing = () => {
 
         <div style={{ marginBottom: 28, fontSize: 13, color: 'rgba(0,0,0,.55)', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '7px 13px', borderRadius: 4, background: '#FD7202', color: '#fff', fontSize: 11, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Ранний тариф</span>
-          <span>Сниженная цена для всех, кто подпишется до 16 июля — первого месяца жизни сообщества.</span>
+          <span>Сниженная цена для всех, кто подпишется до 8 июля — первого месяца жизни сообщества.</span>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16 }} className="grid-3">
@@ -94,7 +94,7 @@ const Pricing = () => {
                 <div style={{ minHeight: 96 }}>
                   {t.regular !== null ? (
                     <>
-                      {!annual && <div style={{ fontSize: 11, color: popular ? '#FCBC60' : '#FD7202', letterSpacing: '0.06em', marginBottom: 4, textTransform: 'uppercase' }}>ранний тариф · до 16 июля</div>}
+                      {!annual && <div style={{ fontSize: 11, color: popular ? '#FCBC60' : '#FD7202', letterSpacing: '0.06em', marginBottom: 4, textTransform: 'uppercase' }}>ранний тариф · до 8 июля</div>}
                       <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
                         <div className="numeral" style={{ fontSize: 40 }}>{fmt(introPrice)} ₽</div>
                         {!annual && <div style={{ fontSize: 14, color: popular ? 'rgba(255,255,255,.5)' : 'rgba(0,0,0,.4)', textDecoration: 'line-through' }}>{fmt(t.regular)} ₽</div>}
