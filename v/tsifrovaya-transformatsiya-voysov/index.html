@@ -1,4 +1,6 @@
 <!doctype html>
+<!-- РУЧНАЯ КАСТОМИЗАЦИЯ: видео (cap-publish) + обезличенный разбор из becker-transkribatsiya.
+     НЕ перегенерировать через cap-publish.mjs — затрёт тело материала. -->
 <html lang="ru" data-brand="b2c">
 <head>
   <meta charset="utf-8">
@@ -56,6 +58,72 @@
     .tr-seek{font:inherit;border:0;background:none;padding:0;cursor:pointer}
     .tr-h .tr-seek{color:var(--blue,#2A3EF4);font-variant-numeric:tabular-nums;margin-right:6px}
     .tr-h .tr-seek:hover{text-decoration:underline}
+
+    /* ——— разбор (тело материала) ——— */
+    .material{max-width:880px;margin:6px auto 0}
+    .material .eyebrow-line{display:inline-flex;align-items:center;gap:10px;margin-bottom:14px}
+    .material .eyebrow-line .bar{width:22px;height:3px;background:var(--grad-full,linear-gradient(90deg,#2A3EF4,#D51F75,#FD7202));border-radius:2px}
+    section.blk{padding:48px 0;border-top:1px solid var(--ink-08,rgba(0,0,0,.08))}
+    .mat-h2{font-family:var(--font-display,Tektur,sans-serif);font-weight:400;font-size:clamp(1.7rem,3.4vw,2.3rem);line-height:1.12;letter-spacing:-.02em;color:var(--ink,#000);margin:0 0 18px}
+    .mat-p{font-size:16.5px;line-height:1.68;color:var(--ink-72,rgba(0,0,0,.72));margin:0 0 16px;max-width:720px}
+    .mat-p b{color:var(--ink,#000);font-weight:600}
+    .ic{font-family:var(--font-mono,ui-monospace,monospace);font-size:13.5px;background:var(--ink-04,rgba(0,0,0,.04));border:1px solid var(--ink-08,rgba(0,0,0,.08));border-radius:5px;padding:1px 6px;color:var(--ink,#000)}
+    .note{font-size:13.5px;color:var(--ink-55,rgba(0,0,0,.55));line-height:1.55}
+    .flow{display:grid;gap:0;margin-top:8px}
+    .fstep{display:grid;grid-template-columns:40px 1fr;gap:16px;align-items:start;padding:18px 0;border-top:1px solid var(--ink-08,rgba(0,0,0,.08))}
+    .fstep:first-child{border-top:0}
+    .fstep .fn{font-family:var(--font-display,Tektur,sans-serif);font-size:17px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--ink-04,rgba(0,0,0,.04));border:1px solid var(--ink-12,rgba(0,0,0,.12))}
+    .fstep .ft h4{font-family:var(--font-display,Tektur,sans-serif);font-weight:400;font-size:17px;margin:6px 0 6px;letter-spacing:-.01em}
+    .fstep .ft p{font-size:15px;line-height:1.55;color:var(--ink-72,rgba(0,0,0,.72));margin:0}
+    .matrix{border:1px solid var(--ink-12,rgba(0,0,0,.12));border-radius:16px;overflow:hidden;margin-top:8px}
+    .mrow{display:grid;grid-template-columns:1.5fr .85fr .8fr 1fr 1fr 1.1fr;border-top:1px solid var(--ink-08,rgba(0,0,0,.08))}
+    .mrow:first-child{border-top:0}
+    .mrow.head{background:var(--ash,rgba(0,0,0,.03))}
+    .mrow.section-row{background:rgba(42,62,244,.04)}
+    .mrow.section-row .mcell{font-family:var(--font-mono,monospace);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--blue,#2A3EF4);font-weight:600;grid-column:1/-1}
+    .mcell{padding:12px 13px;font-size:13px;line-height:1.4;color:var(--ink-72,rgba(0,0,0,.72))}
+    .mrow.head .mcell{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-55,rgba(0,0,0,.55));font-weight:600}
+    .mcell.svc{color:var(--ink,#000);font-weight:600}
+    .mcell.svc small{display:block;font-weight:400;color:var(--ink-55,rgba(0,0,0,.55));font-size:11.5px;margin-top:2px}
+    .pill{display:inline-flex;font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px}
+    .pill.ru{color:var(--magenta,#D51F75);background:rgba(213,31,117,.10)}
+    .pill.no{color:var(--ink-40,rgba(0,0,0,.4));background:var(--ink-04,rgba(0,0,0,.04))}
+    .pill.yes{color:#1b7a43;background:rgba(27,122,67,.10)}
+    .pill.warn{color:#b15c00;background:rgba(253,114,2,.12)}
+    .triad{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+    .ccard{border:1px solid var(--ink-12,rgba(0,0,0,.12));border-radius:18px;padding:22px 22px;background:#fff}
+    .ccard .num{font-family:var(--font-display,Tektur,sans-serif);font-size:19px;color:var(--blue,#2A3EF4)}
+    .ccard h3{font-family:var(--font-display,Tektur,sans-serif);font-weight:400;font-size:20px;line-height:1.15;letter-spacing:-.01em;margin:8px 0 8px}
+    .ccard p{font-size:14.5px;line-height:1.55;color:var(--ink-72,rgba(0,0,0,.72));margin:0}
+    .tip{margin-top:14px;padding:16px 18px;border-left:3px solid var(--magenta,#D51F75);background:var(--ink-04,rgba(0,0,0,.04));border-radius:0 12px 12px 0;font-size:15px;line-height:1.6;color:var(--ink-72,rgba(0,0,0,.72))}
+    .tip b{color:var(--ink,#000);font-weight:600}
+    .picks{display:grid;gap:12px;margin-top:8px}
+    .pick{border:1px solid var(--ink-12,rgba(0,0,0,.12));border-radius:14px;padding:18px 20px;background:#fff;display:grid;gap:6px}
+    .pick .q{font-weight:600;color:var(--ink,#000);font-size:15.5px}
+    .pick .a{font-size:14.5px;line-height:1.55;color:var(--ink-72,rgba(0,0,0,.72))}
+    .pick .a b{color:var(--ink,#000)}
+    .pick.lead{border-color:var(--ink,#000);border-width:1.5px}
+    .pick .badge{font-family:var(--font-mono,monospace);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--magenta,#D51F75)}
+    .author-card{display:flex;gap:20px;align-items:center;border:1px solid var(--ink-12,rgba(0,0,0,.12));border-radius:18px;padding:22px;background:#fff}
+    .author-card img{width:76px;height:76px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1px solid var(--ink-12,rgba(0,0,0,.12))}
+    .author-card .nm{font-family:var(--font-display,Tektur,sans-serif);font-size:22px;letter-spacing:-.01em}
+    .author-card .rl{font-size:14px;color:var(--ink-72,rgba(0,0,0,.72));line-height:1.55;margin-top:6px}
+    .grad-rule2{height:2px;width:100%;background:var(--grad-full,linear-gradient(90deg,#2A3EF4,#D51F75,#FD7202));border:0;margin:0}
+    .endcta{text-align:center;padding:44px 0 8px}
+    .tr-details{margin-top:34px;border-top:1px solid var(--ink-08,rgba(0,0,0,.08));padding-top:18px}
+    .tr-details>summary{cursor:pointer;font-family:var(--font-display,Tektur,sans-serif);font-size:18px;color:var(--ink,#000);list-style:none}
+    .tr-details>summary::-webkit-details-marker{display:none}
+    .tr-details>summary::before{content:"▸ ";color:var(--blue,#2A3EF4)}
+    .tr-details[open]>summary::before{content:"▾ "}
+    @media (max-width:820px){
+      .triad{grid-template-columns:1fr}
+      .mrow{grid-template-columns:1fr}
+      .mrow .mcell{border-top:1px solid var(--ink-08,rgba(0,0,0,.08));padding:7px 16px}
+      .mrow .mcell.svc{padding-top:14px}
+      .mrow .mcell::before{content:attr(data-label);display:inline-block;min-width:128px;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-40,rgba(0,0,0,.4));font-weight:600}
+      .mrow.head,.mrow.section-row{display:none}
+      .author-card{flex-direction:column;text-align:center}
+    }
   </style>
 </head>
 <body>
@@ -78,11 +146,179 @@
     <p class="desc">От хаоса в чатах — к системе. Plaud и диаризация, расшифровка голосовых, диктовка Wisprflow, Granola и Zoom — что подключать и как.</p>
     <div class="stage"><video id="v" controls playsinline preload="none" poster="https://storage.yandexcloud.net/video.business.hakku.ai/tsifrovaya-transformatsiya-voysov-poster.jpg"></video></div>
     
-    <section class="transcript">
-      <div class="tr-bar"><h2>Расшифровка</h2><span class="tr-note">Текстовая версия ролика — для чтения и поиска</span></div>
-      <nav class="tr-nav"><button type="button" class="tr-seek tr-chip" data-t="0"><span class="tr-ts">00:00</span>Вступление: что такое цифровая трансформация войсов</button><button type="button" class="tr-seek tr-chip" data-t="63"><span class="tr-ts">01:03</span>Plaud — диктофон с диаризацией + подключение через MCP к Claude Code</button><button type="button" class="tr-seek tr-chip" data-t="252"><span class="tr-ts">04:12</span>Расшифровка голосовых: бот Founder OS (локальный Whisper V3 Large + Gemini)</button><button type="button" class="tr-seek tr-chip" data-t="294"><span class="tr-ts">04:54</span>MacWhisper: локальная расшифровка и сравнение нормализации</button><button type="button" class="tr-seek tr-chip" data-t="469"><span class="tr-ts">07:49</span>Диктовка: почему встроенная плохая — и Wisprflow</button><button type="button" class="tr-seek tr-chip" data-t="723"><span class="tr-ts">12:03</span>Granola — заметки по встречам без бота</button><button type="button" class="tr-seek tr-chip" data-t="854"><span class="tr-ts">14:14</span>Zoom: кастомный коннектор вместо встроенной транскрипции</button></nav>
+    <nav class="tr-nav"><button type="button" class="tr-seek tr-chip" data-t="0"><span class="tr-ts">00:00</span>Вступление: что такое цифровая трансформация войсов</button><button type="button" class="tr-seek tr-chip" data-t="63"><span class="tr-ts">01:03</span>Plaud — диктофон с диаризацией + подключение через MCP к Claude Code</button><button type="button" class="tr-seek tr-chip" data-t="252"><span class="tr-ts">04:12</span>Расшифровка голосовых: бот Founder OS (локальный Whisper V3 Large + Gemini)</button><button type="button" class="tr-seek tr-chip" data-t="294"><span class="tr-ts">04:54</span>MacWhisper: локальная расшифровка и сравнение нормализации</button><button type="button" class="tr-seek tr-chip" data-t="469"><span class="tr-ts">07:49</span>Диктовка: почему встроенная плохая — и Wisprflow</button><button type="button" class="tr-seek tr-chip" data-t="723"><span class="tr-ts">12:03</span>Granola — заметки по встречам без бота</button><button type="button" class="tr-seek tr-chip" data-t="854"><span class="tr-ts">14:14</span>Zoom: кастомный коннектор вместо встроенной транскрипции</button></nav>
+
+    <div class="material">
+
+      <section class="blk" style="border-top:0;padding-top:38px">
+        <p class="mat-p">Видео выше — живое демо инструментов. Ниже — как всё это собирается в систему: из чего состоит «расшифровка с задачами», сравнение движков и готовых продуктов по полкам и что брать под свой сценарий.</p>
+      </section>
+
+      <section class="blk">
+        <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Архитектура</span></div>
+        <h2 class="mat-h2">Из чего состоит «расшифровка с задачами»</h2>
+        <p class="mat-p">Любое решение — это цепочка из 3–4 слоёв. Понимание слоёв снимает вопрос «что выбрать»: вы выбираете не продукт, а где провести границу «своё / готовое».</p>
+        <div class="flow">
+          <div class="fstep"><div class="fn">1</div><div class="ft"><h4>STT — распознавание речи в текст</h4><p>Движок: Whisper (локально / API), Deepgram, Яндекс SpeechKit, Сбер SaluteSpeech. Здесь же выбор облако vs локально и резидентность данных.</p></div></div>
+          <div class="fstep"><div class="fn">2</div><div class="ft"><h4>Диаризация — «кто говорил»</h4><p>Разделение по спикерам. whisperX делает её через pyannote — и именно pyannote тормозит, не сама расшифровка. Часть движков (Deepgram, Яндекс, mymeet) дают диаризацию из коробки и быстрее.</p></div></div>
+          <div class="fstep"><div class="fn">3</div><div class="ft"><h4>LLM-слой — саммари, вопросы, задачи</h4><p>Поверх транскрипта модель (Claude / GPT) выделяет договорённости, вопросы и action items. Это просто промпт. Plaud и mymeet делают ровно это, только упаковано.</p></div></div>
+          <div class="fstep"><div class="fn">4</div><div class="ft"><h4>Доставка — в задачи и чаты</h4><p>Итоги уходят туда, где работает команда: задачи, чек-листы, сообщения в рабочие чаты, обновление полей сделки в CRM. Нативно это умеет Битрикс24 CoPilot; остальное — через коннектор или свой клей на REST API.</p></div></div>
+        </div>
+        <div class="tip"><b>Про скорость whisperX:</b> он медленный по двум причинам — диаризация pyannote тяжёлая и сам он не заточен под Apple Metal. На Mac быстрый путь — <span class="ic">whisper.cpp</span> + модель <span class="ic">large-v3-turbo</span> с Metal (≈28× реалтайма, час за пару минут), либо whisperX на MLX-бэкенде. Диаризацию тогда вешать отдельным проходом pyannote или уходить в облако.</div>
+      </section>
+
+      <section class="blk">
+        <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Матрица сравнения</span></div>
+        <h2 class="mat-h2">Движки и готовые продукты — по полкам</h2>
+        <div class="matrix">
+          <div class="mrow head">
+            <div class="mcell">Решение</div><div class="mcell">Тип</div><div class="mcell">Диаризация</div><div class="mcell">Русский / данные</div><div class="mcell">Задачи в Б24</div><div class="mcell">Цена</div>
+          </div>
+          <div class="mrow section-row"><div class="mcell">Готовые продукты «под ключ»</div></div>
+          <div class="mrow">
+            <div class="mcell svc" data-label="Решение">Битрикс24 CoPilot<small>встроено в Б24</small></div>
+            <div class="mcell" data-label="Тип">ВКС + звонки</div>
+            <div class="mcell" data-label="Диаризация"><span class="pill yes">да</span></div>
+            <div class="mcell" data-label="Русский / данные"><span class="pill ru">РФ · в Б24</span></div>
+            <div class="mcell" data-label="Задачи в Б24"><span class="pill yes">нативно</span></div>
+            <div class="mcell" data-label="Цена">тариф «Стандартный»+</div>
+          </div>
+          <div class="mrow">
+            <div class="mcell svc" data-label="Решение">mymeet.ai<small>бот в ВКС</small></div>
+            <div class="mcell" data-label="Тип">встречи</div>
+            <div class="mcell" data-label="Диаризация"><span class="pill yes">да</span></div>
+            <div class="mcell" data-label="Русский / данные"><span class="pill ru">РФ · 152-ФЗ</span></div>
+            <div class="mcell" data-label="Задачи в Б24"><span class="pill warn">через Albato</span></div>
+            <div class="mcell" data-label="Цена">Free 180 мин / 850 / 2490 ₽ мес</div>
+          </div>
+          <div class="mrow">
+            <div class="mcell svc" data-label="Решение">Plaud Note / NotePin<small>гаджет</small></div>
+            <div class="mcell" data-label="Тип">диктофон</div>
+            <div class="mcell" data-label="Диаризация"><span class="pill yes">да</span></div>
+            <div class="mcell" data-label="Русский / данные"><span class="pill no">облако США</span></div>
+            <div class="mcell" data-label="Задачи в Б24"><span class="pill no">нет</span></div>
+            <div class="mcell" data-label="Цена">устройство + Free 300 / Pro 1200 мин</div>
+          </div>
+          <div class="mrow section-row"><div class="mcell">STT-движки (нужен свой LLM-слой + клей до CRM)</div></div>
+          <div class="mrow">
+            <div class="mcell svc" data-label="Решение">Яндекс SpeechKit<small>облако РФ</small></div>
+            <div class="mcell" data-label="Тип">движок</div>
+            <div class="mcell" data-label="Диаризация"><span class="pill yes">да</span></div>
+            <div class="mcell" data-label="Русский / данные"><span class="pill ru">РФ · лучший рус.</span></div>
+            <div class="mcell" data-label="Задачи в Б24"><span class="pill warn">свой клей</span></div>
+            <div class="mcell" data-label="Цена">по 15-сек блокам (уточнить ₽)</div>
+          </div>
+          <div class="mrow">
+            <div class="mcell svc" data-label="Решение">Сбер SaluteSpeech<small>облако РФ</small></div>
+            <div class="mcell" data-label="Тип">движок</div>
+            <div class="mcell" data-label="Диаризация"><span class="pill warn">уточнить</span></div>
+            <div class="mcell" data-label="Русский / данные"><span class="pill ru">РФ · 152-ФЗ</span></div>
+            <div class="mcell" data-label="Задачи в Б24"><span class="pill warn">свой клей</span></div>
+            <div class="mcell" data-label="Цена">1,2 ₽/мин (~72 ₽/час)</div>
+          </div>
+          <div class="mrow">
+            <div class="mcell svc" data-label="Решение">Deepgram nova-3<small>облако США</small></div>
+            <div class="mcell" data-label="Тип">движок · realtime</div>
+            <div class="mcell" data-label="Диаризация"><span class="pill yes">да</span></div>
+            <div class="mcell" data-label="Русский / данные"><span class="pill no">облако США</span></div>
+            <div class="mcell" data-label="Задачи в Б24"><span class="pill warn">свой клей</span></div>
+            <div class="mcell" data-label="Цена">~$0,005/мин батч, $0,009 стрим</div>
+          </div>
+          <div class="mrow">
+            <div class="mcell svc" data-label="Решение">OpenAI Whisper API<small>облако США</small></div>
+            <div class="mcell" data-label="Тип">движок</div>
+            <div class="mcell" data-label="Диаризация"><span class="pill no">нет (доп.)</span></div>
+            <div class="mcell" data-label="Русский / данные"><span class="pill no">облако США</span></div>
+            <div class="mcell" data-label="Задачи в Б24"><span class="pill warn">свой клей</span></div>
+            <div class="mcell" data-label="Цена">$0,006/мин (~$0,36/час)</div>
+          </div>
+          <div class="mrow">
+            <div class="mcell svc" data-label="Решение">whisper.cpp / whisperX<small>локально на Mac</small></div>
+            <div class="mcell" data-label="Тип">локальный</div>
+            <div class="mcell" data-label="Диаризация"><span class="pill yes">да · pyannote</span></div>
+            <div class="mcell" data-label="Русский / данные"><span class="pill yes">на устройстве</span></div>
+            <div class="mcell" data-label="Задачи в Б24"><span class="pill warn">свой клей</span></div>
+            <div class="mcell" data-label="Цена">$0 за API (только железо)</div>
+          </div>
+        </div>
+        <p class="note" style="margin-top:14px">Цены и лимиты на июнь 2026, перед закупкой сверяйтесь с сайтом сервиса. «Свой клей» = LLM-экстрактор задач (Claude / GPT) + запись в CRM через REST API. Диаризация SaluteSpeech и точная ₽-цена Яндекс SpeechKit требуют уточнения у вендора.</p>
+      </section>
+
+      <section class="blk">
+        <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Доставка результата</span></div>
+        <h2 class="mat-h2">Кто реально доводит задачи до CRM</h2>
+        <p class="mat-p">Это и есть водораздел. Большинство инструментов останавливаются на красивом транскрипте — а нужно, чтобы задачи сами оказались в системе и рабочих чатах. Так умеют трое:</p>
+        <div class="triad">
+          <div class="ccard"><span class="num">01</span><h3>Битрикс24 CoPilot</h3><p>Нативно. Расшифровывает звонки и видеовстречи, делит по спикерам, на русском. CoPilot Follow-up: повестка, итоги, тайминг → в чат, авто-создание задач и чек-листов, предложение обновить поля сделки. Данные не выходят из Б24.</p></div>
+          <div class="ccard"><span class="num">02</span><h3>mymeet.ai + Albato</h3><p>mymeet сам выделяет задачи и брифы (РФ-хостинг, 152-ФЗ), а перенос в CRM настраивается no-code-коннектором Albato. Хорошо для встреч в Zoom / Meet / Телемост, которых нет внутри CRM.</p></div>
+          <div class="ccard"><span class="num">03</span><h3>Свой контур</h3><p>STT-движок (Яндекс / Сбер / локальный Whisper) + LLM-экстрактор задач + запись в CRM через REST API. Максимум контроля и приватности, любые правила постановки задач — но это разработка, а не покупка.</p></div>
+        </div>
+        <div class="tip"><b>Важный нюанс:</b> CoPilot закрывает встречи и звонки <b>внутри</b> Битрикс24. Если планёрки идут в Zoom / Телемост / офлайн с диктофона — нужен либо бот (mymeet), либо свой контур, который донесёт результат до CRM.</div>
+      </section>
+
+      <section class="blk">
+        <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Сценарий</span></div>
+        <h2 class="mat-h2">Как встреча превращается в задачи</h2>
+        <div class="flow">
+          <div class="fstep"><div class="fn">1</div><div class="ft"><h4>Запись</h4><p>Планёрка в звонке CRM / Телемосте / с диктофона. Один источник, без гаджета у каждого.</p></div></div>
+          <div class="fstep"><div class="fn">2</div><div class="ft"><h4>Транскрипт + диаризация</h4><p>Расшифровка с разделением «кто говорил» — чтобы договорённости были привязаны к людям.</p></div></div>
+          <div class="fstep"><div class="fn">3</div><div class="ft"><h4>Структура</h4><p>LLM раскладывает встречу на три блока: обсуждения · открытые вопросы · задачи с ответственными.</p></div></div>
+          <div class="fstep"><div class="fn">4</div><div class="ft"><h4>Перенос в CRM</h4><p>Задачи создаются на ответственных, итоги падают в рабочий чат, открытые вопросы — отдельным списком на следующую планёрку.</p></div></div>
+        </div>
+      </section>
+
+      <section class="blk">
+        <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Рекомендация</span></div>
+        <h2 class="mat-h2">Что брать под свой сценарий</h2>
+        <div class="picks">
+          <div class="pick lead">
+            <span class="badge">Рекомендуемый старт</span>
+            <div class="q">Минимум усилий, всё внутри Б24, ПДн в РФ</div>
+            <div class="a"><b>Битрикс24 CoPilot Follow-up.</b> Если CRM уже Б24 — ничего интегрировать не надо, задачи и итоги сразу на месте. С него и проверять гипотезу на ближайшей планёрке.</div>
+          </div>
+          <div class="pick">
+            <div class="q">Встречи вне CRM (Zoom / Телемост), готовый продукт с РФ-хостингом</div>
+            <div class="a"><b>mymeet.ai (Pro 2490 ₽/мес) + Albato → CRM.</b> Авто-задачи и брифы из коробки, данные в РФ. Бесплатные 180 мин — попробовать на одной встрече.</div>
+          </div>
+          <div class="pick">
+            <div class="q">Лучшее русское качество + полный контроль, готовы немного собрать</div>
+            <div class="a"><b>Яндекс SpeechKit или Сбер SaluteSpeech (1,2 ₽/мин)</b> как движок + LLM-экстрактор задач + запись в CRM по REST. Дёшево на масштабе, данные в РФ.</div>
+          </div>
+          <div class="pick">
+            <div class="q">Полная приватность, планёрки не должны уходить наружу</div>
+            <div class="a"><b>whisper.cpp / whisperX (large-v3-turbo) локально на Mac</b> + локальный или российский LLM для задач. $0 за API, но это сборка пайплайна, а не покупка. Именно так собран бот из видео выше.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="blk">
+        <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Realtime</span></div>
+        <h2 class="mat-h2">Голосовой Telegram-бот с Claude</h2>
+        <p class="mat-p">Отдельная от транскрибации история — стандартный стек <span class="ic">voice → STT → LLM → TTS</span>. Голосовое в Telegram → распознавание (Deepgram streaming или локальный Whisper) → Claude формирует ответ → ответ текстом или озвучка обратно через TTS. Собирается за вечер; для realtime-диалога важна низкая задержка STT, поэтому здесь облачный потоковый движок предпочтительнее локального.</p>
+      </section>
+
+      <section class="blk">
+        <div class="author-card">
+          <img src="/assets/founders/alexander.jpg" alt="Александр Долгов">
+          <div>
+            <div class="nm">Александр Долгов</div>
+            <div class="rl">Сооснователь хакку.ии | б<span style="color:#D51F75">ИИ</span>знес. Строит голосовые ИИ-агенты в проде — STT, диаризация, realtime-телефония, follow-up в CRM.</div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="grad-rule2">
+
+      <div class="endcta">
+        <p class="mat-p" style="max-width:680px;margin:0 auto;font-size:18px">Закупать Plaud на каждое подразделение не нужно — это переупаковка чужого Whisper + GPT в гаджет. Результат «встреча → задачи» централизованно даёт Битрикс24 CoPilot уже сейчас, а под особые требования собирается свой контур. Возьмите готовый инструмент на одну планёрку и сравните итог с тем, что записали бы руками.</p>
+      </div>
+
+    </div>
+
+    <details class="tr-details">
+      <summary>Полная расшифровка ролика</summary>
       <div class="tr-body"><h3 class="tr-h"><button type="button" class="tr-seek" data-t="0">00:00</button> Вступление: что такое цифровая трансформация войсов</h3><p>Всем привет, с вами Саша, один из основателей сообщества хакку.ии для бизнеса. Сегодня тема живая, которую мы ещё не записывали, — цифровая трансформация войсов. Всё, что связано с голосовыми сообщениями, транскрибацией встреч, записью и последующей расшифровкой. Тема обширная, поэтому покажу базовые вещи: что и как подключается.</p><h3 class="tr-h"><button type="button" class="tr-seek" data-t="63">01:03</button> Plaud — диктофон с диаризацией + подключение через MCP к Claude Code</h3><p>Начнём с физического мира. Если вы участвуете в совещаниях, где нужно записывать встречи, а потом подключать своих ИИ-ассистентов к расшифровке и постановке задач по итогам, — здесь есть нюансы. По сути это диктофон плюс коннектор к вашему ИИ.</p><p>Проще всего — через устройство Plaud: это диктофон и диаризатор в одном. Диаризация — это разделение по спикерам: система понимает речь спикера 1 и спикера 2, разделяет дорожки и потом скармливает их в ИИ.</p><p>Подключается просто. Нужен кастомный коннектор в Claude Code: открываете Claude Code → настройки → коннекторы → Customize → «+» → Add Custom Connector. Добавляете официальный Remote MCP Plaud, называете его, скажем, «Plaud MCP», жмёте Add — дальше он пробрасывает вас на страницу авторизации.</p><p>Как альтернатива — через терминал: открываете документацию Plaud, копируете строку установки, запускаете в терминале. Он спросит, куда подключить (Claude Desktop, Claude Code), отвечаете Y/N. На «Login in Claude now, open browser?» отвечаете Y — открывается официальная авторизация Plaud. То же самое работает с Codex (если используете GPT-модели) и с другими нейро-средами — Antigravity, Perplexity.</p><h3 class="tr-h"><button type="button" class="tr-seek" data-t="252">04:12</button> Расшифровка голосовых: бот Founder OS (локальный Whisper V3 Large + Gemini)</h3><p>У меня установлен полный набор инструментов. Покажу на примере распознавания войсов. Представьте: вам присылают голосовые сообщения, либо вы записываете их сами. Я сделал коннектор, который распознаёт речь в голосовом, делает транскрибацию и затем — саммари сообщения.</p><p>Лидер нашего сообщества Настя прислала голосовое — я пересылаю его в своего Telegram-бота «Founder OS» (это бот с моей операционной системой). Сообщение начинает расшифровываться. Так же можно расшифровывать и видеокружки — от коллег-зумеров, если они у вас есть.</p><p>Технология: в боте стоит локальная модель Whisper V3 Large — она ничего не отправляет в облако, всё происходит на моём компьютере. А саммаризацию и нормализацию делает модель Gemini 2.5 Flash от Google. Я сам занимаюсь голосовыми агентами и большой фанат этой модели — связка работает очень круто: если вам неудобно слушать чужие голосовые, вы просто пересылаете их и получаете чистый текст.</p><h3 class="tr-h"><button type="button" class="tr-seek" data-t="294">04:54</button> MacWhisper: локальная расшифровка и сравнение нормализации</h3><p>То же самое умеет программа MacWhisper (для Mac; на Windows есть аналоги). Загружаете аудиофайл — она расшифровывает локально, в реальном времени. Тоже локальная модель.</p><p>Сравним. MacWhisper выдаёт сплошную «простыню» — вроде всё то же самое. Но в моём боте структура значительно чище за счёт нормализации. Пример: Настя в войсе говорит «last but not least» — MacWhisper передаёт это коряво, а нормализованная версия выдаёт чисто и структурно, плюс даёт саммари. Достигается это локальной моделью Whisper V3 Large, синхронизированной с ботом, и нормализацией через Gemini.</p><h3 class="tr-h"><button type="button" class="tr-seek" data-t="469">07:49</button> Диктовка: почему встроенная плохая — и Wisprflow</h3><p>Ещё одна сильно недооценённая штука — диктовка (dictation). Если диктовать через встроенную системную диктовку прямо в среде (например, в Claude Code или в десктопном Claude), качество будет так себе — сами увидите.</p><p>Для этого есть отдельный инструмент: для Mac (и для Windows) — Wisprflow (Whisper Flow). Зажимаю горячие клавиши и диктую — причём даже в терминале, который ещё менее «нативен» для диктовки. Вы видите, как прямо в моменте сохраняется надиктованный текст: распознаёт очень точно, потом можно дочистить — и отправлять команду. Wisprflow — эффективный инструмент, когда нужно наговорить текст голосом в средах, где это обычно не принято (тот же терминал).</p><h3 class="tr-h"><button type="button" class="tr-seek" data-t="723">12:03</button> Granola — заметки по встречам без бота</h3><p>Последняя классная штука — Granola App (Mac). Минус один: стоит денег (около 14 $/мес), хотя ходят слухи о возможном open-source. Granola коннектится к вашему календарю и видит встречи. Главное отличие — работает без бота в звонке: вы начинаете встречу, и она сразу пишет, что происходит, а затем буквально в реальном времени выдаёт очень качественное summary — после нажатия «Generate notes» она анализирует транскрипт и структурирует заметки. Похоже на магию. По сути это аналог Plaud, но для любых онлайн-встреч.</p><h3 class="tr-h"><button type="button" class="tr-seek" data-t="854">14:14</button> Zoom: кастомный коннектор вместо встроенной транскрипции</h3><p>Альтернатива ботам (MyMeet и подобным) — коннектор внутри Zoom. У меня написан кастомный коннектор: он записывает встречу, транскрибирует её не транскриптом Zoom, а моделью Whisper, дальше нормализует через Gemini и отдаёт мне расшифровку, транскрибацию и summary целиком. Я почти никогда не использую готовое summary от ботов, хотя оно неплохое: беру сырой транскрипт и прогоняю его через свои правила нормализации.</p><p>Тема реально обширная — сегодня успел рассказать самые базовые вещи, дальше будем её постоянно раскрывать и донастраивать. Материал появится в базе знаний — переходите, смотрите, комментируйте. Надеюсь, будет полезно. Спасибо, хорошего вечера!</p></div>
-    </section>
+    </details>
     <div class="foot">
       <span>хакку.ии (hakku.ai) · бИИзнес — сообщество собственников бизнеса</span>
       <a href="/os/">← в базу знаний</a>
