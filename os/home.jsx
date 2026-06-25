@@ -105,8 +105,8 @@ function HomeA({ nav = ()=>{} }) {
         <div className="os-rail-block">
           {/* переключатель: контент-план ↔ программа июля */}
           <div className="os-rail-toggle">
-            <button className={railTab==='plan'?'on':''} onClick={()=>setRailTab('plan')}>Контент-план</button>
-            <button className={railTab==='july'?'on':''} onClick={()=>setRailTab('july')}>Программа июля</button>
+            <button className={railTab==='plan'?'on':''} onClick={()=>setRailTab('plan')}>Июнь · сейчас</button>
+            <button className={railTab==='july'?'on':''} onClick={()=>setRailTab('july')}>Июль</button>
           </div>
 
           {railTab==='plan' ? (
