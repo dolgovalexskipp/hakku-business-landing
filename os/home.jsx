@@ -1,5 +1,12 @@
 // home.jsx — Dashboard (light). Next-event hero + new materials + context rail.
+const JULY = [
+  { n:1, d:'1–7 июля',   items:[ { kind:'Гайд', title:'Каталог ИИ-сотрудников' }, { kind:'Гайд', title:'Промпт-аудитор решений' } ] },
+  { n:2, d:'8–14 июля',  items:[ { kind:'Видео-разбор', title:'Персональный ассистент собственника' }, { kind:'Гайд', title:'Регламент за 20 минут' } ] },
+  { n:3, d:'15–21 июля', items:[ { kind:'Видео-разбор', title:'ИИ — это отдел, а не кнопка' }, { kind:'Видео-разбор', title:'Где ИИ врёт' } ] },
+  { n:4, d:'22–28 июля', items:[ { kind:'Вебинар + Q&A', title:'Оперативка без созвонов' }, { kind:'Гайд', title:'ОС компании на одной странице' } ] },
+];
 function HomeA({ nav = ()=>{} }) {
+  const [railTab, setRailTab] = React.useState('plan');
   const featured = MATERIALS.find(m=>m.k==='video' && m.status==='live') || MATERIALS.find(m=>m.status==='live');
   const fresh = MATERIALS.filter(m=>m.status==='live' && m!==featured).slice(0, 4);
   const TG = 'https://t.me/hakkuai_business_bot';
@@ -96,20 +103,54 @@ function HomeA({ nav = ()=>{} }) {
       {/* right rail — context */}
       <aside className="os-rail">
         <div className="os-rail-block">
-          <div className="os-rail-h">Контент-план · июнь</div>
-          <div style={{ display:'flex', flexDirection:'column' }}>
-            {MATERIALS.map((m,i)=>(
-              <div key={i} style={{ display:'flex', gap: 12, padding:'10px 0', borderTop: i?'1px solid var(--ink-08)':'0' }}>
-                <span style={{ fontFamily:'var(--font-display)', fontSize: 13, color:'var(--ink-40)', width: 42, flexShrink:0 }}>{m.status==='live'?'есть':m.d}</span>
-                <div>
-                  <div style={{ fontSize: 13.5, lineHeight: 1.35 }}>{m.title}</div>
-                  <div style={{ fontSize: 11.5, color:'var(--ink-40)', marginTop: 2 }}>{m.kind}</div>
-                </div>
-              </div>
-            ))}
+          {/* переключатель: контент-план ↔ программа июля */}
+          <div className="os-rail-toggle">
+            <button className={railTab==='plan'?'on':''} onClick={()=>setRailTab('plan')}>Контент-план</button>
+            <button className={railTab==='july'?'on':''} onClick={()=>setRailTab('july')}>Программа июля</button>
           </div>
-          <hr className="os-grad-rule" style={{ marginTop: 6 }}/>
-          <div style={{ fontSize: 12.5, color:'var(--ink-55)' }}>Календарь пополняется каждую неделю и остаётся в базе.</div>
+
+          {railTab==='plan' ? (
+            <React.Fragment>
+              <div style={{ display:'flex', flexDirection:'column', marginTop: 12 }}>
+                {MATERIALS.map((m,i)=>{
+                  const inner = (
+                    <div style={{ display:'flex', gap: 12, padding:'10px 0', borderTop: i?'1px solid var(--ink-08)':'0' }}>
+                      <span style={{ fontFamily:'var(--font-display)', fontSize: 13, color: m.status==='live'?'var(--blue)':'var(--ink-40)', width: 42, flexShrink:0 }}>{m.status==='live'?'есть':m.d}</span>
+                      <div>
+                        <div style={{ fontSize: 13.5, lineHeight: 1.35 }}>{m.title}</div>
+                        <div style={{ fontSize: 11.5, color:'var(--ink-40)', marginTop: 2 }}>{m.kind}</div>
+                      </div>
+                    </div>
+                  );
+                  return m.href
+                    ? <a key={i} className="os-rail-row" href={m.href} style={{ display:'block', textDecoration:'none', color:'inherit' }}>{inner}</a>
+                    : <div key={i} className="os-rail-row" style={{ opacity:.7 }}>{inner}</div>;
+                })}
+              </div>
+              <hr className="os-grad-rule" style={{ marginTop: 6 }}/>
+              <div style={{ fontSize: 12.5, color:'var(--ink-55)' }}>Календарь пополняется каждую неделю и остаётся в базе.</div>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <div style={{ marginTop: 14, display:'flex', flexDirection:'column', gap: 16 }}>
+                {JULY.map((w,i)=>(
+                  <div key={i}>
+                    <div style={{ fontFamily:'var(--font-display)', fontSize: 12.5, color:'var(--blue)', marginBottom: 4 }}>Неделя {w.n} · {w.d}</div>
+                    {w.items.map((it,j)=>(
+                      <div key={j} style={{ padding:'7px 0', borderTop: j?'1px solid var(--ink-08)':'0' }}>
+                        <div style={{ fontSize: 10.5, color:'var(--ink-40)', textTransform:'uppercase', letterSpacing:'.04em' }}>{it.kind}</div>
+                        <div style={{ fontSize: 13.5, lineHeight: 1.35 }}>{it.title}</div>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+              <div style={{ marginTop: 14, padding:'10px 12px', border:'1px solid var(--ink-12)', borderRadius: 10, background:'var(--ink-04)', fontSize: 12.5, color:'var(--ink-72)' }}>
+                Ранний доступ закрывается <b>8 июля</b> — дальше тарифы по обычной цене.
+              </div>
+              <a className="os-clickable" href="/programma-iyulya/" style={{ display:'inline-block', marginTop: 12, fontSize: 13.5, color:'var(--blue)', fontWeight: 500, textDecoration:'none' }}>Открыть программу июля →</a>
+            </React.Fragment>
+          )}
         </div>
 
         <div className="os-rail-block">
