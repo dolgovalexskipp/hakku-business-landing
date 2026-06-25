@@ -27,6 +27,12 @@ const Team = () => {
     { name: 'Андрей Ларионов', photo: 'assets/ambassadors/larionov.jpg' },
     { name: 'Марина Курганова', photo: 'assets/ambassadors/kurganova.jpg' },
   ];
+  const members = [
+    { name: 'Андрей', photo: 'assets/members/andrey.jpg' },
+    { name: 'Ольга', photo: 'assets/members/olga.jpg' },
+    { name: 'Николай', photo: 'assets/members/nikolay.jpg' },
+    { name: 'Егор', photo: 'assets/members/egor.jpg' },
+  ];
   return (
     <section id="team" className="section-pad section-line">
       <div className="container">
@@ -86,6 +92,24 @@ const Team = () => {
               <img src={a.photo} alt={a.name} style={{
                 width: '100%', height: '100%', objectFit: 'cover', display: 'block',
               }}/>
+            </div>
+          ))}
+        </div>
+
+        {/* Уже оформили доступ — реальные участники, кружочками с именами */}
+        <div style={{ marginTop: 46, marginBottom: 18 }}>
+          <div style={{ fontFamily: 'Tektur, sans-serif', fontSize: 18, letterSpacing: '-0.01em', color: '#000', marginBottom: 4 }}>
+            Уже оформили доступ
+          </div>
+          <div style={{ fontSize: 13.5, color: 'rgba(0,0,0,.55)' }}>Собственники, которые присоединились к бИИзнес одними из первых — уже на тарифе.</div>
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 26, alignItems: 'flex-start' }}>
+          {members.map((m) => (
+            <div key={m.name} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, width: 92 }}>
+              <div style={{ width: 84, height: 84, borderRadius: '50%', overflow: 'hidden', background: '#f4f4f5', border: '1px solid rgba(0,0,0,.08)' }}>
+                <img src={m.photo} alt={m.name} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}/>
+              </div>
+              <div style={{ fontSize: 14, color: '#000', fontWeight: 500 }}>{m.name}</div>
             </div>
           ))}
         </div>
