@@ -124,6 +124,19 @@
       .mrow.head,.mrow.section-row{display:none}
       .author-card{flex-direction:column;text-align:center}
     }
+    /* таймкоды — как в Excel-материале */
+    .chapters{margin-top:6px;border:1px solid var(--ink-12,rgba(0,0,0,.12));border-radius:18px;background:#fff;overflow:hidden}
+    .chapters-h{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-40,rgba(0,0,0,.4));padding:16px 22px 6px}
+    .ch-list{list-style:none;margin:0;padding:0 10px 8px}
+    .ch-list li{display:flex;align-items:baseline;gap:14px;padding:9px 12px;border-radius:10px;transition:background .12s}
+    .ch-list li:hover{background:var(--ink-04,rgba(0,0,0,.04))}
+    .ch{flex-shrink:0;font-family:var(--font-mono,ui-monospace,monospace);font-size:13px;font-weight:600;color:var(--blue,#2A3EF4);background:rgba(42,62,244,.07);border:1px solid rgba(42,62,244,.16);border-radius:7px;padding:4px 9px;cursor:pointer;min-width:64px;text-align:center;transition:background .12s,color .12s}
+    .ch:hover{background:var(--blue,#2A3EF4);color:#fff}
+    .ch-list li>span:last-child{font-size:15.5px;line-height:1.4;color:var(--ink-72,rgba(0,0,0,.72))}
+    .ch-list li.active{background:rgba(42,62,244,.06)}
+    .ch-list li.active .ch{background:var(--blue,#2A3EF4);color:#fff}
+    .ch-list li.active>span:last-child{color:var(--ink,#000);font-weight:600}
+    .fstep .ft h4 .ch{margin-right:8px;vertical-align:baseline}
   </style>
 </head>
 <body>
@@ -146,12 +159,40 @@
     <p class="desc">От хаоса в чатах — к системе. Plaud и диаризация, расшифровка голосовых, диктовка Wisprflow, Granola и Zoom — что подключать и как.</p>
     <div class="stage"><video id="v" controls playsinline preload="none" poster="https://storage.yandexcloud.net/video.business.hakku.ai/tsifrovaya-transformatsiya-voysov-poster.jpg"></video></div>
     
-    <nav class="tr-nav"><button type="button" class="tr-seek tr-chip" data-t="0"><span class="tr-ts">00:00</span>Вступление: что такое цифровая трансформация войсов</button><button type="button" class="tr-seek tr-chip" data-t="63"><span class="tr-ts">01:03</span>Plaud — диктофон с диаризацией + подключение через MCP к Claude Code</button><button type="button" class="tr-seek tr-chip" data-t="252"><span class="tr-ts">04:12</span>Расшифровка голосовых: бот Founder OS (локальный Whisper V3 Large + Gemini)</button><button type="button" class="tr-seek tr-chip" data-t="294"><span class="tr-ts">04:54</span>MacWhisper: локальная расшифровка и сравнение нормализации</button><button type="button" class="tr-seek tr-chip" data-t="469"><span class="tr-ts">07:49</span>Диктовка: почему встроенная плохая — и Wisprflow</button><button type="button" class="tr-seek tr-chip" data-t="723"><span class="tr-ts">12:03</span>Granola — заметки по встречам без бота</button><button type="button" class="tr-seek tr-chip" data-t="854"><span class="tr-ts">14:14</span>Zoom: кастомный коннектор вместо встроенной транскрипции</button></nav>
+    <div class="chapters">
+      <div class="chapters-h">Таймкоды · 7 глав</div>
+      <ul class="ch-list">
+        <li><span class="ch" data-t="0">0:00</span><span>Вступление: что такое цифровая трансформация войсов</span></li>
+        <li><span class="ch" data-t="63">1:03</span><span>Plaud: диктофон с диаризацией + подключение по MCP к Claude Code</span></li>
+        <li><span class="ch" data-t="252">4:12</span><span>Бот Founder OS: расшифровка голосовых (Whisper V3 Large + Gemini)</span></li>
+        <li><span class="ch" data-t="294">4:54</span><span>MacWhisper: локальная расшифровка и сравнение нормализации</span></li>
+        <li><span class="ch" data-t="469">7:49</span><span>Диктовка голосом в любую среду: Wisprflow</span></li>
+        <li><span class="ch" data-t="723">12:03</span><span>Granola: заметки по встречам без бота</span></li>
+        <li><span class="ch" data-t="854">14:14</span><span>Zoom: кастомный коннектор вместо встроенной транскрипции</span></li>
+      </ul>
+    </div>
 
     <div class="material">
 
       <section class="blk" style="border-top:0;padding-top:38px">
-        <p class="mat-p">Видео выше — живое демо инструментов. Ниже — как всё это собирается в систему: из чего состоит «расшифровка с задачами», сравнение движков и готовых продуктов по полкам и что брать под свой сценарий.</p>
+        <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Что в видео</span></div>
+        <h2 class="mat-h2">Шесть инструментов из ролика</h2>
+        <p class="mat-p">Коротко — что показано и как подключить. Тайм-код рядом открывает нужный момент видео.</p>
+        <div class="flow">
+          <div class="fstep"><div class="fn">1</div><div class="ft"><h4><span class="ch" data-t="63">1:03</span>Plaud — диктофон с диаризацией</h4><p>Гаджет «диктофон + диаризатор» (разделение по спикерам). Подключается к Claude Code кастомным MCP-коннектором: настройки → коннекторы → Add Custom Connector → официальный Remote MCP Plaud (или через терминал). Так же — к Codex, Antigravity, Perplexity.</p></div></div>
+          <div class="fstep"><div class="fn">2</div><div class="ft"><h4><span class="ch" data-t="252">4:12</span>Бот Founder OS — расшифровка голосовых</h4><p>Пересылаешь голосовое или видеокружок в Telegram-бота → локальная модель Whisper V3 Large (ничего не уходит в облако) расшифровывает, а Gemini 2.5 Flash нормализует и делает саммари. На выходе — чистый структурный текст вместо чужого войса.</p></div></div>
+          <div class="fstep"><div class="fn">3</div><div class="ft"><h4><span class="ch" data-t="294">4:54</span>MacWhisper — локальная расшифровка файлов</h4><p>Грузишь аудиофайл — расшифровка идёт локально, в реальном времени. В ролике — сравнение: «сырая простыня» MacWhisper против нормализованного вывода бота (чище, со структурой и саммари).</p></div></div>
+          <div class="fstep"><div class="fn">4</div><div class="ft"><h4><span class="ch" data-t="469">7:49</span>Wisprflow — диктовка голосом в любую среду</h4><p>Встроенная системная диктовка слабая. Wisprflow по горячей клавише диктует куда угодно — даже в терминал и Claude Code — и распознаёт точно. Для Windows есть аналог.</p></div></div>
+          <div class="fstep"><div class="fn">5</div><div class="ft"><h4><span class="ch" data-t="723">12:03</span>Granola — заметки по встречам без бота</h4><p>Коннектится к календарю, пишет встречу без бота в звонке и сразу выдаёт качественное summary. Аналог Plaud для любых онлайн-встреч. Минус — платная (~$14/мес).</p></div></div>
+          <div class="fstep"><div class="fn">6</div><div class="ft"><h4><span class="ch" data-t="854">14:14</span>Zoom — кастомный коннектор</h4><p>Вместо встроенного транскрипта Zoom: запись → расшифровка моделью Whisper → нормализация Gemini → расшифровка и саммари целиком. Берётся сырой транскрипт и прогоняется по своим правилам нормализации.</p></div></div>
+        </div>
+        <div class="tip"><b>Через что это собрано:</b> локальный Whisper V3 Large для расшифровки + Gemini 2.5 Flash для нормализации и саммари — связка держит данные на своём железе и даёт чистый текст. Ниже — как выбрать стек под свою задачу.</div>
+      </section>
+
+      <section class="blk">
+        <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Разбор · копнуть глубже</span></div>
+        <h2 class="mat-h2">Как собрать это в систему компании</h2>
+        <p class="mat-p">Инструменты выше — это «вход». Дальше вопрос — как из любого источника довести итоги до задач в CRM. Ниже — выжимка из текстового разбора по транскрибации для бизнеса: слои технологии, матрица решений и что брать под свой сценарий.</p>
       </section>
 
       <section class="blk">
@@ -336,11 +377,13 @@
   </script>
   <script>
   document.addEventListener('click',function(e){
-    var b=e.target.closest('.tr-seek'); if(!b)return;
+    var b=e.target.closest('.tr-seek,.ch'); if(!b)return;
     var v=document.getElementById('v'); if(!v)return;
     var t=parseFloat(b.getAttribute('data-t'))||0;
-    try{v.currentTime=t;v.play&&v.play();}catch(_){}
-    v.scrollIntoView({behavior:'smooth',block:'start'});
+    var go=function(){try{v.currentTime=t;}catch(_){}var p=v.play&&v.play();if(p&&p.catch)p.catch(function(){});};
+    if(v.readyState>=1)go(); else {v.addEventListener('loadedmetadata',go,{once:true});}
+    v.scrollIntoView({behavior:'smooth',block:'center'});
+    try{var row=b.closest('.ch-list li');if(row){var a=document.querySelectorAll('.ch-list li.active');for(var i=0;i<a.length;i++)a[i].classList.remove('active');row.classList.add('active');}}catch(_){}
   });
   </script>
 </body>
