@@ -1,0 +1,7 @@
+#!/bin/sh
+# Auto-rebuild app.bundle.js from components/*.jsx and stage it, so the bundle
+# never drifts from source. Skips silently if deps aren't installed (run `npm i`).
+if [ -f node_modules/@babel/core/package.json ]; then
+  node _tools/build.mjs || exit 1
+  git add app.bundle.js index.html
+fi
