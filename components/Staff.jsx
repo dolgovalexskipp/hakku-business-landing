@@ -52,6 +52,14 @@ const Staff = () => {
           </p>
         </div>
 
+        <style>{`
+          @media (max-width: 760px) {
+            #staff .staff-panel { padding: 26px 22px 24px !important; }
+            #staff .staff-holo { width: 168px !important; height: 168px !important; right: -42px !important; top: -42px !important; opacity: .5 !important; }
+            #staff .staff-row { grid-template-columns: 1fr !important; gap: 5px !important; }
+            #staff .staff-role { font-size: 24px !important; }
+          }
+        `}</style>
         <div style={{ display: 'grid', gridTemplateColumns: '360px 1fr', gap: 16 }} className="grid-2">
           {/* selector list */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -72,14 +80,14 @@ const Staff = () => {
           </div>
 
           {/* detail panel */}
-          <div style={{ border: '1px solid rgba(0,0,0,.12)', borderRadius: 24, padding: '40px 40px 36px', position: 'relative', overflow: 'hidden', minHeight: 360, display: 'flex', flexDirection: 'column' }}>
-            <img src="assets/graphic-holo-ring.webp" alt="" style={{ position: 'absolute', right: -90, top: -90, width: 340, height: 340, objectFit: 'contain', opacity: .85, pointerEvents: 'none' }}/>
+          <div className="staff-panel" style={{ border: '1px solid rgba(0,0,0,.12)', borderRadius: 24, padding: '40px 40px 36px', position: 'relative', overflow: 'hidden', minHeight: 360, display: 'flex', flexDirection: 'column' }}>
+            <img className="staff-holo" src="assets/graphic-holo-ring.webp" alt="" style={{ position: 'absolute', right: -90, top: -90, width: 340, height: 340, objectFit: 'contain', opacity: .85, pointerEvents: 'none' }}/>
             <div style={{ position: 'relative', zIndex: 1 }}>
-              <span style={{ display: 'inline-block', fontSize: 12, fontWeight: 500, color: '#2A3EF4', border: '1px solid rgba(42,62,244,.3)', borderRadius: 999, padding: '5px 13px', marginBottom: 20 }}>{cur.tag}</span>
-              <h3 style={{ fontFamily: 'Tektur, sans-serif', fontSize: 30, lineHeight: 1.1, letterSpacing: '-0.01em', margin: '0 0 28px', fontWeight: 400, color: '#000', maxWidth: 520 }}>{cur.role}</h3>
+              <span style={{ display: 'inline-block', fontSize: 12, fontWeight: 500, color: '#2A3EF4', border: '1px solid rgba(42,62,244,.3)', borderRadius: 999, padding: '5px 13px', marginBottom: 20, background: 'rgba(255,255,255,.7)' }}>{cur.tag}</span>
+              <h3 className="staff-role" style={{ fontFamily: 'Tektur, sans-serif', fontSize: 30, lineHeight: 1.1, letterSpacing: '-0.01em', margin: '0 0 28px', fontWeight: 400, color: '#000', maxWidth: 460 }}>{cur.role}</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 620 }}>
                 {[['Функция', cur.fn, 'rgba(0,0,0,.4)'], ['Боль', cur.pain, '#D51F75'], ['ИИ-сотрудник закрывает', cur.sol, '#2A3EF4']].map(([label, text, c]) => (
-                  <div key={label} style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: 18, alignItems: 'baseline', paddingTop: 16, borderTop: '1px solid rgba(0,0,0,.08)' }}>
+                  <div key={label} className="staff-row" style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: 18, alignItems: 'baseline', paddingTop: 16, borderTop: '1px solid rgba(0,0,0,.08)' }}>
                     <span style={{ fontSize: 11, letterSpacing: '0.06em', textTransform: 'uppercase', color: c, fontWeight: 500 }}>{label}</span>
                     <span style={{ fontSize: 15, color: 'rgba(0,0,0,.78)', lineHeight: 1.55 }}>{text}</span>
                   </div>

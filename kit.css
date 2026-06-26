@@ -1,4 +1,10 @@
 /* ===== UI Kit · landing-specific layout helpers ===== */
+/* Global guards: no horizontal scroll on mobile, media never overflows,
+   long Russian words in display headings wrap instead of clipping. */
+html, body { overflow-x: hidden; }
+*, *::before, *::after { min-width: 0; }
+img, svg, video { max-width: 100%; }
+h1, h2, h3 { overflow-wrap: break-word; word-break: break-word; }
 .container { max-width: 1240px; margin: 0 auto; padding: 0 56px; }
 section { position: relative; }
 /* Якорная прокрутка не должна заезжать под sticky-навигацию */

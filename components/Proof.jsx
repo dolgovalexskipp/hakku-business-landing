@@ -8,7 +8,8 @@ const Proof = () => {
   ];
   return (
     <section id="proof" data-canvas="ink" style={{ background: '#000', color: '#fff', padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
-      <img src="assets/graphic-holo-ring.webp" alt="" style={{
+      <style>{`@media (max-width: 760px){ #proof .pf-holo{ width:260px !important; height:260px !important; left:-100px !important; top:-80px !important; opacity:.34 !important; } }`}</style>
+      <img className="pf-holo" src="assets/graphic-holo-ring.webp" alt="" style={{
         position: 'absolute', left: -140, top: -120, width: 460, height: 460,
         objectFit: 'contain', opacity: .5, pointerEvents: 'none',
         animation: 'hakku-spin 150s linear infinite',

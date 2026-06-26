@@ -38,7 +38,8 @@ const Team = () => {
         </div>
 
         <style>{`
-          @media (max-width: 980px) { #team .team-grid { grid-template-columns: 1fr !important; } #team .team-photo { aspect-ratio: 16/10 !important; } }
+          @media (max-width: 980px) { #team .team-grid { grid-template-columns: 1fr !important; } }
+          @media (max-width: 980px) and (min-width: 561px) { #team .team-card { flex-direction: row !important; } #team .team-photo { width: 200px !important; flex: 0 0 200px !important; } }
           #team .team-card { transition: transform .25s cubic-bezier(0.2,0.8,0.2,1); }
           #team .team-card:hover { transform: translateY(-4px); }
           #team .amb-card { transition: transform .25s cubic-bezier(0.2,0.8,0.2,1); }

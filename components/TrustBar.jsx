@@ -16,12 +16,17 @@ const TrustBar = () => {
         .marquee-track:hover { animation-play-state: paused; }
         .marquee-track img { height: 30px; width: auto; opacity: .72; transition: opacity .2s; flex-shrink: 0; }
         .marquee-track img:hover { opacity: 1; }
+        @media (max-width: 760px) {
+          .tb-head { flex-wrap: wrap; gap: 6px 14px !important; }
+          .tb-head .tb-label { white-space: normal !important; }
+          .tb-head .tb-rule { display: none !important; }
+        }
       `}</style>
       <div className="container">
-        <div style={{ display: 'flex', alignItems: 'center', gap: 24, marginBottom: 22 }}>
-          <span style={{ fontSize: 11, color: 'rgba(255,255,255,.55)', letterSpacing: '0.08em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Та же методика, по которой команда хакку обучает крупнейших</span>
-          <span style={{ flex: 1, height: 1, background: 'rgba(255,255,255,.12)' }}/>
-          <span style={{ fontSize: 11, color: '#FCBC60', letterSpacing: '0.04em', whiteSpace: 'nowrap' }}>Теперь — для собственников малого и среднего бизнеса</span>
+        <div className="tb-head" style={{ display: 'flex', alignItems: 'center', gap: 24, marginBottom: 22 }}>
+          <span className="tb-label" style={{ fontSize: 11, color: 'rgba(255,255,255,.55)', letterSpacing: '0.08em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Та же методика, по которой команда хакку обучает крупнейших</span>
+          <span className="tb-rule" style={{ flex: 1, height: 1, background: 'rgba(255,255,255,.12)' }}/>
+          <span className="tb-label" style={{ fontSize: 11, color: '#FCBC60', letterSpacing: '0.04em', whiteSpace: 'nowrap' }}>Теперь — для собственников малого и среднего бизнеса</span>
         </div>
       </div>
       <div style={{ position: 'relative', overflow: 'hidden' }}>

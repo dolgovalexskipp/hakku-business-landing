@@ -10,7 +10,11 @@ const Hero = () => {
         filter: 'drop-shadow(0 30px 80px rgba(42,62,244,.18))',
       }}/>
       <style>{`
-        @media (max-width: 900px) { .hero-holo { width: 320px !important; height: 320px !important; right: -90px !important; top: 8px !important; opacity: .5; } }
+        @media (max-width: 900px) { .hero-holo { width: 220px !important; height: 220px !important; right: -96px !important; top: -24px !important; opacity: .3; } }
+        @media (max-width: 640px) {
+          .hero-stat { grid-template-columns: 1fr !important; row-gap: 10px !important; }
+          .hero-stat .numeral { font-size: 44px !important; }
+        }
       `}</style>
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: 960 }}>
@@ -46,7 +50,7 @@ const Hero = () => {
           </div>
         </div>
 
-        <div style={{
+        <div className="hero-stat" style={{
           marginTop: 56, paddingTop: 26, borderTop: '1px solid rgba(0,0,0,.08)',
           maxWidth: 940, display: 'grid', gridTemplateColumns: '140px 1fr',
           columnGap: 48, rowGap: 24, alignItems: 'baseline',
