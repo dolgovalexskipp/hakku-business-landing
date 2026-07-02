@@ -39,14 +39,25 @@ window.onTelegramAuth = async function(user){
   }
 };
 
+const VIEWS = ['home','trajectory','knowledge','schedule','faculty','expert'];
+// deep link: /os/?view=expert (пришедший /office-hours/ редиректится сюда)
+const viewFromURL = () => {
+  try { const v = new URLSearchParams(location.search).get('view'); return VIEWS.includes(v) ? v : 'home'; }
+  catch(e){ return 'home'; }
+};
+
 function App(){
   const [ready, setReady]   = React.useState(false);
   const [authed, setAuthed] = React.useState(false);
-  const [view, setView]     = React.useState('home');
+  const [view, setView]     = React.useState(viewFromURL);
   const [kbTrack, setKbTrack] = React.useState(null); // preselected knowledge-base track
 
   // nav(view, opts?) — opts.track deep-links the knowledge base to a track stage
-  const go = (v, opts) => { if (opts && 'track' in opts) setKbTrack(opts.track); setView(v); };
+  const go = (v, opts) => {
+    if (opts && 'track' in opts) setKbTrack(opts.track);
+    setView(v);
+    try { history.replaceState(null, '', v==='home' ? '/os/' : `/os/?view=${v}`); } catch(e){}
+  };
 
   React.useEffect(()=>{ (async()=>{
     // 1) Telegram session via backend cookie
