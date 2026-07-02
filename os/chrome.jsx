@@ -122,7 +122,7 @@ const navData = [
   { label:'Среда', items:[
     { ic:'cal', t:'Расписание', view:'schedule' },
     { ic:'users', t:'Спикеры', view:'faculty' },
-    { ic:'video', t:'Разбор с экспертом', view:'expert' },
+    { ic:'video', t:'Office hours', view:'expert' },
   ]},
 ];
 

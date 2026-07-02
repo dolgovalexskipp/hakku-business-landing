@@ -5,12 +5,12 @@ function Expert({ nav = ()=>{} }) {
     <div className="os-frame">
       <Sidebar active="expert" nav={nav}/>
       <div className="os-main">
-        <Topbar crumbs={['бИИзнес','Разбор с экспертом']} actions={null}/>
+        <Topbar crumbs={['бИИзнес','Office hours']} actions={null}/>
         <div className="os-content">
           <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', gap: 16, flexWrap:'wrap' }}>
             <div>
               <div className="os-eyebrow" style={{ marginBottom: 10 }}>Личный разбор · 1-на-1</div>
-              <h1 className="os-h1">Разбор с экспертом.</h1>
+              <h1 className="os-h1">Office hours.</h1>
               <p className="os-sub" style={{ marginTop: 8, maxWidth: 580 }}>
                 Созвон с Сашей Долговым: разберём вашу задачу — от выбора первого ИИ-сотрудника до узких мест в процессах.
                 Приходите с конкретной болью, уходите с планом. Выберите удобный слот ниже.
