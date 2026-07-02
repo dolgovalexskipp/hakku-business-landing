@@ -1,12 +1,24 @@
 // home.jsx — Dashboard (light). Next-event hero + new materials + context rail.
-const JULY = [
-  { n:1, d:'1–7 июля',   items:[ { kind:'Гайд', title:'Каталог ИИ-сотрудников', href:'/materials/katalog-ii-sotrudnikov/' }, { kind:'Гайд', title:'Промпт-аудитор решений', href:'/materials/prompt-auditor/' } ] },
-  { n:2, d:'8–14 июля',  items:[ { kind:'Видео-разбор', title:'Персональный ассистент собственника' }, { kind:'Гайд', title:'Регламент за 20 минут' } ] },
-  { n:3, d:'15–21 июля', items:[ { kind:'Видео-разбор', title:'ИИ — это отдел, а не один помощник' }, { kind:'Видео-разбор', title:'Где ИИ врёт' } ] },
-  { n:4, d:'22–28 июля', items:[ { kind:'Вебинар + Q&A', title:'Оперативка без созвонов' }, { kind:'Гайд', title:'ОС компании на одной странице' } ] },
+// MONTHS — единая листалка контента по месяцам в правом рейле.
+// Формат строки одинаковый для всех месяцев: когда · что · формат + этап (где применим).
+const MONTHS = [
+  { id:'june', label:'Июнь',
+    items: MATERIALS.filter(m=>!m.isNew).map(m=>({ when: m.status==='live'?'есть':m.d, kind:m.kind, title:m.title, href:m.href, track:m.track })),
+    foot:'Материалы июня остаются в базе навсегда.' },
+  { id:'july', label:'Июль', now:true,
+    items:[
+      { when:'есть',  kind:'Гайд',         title:'Каталог ИИ-сотрудников',              href:'/materials/katalog-ii-sotrudnikov/', track:'first-agent' },
+      { when:'есть',  kind:'Промпты',      title:'Промпт-аудитор решений',              href:'/materials/prompt-auditor/',        track:'personal' },
+      { when:'13.07', kind:'Loom-разбор',  title:'Персональный ассистент собственника', track:'first-agent' },
+      { when:'16.07', kind:'Гайд',         title:'Регламент за 20 минут',               track:'team' },
+      { when:'20.07', kind:'Loom-разбор',  title:'ИИ — это отдел, а не один помощник',  track:'team' },
+      { when:'20.07', kind:'Loom-разбор',  title:'Где ИИ врёт — живая демонстрация',    track:'personal' },
+      { when:'22.07', kind:'Вебинар + Q&A', title:'Оперативка без созвонов',            track:'team', note:'дата уточняется' },
+      { when:'28.07', kind:'Гайд',         title:'ОС компании на одной странице',       track:'team' },
+    ] },
 ];
 function HomeA({ nav = ()=>{} }) {
-  const [railTab, setRailTab] = React.useState('july');
+  const [monthIdx, setMonthIdx] = React.useState(MONTHS.findIndex(m=>m.now));
   const featured = MATERIALS.find(m=>m.k==='video' && m.status==='live') || MATERIALS.find(m=>m.status==='live');
   // latest additions first — new registry entries land at the tail of MATERIALS
   const fresh = MATERIALS.filter(m=>m.status==='live' && m!==featured).slice(-4).reverse();
@@ -105,61 +117,50 @@ function HomeA({ nav = ()=>{} }) {
       {/* right rail — context */}
       <aside className="os-rail">
         <div className="os-rail-block">
-          {/* переключатель: контент-план ↔ программа июля */}
-          <div className="os-rail-toggle">
-            <button className={railTab==='plan'?'on':''} onClick={()=>setRailTab('plan')}>Июнь</button>
-            <button className={railTab==='july'?'on':''} onClick={()=>setRailTab('july')}>Июль · сейчас</button>
-          </div>
-
-          {railTab==='plan' ? (
+          {/* листалка по месяцам — единый формат строк для любого месяца */}
+          {(()=>{ const mo = MONTHS[monthIdx]; return (
             <React.Fragment>
-              <div style={{ display:'flex', flexDirection:'column', marginTop: 12 }}>
-                {MATERIALS.map((m,i)=>{
+              <div style={{ display:'flex', alignItems:'center', gap: 8 }}>
+                <button className="os-mo-arrow" disabled={monthIdx===0} onClick={()=>setMonthIdx(monthIdx-1)}>‹</button>
+                <div style={{ flex: 1, textAlign:'center', fontFamily:'var(--font-display)', fontSize: 15 }}>
+                  {mo.label}{mo.now && <span style={{ fontSize: 11.5, fontFamily:'var(--font-body)', fontWeight: 600, color:'var(--magenta)', marginLeft: 7, textTransform:'uppercase', letterSpacing:'.05em' }}>сейчас</span>}
+                </div>
+                <button className="os-mo-arrow" disabled={monthIdx===MONTHS.length-1} onClick={()=>setMonthIdx(monthIdx+1)}>›</button>
+              </div>
+              <div style={{ display:'flex', flexDirection:'column', marginTop: 10 }}>
+                {mo.items.map((it,i)=>{
+                  const tr = it.track && trackById(it.track);
                   const inner = (
                     <div style={{ display:'flex', gap: 12, padding:'10px 0', borderTop: i?'1px solid var(--ink-08)':'0' }}>
-                      <span style={{ fontFamily:'var(--font-display)', fontSize: 13, color: m.status==='live'?'var(--blue)':'var(--ink-40)', width: 42, flexShrink:0 }}>{m.status==='live'?'есть':m.d}</span>
-                      <div>
-                        <div style={{ fontSize: 13.5, lineHeight: 1.35 }}>{m.title}</div>
-                        <div style={{ fontSize: 11.5, color:'var(--ink-40)', marginTop: 2 }}>{m.kind}</div>
+                      <span style={{ fontFamily:'var(--font-display)', fontSize: 13, color: it.when==='есть'?'var(--blue)':'var(--ink-40)', width: 44, flexShrink:0 }}>{it.when}</span>
+                      <div style={{ minWidth: 0 }}>
+                        <div style={{ fontSize: 13.5, lineHeight: 1.35 }}>{it.title}</div>
+                        <div style={{ fontSize: 11.5, color:'var(--ink-40)', marginTop: 2 }}>
+                          {it.kind}{tr ? ` · этап ${tr.n} · ${tr.short.toLowerCase()}` : ''}{it.note ? ` · ${it.note}` : ''}
+                        </div>
                       </div>
                     </div>
                   );
-                  return m.href
-                    ? <a key={i} className="os-rail-row" href={m.href} style={{ display:'block', textDecoration:'none', color:'inherit' }}>{inner}</a>
-                    : <div key={i} className="os-rail-row" style={{ opacity:.7 }}>{inner}</div>;
+                  return it.href
+                    ? <a key={i} className="os-rail-row" href={it.href} style={{ display:'block', textDecoration:'none', color:'inherit' }}>{inner}</a>
+                    : <div key={i} className="os-rail-row" style={{ opacity:.75 }}>{inner}</div>;
                 })}
               </div>
-              <hr className="os-grad-rule" style={{ marginTop: 6 }}/>
-              <div style={{ fontSize: 12.5, color:'var(--ink-55)' }}>Календарь пополняется каждую неделю и остаётся в базе.</div>
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              <div style={{ marginTop: 14, display:'flex', flexDirection:'column', gap: 16 }}>
-                {JULY.map((w,i)=>(
-                  <div key={i}>
-                    <div style={{ fontFamily:'var(--font-display)', fontSize: 12.5, color:'var(--blue)', marginBottom: 4 }}>Неделя {w.n} · {w.d}</div>
-                    {w.items.map((it,j)=>{
-                      const inner = (
-                        <div style={{ padding:'7px 0', borderTop: j?'1px solid var(--ink-08)':'0' }}>
-                          <div style={{ fontSize: 10.5, color:'var(--ink-40)', textTransform:'uppercase', letterSpacing:'.04em' }}>
-                            {it.kind}{it.href && <span className="os-status live" style={{ marginLeft: 8, textTransform:'none', letterSpacing: 0 }}>{Icons.check(' ')} есть</span>}
-                          </div>
-                          <div style={{ fontSize: 13.5, lineHeight: 1.35 }}>{it.title}</div>
-                        </div>
-                      );
-                      return it.href
-                        ? <a key={j} className="os-rail-row" href={it.href} style={{ display:'block', textDecoration:'none', color:'inherit' }}>{inner}</a>
-                        : <div key={j}>{inner}</div>;
-                    })}
+              {mo.now ? (
+                <React.Fragment>
+                  <div style={{ marginTop: 14, padding:'10px 12px', border:'1px solid var(--ink-12)', borderRadius: 10, background:'var(--ink-04)', fontSize: 12.5, color:'var(--ink-72)' }}>
+                    Ранний доступ закрывается <b>16 июля</b> — дальше тарифы по обычной цене.
                   </div>
-                ))}
-              </div>
-              <div style={{ marginTop: 14, padding:'10px 12px', border:'1px solid var(--ink-12)', borderRadius: 10, background:'var(--ink-04)', fontSize: 12.5, color:'var(--ink-72)' }}>
-                Ранний доступ закрывается <b>8 июля</b> — дальше тарифы по обычной цене.
-              </div>
-              <a className="os-clickable" href="/programma-iyulya/" style={{ display:'inline-block', marginTop: 12, fontSize: 13.5, color:'var(--blue)', fontWeight: 500, textDecoration:'none' }}>Открыть программу июля →</a>
+                  <a className="os-clickable" href="/programma-iyulya/" style={{ display:'inline-block', marginTop: 12, fontSize: 13.5, color:'var(--blue)', fontWeight: 500, textDecoration:'none' }}>Открыть программу июля →</a>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <hr className="os-grad-rule" style={{ marginTop: 6 }}/>
+                  <div style={{ fontSize: 12.5, color:'var(--ink-55)' }}>{mo.foot}</div>
+                </React.Fragment>
+              )}
             </React.Fragment>
-          )}
+          ); })()}
         </div>
 
         <div className="os-rail-block">

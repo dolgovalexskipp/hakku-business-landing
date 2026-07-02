@@ -83,7 +83,7 @@ function App(){
   if (!ready) return null;
   if (!authed) return <div className="os-app"><Login onAuth={handleAuth}/></div>;
 
-  const Screen = ({ home:HomeA, trajectory:Trajectory, knowledge:Knowledge, schedule:Schedule, faculty:Faculty }[view]) || HomeA;
+  const Screen = ({ home:HomeA, trajectory:Trajectory, knowledge:Knowledge, schedule:Schedule, faculty:Faculty, expert:Expert }[view]) || HomeA;
   return <div className="os-app"><Screen nav={go} kbTrack={kbTrack}/></div>;
 }
 

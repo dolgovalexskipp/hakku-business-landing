@@ -70,6 +70,16 @@ const MATERIALS = [
   { kind:'Промпты',  k:'prompt', title:'Промпт-аудитор решений',      sub:'Найдите решения, которые принимаете зря',        auth:'alex',    read:'7 мин',  status:'live', track:'personal',    topics:['Продуктивность','Рутина'],        tier:'pro', href:'/materials/prompt-auditor/', isNew:true },
 ];
 const liveCount = MATERIALS.filter(m=>m.status==='live').length;
+const soonCount = MATERIALS.length - liveCount;
+// russian plural: 1 материал / 2 материала / 5 материалов
+const matPlural = (n) => {
+  const m10 = n % 10, m100 = n % 100;
+  if (m10 === 1 && m100 !== 11) return `${n} материал`;
+  if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return `${n} материала`;
+  return `${n} материалов`;
+};
+// materials авторства спикера — считается из реестра, не хардкодом
+const matCountByAuthor = (id) => MATERIALS.filter(m => m.auth === id && m.status === 'live').length;
 
 /* ---- taxonomy: learning track (primary) + access tiers ------ */
 const TRACKS = [
@@ -85,19 +95,19 @@ const TIER_RANK = { pro:1, max:2, company:3 };
 const USER_TIER = 'company';
 const canAccess = (m) => TIER_RANK[window.__SESSION_TIER || USER_TIER] >= TIER_RANK[m.tier || 'pro'];
 const trackById = (id) => TRACKS.find(t => t.id === id);
-const countByTrack = (id) => MATERIALS.filter(m => m.track === id).length;
+const countByTrack = (id) => MATERIALS.filter(m => m.track === id && m.status === 'live').length;
 const ALL_TOPICS = [...new Set(MATERIALS.flatMap(m => m.topics || []))];
 
 const LECTURERS = [
   { id:'nikolai', name:'Николай Писаренко', role:'сооснователь · хакку.ии', tg:'@npisarenko', img:AV.nikolai,
     bio:'PwC, СИБУР, СберУниверситет. Спикер 100+ конференций, 10+ лет в корпоративном обучении и ИИ-трансформации. В сообществе отвечает за методологию и корпоративный контекст — как встроить ИИ в процессы компании системно, без хаоса в чатах.',
-    tags:['Методология','Корпоративный контекст','Процессы','Обучение'], count:3 },
+    tags:['Методология','Корпоративный контекст','Процессы','Обучение'] },
   { id:'sergei', name:'Сергей Ершов', role:'сооснователь · хакку.ии', tg:'@sershov', img:AV.sergei,
     bio:'CPO/CEO Edutoria (образовательная платформа Сбера), директор по развитию Ultimate Education. Продукт и образование, автор каналов про ИИ и технологии. Ведёт серии промптов и вебинары с разбором кейсов выручки и маржи.',
-    tags:['Продукт','Промпт-инжиниринг','Продажи','EdTech'], count:2 },
+    tags:['Продукт','Промпт-инжиниринг','Продажи','EdTech'] },
   { id:'alex', name:'Саша Долгов', role:'сооснователь · бИИзнес', tg:'@dolgovalex', img:AV.alex,
     bio:'Основатель VEYRA (голосовые ИИ-агенты). McKinsey → Skyeng → собственная компания, построенная с нуля вокруг ИИ. Практик ИИ-интеграций: ведёт гайды по инфраструктуре и настройке инструментов — от оплаты нейронок до второго мозга.',
-    tags:['ИИ-инфраструктура','Claude','Автоматизация'], count:3 },
+    tags:['ИИ-инфраструктура','Claude','Автоматизация'] },
 ];
 
 const navData = [
@@ -106,12 +116,13 @@ const navData = [
     { ic:'route', t:'Траектория', view:'trajectory' },
   ] },
   { label:'База знаний', items:[
-    { ic:'book', t:'Все материалы', count:String(MATERIALS.length), view:'knowledge', track:null },
+    { ic:'book', t:'Все материалы', count:String(liveCount), view:'knowledge', track:null },
     ...TRACKS.map(tr => ({ sub:true, t:`${tr.n} · ${tr.short}`, count:String(countByTrack(tr.id)), view:'knowledge', track:tr.id })),
   ]},
   { label:'Среда', items:[
     { ic:'cal', t:'Расписание', view:'schedule' },
-    { ic:'users', t:'Лекторы', view:'faculty' },
+    { ic:'users', t:'Спикеры', view:'faculty' },
+    { ic:'video', t:'Разбор с экспертом', view:'expert' },
   ]},
 ];
 
@@ -181,4 +192,4 @@ function Topbar({ crumbs, actions }) {
   );
 }
 
-Object.assign(window, { Glyph, Wordmark, Icons, AV, MATERIALS, LECTURERS, liveCount, TRACKS, TIERS, USER_TIER, canAccess, trackById, countByTrack, ALL_TOPICS, Sidebar, Topbar, osLogout });
+Object.assign(window, { Glyph, Wordmark, Icons, AV, MATERIALS, LECTURERS, liveCount, soonCount, matPlural, matCountByAuthor, TRACKS, TIERS, USER_TIER, canAccess, trackById, countByTrack, ALL_TOPICS, Sidebar, Topbar, osLogout });

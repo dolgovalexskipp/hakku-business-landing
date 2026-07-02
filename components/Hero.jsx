@@ -46,7 +46,7 @@ const Hero = () => {
           <div style={{ display: 'flex', gap: 22, flexWrap: 'wrap', alignItems: 'center' }}>
             <a href="#cta"><button style={{ ...btnStyles.primary, fontSize: 16, padding: '18px 34px' }}
               onMouseOver={e => e.currentTarget.style.filter = 'brightness(1.7)'} onMouseOut={e => e.currentTarget.style.filter = 'none'}>Войти в сообщество →</button></a>
-            <a href="#pricing" style={{ fontSize: 15, color: 'rgba(0,0,0,.6)', borderBottom: '1px solid rgba(0,0,0,.2)', paddingBottom: 2 }}>Тарифы от 3 900 ₽ — ранняя цена до 8 июля</a>
+            <a href="#pricing" style={{ fontSize: 15, color: 'rgba(0,0,0,.6)', borderBottom: '1px solid rgba(0,0,0,.2)', paddingBottom: 2 }}>Тарифы от 3 900 ₽ — ранняя цена до 16 июля</a>
           </div>
         </div>
 

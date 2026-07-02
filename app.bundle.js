@@ -267,7 +267,7 @@ const Hero = () => {
       borderBottom: '1px solid rgba(0,0,0,.2)',
       paddingBottom: 2
     }
-  }, "\u0422\u0430\u0440\u0438\u0444\u044B \u043E\u0442 3 900 \u20BD \u2014 \u0440\u0430\u043D\u043D\u044F\u044F \u0446\u0435\u043D\u0430 \u0434\u043E 8 \u0438\u044E\u043B\u044F"))), React.createElement("div", {
+  }, "\u0422\u0430\u0440\u0438\u0444\u044B \u043E\u0442 3 900 \u20BD \u2014 \u0440\u0430\u043D\u043D\u044F\u044F \u0446\u0435\u043D\u0430 \u0434\u043E 16 \u0438\u044E\u043B\u044F"))), React.createElement("div", {
     className: "hero-stat",
     style: {
       marginTop: 56,
@@ -1601,7 +1601,7 @@ const Pricing = () => {
       textTransform: 'uppercase',
       whiteSpace: 'nowrap'
     }
-  }, "\u0420\u0430\u043D\u043D\u0438\u0439 \u0442\u0430\u0440\u0438\u0444"), React.createElement("span", null, "\u0421\u043D\u0438\u0436\u0435\u043D\u043D\u0430\u044F \u0446\u0435\u043D\u0430 \u0434\u043B\u044F \u0432\u0441\u0435\u0445, \u043A\u0442\u043E \u043F\u043E\u0434\u043F\u0438\u0448\u0435\u0442\u0441\u044F \u0434\u043E 8 \u0438\u044E\u043B\u044F \u2014 \u043F\u0435\u0440\u0432\u043E\u0433\u043E \u043C\u0435\u0441\u044F\u0446\u0430 \u0436\u0438\u0437\u043D\u0438 \u0441\u043E\u043E\u0431\u0449\u0435\u0441\u0442\u0432\u0430.")), React.createElement("div", {
+  }, "\u0420\u0430\u043D\u043D\u0438\u0439 \u0442\u0430\u0440\u0438\u0444"), React.createElement("span", null, "\u0421\u043D\u0438\u0436\u0435\u043D\u043D\u0430\u044F \u0446\u0435\u043D\u0430 \u0434\u043B\u044F \u0432\u0441\u0435\u0445, \u043A\u0442\u043E \u043F\u043E\u0434\u043F\u0438\u0448\u0435\u0442\u0441\u044F \u0434\u043E 16 \u0438\u044E\u043B\u044F \u2014 \u043F\u0435\u0440\u0432\u043E\u0433\u043E \u043C\u0435\u0441\u044F\u0446\u0430 \u0436\u0438\u0437\u043D\u0438 \u0441\u043E\u043E\u0431\u0449\u0435\u0441\u0442\u0432\u0430.")), React.createElement("div", {
     style: {
       display: 'grid',
       gridTemplateColumns: 'repeat(3,1fr)',
@@ -1666,7 +1666,7 @@ const Pricing = () => {
         marginBottom: 4,
         textTransform: 'uppercase'
       }
-    }, "\u0440\u0430\u043D\u043D\u0438\u0439 \u0442\u0430\u0440\u0438\u0444 \xB7 \u0434\u043E 8 \u0438\u044E\u043B\u044F"), React.createElement("div", {
+    }, "\u0440\u0430\u043D\u043D\u0438\u0439 \u0442\u0430\u0440\u0438\u0444 \xB7 \u0434\u043E 16 \u0438\u044E\u043B\u044F"), React.createElement("div", {
       style: {
         display: 'flex',
         alignItems: 'baseline',

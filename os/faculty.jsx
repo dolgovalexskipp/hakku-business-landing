@@ -1,13 +1,13 @@
-// faculty.jsx — lecturer profiles. Co-founders as practitioners.
+// faculty.jsx — speaker profiles. Co-founders as practitioners.
 function Faculty({ nav = ()=>{} }) {
   return (
     <div className="os-frame">
       <Sidebar active="faculty" nav={nav}/>
       <div className="os-main">
-        <Topbar crumbs={['бИИзнес','Лекторы']} actions={null}/>
+        <Topbar crumbs={['бИИзнес','Спикеры']} actions={null}/>
         <div className="os-content">
           <div>
-            <div className="os-eyebrow" style={{ marginBottom: 10 }}>Команда · практики, не лекторы</div>
+            <div className="os-eyebrow" style={{ marginBottom: 10 }}>Спикеры · практики, не теоретики</div>
             <h1 className="os-h1">Кто ведёт материалы.</h1>
             <p className="os-sub" style={{ marginTop: 8, maxWidth: 580 }}>
               Не теоретики со сцены. Собственники и продуктологи, которые сами внедрили ИИ в свои компании — и показывают, как это сделали.
@@ -26,7 +26,7 @@ function Faculty({ nav = ()=>{} }) {
                   <p className="bio">{l.bio}</p>
                   <div className="tags">{l.tags.map((t,j)=><span className="os-tag" key={j}>{t}</span>)}</div>
                   <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginTop: 4, paddingTop: 14, borderTop:'1px solid var(--ink-08)' }}>
-                    <span className="os-meta">{Icons.book(' ')} {l.count} материалов</span>
+                    <span className="os-meta">{Icons.book(' ')} {matCountByAuthor(l.id) > 0 ? matPlural(matCountByAuthor(l.id)) : 'материалы скоро'}</span>
                     <a href={`https://t.me/${l.tg.replace('@','')}`} target="_blank" rel="noopener" style={{ fontSize: 13, color:'var(--blue)', fontWeight: 500, textDecoration:'none' }}>{l.tg}</a>
                   </div>
                 </div>

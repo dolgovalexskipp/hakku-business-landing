@@ -300,3 +300,18 @@ html, body { margin: 0; background: var(--paper); }
   .os-app .os-tj-mat .mr { display: none; }
   .os-app .os-tj-cta .os-btn { width: 100%; justify-content: center; }
 }
+
+/* month pager in the home rail */
+.os-app .os-mo-arrow { width: 28px; height: 28px; border: 1px solid var(--ink-12); border-radius: 8px; background: #fff; color: var(--ink-72); font-size: 16px; line-height: 1; cursor: pointer; transition: color .12s, border-color .12s; }
+.os-app .os-mo-arrow:hover:not(:disabled) { color: var(--ink); border-color: var(--ink-40); }
+.os-app .os-mo-arrow:disabled { opacity: .3; cursor: default; }
+
+/* speakers — circle avatars (deck style) */
+.os-app .os-fac-card { align-items: center; text-align: center; padding: 28px 20px 20px; }
+.os-app .os-fac-card .ph { width: 150px; height: 150px; aspect-ratio: 1/1; border-radius: 50%; object-fit: cover; border: 1px solid var(--ink-12); }
+.os-app .os-fac-card .bd { width: 100%; padding: 18px 4px 0; align-items: center; }
+.os-app .os-fac-card .tags { justify-content: center; }
+
+/* calendar cells hold full event names */
+.os-app .os-cal-cell { min-height: 96px; }
+.os-app .os-cal-ev { margin-top: 3px; }

@@ -1,24 +1,31 @@
 // schedule.jsx — July 2026 calendar (Mon-start) + upcoming list rail.
+// ICS-подписка: /os/hakku-biiznes.ics — отдельный календарь «хакку.ии | бИИзнес».
+const ICS_PATH = '/os/hakku-biiznes.ics';
+const icsWebcal = () => 'webcal://' + location.host + ICS_PATH;
+const icsGoogle = () => 'https://calendar.google.com/calendar/r?cid=' + encodeURIComponent('http://' + location.host + ICS_PATH);
 function Schedule({ nav = ()=>{} }) {
   const TG = 'https://t.me/hakkuai_business_bot';
+  // день → список событий; полные названия материалов
   const ev = {
-    1:  { c:'blue',   t:'2 гайда · старт июля' },
-    8:  { c:'orange', t:'Финал раннего доступа' },
-    13: { c:'mag',    t:'Loom · ассистент' },
-    16: { c:'blue',   t:'Гайд · регламент' },
-    20: { c:'mag',    t:'2 Loom · проверка' },
-    22: { c:'ink',    t:'Вебинар · дата уточняется' },
+    1:  [ { c:'blue',   t:'Гайды: Каталог ИИ-сотрудников · Промпт-аудитор решений' } ],
+    13: [ { c:'mag',    t:'Loom: Персональный ассистент собственника' } ],
+    16: [ { c:'orange', t:'Финал раннего доступа' }, { c:'blue', t:'Гайд: Регламент за 20 минут' } ],
+    20: [ { c:'mag',    t:'Loom: ИИ — это отдел, а не один помощник' }, { c:'mag', t:'Loom: Где ИИ врёт — живая демонстрация' } ],
+    22: [ { c:'ink',    t:'Вебинар: Оперативка без созвонов · дата уточняется' } ],
+    28: [ { c:'blue',   t:'Гайд: ОС компании на одной странице' } ],
   };
   const days = []; for (let i=1;i<=31;i++) days.push(i);
   const dows = ['ПН','ВТ','СР','ЧТ','ПТ','СБ','ВС'];
   const now = new Date();
   const todayNum = (now.getFullYear()===2026 && now.getMonth()===6) ? now.getDate() : null;
   const upcoming = [
-    { d:'1',  m:'июл', dow:'СР', time:'—', kind:'Гайды',   c:'blue',   t:'Каталог ИИ-сотрудников + Промпт-аудитор', who:'Саша Долгов · уже в базе' },
-    { d:'8',  m:'июл', dow:'СР', time:'—', kind:'Дедлайн', c:'orange', t:'Закрытие раннего доступа', who:'тарифы фиксируются до конца 2026' },
+    { d:'1',  m:'июл', dow:'СР', time:'—', kind:'Гайды',   c:'blue',   t:'Каталог ИИ-сотрудников + Промпт-аудитор решений', who:'Саша Долгов · уже в базе' },
     { d:'13', m:'июл', dow:'ПН', time:'—', kind:'Loom',    c:'mag',    t:'Персональный ассистент собственника', who:'Саша Долгов' },
+    { d:'16', m:'июл', dow:'ЧТ', time:'—', kind:'Дедлайн', c:'orange', t:'Закрытие раннего доступа', who:'тарифы фиксируются до конца 2026' },
+    { d:'16', m:'июл', dow:'ЧТ', time:'—', kind:'Гайд',    c:'blue',   t:'Регламент за 20 минут', who:'гайд недели 2' },
     { d:'20', m:'июл', dow:'ПН', time:'—', kind:'Loom',    c:'mag',    t:'ИИ — это отдел · Где ИИ врёт', who:'Саша Долгов' },
-    { d:'22', m:'июл', dow:'СР', time:'дата уточняется', kind:'Вебинар', c:'blue', t:'Оперативка на минималках', who:'гость + разбор кейсов + Q&A' },
+    { d:'22', m:'июл', dow:'СР', time:'дата уточняется', kind:'Вебинар', c:'blue', t:'Оперативка без созвонов', who:'гость + разбор кейсов + Q&A' },
+    { d:'28', m:'июл', dow:'ВТ', time:'—', kind:'Гайд',    c:'blue',   t:'ОС компании на одной странице', who:'финал месяца операционки' },
   ];
   return (
     <div className="os-frame">
@@ -26,12 +33,15 @@ function Schedule({ nav = ()=>{} }) {
       <div className="os-main">
         <Topbar crumbs={['бИИзнес','Расписание']} actions={null}/>
         <div className="os-content">
-          <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between' }}>
+          <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', gap: 16, flexWrap:'wrap' }}>
             <div>
               <div className="os-eyebrow" style={{ marginBottom: 10 }}>Расписание · CET / МСК</div>
               <h1 className="os-h1">Июль 2026.</h1>
             </div>
-            <div className="os-seg"><button>‹</button><button className="on">Июль</button><button>›</button></div>
+            <div style={{ display:'flex', alignItems:'center', gap: 10, flexWrap:'wrap' }}>
+              <a className="os-btn sm" href={icsWebcal()} style={{ textDecoration:'none' }}>{Icons.cal(' ')} Добавить себе в календарь</a>
+              <a href={icsGoogle()} target="_blank" rel="noopener" style={{ fontSize: 13, color:'var(--blue)', fontWeight: 500, textDecoration:'none' }}>Google Календарь →</a>
+            </div>
           </div>
 
           <div className="os-cal">
@@ -39,11 +49,11 @@ function Schedule({ nav = ()=>{} }) {
             <div className="os-cal-grid">
               {[29,30].map(n=><div className="os-cal-cell muted" key={'p'+n}><div className="n">{n}</div></div>)}
               {days.map(n=>{
-                const e = ev[n]; const today = n===todayNum;
+                const es = ev[n]; const today = n===todayNum;
                 return (
                   <div className={`os-cal-cell${today?' today':''}`} key={n}>
                     <div className="n">{n}</div>
-                    {e && <div className={`os-cal-ev ${e.c}`}>{e.t}</div>}
+                    {es && es.map((e,i)=><div className={`os-cal-ev ${e.c}`} key={i}>{e.t}</div>)}
                   </div>
                 );
               })}

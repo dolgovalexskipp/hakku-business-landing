@@ -98,7 +98,7 @@ function Knowledge({ nav = ()=>{}, kbTrack = null }) {
               ))}
             </div>
             <span style={{ fontSize: 13, color:'var(--ink-40)', whiteSpace:'nowrap' }}>
-              {query || topic!=='Все' ? `${total} найдено` : `${MATERIALS.length} материалов · ${liveCount} доступно сейчас`}
+              {query || topic!=='Все' ? `${total} найдено` : `${matPlural(liveCount)} в базе${soonCount ? ` · ещё ${soonCount} скоро` : ''}`}
             </span>
           </div>
 
