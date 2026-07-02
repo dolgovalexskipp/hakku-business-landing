@@ -1,19 +1,24 @@
-// schedule.jsx — June 2026 calendar (Mon-start) + upcoming list rail.
+// schedule.jsx — July 2026 calendar (Mon-start) + upcoming list rail.
 function Schedule({ nav = ()=>{} }) {
   const TG = 'https://t.me/hakkuai_business_bot';
   const ev = {
-    8:  { c:'ink',    t:'Запуск · live 18:00' },
-    15: { c:'orange', t:'Серия промптов' },
-    22: { c:'mag',    t:'Loom · войсы' },
-    23: { c:'blue',   t:'Вебинар · Excel' },
+    1:  { c:'blue',   t:'2 гайда · старт июля' },
+    8:  { c:'orange', t:'Финал раннего доступа' },
+    13: { c:'mag',    t:'Loom · ассистент' },
+    16: { c:'blue',   t:'Гайд · регламент' },
+    20: { c:'mag',    t:'2 Loom · проверка' },
+    22: { c:'ink',    t:'Вебинар · дата уточняется' },
   };
-  const days = []; for (let i=1;i<=30;i++) days.push(i);
+  const days = []; for (let i=1;i<=31;i++) days.push(i);
   const dows = ['ПН','ВТ','СР','ЧТ','ПТ','СБ','ВС'];
+  const now = new Date();
+  const todayNum = (now.getFullYear()===2026 && now.getMonth()===6) ? now.getDate() : null;
   const upcoming = [
-    { d:'8',  m:'июн', dow:'ПН', time:'18:00', kind:'Запуск',  c:'ink',    t:'Запуск сообщества бИИзнес', who:'Саша Долгов', live:true },
-    { d:'15', m:'июн', dow:'ПН', time:'—',     kind:'Промпты', c:'orange', t:'«Как ИИ забустит мой бизнес»', who:'Сергей Ершов' },
-    { d:'22', m:'июн', dow:'ПН', time:'—',     kind:'Loom',    c:'mag',    t:'Цифровая трансформация войсов', who:'Николай Писаренко' },
-    { d:'23', m:'июн', dow:'ВТ', time:'19:00', kind:'Вебинар', c:'blue',   t:'Цифровая революция в Excel', who:'Сергей Ершов', live:true },
+    { d:'1',  m:'июл', dow:'СР', time:'—', kind:'Гайды',   c:'blue',   t:'Каталог ИИ-сотрудников + Промпт-аудитор', who:'Саша Долгов · уже в базе' },
+    { d:'8',  m:'июл', dow:'СР', time:'—', kind:'Дедлайн', c:'orange', t:'Закрытие раннего доступа', who:'тарифы фиксируются до конца 2026' },
+    { d:'13', m:'июл', dow:'ПН', time:'—', kind:'Loom',    c:'mag',    t:'Персональный ассистент собственника', who:'Саша Долгов' },
+    { d:'20', m:'июл', dow:'ПН', time:'—', kind:'Loom',    c:'mag',    t:'ИИ — это отдел · Где ИИ врёт', who:'Саша Долгов' },
+    { d:'22', m:'июл', dow:'СР', time:'дата уточняется', kind:'Вебинар', c:'blue', t:'Оперативка на минималках', who:'гость + разбор кейсов + Q&A' },
   ];
   return (
     <div className="os-frame">
@@ -24,16 +29,17 @@ function Schedule({ nav = ()=>{} }) {
           <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between' }}>
             <div>
               <div className="os-eyebrow" style={{ marginBottom: 10 }}>Расписание · CET / МСК</div>
-              <h1 className="os-h1">Июнь 2026.</h1>
+              <h1 className="os-h1">Июль 2026.</h1>
             </div>
-            <div className="os-seg"><button>‹</button><button className="on">Июнь</button><button>›</button></div>
+            <div className="os-seg"><button>‹</button><button className="on">Июль</button><button>›</button></div>
           </div>
 
           <div className="os-cal">
             <div className="os-cal-head">{dows.map(d=><div key={d}>{d}</div>)}</div>
             <div className="os-cal-grid">
+              {[29,30].map(n=><div className="os-cal-cell muted" key={'p'+n}><div className="n">{n}</div></div>)}
               {days.map(n=>{
-                const e = ev[n]; const today = n===8;
+                const e = ev[n]; const today = n===todayNum;
                 return (
                   <div className={`os-cal-cell${today?' today':''}`} key={n}>
                     <div className="n">{n}</div>
@@ -41,15 +47,15 @@ function Schedule({ nav = ()=>{} }) {
                   </div>
                 );
               })}
-              {[0,1,2,3,4].map(i=><div className="os-cal-cell muted" key={'p'+i}><div className="n">{i+1}</div></div>)}
+              {[1,2].map(n=><div className="os-cal-cell muted" key={'n'+n}><div className="n">{n}</div></div>)}
             </div>
           </div>
 
           <div className="os-legend">
             <span><span className="os-dot" style={{ background:'var(--ink)' }}/> вебинар (live)</span>
             <span><span className="os-dot mag"/> Loom-разбор</span>
-            <span><span className="os-dot orange"/> серия промптов</span>
-            <span><span className="os-dot blue"/> эфир + запись</span>
+            <span><span className="os-dot blue"/> гайды</span>
+            <span><span className="os-dot orange"/> дедлайн раннего доступа</span>
             <span><span className="os-dot" style={{ background:'#fff', border:'2px solid var(--blue)' }}/> сегодня</span>
           </div>
         </div>

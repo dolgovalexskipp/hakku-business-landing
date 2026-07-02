@@ -41,7 +41,7 @@ function Knowledge({ nav = ()=>{}, kbTrack = null }) {
         : <span style={{ fontSize: 12, color:'var(--ink-40)', fontFamily:'var(--font-display)' }}>{m.date}</span> }</div>
       <div><span className={`os-badge ${m.k==='video'?'mag':m.k==='prompt'?'orange':m.k==='cal'?'blue':''}`}>{Icons[m.k](' ')}{m.kind}</span></div>
       <div>
-        <div className="ttl">{m.title}{tierChip}</div>
+        <div className="ttl">{m.title}{m.isNew && <span className="os-badge mag" style={{ marginLeft: 8, verticalAlign:'middle' }}>новое</span>}{tierChip}</div>
         <div className="sub">{m.sub}</div>
         {((m.topics||[]).length>0 || m.md) && (
           <div className="os-row-tags">
@@ -124,7 +124,7 @@ function Knowledge({ nav = ()=>{}, kbTrack = null }) {
 
           <div style={{ display:'flex', alignItems:'center', gap: 12, fontSize: 13.5, color:'var(--ink-55)' }}>
             <span style={{ width: 22, height: 3, background:'var(--grad-cool)', display:'inline-block', borderRadius: 2 }}/>
-            Это только июнь. Каждую неделю — новые материалы.
+            Идёт июль — месяц операционки. Каждую неделю — новые материалы, всё пройденное остаётся в базе.
           </div>
         </div>
       </div>

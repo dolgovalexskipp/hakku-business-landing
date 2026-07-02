@@ -1,14 +1,15 @@
 // home.jsx — Dashboard (light). Next-event hero + new materials + context rail.
 const JULY = [
-  { n:1, d:'1–7 июля',   items:[ { kind:'Гайд', title:'Каталог ИИ-сотрудников' }, { kind:'Гайд', title:'Промпт-аудитор решений' } ] },
+  { n:1, d:'1–7 июля',   items:[ { kind:'Гайд', title:'Каталог ИИ-сотрудников', href:'/materials/katalog-ii-sotrudnikov/' }, { kind:'Гайд', title:'Промпт-аудитор решений', href:'/materials/prompt-auditor/' } ] },
   { n:2, d:'8–14 июля',  items:[ { kind:'Видео-разбор', title:'Персональный ассистент собственника' }, { kind:'Гайд', title:'Регламент за 20 минут' } ] },
-  { n:3, d:'15–21 июля', items:[ { kind:'Видео-разбор', title:'ИИ — это отдел, а не кнопка' }, { kind:'Видео-разбор', title:'Где ИИ врёт' } ] },
+  { n:3, d:'15–21 июля', items:[ { kind:'Видео-разбор', title:'ИИ — это отдел, а не один помощник' }, { kind:'Видео-разбор', title:'Где ИИ врёт' } ] },
   { n:4, d:'22–28 июля', items:[ { kind:'Вебинар + Q&A', title:'Оперативка без созвонов' }, { kind:'Гайд', title:'ОС компании на одной странице' } ] },
 ];
 function HomeA({ nav = ()=>{} }) {
-  const [railTab, setRailTab] = React.useState('plan');
+  const [railTab, setRailTab] = React.useState('july');
   const featured = MATERIALS.find(m=>m.k==='video' && m.status==='live') || MATERIALS.find(m=>m.status==='live');
-  const fresh = MATERIALS.filter(m=>m.status==='live' && m!==featured).slice(0, 4);
+  // latest additions first — new registry entries land at the tail of MATERIALS
+  const fresh = MATERIALS.filter(m=>m.status==='live' && m!==featured).slice(-4).reverse();
   const TG = 'https://t.me/hakkuai_business_bot';
   const today = new Date().toLocaleDateString('ru-RU', { weekday:'long', day:'numeric', month:'long' });
   return (
@@ -88,6 +89,7 @@ function HomeA({ nav = ()=>{} }) {
                 <a className="os-mat-card" key={i} href={m.href} style={{ textDecoration:'none' }}>
                   <div className="head">
                     <span className={`os-badge ${m.k==='video'?'mag':m.k==='prompt'?'orange':'blue'}`}>{Icons[m.k](' ')}{m.kind}</span>
+                    {m.isNew && <span className="os-badge mag">новое</span>}
                     <span className="os-status live">{Icons.check(' ')} доступно</span>
                   </div>
                   <h4>{m.title}</h4>
@@ -105,8 +107,8 @@ function HomeA({ nav = ()=>{} }) {
         <div className="os-rail-block">
           {/* переключатель: контент-план ↔ программа июля */}
           <div className="os-rail-toggle">
-            <button className={railTab==='plan'?'on':''} onClick={()=>setRailTab('plan')}>Июнь · сейчас</button>
-            <button className={railTab==='july'?'on':''} onClick={()=>setRailTab('july')}>Июль</button>
+            <button className={railTab==='plan'?'on':''} onClick={()=>setRailTab('plan')}>Июнь</button>
+            <button className={railTab==='july'?'on':''} onClick={()=>setRailTab('july')}>Июль · сейчас</button>
           </div>
 
           {railTab==='plan' ? (
@@ -136,12 +138,19 @@ function HomeA({ nav = ()=>{} }) {
                 {JULY.map((w,i)=>(
                   <div key={i}>
                     <div style={{ fontFamily:'var(--font-display)', fontSize: 12.5, color:'var(--blue)', marginBottom: 4 }}>Неделя {w.n} · {w.d}</div>
-                    {w.items.map((it,j)=>(
-                      <div key={j} style={{ padding:'7px 0', borderTop: j?'1px solid var(--ink-08)':'0' }}>
-                        <div style={{ fontSize: 10.5, color:'var(--ink-40)', textTransform:'uppercase', letterSpacing:'.04em' }}>{it.kind}</div>
-                        <div style={{ fontSize: 13.5, lineHeight: 1.35 }}>{it.title}</div>
-                      </div>
-                    ))}
+                    {w.items.map((it,j)=>{
+                      const inner = (
+                        <div style={{ padding:'7px 0', borderTop: j?'1px solid var(--ink-08)':'0' }}>
+                          <div style={{ fontSize: 10.5, color:'var(--ink-40)', textTransform:'uppercase', letterSpacing:'.04em' }}>
+                            {it.kind}{it.href && <span className="os-status live" style={{ marginLeft: 8, textTransform:'none', letterSpacing: 0 }}>{Icons.check(' ')} есть</span>}
+                          </div>
+                          <div style={{ fontSize: 13.5, lineHeight: 1.35 }}>{it.title}</div>
+                        </div>
+                      );
+                      return it.href
+                        ? <a key={j} className="os-rail-row" href={it.href} style={{ display:'block', textDecoration:'none', color:'inherit' }}>{inner}</a>
+                        : <div key={j}>{inner}</div>;
+                    })}
                   </div>
                 ))}
               </div>

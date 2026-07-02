@@ -66,8 +66,8 @@ const MATERIALS = [
   { kind:'Промпты',  k:'prompt', title:'«Как ИИ забустит мой бизнес»', sub:'Серия промптов · рутина · продажи',             auth:'sergei',  read:'серия', status:'soon', track:'first-agent', topics:['Продажи','Рутина'],               tier:'pro', date:'15 июн', d:'15.06' },
   { kind:'Loom',     k:'video',  title:'Цифровая трансформация войсов', sub:'От хаоса в чатах — к системе',                 auth:'alex',    read:'16 мин', status:'live', track:'first-agent', topics:['Кейс','Автоматизация'],           tier:'max', href:'/v/tsifrovaya-transformatsiya-voysov/' },
   { kind:'Вебинар',  k:'book',   title:'Революция в Excel',           sub:'Конспект эфира: ИИ внутри таблицы, демо, промпты', auth:'alex',   read:'10 мин', status:'live', track:'personal',    topics:['Кейс','Продуктивность'],          tier:'pro', href:'/materials/revolyuciya-v-excel/' },
-  { kind:'Гайд',     k:'book',   title:'Каталог ИИ-сотрудников',      sub:'5 ролей: боль → кейс → решение. Кого собрать первым', auth:'alex', read:'12 мин', status:'live', track:'first-agent', topics:['Кейс','Рутина','Продажи'],       tier:'pro', href:'/materials/katalog-ii-sotrudnikov/' },
-  { kind:'Промпты',  k:'prompt', title:'Промпт-аудитор решений',      sub:'Найдите решения, которые принимаете зря',        auth:'alex',    read:'7 мин',  status:'live', track:'personal',    topics:['Продуктивность','Рутина'],        tier:'pro', href:'/materials/prompt-auditor/' },
+  { kind:'Гайд',     k:'book',   title:'Каталог ИИ-сотрудников',      sub:'5 ролей: боль → кейс → решение. Кого собрать первым', auth:'alex', read:'12 мин', status:'live', track:'first-agent', topics:['Кейс','Рутина','Продажи'],       tier:'pro', href:'/materials/katalog-ii-sotrudnikov/', isNew:true },
+  { kind:'Промпты',  k:'prompt', title:'Промпт-аудитор решений',      sub:'Найдите решения, которые принимаете зря',        auth:'alex',    read:'7 мин',  status:'live', track:'personal',    topics:['Продуктивность','Рутина'],        tier:'pro', href:'/materials/prompt-auditor/', isNew:true },
 ];
 const liveCount = MATERIALS.filter(m=>m.status==='live').length;
 
