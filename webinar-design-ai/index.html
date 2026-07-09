@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="ru" data-brand="b2c">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Дизайн и ИИ · Hakku · бИИзнес</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/design_system/colors_and_type.css">
+  <meta property="og:title" content="Дизайн и ИИ для собственника — Hakku">
+  <meta property="og:description" content="От идеи до кликабельного прототипа и живого продукта — без дизайн-агентства. Claude Design → Claude Code.">
+  <style>
+    /* ============================================================
+       Design × AI Deck — paper-first бИИзнес, 16:9 слайды
+       движок и стиль наследуют webinar-excel
+       ============================================================ */
+    html, body { margin:0; background:#e9e9ec; }
+    body { font-family: var(--font-body); color: var(--ink); -webkit-font-smoothing: antialiased; }
+
+    .deck { height:100vh; overflow-y:scroll; scroll-snap-type:y mandatory; scroll-behavior:smooth; }
+
+    .slide {
+      position:relative;
+      width:min(96vw, calc((100vh - 40px) * 16 / 9));
+      aspect-ratio:16/9;
+      margin:20px auto;
+      background:var(--paper);
+      border:1px solid var(--ink-08);
+      border-radius:18px;
+      box-shadow:0 24px 70px rgba(16,16,15,.10);
+      scroll-snap-align:center;
+      overflow:hidden;
+      container-type:inline-size;
+      display:flex; flex-direction:column;
+    }
+    .slide[data-canvas="ink"]{ background:var(--ink); border-color:rgba(255,255,255,.10); }
+
+    .s-body { flex:1; padding:3.8cqw 5.2cqw 2.4cqw; display:flex; flex-direction:column; min-height:0; position:relative; z-index:1; }
+    .s-foot {
+      height:5.6cqh; flex:0 0 auto;
+      border-top:1px solid var(--ink-08);
+      background:var(--ink-04);
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 6cqw; font-size:1.45cqw; color:var(--fg-faint); letter-spacing:.02em;
+    }
+    [data-canvas="ink"] .s-foot{ border-top-color:rgba(255,255,255,.12); background:rgba(255,255,255,.03); color:var(--paper-55); }
+    .s-foot .fbrand{ font-family:var(--font-display); color:var(--fg-muted); letter-spacing:normal; }
+    [data-canvas="ink"] .s-foot .fbrand{ color:var(--paper-72); }
+    .s-foot .fbrand .sep{ color:var(--ink-40); margin:0 .4em; }
+    [data-canvas="ink"] .s-foot .fbrand .sep{ color:var(--paper-40); }
+    .s-foot .ii{ color:var(--magenta); }
+
+    .eyebrow-line{ display:inline-flex; align-items:center; gap:.7em; margin-bottom:1.8cqw; }
+    .eyebrow-line .bar{ width:2.4cqw; height:.35cqw; min-height:2px; background:var(--grad-full); border-radius:2px; }
+    .eyebrow-line .eyebrow{ font-size:1.5cqw; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--fg-faint); }
+    [data-canvas="ink"] .eyebrow-line .eyebrow{ color:var(--paper-55); }
+
+    .s-title{ font-family:var(--font-display); font-weight:400; line-height:1.04; letter-spacing:-.02em; color:var(--ink); font-size:4.4cqw; margin:0 0 1.3cqw; }
+    [data-canvas="ink"] .s-title{ color:var(--paper); }
+    .s-lede{ font-size:2.0cqw; line-height:1.4; color:var(--ink-72); max-width:62cqw; margin:0; }
+    [data-canvas="ink"] .s-lede{ color:var(--paper-72); }
+    .grad-text{ background:var(--grad-cool); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .grad-warm-text{ background:var(--grad-warm); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .mag{ color:var(--magenta); }
+    b, strong{ font-weight:600; color:inherit; }
+
+    .grow{ flex:1; min-height:0; }
+    .row{ display:flex; }
+    .between{ justify-content:space-between; }
+    .center{ align-items:center; }
+    .mt-auto{ margin-top:auto; }
+    .pill{ display:inline-flex; align-items:center; gap:.5em; font-size:1.5cqw; font-weight:500; padding:.7em 1.2em; border-radius:999px; border:1px solid var(--ink-12); color:var(--ink-72); background:#fff; }
+    .pill.b{ border-color:var(--blue); color:var(--blue); }
+
+    .grid{ display:grid; gap:1.2cqw; }
+    .g2{ grid-template-columns:1fr 1fr; }
+    .g3{ grid-template-columns:repeat(3,1fr); }
+    .g4{ grid-template-columns:repeat(4,1fr); }
+    .card{ border:1px solid var(--ink-12); border-radius:1.2cqw; padding:1.7cqw 1.6cqw; background:#fff; display:flex; flex-direction:column; }
+    .card .k{ font-size:1.35cqw; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--blue); margin:0 0 .7cqw; }
+    .card h3{ font-family:var(--font-display); font-weight:400; font-size:2.0cqw; letter-spacing:-.01em; line-height:1.08; color:var(--ink); margin:0 0 .6cqw; }
+    .card p{ font-size:1.48cqw; line-height:1.4; color:var(--ink-72); margin:0; }
+    .card p + p{ margin-top:.7cqw; }
+    .card .cap{ font-size:1.4cqw; color:var(--ink-55); margin-top:auto; padding-top:1cqw; }
+
+    .stat{ font-family:var(--font-display); font-weight:400; letter-spacing:-.02em; line-height:1; font-feature-settings:"tnum" 1; }
+
+    .lvl{ font-family:var(--font-display); font-size:3.4cqw; line-height:1; color:#fff; width:2em; height:2em; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
+
+    .list{ display:flex; flex-direction:column; gap:1cqw; }
+    .list li{ list-style:none; display:flex; gap:.9em; font-size:1.55cqw; line-height:1.36; color:var(--ink-72); }
+    .list .m{ flex:0 0 auto; font-weight:700; width:1.3em; }
+    .list .ok .m{ color:var(--blue); } .list .no .m{ color:var(--magenta); }
+    ul{ margin:0; padding:0; }
+
+    .render{ position:absolute; pointer-events:none; user-select:none; object-fit:contain; z-index:0; }
+
+    .callout{ background:var(--ink); color:#fff; border-radius:1.6cqw; padding:2.6cqw 2.8cqw; position:relative; overflow:hidden; }
+    .callout p{ font-size:1.9cqw; line-height:1.45; color:rgba(255,255,255,.82); margin:0; max-width:74cqw; position:relative; z-index:1; }
+    .callout b{ color:#fff; }
+
+    .flow{ display:flex; align-items:stretch; gap:1.1cqw; }
+    .flow .step{ flex:1; border:1px solid var(--ink-12); border-radius:1.2cqw; padding:1.8cqw 1.4cqw; background:#fff; }
+    .flow .step .n{ font-size:1.3cqw; font-weight:700; letter-spacing:.1em; color:var(--blue); text-transform:uppercase; }
+    .flow .step .t{ font-family:var(--font-display); font-size:1.9cqw; line-height:1.1; margin:.5cqw 0 .6cqw; color:var(--ink); }
+    .flow .step p{ font-size:1.42cqw; line-height:1.4; color:var(--ink-72); margin:0; }
+    .flow .arr{ align-self:center; color:var(--blue); font-size:2.4cqw; }
+
+    .ladder{ display:flex; flex-direction:column; gap:1cqw; }
+    .rung{ display:flex; align-items:center; gap:1.6cqw; border:1px solid var(--ink-12); border-radius:1.2cqw; padding:1.25cqw 1.8cqw; background:#fff; }
+    .rung .yr{ font-family:var(--font-display); font-size:2.2cqw; color:var(--blue); flex:0 0 12cqw; letter-spacing:-.01em; }
+    .rung .meta h3{ font-family:var(--font-display); font-weight:400; font-size:2.1cqw; line-height:1.05; color:var(--ink); margin:0 0 .3cqw; }
+    .rung .meta p{ font-size:1.45cqw; line-height:1.32; color:var(--ink-72); margin:0; }
+
+    .check{ display:grid; grid-template-columns:1fr 1fr; gap:1cqw 3cqw; }
+    .check div{ display:flex; gap:.8em; font-size:1.66cqw; color:var(--ink-72); align-items:center; }
+    .check .box{ width:1.4em; height:1.4em; border:1.5px solid var(--ink-40); border-radius:5px; flex:0 0 auto; }
+
+    .photo{ width:11cqw; height:11cqw; border-radius:50%; object-fit:cover; border:1px solid var(--ink-12); }
+
+    .qr-card{ display:flex; align-items:center; gap:2.2cqw; border:1.5px solid var(--ink-12); border-radius:1.6cqw; padding:2cqw 2.2cqw; background:rgba(255,255,255,.04); }
+    .qr-tile{ flex:0 0 auto; width:15cqw; height:15cqw; background:#fff; border-radius:1cqw; padding:1cqw; box-shadow:0 10px 30px rgba(0,0,0,.30); }
+    .qr-tile svg{ display:block; width:100%; height:100%; }
+    .qr-tile svg path{ fill:var(--ink); }
+    .qr-name{ font-family:var(--font-display); font-weight:400; font-size:2.6cqw; line-height:1.04; letter-spacing:-.01em; color:#fff; }
+    .qr-name .sep{ color:var(--paper-40); margin:0 .35em; }
+    .qr-name .ii{ color:var(--magenta); }
+    .qr-sub{ font-size:1.62cqw; line-height:1.3; color:var(--paper-72); margin-top:.8cqw; }
+    .qr-hint{ font-size:1.4cqw; color:var(--paper-55); margin-top:1cqw; font-variant-numeric:tabular-nums; }
+
+    .nav{ position:fixed; left:0; right:0; bottom:0; z-index:50; display:flex; align-items:center; justify-content:center; gap:14px; padding:12px; pointer-events:none; }
+    .nav button{ pointer-events:auto; width:40px; height:40px; border-radius:999px; border:1px solid var(--ink-12); background:rgba(255,255,255,.92); backdrop-filter:blur(10px); color:var(--ink); font-size:17px; cursor:pointer; box-shadow:0 6px 20px rgba(0,0,0,.12); transition:transform .12s; }
+    .nav button:hover{ transform:translateY(-2px); }
+    .nav .count{ pointer-events:none; font-size:13px; color:var(--ink-55); background:rgba(255,255,255,.92); border:1px solid var(--ink-12); border-radius:999px; padding:9px 14px; backdrop-filter:blur(10px); font-variant-numeric:tabular-nums; }
+    .topbar{ position:fixed; top:0; left:0; right:0; z-index:50; display:flex; align-items:center; justify-content:space-between; padding:14px 22px; pointer-events:none; }
+    .topbar .wm{ pointer-events:auto; font-family:var(--font-display); font-size:15px; letter-spacing:-.02em; color:var(--ink-72); background:rgba(255,255,255,.85); border:1px solid var(--ink-08); border-radius:999px; padding:7px 14px; backdrop-filter:blur(10px); }
+    .topbar .wm .ii{ color:var(--magenta); } .topbar .wm .sep{ color:var(--ink-40); margin:0 .3em; }
+    .topbar .back{ pointer-events:auto; font-size:13px; color:var(--ink-55); background:rgba(255,255,255,.85); border:1px solid var(--ink-08); border-radius:999px; padding:8px 14px; backdrop-filter:blur(10px); }
+
+    .cta{ display:inline-flex; align-items:center; gap:.6em; font-size:1.9cqw; font-weight:600; color:#fff; background:var(--blue); border-radius:999px; padding:.85em 1.6em; }
+    .cta.lg{ font-size:2.1cqw; }
+
+    @media (max-width:760px){
+      html,body{ background:#fff; overflow-x:hidden; }
+      .topbar{ position:static; padding:12px 16px; }
+      .topbar .wm,.topbar .back{ background:transparent; border:0; padding:0; }
+      .nav{ display:none; }
+
+      .deck{ height:auto; overflow:visible; overflow-x:hidden; scroll-snap-type:none; }
+      .slide{
+        width:100%; aspect-ratio:auto; min-height:auto;
+        margin:0; border:0; border-top:8px solid var(--ash); border-radius:0;
+        box-shadow:none; container-type:normal; overflow:visible;
+      }
+      .render{ display:none !important; }
+      .grow{ flex:none !important; min-height:auto; }
+      .mt-auto{ margin-top:16px; }
+
+      .s-body{ padding:24px 18px 20px; overflow-wrap:break-word; }
+      .s-body *{ max-width:100%; }
+      .s-foot{ height:auto; min-height:0; padding:11px 18px; font-size:11px; gap:10px; }
+      .s-foot span:last-child{ display:none; }
+
+      .eyebrow-line{ display:flex; flex-wrap:wrap; align-items:center; margin-bottom:14px; }
+      .eyebrow-line .bar{ width:22px; height:3px; flex:0 0 auto; }
+      .eyebrow-line .eyebrow,.eyebrow{ font-size:11px !important; white-space:normal; min-width:0; }
+      .s-title{ font-size:27px !important; margin-bottom:12px; }
+      .s-lede{ font-size:15px !important; max-width:none !important; }
+      .card{ padding:18px 16px; border-radius:14px; }
+      .card .k{ font-size:12px !important; }
+      .card h3{ font-size:17px !important; }
+      .card p{ font-size:14px !important; }
+      .card .cap{ font-size:12px !important; }
+      .list li{ font-size:14px !important; }
+      .stat{ font-size:40px !important; }
+      .lvl{ font-size:22px !important; width:1.9em; height:1.9em; }
+      .rung{ flex-wrap:wrap; gap:12px; padding:16px; }
+      .rung .yr{ flex-basis:auto; font-size:18px !important; }
+      .rung .meta h3{ font-size:17px !important; }
+      .rung .meta p{ font-size:13.5px !important; }
+      .flow .step{ padding:16px; }
+      .flow .step .n{ font-size:12px !important; }
+      .flow .step .t{ font-size:17px !important; }
+      .flow .step p{ font-size:13.5px !important; }
+      .callout{ padding:20px 18px !important; border-radius:16px; }
+      .callout p{ font-size:15px !important; max-width:none !important; }
+      .pill{ font-size:13px !important; align-self:flex-start; }
+      .cta,.cta.lg{ font-size:16px !important; }
+      .cta + span{ font-size:13px !important; }
+      .photo{ width:84px; height:84px; }
+
+      .g2,.g3,.g4{ grid-template-columns:minmax(0,1fr) !important; }
+      .check{ grid-template-columns:minmax(0,1fr) !important; }
+      .check div{ font-size:14px !important; }
+      .row{ flex-direction:column; }
+      .row > div[style*="flex:1"]{ width:100%; }
+      .row > *,.eyebrow-line > *,.flow > *,.s-foot > *{ min-width:0; }
+      .s-body img,.s-body svg{ max-width:100%; }
+      .flow{ flex-direction:column; }
+      .flow .arr{ transform:rotate(90deg); align-self:flex-start; margin:2px 0 2px 16px; font-size:20px; }
+      .qr-card{ flex-direction:column; text-align:center; }
+    }
+
+    @media print{
+      @page{ size:1280px 720px; margin:0; }
+      html,body{ background:#fff; }
+      .deck{ height:auto; overflow:visible; }
+      .topbar,.nav{ display:none !important; }
+      .slide{ width:1280px; height:720px; aspect-ratio:auto; margin:0; border:0; border-radius:0; box-shadow:none; break-after:page; page-break-after:always; }
+    }
+  </style>
+</head>
+<body>
+<div class="topbar"><span class="wm">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><a class="back" href="https://business.hakku.ai/">business.hakku.ai ↗</a></div>
+<div class="deck" id="deck">
+
+<!-- 01 · ЗАСТАВКА -->
+<section class="slide" data-canvas="ink">
+  <img class="render" src="/assets/graphic-holo-torus.webp" alt="" style="right:-6cqw; top:50%; transform:translateY(-50%); width:46cqw; opacity:.92;">
+  <div class="s-body" style="justify-content:center;">
+    <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow" style="color:var(--paper-55);">Закрытый вебинар сообщества · 2026</span></div>
+    <h1 class="s-title" style="font-size:6.4cqw; max-width:66cqw; color:#fff;">Дизайн и ИИ:<br>от идеи до живого<br>продукта <span class="grad-text">за вечер</span></h1>
+    <p class="s-lede" style="margin-top:2cqw; max-width:52cqw; color:var(--paper-72);">Начнём через пару минут — подключайтесь, наливайте чай и пишите в чат, откуда вы.</p>
+  </div>
+  <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>01 / 20</span><span>Заставка · скоро начнём</span></div>
+</section>
+
+<!-- 02 · КТО ВЕДЁТ -->
+<section class="slide">
+  <div class="s-body">
+    <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Приветствие</span></div>
+    <h1 class="s-title">Рады видеть вас<br>в <span class="grad-text">бИИзнес-сообществе</span></h1>
+    <div class="row center grow" style="gap:2.4cqw; margin-top:2.2cqw; justify-content:space-around;">
+      <div style="text-align:center;"><img class="photo" src="/assets/founders/alexander.jpg" alt=""><div style="font-family:var(--font-display); font-size:2cqw; margin-top:1cqw;">Саша Долгов</div><div style="font-size:1.4cqw; color:var(--ink-55);">ведущий · сооснователь бИИзнес</div></div>
+      <div style="text-align:center;"><img class="photo" src="/assets/founders/sergei.jpg" alt=""><div style="font-family:var(--font-display); font-size:2cqw; margin-top:1cqw;">Сергей Ершов</div><div style="font-size:1.4cqw; color:var(--ink-55);">сооснователь · хакку.ии</div></div>
+      <div style="text-align:center;"><img class="photo" src="/assets/founders/nikolai.jpg" alt=""><div style="font-family:var(--font-display); font-size:2cqw; margin-top:1cqw;">Николай Писаренко</div><div style="font-size:1.4cqw; color:var(--ink-55);">сооснователь · хакку.ии</div></div>
+    </div>
+  </div>
+  <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>02 / 20</span><span>Кто ведёт</span></div>
+</section>
+
+<!-- 03 · О СООБЩЕСТВЕ -->
+<section class="slide">
+  <div class="s-body">
+    <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Что это за сообщество</span></div>
+    <h1 class="s-title">Собственники, которые<br>внедряют ИИ <span class="mag">вместе</span></h1>
+    <div class="grid g3" style="margin-top:1.8cqw; grid-auto-rows:1fr;">
+      <div class="card"><div class="k">Только собственники</div><p>Здесь — предприниматели и владельцы бизнеса. Один уровень разговора, без «купите курс».</p></div>
+      <div class="card"><div class="k">Трансформация в моменте</div><p>Мы проводим цифровую трансформацию бизнеса все вместе — прямо сейчас, в отличной компании.</p></div>
+      <div class="card"><div class="k">Практика, а не теория</div><p>Каждую встречу уносишь рабочий инструмент, который применяешь у себя на следующий день.</p></div>
+    </div>
+    <div class="callout mt-auto" style="margin-top:1.6cqw; padding:1.5cqw 2.2cqw;">
+      <p style="font-size:1.7cqw;">Сегодняшний вебинар — пример того, что внутри: <b>навык, который заменяет месяцы работы дизайн-агентства.</b></p>
+    </div>
+  </div>
+  <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>03 / 20</span><span>О сообществе</span></div>
+</section>
+
+<!-- 04 · ТАРИФЫ -->
+<section class="slide">
+  <div class="s-body">
+    <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Условия участия · ранние цены сообщества</span></div>
+    <h1 class="s-title">Три уровня участия</h1>
+    <div class="ladder grow" style="margin-top:1.6cqw; justify-content:center;">
+      <div class="rung"><div class="lvl" style="background:var(--ink);">·</div><div class="meta"><h3>Про</h3><p>Только собственник. Полный доступ к встречам, записям и базе знаний сообщества.</p></div><div class="prod" style="margin-left:auto; text-align:right; flex:0 0 30cqw;"><span style="display:inline-block; font-size:1.55cqw; font-weight:600; color:var(--blue); background:rgba(42,62,244,.08); border:1px solid rgba(42,62,244,.25); border-radius:999px; padding:.5em 1em;">3 900 ₽ / мес</span><div style="font-size:1.35cqw; color:var(--ink-55); margin-top:.5cqw;">ранняя цена · затем 4 900</div></div></div>
+      <div class="rung" style="border-color:var(--blue);"><div class="lvl" style="background:var(--blue);">·</div><div class="meta"><h3>Макс <span style="font-size:1.2cqw; color:var(--blue); font-weight:600; letter-spacing:.06em;">· ПОПУЛЯРНЫЙ</span></h3><p>Собственник + 1 ответственный за ИИ. Первый инструмент под одну функцию с измеримым ростом денег.</p></div><div class="prod" style="margin-left:auto; text-align:right; flex:0 0 30cqw;"><span style="display:inline-block; font-size:1.55cqw; font-weight:600; color:var(--blue); background:rgba(42,62,244,.08); border:1px solid rgba(42,62,244,.25); border-radius:999px; padding:.5em 1em;">5 900 ₽ / мес</span><div style="font-size:1.35cqw; color:var(--ink-55); margin-top:.5cqw;">ранняя цена · затем 7 900</div></div></div>
+      <div class="rung" style="border-color:var(--magenta);"><div class="lvl" style="background:var(--magenta);">·</div><div class="meta"><h3>Компания</h3><p>Вся команда — по договорённости. Интеграция методики сообщества под ваши процессы.</p></div><div class="prod" style="margin-left:auto; text-align:right; flex:0 0 30cqw;"><span style="display:inline-block; font-size:1.55cqw; font-weight:600; color:var(--blue); background:rgba(42,62,244,.08); border:1px solid rgba(42,62,244,.25); border-radius:999px; padding:.5em 1em;">По запросу</span><div style="font-size:1.35cqw; color:var(--ink-55); margin-top:.5cqw;">для бизнеса</div></div></div>
+    </div>
+    <p class="s-lede mt-auto" style="font-size:1.4cqw; color:var(--ink-55); padding-top:1cqw;">Ранние цены сообщества · годовая оплата выгоднее · все условия на business.hakku.ai</p>
+  </div>
+  <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>04 / 20</span><span>Условия подписки</span></div>
+</section>
+
+<!-- 05 · НЕТВОРК ШАГ 1 -->
+<section class="slide">
+  <div class="s-body">
+    <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Нетворк · знакомимся · 10–15 мин</span></div>
+    <h1 class="s-title">«Имя + идея в столе»</h1>
+    <p class="s-lede" style="margin-top:1cqw; font-size:1.9cqw;"><b>Шаг 1.</b> Каждый пишет в чат по формату:</p>
+    <div class="callout" style="margin-top:1.4cqw; padding:1.8cqw 2.4cqw;">
+      <p style="font-size:2cqw;">Имя — сфера бизнеса — <b>какой продукт, лендинг, приложение или интерфейс давно хотели, но упёрлись в дизайн и разработку</b> — что запустите, когда перестанете упираться</p>
+    </div>
+    <p class="s-lede mt-auto" style="font-size:1.55cqw; padding-top:1.4cqw;">Последний пункт — ключевой. «Соберу MVP и проверю спрос», «сделаю нормальный сайт», «запущу внутренний портал» — так сразу видно, у кого что стоит в столе.</p>
+  </div>
+  <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>05 / 20</span><span>Нетворк · шаг 1</span></div>
+</section>
+
+<!-- 06 · НЕТВОРК ШАГИ 2-3 -->
+<section class="slide">
+  <div class="s-body">
+    <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Нетворк · считаем застрявшее</span></div>
+    <h1 class="s-title">Сколько идей стоит в столе — <span class="mag">вместе</span></h1>
+    <div class="row grow" style="gap:2.6cqw; margin-top:1.8cqw;">
+      <div style="flex:1;">
+        <p class="s-lede" style="font-size:1.7cqw; margin-bottom:1cqw;"><b>Шаг 2.</b> Ведущий суммирует идеи зала:</p>
+        <div class="callout"><p style="font-size:1.9cqw;">«У нашей группы в столе — <b>N продуктов и сайтов</b>, каждый ждёт дизайнера, подрядчика или свободных денег»</p></div>
+      </div>
+      <div style="flex:1;">
+        <p class="s-lede" style="font-size:1.7cqw; margin-bottom:1cqw;"><b>Шаг 3.</b> Мини-голосование: «Что мешает запустить прямо сейчас?»</p>
+        <ul class="list">
+          <li class="ok"><span class="m">🎨</span><span>Нет дизайнера / дорого агентство</span></li>
+          <li class="ok"><span class="m">⏳</span><span>Долго — недели и месяцы</span></li>
+          <li class="ok"><span class="m">🔁</span><span>Дизайн есть, но не доходит до продукта</span></li>
+          <li class="ok"><span class="m">🤷</span><span>Не знаю, с чего начать</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>06 / 20</span><span>Нетворк · шаги 2–3</span></div>
+</section>
+
+<!-- 07 · НЕТВОРК МОСТ -->
+<section class="slide" data-canvas="ink">
+  <img class="render" src="/assets/graphic-holo-ring.webp" alt="" style="right:-8cqw; top:50%; transform:translateY(-50%); width:42cqw; opacity:.85;">
+  <div class="s-body" style="justify-content:center;">
+    <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow" style="color:var(--paper-55);">Нетворк · шаг 4 · мост</span></div>
+    <h1 class="s-title" style="color:#fff; font-size:4.2cqw; max-width:68cqw;">«Между идеей и живым продуктом всегда стояли дизайнер, верстальщик и подрядчик. Сегодня покажу, как ИИ <span class="grad-text">убирает эту дистанцию</span> — и первый экран рождается прямо при вас».</h1>
+    <p class="s-lede" style="margin-top:2cqw; color:var(--paper-72); font-size:1.7cqw;">Начнём с того, почему до сих пор было так дорого и долго.</p>
+  </div>
+  <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>07 / 20</span><span>Нетворк · мост в тему</span></div>
+</section>
+
+<!-- 08 · ОБРАЗОВАТЕЛЬНАЯ ЧАСТЬ INTRO -->
+<section class="slide" data-canvas="ink">
+  <img class="render" src="/assets/graphic-holo-torus.webp" alt="" style="right:-6cqw; top:50%; transform:translateY(-50%); width:44cqw; opacity:.9;">
+  <div class="s-body" style="justify-content:center;">
+    <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow" style="color:var(--paper-55);">Образовательная часть</span></div>
+    <h1 class="s-title" style="color:#fff; font-size:5.4cqw; max-width:64cqw;">Дизайн перестал быть<br><span class="grad-text">узким местом</span></h1>
+    <p class="s-lede" style="margin-top:2cqw; max-width:54cqw; color:var(--paper-72);">Сначала — короткая история вопроса: как за 20 лет дизайн-инструменты дошли до того, что интерфейс можно просто описать словами. А потом — как это применить у себя сегодня.</p>
+  </div>
+  <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>08 / 20</span><span>Дизайн и ИИ</span></div>
+</section>
+
+<!-- 09 · ИСТОРИЯ ВОПРОСА -->
+<section class="slide">
+  <div class="s-body">
+    <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">История вопроса · 20 лет за одну минуту</span></div>
+    <h1 class="s-title">Инструменты всё это время<br>шли <span class="grad-text">в сторону кода</span></h1>
+    <div class="ladder grow" style="margin-top:1.4cqw; justify-content:center;">
+      <div class="rung"><div class="yr">2000-е</div><div class="meta"><h3>Photoshop</h3><p>Дизайн — это картинка. Красиво на макете, но продукт разработчик собирает заново и вручную.</p></div></div>
+      <div class="rung"><div class="yr">2010+</div><div class="meta"><h3>Sketch</h3><p>Символы и переиспользуемые элементы. Родилась идея дизайн-системы, но всё заперто на одном Mac.</p></div></div>
+      <div class="rung" style="border-color:var(--blue);"><div class="yr">2016+</div><div class="meta"><h3>Figma</h3><p>Браузер, живая совместная работа, компоненты, авто-раскладка, Dev Mode. Дизайн стал ближе к коду, чем когда-либо.</p></div></div>
+      <div class="rung" style="border-color:var(--magenta);"><div class="yr">2024+</div><div class="meta"><h3>ИИ</h3><p>Интерфейс можно описать словами — и получить не картинку, а рабочий кликабельный экран в коде.</p></div></div>
+    </div>
+  </div>
+  <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>09 / 20</span><span>История вопроса</span></div>
+</section>
+
+<!-- 10 · СТАРЫЙ МИР · 4 ВРАГА -->
+<section class="slide">
+  <div class="s-body">
+    <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Старый мир</span></div>
+    <h1 class="s-title">Почему свой продукт<br>стоил <span class="mag">так дорого и долго</span></h1>
+    <div class="grid g4" style="margin-top:2cqw; grid-auto-rows:1fr;">
+      <div class="card"><div class="k">Барьер 1</div><h3>Дизайн — картинка</h3><p>Макет красивый, но это не продукт. Кликнуть нельзя, проверить гипотезу — тоже.</p></div>
+      <div class="card"><div class="k">Барьер 2</div><h3>Пропасть до кода</h3><p>Разработчик пересобирает дизайн заново. Результат уезжает от макета.</p></div>
+      <div class="card"><div class="k">Барьер 3</div><h3>Система в голове</h3><p>Единые цвета, шрифты, кнопки живут у дизайнера в голове и рассыпаются.</p></div>
+      <div class="card"><div class="k">Барьер 4</div><h3>Цепочка людей</h3><p>Дизайнер → верстальщик → разработчик → правки. Недели и бюджет агентства.</p></div>
+    </div>
+    <p class="s-lede mt-auto" style="padding-top:1.4cqw; font-size:1.6cqw;">Сегодня эту цепочку проходит один человек с ИИ — за вечер.</p>
+  </div>
+  <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>10 / 20</span><span>Барьеры старого мира</span></div>
+</section>
+
+<!-- 11 · ЧТО ИЗМЕНИЛОСЬ -->
+<section class="slide">
+  <div class="s-body">
+    <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Что изменилось</span></div>
+    <h1 class="s-title">ИИ рисует не картинку —<br>а <span class="grad-text">рабочий интерфейс</span></h1>
+    <div class="row grow" style="gap:2.6cqw; margin-top:2cqw;">
+      <div style="flex:1;">
+        <ul class="list">
+          <li class="ok"><span class="m">✓</span><span>Описываете экран словами — получаете кликабельный прототип в коде</span></li>
+          <li class="ok"><span class="m">✓</span><span>Меняете на словах: «сделай строже», «добавь тарифы» — он перерисовывает</span></li>
+          <li class="ok"><span class="m">✓</span><span>Это уже не мокап, а то, что можно показать клиенту и проверить</span></li>
+        </ul>
+      </div>
+      <div style="flex:1; display:flex; align-items:center;">
+        <div class="callout" style="width:100%;"><p style="font-size:1.9cqw;">Разница как между чертежом дома и <b>готовой комнатой, в которую можно войти</b>. Прототип перестал быть картинкой.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>11 / 20</span><span>Прототип в коде</span></div>
+</section>
+
+<!-- 12 · КЛЮЧЕВАЯ МОДЕЛЬ · CLAUDE DESIGN + CLAUDE CODE -->
+<section class="slide">
+  <div class="s-body">
+    <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Ключевая модель · держите её в голове весь вебинар</span></div>
+    <h1 class="s-title">Не один инструмент — а <span class="grad-text">связка двух ролей</span></h1>
+    <div class="flow grow" style="margin-top:2.4cqw; align-items:stretch;">
+      <div class="step"><div class="n">Роль 1 · Дизайнер</div><div class="t">Claude Design</div><p>Быстро исследует варианты, собирает кликабельный прототип и дизайн-систему: цвета, шрифты, компоненты.</p></div>
+      <div class="arr">→</div>
+      <div class="step" style="border-color:var(--blue);"><div class="n" style="color:var(--magenta);">Роль 2 · Инженер</div><div class="t">Claude Code</div><p>Берёт утверждённый прототип и систему — и строит продакшн прямо в вашем реальном коде.</p></div>
+      <div class="arr">=</div>
+      <div class="step" style="border-color:var(--magenta);"><div class="n" style="color:var(--magenta);">Результат</div><div class="t">Живой продукт</div><p>То, что раньше проходила цепочка из людей и недель, делает один человек за вечер.</p></div>
+    </div>
+    <p class="s-lede mt-auto" style="padding-top:1.4cqw; font-size:1.55cqw;">Главная мысль сегодня: <b>прототип и дизайн-систему собирайте в Claude Design — и уже готовое отдавайте Claude Code.</b></p>
+  </div>
+  <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>12 / 20</span><span>Модель: Design → Code</span></div>
+</section>
+
+<!-- 13 · ДЕМО-ПЛАН -->
+<section class="slide" data-canvas="ink">
+  <div class="s-body" style="justify-content:center;">
+    <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow" style="color:var(--paper-55);">Переключаемся к экрану · живое демо</span></div>
+    <h1 class="s-title" style="color:#fff; font-size:4.6cqw;">Сейчас — вживую, от промпта до продукта</h1>
+    <div class="check" style="margin-top:2.4cqw; color:var(--paper-72);">
+      <div><span class="box" style="border-color:var(--paper-40);"></span>От одной фразы — к кликабельному экрану</div>
+      <div><span class="box" style="border-color:var(--paper-40);"></span>Итерация словами: тон, цвет, структура</div>
+      <div><span class="box" style="border-color:var(--paper-40);"></span>Сборка дизайн-системы: токены и компоненты</div>
+      <div><span class="box" style="border-color:var(--paper-40);"></span>Мост в Figma и обратно</div>
+      <div><span class="box" style="border-color:var(--paper-40);"></span>Передача прототипа в Claude Code</div>
+      <div><span class="box" style="border-color:var(--paper-40);"></span>Продакшн в реальном репозитории</div>
+    </div>
+  </div>
+  <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>13 / 20</span><span>Живое демо · план</span></div>
+</section>
+
+<!-- 14 · FIGMA AI · доуточнить фактами ресёрча -->
+<section class="slide">
+  <div class="s-body">
+    <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">А что Figma · где место главного дизайн-инструмента</span></div>
+    <h1 class="s-title">Figma тоже пустила <span class="grad-text">ИИ внутрь</span></h1>
+    <div class="grid g2" style="margin-top:1.6cqw; grid-auto-rows:1fr;">
+      <div class="card"><div class="k">Figma Make</div><h3>Промпт → прототип</h3><p>Описываете идею словами — Figma собирает рабочий кликабельный прототип. Под капотом — модели Claude.</p></div>
+      <div class="card"><div class="k">First Draft · Figma AI</div><h3>Первый черновик за секунды</h3><p>Генерация стартового макета из фразы, авто-переименование слоёв, поиск по смыслу — черновая рутина уходит.</p></div>
+      <div class="card"><div class="k">Dev Mode + MCP</div><h3>Мост Figma → код</h3><p>Dev Mode отдаёт разработчику точные размеры и токены; через MCP-коннектор дизайн из Figma забирает Claude Code.</p></div>
+      <div class="card"><div class="k">Code Connect</div><h3>Компоненты = ваш код</h3><p>Компоненты Figma привязываются к реальным компонентам вашего кода — агент собирает из ваших же кирпичей.</p></div>
+    </div>
+    <p class="s-lede mt-auto" style="padding-top:1cqw; font-size:1.5cqw; color:var(--ink-55);">Figma остаётся местом, где команда хранит дизайн-систему и работает вместе. ИИ добавляет скорость на обоих концах.</p>
+  </div>
+  <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>14 / 20</span><span>Figma AI</span></div>
+</section>
+
+<!-- 15 · ПОЧЕМУ ИМЕННО ТАК · ТЕЗИС -->
+<section class="slide">
+  <div class="s-body">
+    <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Главный вывод · почему именно такой порядок</span></div>
+    <h1 class="s-title">Прототип в Claude Design →<br>прод в <span class="grad-text">Claude Code</span></h1>
+    <div class="grid g2" style="margin-top:1.6cqw; grid-auto-rows:1fr;">
+      <div class="card"><div class="k">Итерация в минутах</div><p>Дизайн крутите на живом, кликабельном экране, а не в голове. Двадцать вариантов до обеда — дёшево.</p></div>
+      <div class="card"><div class="k">Дизайн-система как контракт</div><p>Токены и компоненты — единый язык. Их вы и передаёте: не «сделай красиво», а точную систему.</p></div>
+      <div class="card"><div class="k">Код не выдумывает интерфейс</div><p>Claude Code реализует утверждённое, а не изобретает UI по ходу. Меньше расхождений и переделок.</p></div>
+      <div class="card" style="border-color:var(--blue);"><div class="k">Один язык до конца</div><p>Прототип уже в коде — переход в продакшн без ручной пересборки макета. Ничего не теряется в передаче.</p></div>
+    </div>
+    <div class="callout mt-auto" style="margin-top:1.4cqw; padding:1.5cqw 2.2cqw;"><p style="font-size:1.7cqw;">Сначала <b>договоритесь о продукте на прототипе</b>, потом стройте. Так дешевле передумать — и надёжнее собрать.</p></div>
+  </div>
+  <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>15 / 20</span><span>Главный тезис ★</span></div>
+</section>
+
+<!-- 16 · ЧЕСТНЫЕ ГРАНИЦЫ -->
+<section class="slide">
+  <div class="s-body">
+    <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Честно · чтобы доверять инструменту</span></div>
+    <h1 class="s-title">Где у него границы</h1>
+    <div class="grid g2" style="margin-top:1.8cqw; grid-auto-rows:1fr;">
+      <div class="card"><div class="k">Вкус и бренд</div><p>ИИ даёт крепкий средний уровень. Фирменный характер и тонкую эстетику задаёте вы — редактируете, а не принимаете вслепую.</p></div>
+      <div class="card"><div class="k">Сложные состояния</div><p>Пустые экраны, ошибки, крайние случаи, доступность — их всё ещё нужно продумывать и проверять руками.</p></div>
+      <div class="card"><div class="k">Дизайн-систему ревизуйте</div><p>Первый набор токенов и компонентов почистите: убрать лишнее, свести к единому — иначе система «поплывёт».</p></div>
+      <div class="card"><div class="k">Не замена дизайнера</div><p>В зрелом продукте ИИ ускоряет дизайнера и разработчика, а не отменяет их. Для запуска и MVP — вы справитесь сами.</p></div>
+    </div>
+    <p class="s-lede mt-auto" style="padding-top:1cqw; font-size:1.5cqw; color:var(--ink-55);">И честно про сам инструмент: <b style="color:var(--ink-72);">Claude Design</b> — свежий research-preview от Anthropic Labs, всё быстро меняется. Claude Code и Artifacts уже зрелые. Пробуйте — но держите руку на пульсе обновлений.</p>
+  </div>
+  <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>16 / 20</span><span>Честные ограничения</span></div>
+</section>
+
+<!-- 17 · С ЧЕГО НАЧАТЬ -->
+<section class="slide">
+  <div class="s-body">
+    <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">С чего начать · техника</span></div>
+    <h1 class="s-title">Первый прототип за 10 минут</h1>
+    <div class="flow grow" style="margin-top:2.2cqw;">
+      <div class="step"><div class="n">Шаг 1</div><div class="t">Опишите экран</div><p>Откройте Claude и одной фразой скажите, какой экран нужен: «лендинг для…», «дашборд с…».</p></div>
+      <div class="arr">→</div>
+      <div class="step"><div class="n">Шаг 2</div><div class="t">Покрутите словами</div><p>«Строже», «добавь блок цен», «фирменный синий». Соберите заодно палитру и компоненты.</p></div>
+      <div class="arr">→</div>
+      <div class="step" style="border-color:var(--blue);"><div class="n" style="color:var(--magenta);">Шаг 3</div><div class="t">Отдайте в код</div><p>Готовый прототип и систему передайте Claude Code — он соберёт продакшн в реальном проекте.</p></div>
+    </div>
+  </div>
+  <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>17 / 20</span><span>Установка · первый шаг</span></div>
+</section>
+
+<!-- 18 · ПЕРВАЯ ПОБЕДА -->
+<section class="slide">
+  <div class="s-body">
+    <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Ваша первая победа</span></div>
+    <h1 class="s-title">Что сделать <span class="mag">завтра утром</span></h1>
+    <div class="grid g3" style="margin-top:2cqw; grid-auto-rows:1fr;">
+      <div class="card"><div class="k">1 · Возьмите</div><p>Ту самую идею из стола: лендинг, экран продукта, внутренний инструмент.</p></div>
+      <div class="card"><div class="k">2 · Соберите прототип</div><p>Опишите первый экран в Claude и покрутите его словами до «то самое».</p></div>
+      <div class="card" style="border-color:var(--blue);"><div class="k">3 · Покажите</div><p>Отправьте кликабельную ссылку клиенту или команде. Проверьте гипотезу — сегодня.</p></div>
+    </div>
+    <div class="callout mt-auto" style="margin-top:1.6cqw; padding:1.5cqw 2.2cqw;"><p style="font-size:1.7cqw;">Не ждите идеального ТЗ и свободного бюджета. Соберите <b>первый экран сегодня</b> — с него всё и начинается.</p></div>
+  </div>
+  <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>18 / 20</span><span>Первый шаг</span></div>
+</section>
+
+<!-- 19 · Q&A -->
+<section class="slide" data-canvas="ink">
+  <img class="render" src="/assets/graphic-holo-knot.webp" alt="" style="right:-6cqw; top:50%; transform:translateY(-50%); width:44cqw; opacity:.88;">
+  <div class="s-body" style="justify-content:center;">
+    <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow" style="color:var(--paper-55);">Вопросы и ответы</span></div>
+    <h1 class="s-title" style="color:#fff; font-size:6cqw;">Ваши вопросы</h1>
+    <p class="s-lede" style="margin-top:2cqw; max-width:52cqw; color:var(--paper-72);">Опишите вашу идею из стола — разберём вживую, с какого экрана начать и как довести её до продукта.</p>
+  </div>
+  <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>19 / 20</span><span>Q&A</span></div>
+</section>
+
+<!-- 20 · ПРИСОЕДИНИТЬСЯ -->
+<section class="slide">
+  <div class="s-body">
+    <div class="eyebrow-line"><span class="bar"></span><span class="eyebrow">Следующий шаг</span></div>
+    <h1 class="s-title">Оставайтесь в сообществе —<br><span class="grad-text">внедряем ИИ вместе</span></h1>
+    <div class="grid g2 grow" style="margin-top:2cqw; align-content:center;">
+      <div class="card"><div class="k">Что вы получаете</div><ul class="list" style="gap:1cqw;"><li class="ok"><span class="m">✓</span><span>Живые встречи и записи с рабочими инструментами</span></li><li class="ok"><span class="m">✓</span><span>Нетворк собственников вашего уровня</span></li><li class="ok"><span class="m">✓</span><span>Цифровую трансформацию — в компании, а не в одиночку</span></li></ul></div>
+      <div class="card" style="border-color:var(--blue);"><div class="k">Как присоединиться</div><ul class="list" style="gap:1cqw;"><li class="ok"><span class="m" style="color:var(--blue);">→</span><span>Выберите уровень: Про · Макс · Компания</span></li><li class="ok"><span class="m" style="color:var(--blue);">→</span><span>Напишите ведущему или в чат сообщества</span></li><li class="ok"><span class="m" style="color:var(--blue);">→</span><span>Первый шаг — уже на этом вебинаре</span></li></ul></div>
+    </div>
+    <div class="row center mt-auto" style="gap:1.4cqw; padding-top:1.6cqw;">
+      <a class="cta lg" href="https://business.hakku.ai/">Присоединиться к сообществу →</a>
+      <span style="font-size:1.5cqw; color:var(--ink-55);">business.hakku.ai</span>
+    </div>
+  </div>
+  <div class="s-foot"><span class="fbrand">хакку.ии<span class="sep">|</span>б<span class="ii">ИИ</span>знес</span><span>20 / 20</span><span>Присоединиться</span></div>
+</section>
+
+</div>
+<div class="nav"><button id="prev" aria-label="Назад">←</button><span class="count" id="count">01 / 20</span><button id="next" aria-label="Вперёд">→</button></div>
+<script>
+  const deck=document.getElementById('deck');const slides=[...deck.querySelectorAll('.slide')];const count=document.getElementById('count');const pad=n=>String(n).padStart(2,'0');let cur=0;
+  function go(i){cur=Math.max(0,Math.min(slides.length-1,i));slides[cur].scrollIntoView({behavior:'smooth',block:'center'});}
+  document.getElementById('prev').onclick=()=>go(cur-1);document.getElementById('next').onclick=()=>go(cur+1);
+  document.addEventListener('keydown',e=>{if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();go(cur+1);}if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();go(cur-1);}});
+  const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){cur=slides.indexOf(en.target);count.textContent=pad(cur+1)+' / '+slides.length;}});},{root:deck,threshold:0.55});
+  slides.forEach(s=>io.observe(s));
+</script>
+</body>
+</html>
