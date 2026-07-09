@@ -114,6 +114,7 @@
 
     .check{ display:grid; grid-template-columns:1fr 1fr; gap:1cqw 3cqw; }
     .check div{ display:flex; gap:.8em; font-size:1.66cqw; color:var(--ink-72); align-items:center; }
+    [data-canvas="ink"] .check div{ color:var(--paper-72); }
     .check .box{ width:1.4em; height:1.4em; border:1.5px solid var(--ink-40); border-radius:5px; flex:0 0 auto; }
 
     .photo{ width:11cqw; height:11cqw; border-radius:50%; object-fit:cover; border:1px solid var(--ink-12); }
@@ -164,8 +165,11 @@
       .eyebrow-line{ display:flex; flex-wrap:wrap; align-items:center; margin-bottom:14px; }
       .eyebrow-line .bar{ width:22px; height:3px; flex:0 0 auto; }
       .eyebrow-line .eyebrow,.eyebrow{ font-size:11px !important; white-space:normal; min-width:0; }
-      .s-title{ font-size:27px !important; margin-bottom:12px; }
+      .s-title{ font-size:27px !important; margin-bottom:12px; max-width:none !important; }
       .s-lede{ font-size:15px !important; max-width:none !important; }
+      .slide .s-body{ justify-content:flex-start !important; }
+      .callout p{ max-width:none !important; }
+      .card,.callout,.flow .step,.rung{ min-width:0; max-width:100%; }
       .card{ padding:18px 16px; border-radius:14px; }
       .card .k{ font-size:12px !important; }
       .card h3{ font-size:17px !important; }
@@ -174,10 +178,14 @@
       .list li{ font-size:14px !important; }
       .stat{ font-size:40px !important; }
       .lvl{ font-size:22px !important; width:1.9em; height:1.9em; }
-      .rung{ flex-wrap:wrap; gap:12px; padding:16px; }
-      .rung .yr{ flex-basis:auto; font-size:18px !important; }
+      .rung{ flex-wrap:wrap; gap:10px 12px; padding:16px; }
+      .rung .yr{ flex:0 0 auto; flex-basis:auto; font-size:18px !important; }
+      .rung .meta{ flex:1 1 100%; min-width:0; }
       .rung .meta h3{ font-size:17px !important; }
       .rung .meta p{ font-size:13.5px !important; }
+      .rung .prod{ flex:1 1 100% !important; width:100% !important; margin-left:0 !important; text-align:left !important; margin-top:2px; }
+      .rung .prod span{ font-size:13px !important; }
+      .rung .prod div{ font-size:12px !important; }
       .flow .step{ padding:16px; }
       .flow .step .n{ font-size:12px !important; }
       .flow .step .t{ font-size:17px !important; }
