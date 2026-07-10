@@ -69,6 +69,7 @@ const MATERIALS = [
   { kind:'Гайд',     k:'book',   title:'Каталог ИИ-сотрудников',      sub:'5 ролей: боль → кейс → решение. Кого собрать первым', auth:'alex', read:'12 мин', status:'live', track:'first-agent', topics:['Кейс','Рутина','Продажи'],       tier:'pro', href:'/materials/katalog-ii-sotrudnikov/', isNew:true },
   { kind:'Промпты',  k:'prompt', title:'Промпт-аудитор решений',      sub:'Найдите решения, которые принимаете зря',        auth:'alex',    read:'7 мин',  status:'live', track:'personal',    topics:['Продуктивность','Рутина'],        tier:'pro', href:'/materials/prompt-auditor/', isNew:true },
   { kind:'Гайд',     k:'book',   title:'Постановка задач для ИИ',     sub:'Почему ИИ приносит не то — и 8 приёмов с промптами', auth:'alex', read:'12 мин', status:'live', track:'personal',    topics:['Продуктивность','Контекст'],      tier:'pro', href:'/materials/postanovka-zadach/', isNew:true },
+  { kind:'Вебинар',  k:'book',   title:'ИИ в дизайне продуктов',      sub:'Конспект эфира: дизайн-система, Claude Design + Code, флоу', auth:'alex', read:'12 мин', status:'live', track:'first-agent', topics:['Кейс','Продуктивность'],          tier:'pro', href:'/materials/dizayn-produktov/', isNew:true },
 ];
 const liveCount = MATERIALS.filter(m=>m.status==='live').length;
 const soonCount = MATERIALS.length - liveCount;
