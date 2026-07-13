@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 // Rebrand the default dolgov-ai password gate (produced by encrypt-page.js)
 // into the hakku.ai | бИИзнес look. Idempotent-ish: run right after encrypt.
-//   node kp/_rebrand-gate.js <path-to-encrypted.html>
+//   node kp/_rebrand-gate.cjs <path-to-encrypted.html> "<Имя клиента для гейта>"
 const fs = require('fs');
 const file = process.argv[2];
-if (!file) { console.error('usage: node _rebrand-gate.js <file.html>'); process.exit(1); }
+const client = process.argv[3];
+if (!file || !client) { console.error('usage: node _rebrand-gate.cjs <file.html> "<Имя клиента>"'); process.exit(1); }
 let html = fs.readFileSync(file, 'utf8');
 
 const GLYPH = '<svg class="glyph" viewBox="0 0 75.947 63.746" fill="currentColor" aria-hidden="true"><g transform="translate(52.456,1.459)"><path d="M 12.389 59.989 L 23.491 48.887 C 18.463 43.859 15.701 37.15 15.701 29.994 C 15.701 22.822 18.463 16.113 23.491 11.102 L 12.389 0 C 4.41 7.979 0 18.635 0 29.994 C 0 41.354 4.393 52.01 12.389 59.989 Z"/></g><g transform="translate(0,21.328)"><path fill-rule="evenodd" d="M 42.418 0 L 42.418 0.001 L 48.578 0.001 L 48.578 15.702 L 39.403 15.702 C 33.149 31.34 17.844 42.418 0 42.418 L 0 26.718 C 14.723 26.718 26.717 14.74 26.717 0 L 42.418 0 Z"/></g><g transform="translate(26.734,0)"><path d="M 7.859 15.718 C 12.199 15.718 15.718 12.199 15.718 7.859 C 15.718 3.519 12.199 0 7.859 0 C 3.519 0 0 3.519 0 7.859 C 0 12.199 3.519 15.718 7.859 15.718 Z"/></g></svg>';
@@ -104,7 +105,7 @@ const pairs = [
       <h1>Персональный R&amp;D</h1>
       <p class="hint">Страница закрыта паролем. Введите пароль из сообщения — откроется рабочий документ под вашу сессию.</p>`,
    `      <span class="kicker">Коммерческое предложение</span>
-      <h1>Для IZMENI SOZNANIE</h1>
+      <h1>Для ${client}</h1>
       <p class="hint">Документ закрыт паролем. Введите пароль из сообщения — откроется коммерческое предложение.</p>`],
   // foot
   [`      <div class="foot">Долгов, Эй Ай и партнёры</div>`,
