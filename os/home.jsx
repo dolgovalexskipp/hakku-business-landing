@@ -9,8 +9,8 @@ const MONTHS = [
     items:[
       { when:'есть',  kind:'Гайд',         title:'Каталог ИИ-сотрудников',              href:'/materials/katalog-ii-sotrudnikov/', track:'first-agent' },
       { when:'есть',  kind:'Промпты',      title:'Промпт-аудитор решений',              href:'/materials/prompt-auditor/',        track:'personal' },
-      { when:'13.07', kind:'Loom-разбор',  title:'Персональный ассистент собственника', track:'first-agent' },
-      { when:'16.07', kind:'Гайд',         title:'Регламент за 20 минут',               track:'team' },
+      { when:'есть',  kind:'Гайд',         title:'Регламент за 20 минут',               href:'/materials/reglament-za-20-minut/', track:'team' },
+      { when:'16.07', kind:'Loom-разбор',  title:'Персональный ассистент собственника', track:'first-agent' },
       { when:'20.07', kind:'Loom-разбор',  title:'ИИ — это отдел, а не один помощник',  track:'team' },
       { when:'20.07', kind:'Loom-разбор',  title:'Где ИИ врёт — живая демонстрация',    track:'personal' },
       { when:'22.07', kind:'Вебинар + Q&A', title:'Оперативка без созвонов',            track:'team', note:'дата уточняется' },
