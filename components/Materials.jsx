@@ -132,7 +132,7 @@ const Materials = () => {
                 Вступить в сообщество →
               </button>
             </a>
-            <a href="#pricing" style={{ fontSize: 13.5, color: 'rgba(255,255,255,.6)', borderBottom: '1px solid rgba(255,255,255,.25)', paddingBottom: 2 }}>Тарифы от 3 900 ₽ — ранняя цена</a>
+            <a href="#pricing" style={{ fontSize: 13.5, color: 'rgba(255,255,255,.6)', borderBottom: '1px solid rgba(255,255,255,.25)', paddingBottom: 2 }}>Тарифы от 4 900 ₽ в месяц</a>
           </div>
         </div>
       </div>

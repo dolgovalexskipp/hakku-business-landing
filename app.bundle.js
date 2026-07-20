@@ -267,7 +267,7 @@ const Hero = () => {
       borderBottom: '1px solid rgba(0,0,0,.2)',
       paddingBottom: 2
     }
-  }, "\u0422\u0430\u0440\u0438\u0444\u044B \u043E\u0442 3 900 \u20BD \u2014 \u0440\u0430\u043D\u043D\u044F\u044F \u0446\u0435\u043D\u0430 \u0434\u043E 16 \u0438\u044E\u043B\u044F"))), React.createElement("div", {
+  }, "\u0422\u0430\u0440\u0438\u0444\u044B \u043E\u0442 4 900 \u20BD \u0432 \u043C\u0435\u0441\u044F\u0446"))), React.createElement("div", {
     className: "hero-stat",
     style: {
       marginTop: 56,
@@ -1244,7 +1244,7 @@ const Materials = () => {
       borderBottom: '1px solid rgba(255,255,255,.25)',
       paddingBottom: 2
     }
-  }, "\u0422\u0430\u0440\u0438\u0444\u044B \u043E\u0442 3 900 \u20BD \u2014 \u0440\u0430\u043D\u043D\u044F\u044F \u0446\u0435\u043D\u0430")))));
+  }, "\u0422\u0430\u0440\u0438\u0444\u044B \u043E\u0442 4 900 \u20BD \u0432 \u043C\u0435\u0441\u044F\u0446")))));
 };
 window.Materials = Materials;
 /* Proof */
@@ -1416,7 +1416,6 @@ const Pricing = () => {
   const tiers = [{
     name: 'ПРО',
     regular: 4900,
-    intro: 3900,
     users: 'Только собственник',
     desc: 'Полный доступ к сообществу для вас одного. Определите, где в вашем бизнесе ИИ даст прибыль, и запустите первый инструмент лично.',
     avatars: [{
@@ -1432,7 +1431,6 @@ const Pricing = () => {
   }, {
     name: 'МАКС',
     regular: 7900,
-    intro: 5900,
     users: 'Собственник + 1 ответственный за ИИ',
     desc: 'Вы и человек, который будет вести ИИ-трансформацию изнутри компании. Соберите первый инструмент под одну функцию с измеримым ростом денег.',
     popular: true,
@@ -1443,7 +1441,6 @@ const Pricing = () => {
   }, {
     name: 'Компания',
     regular: null,
-    intro: null,
     users: 'Вся команда — по договорённости',
     desc: 'Индивидуальный формат для компаний, которые подключают операционную команду целиком. Интеграция методики сообщества под конкретные процессы.',
     avatars: []
@@ -1578,31 +1575,6 @@ const Pricing = () => {
     }
   }, label))))), React.createElement("div", {
     style: {
-      marginBottom: 28,
-      fontSize: 13,
-      color: 'rgba(0,0,0,.55)',
-      display: 'flex',
-      alignItems: 'center',
-      gap: 12,
-      flexWrap: 'wrap'
-    }
-  }, React.createElement("span", {
-    style: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: 8,
-      padding: '7px 13px',
-      borderRadius: 4,
-      background: '#FD7202',
-      color: '#fff',
-      fontSize: 11,
-      fontWeight: 600,
-      letterSpacing: '0.06em',
-      textTransform: 'uppercase',
-      whiteSpace: 'nowrap'
-    }
-  }, "\u0420\u0430\u043D\u043D\u0438\u0439 \u0442\u0430\u0440\u0438\u0444"), React.createElement("span", null, "\u0421\u043D\u0438\u0436\u0435\u043D\u043D\u0430\u044F \u0446\u0435\u043D\u0430 \u0434\u043B\u044F \u0432\u0441\u0435\u0445, \u043A\u0442\u043E \u043F\u043E\u0434\u043F\u0438\u0448\u0435\u0442\u0441\u044F \u0434\u043E 16 \u0438\u044E\u043B\u044F \u2014 \u043F\u0435\u0440\u0432\u043E\u0433\u043E \u043C\u0435\u0441\u044F\u0446\u0430 \u0436\u0438\u0437\u043D\u0438 \u0441\u043E\u043E\u0431\u0449\u0435\u0441\u0442\u0432\u0430.")), React.createElement("div", {
-    style: {
       display: 'grid',
       gridTemplateColumns: 'repeat(3,1fr)',
       gap: 16
@@ -1610,8 +1582,7 @@ const Pricing = () => {
     className: "grid-3"
   }, tiers.map(t => {
     const popular = t.popular;
-    const introPrice = annual && t.regular ? Math.round(t.intro * 0.8) : t.intro;
-    const regularPrice = annual && t.regular ? Math.round(t.regular * 0.8) : t.regular;
+    const price = annual && t.regular ? Math.round(t.regular * 0.8) : t.regular;
     return React.createElement("div", {
       key: t.name,
       style: {
@@ -1658,15 +1629,7 @@ const Pricing = () => {
       style: {
         minHeight: 96
       }
-    }, t.regular !== null ? React.createElement(React.Fragment, null, !annual && React.createElement("div", {
-      style: {
-        fontSize: 11,
-        color: popular ? '#FCBC60' : '#FD7202',
-        letterSpacing: '0.06em',
-        marginBottom: 4,
-        textTransform: 'uppercase'
-      }
-    }, "\u0440\u0430\u043D\u043D\u0438\u0439 \u0442\u0430\u0440\u0438\u0444 \xB7 \u0434\u043E 16 \u0438\u044E\u043B\u044F"), React.createElement("div", {
+    }, t.regular !== null ? React.createElement(React.Fragment, null, React.createElement("div", {
       style: {
         display: 'flex',
         alignItems: 'baseline',
@@ -1678,19 +1641,13 @@ const Pricing = () => {
       style: {
         fontSize: 40
       }
-    }, fmt(introPrice), " \u20BD"), !annual && React.createElement("div", {
-      style: {
-        fontSize: 14,
-        color: popular ? 'rgba(255,255,255,.5)' : 'rgba(0,0,0,.4)',
-        textDecoration: 'line-through'
-      }
-    }, fmt(t.regular), " \u20BD")), React.createElement("div", {
+    }, fmt(price), " \u20BD")), React.createElement("div", {
       style: {
         fontSize: 13,
         color: popular ? 'rgba(255,255,255,.55)' : 'rgba(0,0,0,.5)',
         marginTop: 6
       }
-    }, annual ? 'в месяц · при годовой оплате' : `затем ${fmt(regularPrice)} ₽ / мес`)) : React.createElement("div", null, React.createElement("div", {
+    }, annual ? 'в месяц · при годовой оплате' : 'в месяц')) : React.createElement("div", null, React.createElement("div", {
       className: "numeral",
       style: {
         fontSize: 30

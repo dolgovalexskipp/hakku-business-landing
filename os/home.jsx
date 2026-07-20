@@ -148,9 +148,6 @@ function HomeA({ nav = ()=>{} }) {
               </div>
               {mo.now ? (
                 <React.Fragment>
-                  <div style={{ marginTop: 14, padding:'10px 12px', border:'1px solid var(--ink-12)', borderRadius: 10, background:'var(--ink-04)', fontSize: 12.5, color:'var(--ink-72)' }}>
-                    Ранний доступ закрывается <b>16 июля</b> — дальше тарифы по обычной цене.
-                  </div>
                   <a className="os-clickable" href="/programma-iyulya/" style={{ display:'inline-block', marginTop: 12, fontSize: 13.5, color:'var(--blue)', fontWeight: 500, textDecoration:'none' }}>Открыть программу июля →</a>
                 </React.Fragment>
               ) : (

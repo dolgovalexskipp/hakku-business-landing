@@ -1,9 +1,9 @@
-// Тарифы — 3 тарифа: ПРО / МАКС / Компания · ранняя цена · месяц/год.
+// Тарифы — 3 тарифа: ПРО / МАКС / Компания · месяц/год. Раннее окно закрыто 16.07.2026.
 const Pricing = () => {
   const [annual, setAnnual] = React.useState(false);
   const tiers = [
     {
-      name: 'ПРО', regular: 4900, intro: 3900,
+      name: 'ПРО', regular: 4900,
       users: 'Только собственник',
       desc: 'Полный доступ к сообществу для вас одного. Определите, где в вашем бизнесе ИИ даст прибыль, и запустите первый инструмент лично.',
       avatars: [
@@ -13,7 +13,7 @@ const Pricing = () => {
       ],
     },
     {
-      name: 'МАКС', regular: 7900, intro: 5900,
+      name: 'МАКС', regular: 7900,
       users: 'Собственник + 1 ответственный за ИИ',
       desc: 'Вы и человек, который будет вести ИИ-трансформацию изнутри компании. Соберите первый инструмент под одну функцию с измеримым ростом денег.',
       popular: true,
@@ -22,7 +22,7 @@ const Pricing = () => {
       ],
     },
     {
-      name: 'Компания', regular: null, intro: null,
+      name: 'Компания', regular: null,
       users: 'Вся команда — по договорённости',
       desc: 'Индивидуальный формат для компаний, которые подключают операционную команду целиком. Интеграция методики сообщества под конкретные процессы.',
       avatars: [],
@@ -70,16 +70,10 @@ const Pricing = () => {
           </div>
         </div>
 
-        <div style={{ marginBottom: 28, fontSize: 13, color: 'rgba(0,0,0,.55)', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '7px 13px', borderRadius: 4, background: '#FD7202', color: '#fff', fontSize: 11, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Ранний тариф</span>
-          <span>Сниженная цена для всех, кто подпишется до 16 июля — первого месяца жизни сообщества.</span>
-        </div>
-
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16 }} className="grid-3">
           {tiers.map((t) => {
             const popular = t.popular;
-            const introPrice = annual && t.regular ? Math.round(t.intro * 0.8) : t.intro;
-            const regularPrice = annual && t.regular ? Math.round(t.regular * 0.8) : t.regular;
+            const price = annual && t.regular ? Math.round(t.regular * 0.8) : t.regular;
             return (
               <div key={t.name} style={{
                 padding: '36px 28px 28px', border: `1px solid ${popular ? '#000' : 'rgba(0,0,0,.12)'}`,
@@ -94,12 +88,10 @@ const Pricing = () => {
                 <div style={{ minHeight: 96 }}>
                   {t.regular !== null ? (
                     <>
-                      {!annual && <div style={{ fontSize: 11, color: popular ? '#FCBC60' : '#FD7202', letterSpacing: '0.06em', marginBottom: 4, textTransform: 'uppercase' }}>ранний тариф · до 16 июля</div>}
                       <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
-                        <div className="numeral" style={{ fontSize: 40 }}>{fmt(introPrice)} ₽</div>
-                        {!annual && <div style={{ fontSize: 14, color: popular ? 'rgba(255,255,255,.5)' : 'rgba(0,0,0,.4)', textDecoration: 'line-through' }}>{fmt(t.regular)} ₽</div>}
+                        <div className="numeral" style={{ fontSize: 40 }}>{fmt(price)} ₽</div>
                       </div>
-                      <div style={{ fontSize: 13, color: popular ? 'rgba(255,255,255,.55)' : 'rgba(0,0,0,.5)', marginTop: 6 }}>{annual ? 'в месяц · при годовой оплате' : `затем ${fmt(regularPrice)} ₽ / мес`}</div>
+                      <div style={{ fontSize: 13, color: popular ? 'rgba(255,255,255,.55)' : 'rgba(0,0,0,.5)', marginTop: 6 }}>{annual ? 'в месяц · при годовой оплате' : 'в месяц'}</div>
                     </>
                   ) : (
                     <div>
