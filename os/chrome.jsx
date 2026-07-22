@@ -71,6 +71,7 @@ const MATERIALS = [
   { kind:'Гайд',     k:'book',   title:'Постановка задач для ИИ',     sub:'Почему ИИ приносит не то — и 8 приёмов с промптами', auth:'alex', read:'12 мин', status:'live', track:'personal',    topics:['Продуктивность','Контекст'],      tier:'pro', href:'/materials/postanovka-zadach/', isNew:true },
   { kind:'Вебинар',  k:'book',   title:'ИИ в дизайне продуктов',      sub:'Конспект эфира: дизайн-система, Claude Design + Code, флоу', auth:'alex', read:'12 мин', status:'live', track:'first-agent', topics:['Кейс','Продуктивность'],          tier:'pro', href:'/materials/dizayn-produktov/', isNew:true },
   { kind:'Гайд',     k:'book',   title:'Регламент за 20 минут',       sub:'Найм, бюджет, ответы клиентам — правила, которые исполняет ассистент', auth:'alex', read:'11 мин', status:'live', track:'team', topics:['Рутина','Компания'], tier:'pro', href:'/materials/reglament-za-20-minut/', isNew:true },
+  { kind:'Вебинар',  k:'book',   title:'Оперативка на минималках',    sub:'Агентная среда Максима Желепы: Казначей, конвейер, сводки вместо созвонов', auth:'alex', read:'14 мин', status:'live', track:'first-agent', topics:['Кейс','Компания'], tier:'pro', href:'/materials/operativka-na-minimalkah/', isNew:true },
 ];
 const liveCount = MATERIALS.filter(m=>m.status==='live').length;
 const soonCount = MATERIALS.length - liveCount;
