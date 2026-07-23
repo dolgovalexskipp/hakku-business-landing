@@ -13,7 +13,7 @@ const MONTHS = [
       { when:'16.07', kind:'Loom-разбор',  title:'Персональный ассистент собственника', track:'first-agent' },
       { when:'20.07', kind:'Loom-разбор',  title:'ИИ — это отдел, а не один помощник',  track:'team' },
       { when:'20.07', kind:'Loom-разбор',  title:'Где ИИ врёт — живая демонстрация',    track:'personal' },
-      { when:'22.07', kind:'Вебинар + Q&A', title:'Оперативка без созвонов',            track:'team', note:'дата уточняется' },
+      { when:'есть',  kind:'Вебинар',      title:'Оперативка на минималках',            href:'/materials/operativka-na-minimalkah/', track:'first-agent' },
       { when:'28.07', kind:'Гайд',         title:'ОС компании на одной странице',       track:'team' },
     ] },
 ];
