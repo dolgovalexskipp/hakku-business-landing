@@ -13,3 +13,4 @@ _tools/cap.config.json
 # cap-server-publish: тяжёлые видео не в git (заливаются на сервер по scp), GitHub лимит 100MB
 v/**/video.mp4
 /os/
+/materials/
