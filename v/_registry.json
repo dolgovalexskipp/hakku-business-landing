@@ -1,5 +1,14 @@
 [
   {
+    "slug": "vibe-salon-debitorka",
+    "title": "Вайб-салон: AI-агент для контроля дебиторки",
+    "desc": "Кейс Ольги Бугаевой (бухаутсорсинг на 1С, 400+ клиентов): за час собираем агента, который мониторит просрочку, семафорит в Telegram и рисует витрину руководителя.",
+    "url": "https://business.hakku.ai/v/vibe-salon-debitorka/",
+    "private": true,
+    "storage": "yc",
+    "poster": "https://storage.yandexcloud.net/video.business.hakku.ai/vibe-salon-debitorka-poster.jpg"
+  },
+  {
     "slug": "tsifrovaya-transformatsiya-voysov",
     "title": "Цифровая трансформация войсов",
     "desc": "От хаоса в чатах — к системе. Plaud и диаризация, расшифровка голосовых, диктовка Wisprflow, Granola и Zoom — что подключать и как.",

@@ -188,9 +188,17 @@ try {
 
 // ---- AUTH_PROBE из LMS (единый source of truth) -----------------------
 function authProbe() {
-  const appjs = fs.readFileSync(path.join(REPO, 'os', 'app.jsx'), 'utf8');
+  // os/ переехал в монорепо hakku-lms (23.07.2026) — app.jsx читаем оттуда,
+  // со старым путём в лендинге как fallback
+  const candidates = [
+    path.join(process.env.HOME, 'hakku-lms', 'apps', 'os', 'app.jsx'),
+    path.join(REPO, 'os', 'app.jsx'),
+  ];
+  const found = candidates.find(f => fs.existsSync(f));
+  if (!found) die('не нашёл app.jsx (искал: ' + candidates.join(', ') + ') — гейт не собрать');
+  const appjs = fs.readFileSync(found, 'utf8');
   const m = appjs.match(/const AUTH_PROBE\s*=\s*(\{[^;]+\});/);
-  if (!m) die('не нашёл AUTH_PROBE в os/app.jsx — гейт не собрать');
+  if (!m) die('не нашёл AUTH_PROBE в ' + found + ' — гейт не собрать');
   return m[1];
 }
 

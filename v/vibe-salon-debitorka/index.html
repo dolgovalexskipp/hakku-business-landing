@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ru" data-brand="b2c">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Вайб-салон: AI-агент для контроля дебиторки · хакку.ии бИИзнес</title>
+  <meta name="description" content="Кейс Ольги Бугаевой (бухаутсорсинг на 1С, 400+ клиентов): за час собираем агента, который мониторит просрочку, семафорит в Telegram и рисует витрину руководителя.">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <meta property="og:url" content="https://business.hakku.ai/v/vibe-salon-debitorka/">
+  <meta property="og:title" content="Вайб-салон: AI-агент для контроля дебиторки">
+  <meta property="og:description" content="Кейс Ольги Бугаевой (бухаутсорсинг на 1С, 400+ клиентов): за час собираем агента, который мониторит просрочку, семафорит в Telegram и рисует витрину руководителя.">
+  <meta property="og:image" content="https://storage.yandexcloud.net/video.business.hakku.ai/vibe-salon-debitorka-og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:image" content="https://storage.yandexcloud.net/video.business.hakku.ai/vibe-salon-debitorka-og.png">
+  <meta property="og:site_name" content="хакку.ии | бИИзнес">
+  <meta property="og:locale" content="ru_RU">
+  <link rel="stylesheet" href="/design_system/colors_and_type.css">
+  <style>
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--paper,#fff);color:var(--ink,#000);font-family:var(--font-body,Inter,system-ui,sans-serif);-webkit-font-smoothing:antialiased}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 20px 60px}
+    .top{display:flex;align-items:center;gap:10px;margin-bottom:22px}
+    .top .mark{font-family:var(--font-display,Tektur,sans-serif);font-weight:700;letter-spacing:.02em;font-size:18px}
+    .top .sep{color:var(--ink-40,rgba(0,0,0,.4))}
+    .top .muted{color:var(--ink-55,rgba(0,0,0,.55))}
+    .eyebrow{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-40,rgba(0,0,0,.4));margin-bottom:10px}
+    h1{font-family:var(--font-display,Tektur,sans-serif);font-size:clamp(24px,3.4vw,38px);line-height:1.12;margin:0 0 10px}
+    .desc{color:var(--ink-72,rgba(0,0,0,.72));max-width:680px;font-size:16px;line-height:1.55;margin:0 0 22px}
+    .stage{border:1px solid var(--ink-12,rgba(0,0,0,.12));border-radius:16px;overflow:hidden;background:#000;box-shadow:0 18px 50px rgba(0,0,0,.14)}
+    video{display:block;width:100%;height:auto;background:#000;aspect-ratio:2560/1528}
+    .foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-top:18px;padding-top:16px;border-top:1px solid var(--ink-08,rgba(0,0,0,.08));color:var(--ink-40,rgba(0,0,0,.4));font-size:13.5px}
+    .foot a{color:var(--blue,#2A3EF4);text-decoration:none;font-weight:500}
+    .gate{position:fixed;inset:0;background:var(--paper,#fff);display:flex;align-items:center;justify-content:center;padding:24px;z-index:10}
+    .gate-card{width:100%;max-width:420px;border:1px solid var(--ink-12,rgba(0,0,0,.12));border-radius:18px;padding:30px;background:var(--paper,#fff);box-shadow:0 18px 50px rgba(0,0,0,.08)}
+    .gate-card h2{font-family:var(--font-display,Tektur,sans-serif);font-size:26px;margin:0 0 8px}
+    .gate-card p{color:var(--ink-55,rgba(0,0,0,.55));font-size:14.5px;line-height:1.5;margin:0 0 18px}
+    .gate-card input{width:100%;height:48px;border:1px solid var(--ink-12,rgba(0,0,0,.12));background:var(--paper,#fff);color:var(--ink,#000);border-radius:11px;padding:0 14px;font-size:15px;outline:none}
+    .gate-card input:focus{border-color:var(--blue,#2A3EF4)}
+    .gate-card button{width:100%;height:48px;margin-top:12px;border:0;border-radius:11px;background:var(--ink,#000);color:#fff;font-size:15px;font-weight:600;cursor:pointer}
+    .err{color:var(--magenta,#D51F75);font-size:13.5px;margin-top:10px}
+    .hint{color:var(--ink-40,rgba(0,0,0,.4));font-size:13px;margin-top:14px}
+    .hint a{color:var(--blue,#2A3EF4);text-decoration:none}
+    .transcript{margin-top:38px}
+    .tr-bar{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px;margin-bottom:16px}
+    .transcript h2{font-family:var(--font-display,Tektur,sans-serif);font-size:clamp(20px,2.6vw,26px);margin:0}
+    .tr-note{color:var(--ink-40,rgba(0,0,0,.4));font-size:13px}
+    .tr-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+    .tr-chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ink-12,rgba(0,0,0,.12));background:var(--paper,#fff);color:var(--ink-72,rgba(0,0,0,.72));border-radius:999px;padding:7px 13px;font-size:13px;line-height:1;cursor:pointer;transition:border-color .15s,color .15s}
+    .tr-chip:hover{border-color:var(--blue,#2A3EF4);color:var(--ink,#000)}
+    .tr-chip .tr-ts{font-variant-numeric:tabular-nums;font-weight:600;color:var(--blue,#2A3EF4)}
+    .tr-body{max-width:720px}
+    .tr-body p{color:var(--ink-72,rgba(0,0,0,.78));font-size:16px;line-height:1.7;margin:0 0 16px}
+    .tr-h{font-family:var(--font-display,Tektur,sans-serif);font-size:18px;line-height:1.3;margin:30px 0 12px;scroll-margin-top:20px}
+    .tr-seek{font:inherit;border:0;background:none;padding:0;cursor:pointer}
+    .tr-h .tr-seek{color:var(--blue,#2A3EF4);font-variant-numeric:tabular-nums;margin-right:6px}
+    .tr-h .tr-seek:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  
+    <form id="gate" class="gate" onsubmit="return submitGate(event)" style="display:none">
+      <div class="gate-card">
+        <div class="eyebrow">Закрытая среда · по приглашению</div>
+        <h2>Разбор для участников бИИзнес</h2>
+        <p>Введите код доступа из чата сообщества, чтобы открыть видео.</p>
+        <input id="pw" type="password" placeholder="Код доступа из чата" autocomplete="off" autofocus>
+        <button type="submit">Открыть →</button>
+        <div id="err" class="err" style="display:none">Код не подошёл. Проверьте раскладку.</div>
+        <div class="hint">Нет доступа? <a href="https://t.me/hakkuai_business_bot" target="_blank" rel="noopener">@hakkuai_business_bot</a></div>
+      </div>
+    </form>
+  <div class="wrap" id="stage" style="display:none">
+    <div class="top"><span class="mark">хакку.ии</span><span class="sep">·</span><span class="muted">бИИзнес</span></div>
+    <div class="eyebrow">Loom-разбор</div>
+    <h1>Вайб-салон: AI-агент для контроля дебиторки</h1>
+    <p class="desc">Кейс Ольги Бугаевой (бухаутсорсинг на 1С, 400+ клиентов): за час собираем агента, который мониторит просрочку, семафорит в Telegram и рисует витрину руководителя.</p>
+    <div class="stage"><video id="v" controls playsinline preload="none" poster="https://storage.yandexcloud.net/video.business.hakku.ai/vibe-salon-debitorka-poster.jpg"></video></div>
+    
+    <p class="desc" style="margin-top:18px">Код агента из эфира — целиком, с тестами и README: <a href="debitorka-agent.zip" download>скачать архив (80 КБ)</a>. Внутри: синтетические данные под калибровку 1С, метрики просрочки, правила алертов, Telegram-бот, LLM-дайджест и Streamlit-витрина.</p>
+    <div class="foot">
+      <span>хакку.ии (hakku.ai) · бИИзнес — сообщество собственников бизнеса</span>
+      <a href="/os/">← в базу знаний</a>
+    </div>
+  </div>
+  
+  <script>
+  const AUTH_PROBE = { "salt":"ULERfbQ7eP7hM5rcJs2SRA==", "iv":"dmM/z52LaNMJQvFE", "ct":"hszrx7qxp71upJ2qnSwKX1UZxs/+MJupR7Yb" };
+  const VIDEO_URL = "https://storage.yandexcloud.net/video.business.hakku.ai/vibe-salon-debitorka.mp4";
+  function _b64(s){var b=atob(s),o=new Uint8Array(b.length);for(var i=0;i<b.length;i++)o[i]=b.charCodeAt(i);return o;}
+  async function verify(pwd){if(!pwd)return false;try{var e=new TextEncoder();var km=await crypto.subtle.importKey('raw',e.encode(pwd),'PBKDF2',false,['deriveKey']);var k=await crypto.subtle.deriveKey({name:'PBKDF2',salt:_b64(AUTH_PROBE.salt),iterations:100000,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);var buf=await crypto.subtle.decrypt({name:'AES-GCM',iv:_b64(AUTH_PROBE.iv)},k,_b64(AUTH_PROBE.ct));return new TextDecoder().decode(buf)==='hakku-os-ok';}catch(e){return false;}}
+  function reveal(){var v=document.getElementById('v');v.src=VIDEO_URL;document.getElementById('gate').style.display='none';document.getElementById('stage').style.display='block';}
+  (async()=>{try{var pw=localStorage.getItem('hakku_os_pw');if(pw&&await verify(pw)){reveal();return;}}catch(e){}document.getElementById('gate').style.display='flex';})();
+  async function submitGate(e){e.preventDefault();var i=document.getElementById('pw'),err=document.getElementById('err');var ok=await verify(i.value);if(ok){try{localStorage.setItem('hakku_os_pw',i.value);localStorage.setItem('hakku_os_authed','1');}catch(e){}reveal();}else{err.style.display='block';}return false;}
+  </script>
+  
+</body>
+</html>
