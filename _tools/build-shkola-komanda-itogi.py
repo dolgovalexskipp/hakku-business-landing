@@ -2,7 +2,7 @@
 """Сборка пост-ридинга школы «Команда» (business.hakku.ai/shkola-komanda-itogi/).
 
 Источник правды — vault:
-  Dolgov-AI/Workshops/komanda-2026-09/postreading_page_source_v1.html  (страница, маркеры <!--MD--> и <!--PHONE-->)
+  Dolgov-AI/Workshops/komanda-2026-09/postreading_page_source_v2.html  (страница, маркеры <!--MD--> и <!--PHONE-->)
   Dolgov-AI/Workshops/komanda-2026-09/postreading_dlya_ii_v1.md         (файл для ИИ, вшивается в #md-skill)
 
 Шаги: склейка → _materials_src/shkola-komanda-itogi.html → encrypt-page.cjs (пароль школы)
@@ -14,7 +14,7 @@ import argparse, pathlib, re, subprocess, sys
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 VAULT = pathlib.Path.home() / "Documents/Sasha_Jopa_OS/Dolgov-AI/Workshops/komanda-2026-09"
-SRC_HTML = VAULT / "postreading_page_source_v1.html"
+SRC_HTML = VAULT / "postreading_page_source_v2.html"
 SRC_MD = VAULT / "postreading_dlya_ii_v1.md"
 MERGED = REPO / "_materials_src/shkola-komanda-itogi.html"
 OUT = REPO / "shkola-komanda-itogi/index.html"
