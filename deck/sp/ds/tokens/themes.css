@@ -1,0 +1,88 @@
+/* ============================================================
+   Hakku 2.0 — Themes (layer 2 of 4: theme)
+   ----------------------------------------------------------------
+   Light is the default (values live in core.css :root).
+   Dark is a FIRST-CLASS theme (inherited from the hakku.ai system):
+   whole-app inversion for product surfaces (LMS, OS, Cowork) and
+   dark communications (decks on stage, night landings).
+
+   [data-canvas="ink"] stays for SECTION-level inversion inside the
+   light theme (hero strips, CTA bands, brand-guide blocks).
+
+   Rule: components must consume SEMANTIC tokens (--surface, --fg,
+   --border…), never raw --ink/--paper directly — that is what makes
+   both themes and ink-canvas sections work.
+   ============================================================ */
+
+/* ---- Explicit light (same as :root defaults — for toggles) -- */
+[data-theme="light"] {
+  --surface:        var(--paper);
+  --surface-soft:   var(--ash);
+  --surface-card:   var(--paper);
+  --surface-raised: #fafafa;
+  --surface-ink:    var(--ink);
+  --fg:             var(--ink);
+  --fg-muted:       var(--ink-72);
+  --fg-faint:       var(--ink-55);
+  --border:         var(--ink-12);
+  --border-strong:  var(--ink);
+}
+
+/* ---- Dark theme (first-class) ------------------------------ */
+[data-theme="dark"] {
+  --surface:        var(--ink);    /* absolute black canvas */
+  --surface-soft:   #0a0a0a;       /* alternating section ground */
+  --surface-card:   #0a0a0a;       /* card fill */
+  --surface-raised: #111111;       /* raised panel / sticky bars */
+  --surface-ink:    var(--paper);  /* "inverted" card flips to paper */
+  --fg:             var(--paper);
+  --fg-muted:       var(--paper-72);
+  --fg-faint:       var(--paper-55);
+  --border:         var(--paper-16);
+  --border-strong:  var(--paper);
+
+  /* product-surface extras (tables, rows) */
+  --row-even:       #111111;
+  --row-odd:        #0a0a0a;
+
+  background: var(--surface);
+  color: var(--fg);
+}
+
+/* Light-theme product extras (defined here so both themes carry them) */
+:root, [data-theme="light"] {
+  --row-even:       #f8fafc;
+  --row-odd:        #ffffff;
+}
+
+/* ---- Ink canvas — section-level inversion (canon) ----------- */
+[data-canvas="ink"] {
+  --surface:        var(--ink);
+  --surface-soft:   #0a0a0a;
+  --surface-card:   #0a0a0a;
+  --surface-raised: #111111;
+  --surface-ink:    var(--paper);
+  --fg:             var(--paper);
+  --fg-muted:       var(--paper-72);
+  --fg-faint:       var(--paper-55);
+  --border:         var(--paper-16);
+  --border-strong:  var(--paper);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Paper canvas — re-invert a region inside dark theme / ink canvas */
+[data-canvas="paper"] {
+  --surface:        var(--paper);
+  --surface-soft:   var(--ash);
+  --surface-card:   var(--paper);
+  --surface-raised: #fafafa;
+  --surface-ink:    var(--ink);
+  --fg:             var(--ink);
+  --fg-muted:       var(--ink-72);
+  --fg-faint:       var(--ink-55);
+  --border:         var(--ink-12);
+  --border-strong:  var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+}

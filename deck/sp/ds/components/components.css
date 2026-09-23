@@ -1,0 +1,266 @@
+/* ============================================================
+   Hakku 2.0 — Components
+   Canon component classes (buttons, cards, badges, lattice, nav)
+   + product-mode controls (inputs, tables, sidebar). Theme-aware:
+   everything consumes semantic tokens only.
+   Requires tokens/tokens.css + base.css.
+   ============================================================ */
+
+/* ============ BUTTONS — always pills ======================== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: var(--s-2);
+  height: var(--ctl-h, 48px);
+  padding: 0 var(--s-5);
+  border-radius: var(--r-pill);
+  border: 1px solid transparent;
+  font-family: var(--font-body);
+  font-size: var(--t-small); font-weight: 500;
+  cursor: pointer; white-space: nowrap;
+  transition: filter var(--dur-fast) var(--ease-brand),
+              background var(--dur-fast) var(--ease-brand),
+              border-color var(--dur-fast) var(--ease-brand);
+  -webkit-user-select: none; user-select: none;
+}
+.btn:focus-visible { outline: none; box-shadow: var(--focus-ring, 0 0 0 3px rgba(42,62,244,.25)); }
+
+/* Primary — solid ink on paper (flips to paper-on-ink in dark/ink) */
+.btn-primary { background: var(--fg); color: var(--surface); }
+
+/* Ghost — transparent + hairline */
+.btn-ghost { background: transparent; color: var(--fg); border-color: var(--border); }
+
+/* Accent — the rare loud CTA (one per view) */
+.btn-accent { background: var(--accent); color: var(--accent-on); }
+
+/* Ховер — только там, где есть указатель: на тач-устройстве
+   состояние залипает после тапа, и пользователь видит «активной»
+   кнопку, с которой уже ушёл. Правило слоя, не исключение. */
+@media (hover: hover) {
+  .btn-primary:hover { filter: brightness(1.35); }
+  [data-theme="dark"] .btn-primary:hover,
+  [data-canvas="ink"] .btn-primary:hover { filter: brightness(0.85); }
+  .btn-ghost:hover { border-color: var(--border-strong); }
+  .btn-accent:hover { filter: brightness(1.1); }
+}
+
+.btn-sm { height: var(--ctl-h-sm, 36px); padding: 0 var(--s-4); font-size: var(--t-caption); }
+.btn-lg { height: var(--ctl-h-lg, 56px); padding: 0 var(--s-6); font-size: var(--t-body); }
+.btn[disabled], .btn.is-disabled { opacity: .4; pointer-events: none; }
+
+/* The brand's only recurring "icon" is the literal arrow glyph → */
+.btn .arrow { font-family: var(--font-body); }
+
+/* Links gain a hairline underline on hover */
+.link { color: var(--fg); border-bottom: 1px solid transparent; transition: border-color var(--dur-fast) var(--ease-brand); }
+@media (hover: hover) { .link:hover { border-color: var(--fg-faint); } }
+.link-accent { color: var(--accent); }
+
+/* ============ BADGES / CHIPS ================================ */
+.badge {
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  padding: 6px 14px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--border);
+  font-size: var(--t-caption); font-weight: 500;
+  color: var(--fg-muted);
+  background: transparent;
+}
+.badge-fill   { background: var(--ink-04); border-color: transparent; }
+.badge-ink    { background: var(--fg); color: var(--surface); border-color: transparent; }
+.badge-accent { background: var(--accent); color: var(--accent-on); border-color: transparent; }
+/* Status dot — the single 6px circle marker */
+.badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.badge .dot-orange { background: var(--orange); }
+.badge .dot-magenta { background: var(--magenta); }
+
+/* ============ CARDS ========================================= */
+/* Hairline borders do the work, not shadows. */
+.card {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--s-6);
+}
+.card-md { border-radius: var(--r-md); padding: var(--s-5); }
+/* Selected / "popular" card inverts */
+.card-ink {
+  background: var(--surface-ink);
+  color: var(--surface);
+  border: 1px solid var(--border-strong);
+}
+.card-ink h1, .card-ink h2, .card-ink h3, .card-ink h4, .card-ink h5,
+.card-ink p { color: inherit; }
+/* Soft card — tonal fill, no border (product lists) */
+.card-soft { background: var(--surface-soft); border-color: transparent; }
+
+/* ============ LATTICE — 1px hairline grid =================== */
+/* Signature editorial table look: cells separated by 1px gap over
+   a hairline ground. */
+.lattice {
+  display: grid;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.lattice > * { background: var(--surface-card); padding: var(--s-6); }
+.lattice-3 { grid-template-columns: repeat(3, 1fr); }
+.lattice-2 { grid-template-columns: repeat(2, 1fr); }
+.lattice-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 768px) { .lattice-2, .lattice-3, .lattice-4 { grid-template-columns: 1fr; } }
+
+/* ============ NAV (sticky, blurred) ========================= */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--s-5);
+  height: var(--topbar-h, 72px);
+  padding: 0 var(--s-6);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--ink-08);
+}
+[data-theme="dark"] .nav, [data-canvas="ink"] .nav { border-bottom-color: var(--paper-10); }
+
+/* ============ SECTION scaffolding (comm) ==================== */
+.section { padding: var(--section-pad, 140px) 0; border-top: 1px solid var(--ink-08); }
+[data-theme="dark"] .section, [data-canvas="ink"] .section { border-top-color: var(--paper-10); }
+
+/* ============ TOGGLE — pill switcher ======================== */
+.toggle {
+  display: inline-flex; padding: 4px;
+  border: 1px solid var(--border); border-radius: var(--r-pill);
+  background: var(--surface-card);
+}
+.toggle button {
+  border: 0; background: transparent; color: var(--fg-muted);
+  padding: 8px 18px; border-radius: var(--r-pill);
+  font: 500 var(--t-small)/1 var(--font-body); cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-brand), color var(--dur-fast) var(--ease-brand);
+}
+.toggle button.is-active { background: var(--fg); color: var(--surface); }
+
+/* ============ ICONS (Lucide subset, product UI) ============= */
+/* Brand rule: 1.5px stroke, ink-coloured, sparse. Icons never
+   compete with holographic graphics. */
+.icon, svg.lucide { width: 20px; height: 20px; stroke-width: 1.5; color: var(--fg-muted); flex: none; }
+.icon-sm { width: 16px; height: 16px; }
+.icon-lg { width: 24px; height: 24px; }
+/* Icons as <img> can't inherit currentColor (SVG stroke stays black) —
+   dark theme / ink canvas auto-inverts them. Prefer inline SVG when the
+   icon must be tinted precisely. */
+[data-theme="dark"] img.icon, [data-canvas="ink"] img.icon { filter: invert(1); opacity: .72; }
+/* …except on inverted fills (active nav pill is paper in dark) */
+[data-theme="dark"] .nav-item.is-active img.icon,
+[data-canvas="ink"] .nav-item.is-active img.icon { filter: none; opacity: 1; }
+
+/* ============ PRODUCT MODE — forms ========================== */
+.input, .select, .textarea {
+  width: 100%;
+  height: var(--ctl-h, 40px);
+  padding: 0 var(--ctl-pad-x, 14px);
+  border: 1px solid var(--border);
+  border-radius: var(--ctl-radius, 8px);
+  background: var(--surface-card);
+  color: var(--fg);
+  font: 400 var(--t-body)/1.4 var(--font-body);
+  transition: border-color var(--dur-fast) var(--ease-brand), box-shadow var(--dur-fast) var(--ease-brand);
+}
+.textarea { height: auto; min-height: 96px; padding: var(--s-3) var(--ctl-pad-x, 14px); resize: vertical; }
+.input::placeholder, .textarea::placeholder { color: var(--fg-faint); }
+@media (hover: hover) { .input:hover, .select:hover, .textarea:hover { border-color: var(--hairline); } }
+.input:focus, .select:focus, .textarea:focus {
+  outline: none; border-color: var(--accent);
+  box-shadow: var(--focus-ring, 0 0 0 3px rgba(42,62,244,.25));
+}
+.input.is-invalid { border-color: var(--magenta); }
+.field { display: grid; gap: var(--s-2); }
+.field > label { font: 500 var(--t-small)/1.2 var(--font-body); color: var(--fg); }
+.field > .hint { font-size: var(--t-caption); color: var(--fg-faint); }
+.field > .error { font-size: var(--t-caption); color: var(--magenta); }
+
+/* Checkbox / radio — ink, square/circle, no accent fill until checked */
+.checkbox, .radio { accent-color: var(--fg); width: 16px; height: 16px; }
+
+/* Switch */
+.switch { position: relative; width: 40px; height: 24px; border-radius: var(--r-pill);
+  background: var(--ink-12); transition: background var(--dur-fast) var(--ease-brand);
+  border: 0; cursor: pointer; }
+.switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px;
+  border-radius: 50%; background: var(--paper); box-shadow: var(--shadow-sm);
+  transition: transform var(--dur-fast) var(--ease-brand); }
+.switch.is-on { background: var(--fg); }
+.switch.is-on::after { transform: translateX(16px); }
+
+/* ============ PRODUCT MODE — tables ========================= */
+.table { width: 100%; border-collapse: collapse; font-size: var(--t-body); }
+.table th {
+  text-align: left; height: var(--row-h-sm, 36px); padding: 0 var(--s-4);
+  font: 500 var(--t-caption)/1 var(--font-body);
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--table-head-fg, var(--fg-faint));
+  border-bottom: 1px solid var(--border);
+}
+.table td { height: var(--row-h, 48px); padding: 0 var(--s-4);
+  border-bottom: 1px solid var(--ink-08); color: var(--fg-muted); }
+[data-theme="dark"] .table td { border-bottom-color: var(--paper-10); }
+@media (hover: hover) {
+  .table tr:hover td { background: var(--ink-04); }
+  [data-theme="dark"] .table tr:hover td { background: var(--paper-04); }
+}
+.table td:first-child { color: var(--fg); font-weight: 500; }
+.table-striped tbody tr:nth-child(even) td { background: var(--row-even); }
+
+/* ============ PRODUCT MODE — app shell ====================== */
+/* Мобильная раскладка (табы + drawer на ≤767) — mobile.css */
+.app-shell { display: grid; grid-template-columns: var(--sidebar-w, 264px) 1fr; min-height: 100vh; min-height: 100dvh; }
+.sidebar {
+  background: var(--surface-card);
+  border-right: 1px solid var(--border);
+  padding: var(--s-5);
+  display: flex; flex-direction: column; gap: var(--s-1);
+}
+.sidebar .nav-item {
+  display: flex; align-items: center; gap: var(--s-3);
+  padding: 10px 14px; border-radius: var(--r-sm);
+  font: 500 var(--t-small)/1.2 var(--font-body); color: var(--fg-muted);
+  cursor: pointer; transition: background var(--dur-fast) var(--ease-brand), color var(--dur-fast) var(--ease-brand);
+}
+@media (hover: hover) {
+  .sidebar .nav-item:hover { background: var(--ink-04); color: var(--fg); }
+  [data-theme="dark"] .sidebar .nav-item:hover { background: var(--paper-04); }
+}
+.sidebar .nav-item.is-active { background: var(--fg); color: var(--surface); }
+.sidebar .nav-item.is-active .icon { color: inherit; }
+
+/* Progress (courses) — hairline track, ink fill, gradient for 100% */
+.progress { height: 4px; border-radius: var(--r-pill); background: var(--ink-08); overflow: hidden; }
+[data-theme="dark"] .progress { background: var(--paper-10); }
+.progress > i { display: block; height: 100%; background: var(--fg); border-radius: var(--r-pill); }
+.progress.is-done > i { background: var(--grad-cool); }
+
+/* Tabs — underline style (product) */
+.tabs { display: flex; gap: var(--s-5); border-bottom: 1px solid var(--border); }
+.tabs button {
+  border: 0; background: none; cursor: pointer;
+  padding: var(--s-3) 0; margin-bottom: -1px;
+  font: 500 var(--t-small)/1.2 var(--font-body); color: var(--fg-faint);
+  border-bottom: 2px solid transparent;
+  transition: color var(--dur-fast) var(--ease-brand), border-color var(--dur-fast) var(--ease-brand);
+}
+@media (hover: hover) { .tabs button:hover { color: var(--fg); } }
+.tabs button.is-active { color: var(--fg); border-bottom-color: var(--fg); }
+
+/* ============ MOTION helpers ================================ */
+.fade-up { opacity: 0; transform: translateY(16px);
+  animation: hk-fade-up var(--dur) var(--ease-brand) forwards; }
+@keyframes hk-fade-up { to { opacity: 1; transform: none; } }
+/* Ambient rotation for holographic renders (90–110s, linear) */
+.holo-spin { animation: hk-spin 100s linear infinite; }
+@keyframes hk-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .fade-up { animation: none; opacity: 1; transform: none; }
+  .holo-spin { animation: none; }
+}

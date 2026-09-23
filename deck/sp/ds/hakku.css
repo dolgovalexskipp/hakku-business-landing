@@ -1,0 +1,9 @@
+/* ============================================================
+   Hakku 2.0 — Design System entry point
+   Single stylesheet for consumers to link: tokens (5 layers) +
+   base element styles + component classes + mobile layer.
+   ============================================================ */
+@import url("tokens/tokens.css?v=220rc1");
+@import url("components/base.css?v=220rc1");
+@import url("components/components.css?v=220rc1");
+@import url("components/mobile.css?v=220rc1");

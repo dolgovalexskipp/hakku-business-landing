@@ -1,0 +1,56 @@
+/* ============================================================
+   Hakku 2.0 — Product mode (layer 3 of 4: mode)
+   ----------------------------------------------------------------
+   [data-mode="product"] — LMS (business.hakku.ai, client forks like
+   cbr.hakku.ai), OS, Cowork and any application UI. Denser type,
+   real control states, tables, forms, navigation.
+
+   Same paper/ink DNA: hierarchy by size and weight, hairline borders
+   instead of shadows, pills for actions. No new hues.
+   ============================================================ */
+
+[data-mode="product"] {
+  /* ---- Compressed type scale (app density) ----------------- */
+  --t-hero:    2.5rem;      /* @kind font */ /* 40 — page hero (rare) */
+  --t-h1:      2rem;        /* @kind font */ /* 32 — page title */
+  --t-h2:      1.5rem;      /* 24 — section title */
+  --t-h3:      1.25rem;     /* 20 — card title */
+  --t-h4:      1.0625rem;   /* 17 — small card / row title */
+  --t-h5:      1rem;        /* 16 */
+  --t-body-lg: 1.0625rem;   /* 17 — lede */
+  --t-body:    0.9375rem;   /* 15 — app body */
+  --t-small:   0.8125rem;   /* 13 — UI secondary */
+  --t-caption: 0.6875rem;   /* 11 — meta / eyebrow */
+
+  /* ---- Controls -------------------------------------------- */
+  --ctl-h:      40px;       /* default control height (buttons, inputs) */
+  --ctl-h-sm:   32px;
+  --ctl-h-lg:   48px;
+  --ctl-pad-x:  var(--s-4);
+  --ctl-radius: var(--r-sm);     /* inputs/selects: 8px */
+  --btn-radius: var(--r-pill);   /* buttons stay pills */
+  --focus-ring: 0 0 0 3px rgba(42,62,244,.25);  /* accessible focus */
+
+  /* ---- Tables / lists --------------------------------------- */
+  --row-h:      48px;
+  --row-h-sm:   36px;
+  --table-head-fg: var(--fg-faint);   /* uppercase caption head */
+
+  /* ---- App layout ------------------------------------------- */
+  --sidebar-w:   264px;
+  --topbar-h:    64px;
+  --content-max: 1080px;    /* reading/content column inside app */
+  --pane-pad:    var(--s-6);
+
+  /* App ground: soft ash canvas, paper cards (light theme) */
+  --surface:     var(--surface-soft);
+
+  /* Tighter body rhythm */
+  line-height: 1.5;
+}
+
+/* Dark-theme product: keep true black canvas, cards raise */
+[data-theme="dark"] [data-mode="product"],
+[data-mode="product"][data-theme="dark"] {
+  --surface: var(--ink);
+}
