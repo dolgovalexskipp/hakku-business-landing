@@ -299,7 +299,7 @@ function page({ company, survey, payload, plainHtml }) {
   ${NAV}
   <section class="blk" style="padding-bottom:24px">
     <div class="wrap">
-      <div class="eyebrow-line" style="margin-bottom:18px"><span class="bar"></span><span style="font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-55)">Обучение работе с ИИ · диагностика</span></div>
+      <div class="eyebrow-line" style="margin-bottom:18px"><span class="bar"></span><span style="font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-55)">${esc(survey.eyebrow || 'Обучение работе с ИИ · диагностика')}</span></div>
       <h1 style="font-family:var(--font-display);font-weight:400;font-size:clamp(2.2rem,5.5vw,3.6rem);line-height:1.05;letter-spacing:-0.03em;margin:0 0 18px;color:var(--ink)">${esc(survey.title)}</h1>
       <p class="lede2" style="max-width:680px">${esc(survey.lede)}</p>
     </div>
@@ -318,13 +318,16 @@ function page({ company, survey, payload, plainHtml }) {
 }
 
 const { companies, surveys } = await import(pathToFileURL(SPEC).href);
+// company.surveys — свой набор анкет (иначе общий); без company.password — открытая страница без замка.
 for (const company of companies) {
-  for (const survey of surveys) {
+  for (const survey of company.surveys || surveys) {
     const inner = gatedHtml(company, survey);
     const rel = path.join('diagnostika', company.slug, survey.path);
     const out = path.join(ROOT, rel, 'index.html');
     fs.mkdirSync(path.dirname(out), { recursive: true });
-    fs.writeFileSync(out, page({ company, survey, payload: await encrypt(inner, company.password) }));
+    fs.writeFileSync(out, company.password
+      ? page({ company, survey, payload: await encrypt(inner, company.password) })
+      : page({ company, survey, plainHtml: inner }));
     console.log('built', '/' + rel.replace(/\\/g, '/') + (survey.path ? '/' : ''), '←', company.slug, survey.slug);
     if (PLAIN) {
       const po = path.join(ROOT, '_materials_src/diagnostika/out', company.slug, survey.path || '', 'index.html');
