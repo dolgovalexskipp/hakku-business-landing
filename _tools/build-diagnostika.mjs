@@ -233,7 +233,7 @@ const ENGINE = `
         if (!(j && j.ok)) throw new Error('fail');
         try { localStorage.removeItem(DRAFT_KEY); } catch (e) {}
         Array.prototype.forEach.call(form.children, function (el) { if (el.id !== 'diag-msg') el.style.display = 'none'; });
-        msg.className = 'fmsg ok'; msg.textContent = 'Спасибо, анкета отправлена. Ответы прочитаю до начала обучения.';
+        msg.className = 'fmsg ok'; msg.textContent = DIAG.thanks || 'Спасибо, анкета отправлена. Ответы прочитаю до начала обучения.';
         msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }).catch(function () {
         btn.disabled = false; btn.textContent = 'Отправить анкету';
@@ -308,7 +308,7 @@ function page({ company, survey, payload, plainHtml }) {
   <div id="gated-content"></div>
   <footer class="pgfoot">хакку.ии | бИИзнес · business.hakku.ai</footer>
   <script>
-    var DIAG = ${JSON.stringify({ company: company.slug, survey: survey.slug })};
+    var DIAG = ${JSON.stringify({ company: company.slug, survey: survey.slug, thanks: survey.thanks })};
     ${plainHtml ? `var PLAIN_HTML = ${JSON.stringify(plainHtml).replace(/</g, '\\u003c')};` : `var PAYLOAD = ${JSON.stringify(payload)};`}
     ${ENGINE}
   </script>
