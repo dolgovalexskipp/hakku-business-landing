@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="ru" data-brand="b2c">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>ИИ-модуль MBA Сколково: делаем продукты с ИИ-агентами</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/design_system/colors_and_type.css">
+  <style>
+    body { background: var(--paper); color: var(--ink); }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 0 28px; }
+    .mat-nav {
+      position: sticky; top: 0; z-index: 40;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 16px 28px;
+      background: rgba(255,255,255,.9);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--ink-08);
+    }
+    .wm { font-family: var(--font-display); font-size: 18px; letter-spacing: -0.02em; display: inline-flex; align-items: center; gap: 9px; color: var(--ink); }
+    .wm .sep { color: var(--ink-40); }
+    .back { font-size: 13px; color: var(--ink-55); transition: color .15s; }
+    .back:hover { color: var(--ink); }
+
+    .eyebrow-line { display: inline-flex; align-items: center; gap: 10px; }
+    .eyebrow-line .bar { width: 22px; height: 3px; background: var(--grad-full); border-radius: 2px; }
+
+    .lede2 { font-size: 19px; line-height: 1.58; color: var(--ink-72); }
+    .mat-p { font-size: 16.5px; line-height: 1.68; color: var(--ink-72); margin: 0 0 18px; }
+    .mat-p b, .mat-p strong { color: var(--ink); font-weight: 600; }
+    .mat-h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.9rem, 4vw, 2.6rem); line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); margin: 0 0 20px; }
+    .mat-h3 { font-family: var(--font-display); font-weight: 400; font-size: 22px; line-height: 1.2; letter-spacing: -0.01em; color: var(--ink); margin: 0 0 10px; }
+    .note { font-size: 14px; color: var(--ink-55); line-height: 1.55; }
+
+    section.blk { padding: 56px 0; border-top: 1px solid var(--ink-08); }
+    section.blk:first-of-type { border-top: 0; }
+
+    .byline { display: flex; align-items: center; gap: 14px; margin-top: 30px; padding-top: 24px; border-top: 1px solid var(--ink-08); }
+    .byline img { width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 1px solid var(--ink-12); }
+    .byline .nm { font-weight: 600; color: var(--ink); font-size: 15.5px; }
+    .byline .rl { font-size: 13px; color: var(--ink-55); margin-top: 2px; }
+
+    /* Reflection facts */
+    .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 24px 0 8px; }
+    .fact { border: 1px solid var(--ink-12); border-radius: 18px; padding: 22px 20px; background: #fff; }
+    .fact .fn { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.4rem); line-height: 1; letter-spacing: -0.02em; color: var(--ink); }
+    .fact .fd { font-size: 13.5px; line-height: 1.5; color: var(--ink-55); margin-top: 9px; }
+    .honest { border-left: 3px solid var(--magenta); padding: 4px 0 4px 18px; margin: 22px 0 0; }
+    .honest p { font-size: 15.5px; line-height: 1.62; color: var(--ink-72); margin: 0 0 10px; }
+    .honest p:last-child { margin-bottom: 0; }
+    .honest b { color: var(--ink); font-weight: 600; }
+
+    /* Steps (framework) */
+    .steps { display: grid; gap: 10px; margin-top: 8px; }
+    .step { display: grid; grid-template-columns: 56px 1fr; gap: 16px; align-items: baseline; border: 1px solid var(--ink-12); border-radius: 16px; padding: 18px 20px; background: #fff; }
+    .step .sn { font-family: var(--font-display); font-size: 15px; color: var(--blue); }
+    .step .st { font-size: 15.5px; line-height: 1.6; color: var(--ink-72); }
+    .step .st b { color: var(--ink); font-weight: 600; }
+    .step .st .new { display: inline-block; margin-left: 8px; padding: 3px 10px; background: rgba(213,31,117,.08); color: var(--magenta); border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; vertical-align: 1px; }
+
+    /* Updates */
+    .upd { border: 1px solid var(--ink-12); border-radius: 20px; padding: 26px 24px; background: #fff; margin-bottom: 14px; }
+    .upd .uh { display: flex; align-items: baseline; gap: 14px; margin-bottom: 10px; }
+    .upd .un { font-family: var(--font-display); font-size: 22px; color: var(--blue); flex-shrink: 0; }
+    .upd .ut { font-family: var(--font-display); font-weight: 400; font-size: 21px; line-height: 1.18; letter-spacing: -0.01em; color: var(--ink); }
+    .upd .ud { font-size: 15px; line-height: 1.62; color: var(--ink-72); margin: 0; }
+    .upd .ud b { color: var(--ink); font-weight: 600; }
+    .upd .uw { margin-top: 12px; font-size: 13.5px; line-height: 1.55; color: var(--ink-55); }
+    .upd .uw b { color: var(--magenta); font-weight: 600; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; margin-right: 7px; }
+
+    .day-h { font-family: var(--font-display); font-weight: 400; font-size: 20px; letter-spacing: -0.01em; color: var(--ink); margin: 26px 0 12px; }
+    .day-h:first-of-type { margin-top: 8px; }
+    .day-h span { color: var(--ink-55); }
+
+    .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+    .ccard { border: 1px solid var(--ink-12); border-radius: 20px; padding: 26px 24px; background: #fff; }
+    .ccard .tag { display: inline-flex; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; margin-bottom: 14px; color: var(--blue); background: rgba(31,99,213,.08); }
+    .ccard.hot .tag { color: var(--magenta); background: rgba(213,31,117,.08); }
+    .ccard h4 { font-family: var(--font-display); font-weight: 400; font-size: 20px; letter-spacing: -0.01em; color: var(--ink); margin: 0 0 9px; }
+    .ccard p { font-size: 14.5px; line-height: 1.58; color: var(--ink-72); margin: 0; }
+    .ccard p b { color: var(--ink); font-weight: 600; }
+
+    .checklist { display: grid; gap: 10px; margin-top: 8px; }
+    .chk { display: grid; grid-template-columns: 22px 1fr; gap: 14px; align-items: start; border: 1px solid var(--ink-12); border-radius: 14px; padding: 16px 18px; background: #fff; font-size: 15px; line-height: 1.55; color: var(--ink-72); }
+    .chk .box { width: 17px; height: 17px; margin-top: 2px; border: 2px solid var(--blue); border-radius: 5px; }
+    .chk b { color: var(--ink); font-weight: 600; }
+
+    .callout { background: var(--ink); color: #fff; border-radius: 24px; padding: 40px 36px; margin: 8px 0 64px; }
+    .callout h3 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.5rem,3vw,2rem); line-height: 1.12; letter-spacing: -0.02em; margin: 0 0 16px; color: #fff; }
+    .callout p { font-size: 16px; line-height: 1.62; color: rgba(255,255,255,.76); margin: 0 0 14px; max-width: 640px; }
+    .callout p:last-child { margin-bottom: 0; }
+    .callout b { color: #fff; font-weight: 600; }
+    .callout a { color: #fff; border-bottom: 1px solid rgba(255,255,255,.35); }
+
+    footer.pgfoot { padding: 28px; border-top: 1px solid var(--ink-08); text-align: center; font-size: 12px; letter-spacing: .04em; color: var(--ink-40); text-transform: uppercase; }
+
+    @media (max-width: 720px) {
+      .wrap { padding: 0 20px; }
+      .facts { grid-template-columns: 1fr; }
+      .duo { grid-template-columns: 1fr; }
+      .step { grid-template-columns: 1fr; gap: 6px; }
+      .mat-nav { padding: 14px 18px; }
+      .callout { padding: 28px 22px; }
+      h1.hero { overflow-wrap: anywhere; hyphens: auto; font-size: clamp(2rem, 9.6vw, 2.4rem) !important; }
+    }
+  
+    .wrap { max-width: 960px; }
+    .cta { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: #fff; border-radius: 999px; padding: 15px 26px; font-size: 15.5px; font-weight: 600; transition: filter .15s; }
+    .cta:hover { filter: brightness(1.7); }
+    .cta.ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink-40); }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 26px; }
+    .pill { font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 999px; background: var(--ink-04); border: 1px solid var(--ink-08); color: var(--ink); }
+    .nums { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 34px 0 0; }
+    .num { background: var(--ink); color: #fff; border-radius: 20px; padding: 22px 20px; }
+    .num .n { font-family: var(--font-display); font-size: clamp(1.9rem, 3.2vw, 2.6rem); line-height: 1; letter-spacing: -0.02em; }
+    .num .t { font-size: 13.5px; line-height: 1.45; color: rgba(255,255,255,.76); margin-top: 10px; }
+    .path { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 10px; }
+    .pst { border: 1px solid var(--ink-12); border-radius: 18px; padding: 20px 18px; background: #fff; position: relative; }
+    .pst .k { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); }
+    .pst .n { font-family: var(--font-display); font-size: 22px; letter-spacing: -0.01em; color: var(--ink); margin: 6px 0 8px; }
+    .pst .t { font-size: 14px; line-height: 1.5; color: var(--ink-72); }
+    .res { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; }
+    .rcard { border: 1px solid var(--ink-12); border-radius: 20px; padding: 24px 22px; background: #fff; }
+    .rcard.wide { grid-column: 1 / -1; background: var(--ink); border-color: var(--ink); }
+    .rcard h4 { font-family: var(--font-display); font-weight: 400; font-size: 21px; line-height: 1.2; letter-spacing: -0.01em; color: var(--ink); margin: 0 0 8px; }
+    .rcard p { font-size: 15px; line-height: 1.6; color: var(--ink-72); margin: 0; }
+    .rcard.wide h4 { color: #fff; } .rcard.wide p { color: rgba(255,255,255,.78); }
+    .les { border: 1px solid var(--ink-12); border-radius: 20px; background: #fff; margin-bottom: 12px; overflow: hidden; }
+    .les .top { display: grid; grid-template-columns: 118px 1fr auto; gap: 18px; align-items: baseline; padding: 22px 24px 0; }
+    .les .dt { font-family: var(--font-display); font-size: 17px; color: var(--blue); white-space: nowrap; }
+    .les .ttl { font-family: var(--font-display); font-weight: 400; font-size: 22px; line-height: 1.2; letter-spacing: -0.01em; color: var(--ink); }
+    .les .who { font-size: 12.5px; font-weight: 600; padding: 5px 12px; border-radius: 999px; background: var(--ink-04); border: 1px solid var(--ink-08); color: var(--ink-72); white-space: nowrap; }
+    .les .body { display: grid; grid-template-columns: 118px 1fr 1fr; gap: 18px; padding: 12px 24px 22px; }
+    .les ul { margin: 0; padding-left: 18px; }
+    .les li { font-size: 15px; line-height: 1.55; color: var(--ink-72); margin-bottom: 4px; }
+    .les .out { background: var(--ink-04); border-radius: 14px; padding: 14px 16px; }
+    .les .out .l { font-size: 11px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--magenta); margin-bottom: 5px; }
+    .les .out p { font-size: 15px; line-height: 1.55; color: var(--ink); margin: 0; }
+    .dirs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 8px; }
+    .dir { border: 1px solid var(--ink-12); border-radius: 20px; padding: 24px 20px; background: #fff; }
+    .dir h4 { font-family: var(--font-display); font-weight: 400; font-size: 20px; line-height: 1.2; letter-spacing: -0.01em; color: var(--ink); margin: 0 0 9px; }
+    .dir p { font-size: 14.5px; line-height: 1.55; color: var(--ink-72); margin: 0; }
+    .dayc { border: 1px solid var(--ink-12); border-radius: 20px; padding: 26px 24px; background: #fff; margin-bottom: 12px; }
+    .dayc .dh { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+    .dayc .dn { font-family: var(--font-display); font-size: 24px; letter-spacing: -0.01em; color: var(--ink); }
+    .dayc .ds { font-size: 13.5px; color: var(--ink-55); }
+    .dayc .blk2 { display: grid; grid-template-columns: 200px 1fr; gap: 16px; padding: 12px 0; border-top: 1px solid var(--ink-08); }
+    .dayc .bn { font-weight: 600; color: var(--ink); font-size: 15.5px; }
+    .dayc .bt { font-size: 15px; line-height: 1.6; color: var(--ink-72); }
+    .faq { border-top: 1px solid var(--ink-08); padding: 18px 0; }
+    .faq:last-child { border-bottom: 1px solid var(--ink-08); }
+    .faq h4 { font-family: var(--font-display); font-weight: 400; font-size: 19px; letter-spacing: -0.01em; color: var(--ink); margin: 0 0 7px; }
+    .faq p { font-size: 15.5px; line-height: 1.62; color: var(--ink-72); margin: 0; max-width: 760px; }
+    .ppl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .big { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.35rem, 2.6vw, 1.8rem); line-height: 1.28; letter-spacing: -0.01em; color: var(--ink); max-width: 800px; margin: 0 0 18px; }
+    @media (max-width: 860px) {
+      .nums { grid-template-columns: 1fr 1fr; }
+      .path { grid-template-columns: 1fr 1fr; }
+      .dirs { grid-template-columns: 1fr 1fr; }
+      .les .top { grid-template-columns: 1fr; gap: 6px; }
+      .les .who { justify-self: start; }
+      .les .body { grid-template-columns: 1fr; gap: 12px; }
+      .les .body > span:first-child { display: none; }
+      .dayc .blk2 { grid-template-columns: 1fr; gap: 4px; }
+    }
+    @media (max-width: 560px) {
+      .res, .dirs, .path, .ppl { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="mat-nav">
+    <a href="/" style="display:flex;align-items:center;gap:10px">
+      <svg width="24" height="20" viewBox="0 0 75.947 63.746" fill="#000">
+        <g transform="translate(52.456,1.459)"><path d="M 12.389 59.989 L 23.491 48.887 C 18.463 43.859 15.701 37.15 15.701 29.994 C 15.701 22.822 18.463 16.113 23.491 11.102 L 12.389 0 C 4.41 7.979 0 18.635 0 29.994 C 0 41.354 4.393 52.01 12.389 59.989 Z"/></g>
+        <g transform="translate(0,21.328)"><path fill-rule="evenodd" d="M 42.418 0 L 42.418 0.001 L 48.578 0.001 L 48.578 15.702 L 39.403 15.702 C 33.149 31.34 17.844 42.418 0 42.418 L 0 26.718 C 14.723 26.718 26.717 14.74 26.717 0 L 42.418 0 Z"/></g>
+        <g transform="translate(26.734,0)"><path d="M 7.859 15.718 C 12.199 15.718 15.718 12.199 15.718 7.859 C 15.718 3.519 12.199 0 7.859 0 C 3.519 0 0 3.519 0 7.859 C 0 12.199 3.519 15.718 7.859 15.718 Z"/></g>
+      </svg>
+      <span class="wm"><span>хакку.ии</span><span class="sep">|</span><span>б<span style="color:#D51F75">ИИ</span>знес</span></span>
+    </a>
+    <a href="/" class="back">← на главную</a>
+  </nav>
+
+  <header style="padding: 56px 0 20px;">
+    <div class="wrap">
+      <div class="eyebrow-line" style="margin-bottom:22px"><span class="bar"></span><span class="eyebrow">ИИ-модуль MBA Сколково · для выпускников и их гостей</span></div>
+      <h1 class="hero" style="font-size:clamp(2.3rem,5.2vw,3.9rem);max-width:900px;margin:0 0 24px">От боли до рабочего прототипа: делаем продукты с ИИ-агентами</h1>
+      <div class="hero-meta"><span class="pill">13 октября – 5 ноября · онлайн</span><span class="pill">6–8 ноября · Казань</span><span class="pill">Без программирования</span></div>
+      <p class="lede2" style="max-width:760px">Вы проходите полный путь продукта: находите проблему, у которой есть цена во времени, деньгах или нервах, проектируете интерфейс вместе с ИИ и собираете прототип, который работает на настоящих данных. Код пишет агент. Вы принимаете продуктовые решения.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px"><a class="cta" href="https://it-park.tech/">Участвовать →</a><a class="cta ghost" href="#program">Смотреть программу</a></div>
+      <div class="nums">
+        <div class="num"><div class="n">8</div><div class="t">онлайн-занятий по 90 минут, вторник и четверг в 11:00</div></div>
+        <div class="num"><div class="n">3 дня</div><div class="t">продуктового спринта в Казани, 6–8 ноября</div></div>
+        <div class="num"><div class="n">до 3</div><div class="t">человек в команде, у каждой команды свой продукт</div></div>
+        <div class="num"><div class="n">1</div><div class="t">рабочий прототип, который вы показываете в воскресенье</div></div>
+      </div>
+    </div>
+  </header>
+
+  <section class="blk" style="border-top:0;padding-top:36px">
+    <div class="wrap">
+      <h2 class="mat-h2">Что изменилось и почему это модуль про продукты</h2>
+      <p class="big">Раньше, чтобы проверить идею продукта, нужны были разработчик, дизайнер и месяцы работы. Сегодня первую рабочую версию один человек с ИИ-агентом собирает за несколько дней.</p>
+      <p class="mat-p" style="max-width:760px">Агент пишет код, рисует экраны, подключает данные и публикует результат. Узким местом стало другое: понять, какую проблему решать, для кого и как должен выглядеть продукт. Это управленческая работа, и ей мы учим.</p>
+      <p class="mat-p" style="max-width:760px">Программистом модуль вас не сделает. Он даёт навык, которого раньше не было у людей без технического образования: довести свою идею до работающего продукта и показать его пользователю.</p>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="wrap">
+      <h2 class="mat-h2">Кому подходит</h2>
+      <div class="steps">
+        <div class="step"><span class="sn">01</span><span class="st"><b>Собственникам и руководителям,</b> у которых есть процесс, который делается руками, держится на одном человеке или теряется между отделами.</span></div>
+        <div class="step"><span class="sn">02</span><span class="st"><b>Тем, кто давно носит идею продукта</b> и не доходит до проверки, потому что нужна команда разработки и бюджет.</span></div>
+        <div class="step"><span class="sn">03</span><span class="st"><b>Тем, кто пользуется чатом с ИИ каждый день</b> и хочет перейти от ответов в окне к работающим инструментам.</span></div>
+        <div class="step"><span class="sn">04</span><span class="st"><b>Тем, кто уже встраивает агентов в компании.</b> Для вас это три дня работы над продуктом с сильной командой и возможность показать свои решения остальным.</span></div>
+      </div>
+      <p class="note" style="margin-top:18px">Опыт программирования не нужен. Нужен ноутбук, на который вы можете ставить программы.</p>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="wrap">
+      <h2 class="mat-h2">С чем вы уезжаете</h2>
+      <div class="res">
+        <div class="rcard wide"><h4>Рабочий прототип продукта</h4><p>С интерфейсом, логикой и настоящими данными. Он открывается по ссылке, и им уже пользовался человек не из вашей команды.</p></div>
+        <div class="rcard"><h4>Описание боли и её цены</h4><p>Чья это проблема, как её решают сейчас и во что она обходится: во времени, деньгах или нервах. На этом держится любое решение о продукте.</p></div>
+        <div class="rcard"><h4>Интерфейс, спроектированный с ИИ</h4><p>Сценарий пользователя, экраны и единый стиль. Вы умеете получить макет за вечер и поправить его словами.</p></div>
+        <div class="rcard"><h4>Второй мозг</h4><p>Рабочая папка с документами, правилами и журналом решений. По ней агент знает ваше дело и не начинает каждый разговор с нуля.</p></div>
+        <div class="rcard"><h4>Рабочая среда с агентами</h4><p>Настроенная на вашем ноутбуке. Следующий продукт вы делаете в ней сами, уже без нас.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="wrap">
+      <h2 class="mat-h2">Путь продукта: пять шагов</h2>
+      <p class="mat-p" style="max-width:760px">Онлайн-часть проводит вас по первым трём шагам и готовит инструменты. В Казани команды проходят весь путь до конца на одном продукте.</p>
+      <div class="path">
+        <div class="pst"><div class="k">Шаг 1</div><div class="n">Боль</div><div class="t">Чья проблема, как её решают сейчас и какова её цена: время, деньги, ощущения</div></div>
+        <div class="pst"><div class="k">Шаг 2</div><div class="n">Продукт</div><div class="t">Гипотеза ценности, обзор существующих решений, сценарий пользователя</div></div>
+        <div class="pst"><div class="k">Шаг 3</div><div class="n">Интерфейс</div><div class="t">UX и UI с ИИ: экраны, стиль, кликабельный макет</div></div>
+        <div class="pst"><div class="k">Шаг 4</div><div class="n">Прототип</div><div class="t">Интерфейс, логика и данные собраны в работающий продукт по ссылке</div></div>
+        <div class="pst"><div class="k">Шаг 5</div><div class="n">Ценность</div><div class="t">Что продукт возвращает человеку или бизнесу. Монетизация, если продукт для рынка</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="wrap">
+      <h2 class="mat-h2"><span id="program">Онлайн: восемь занятий</span></h2>
+      <p class="mat-p" style="max-width:760px">Вторник и четверг в 11:00 по Москве, по 90 минут. К 6 ноября у вас настроены инструменты, выбрана проблема и готов интерфейс своего продукта.</p>
+      <div class="les"><div class="top"><span class="dt">13 октября, вт</span><span class="ttl">Установка агента</span><span class="who">Данил Письменный</span></div><div class="body"><span></span><ul><li>Какие бывают программы-агенты и чем они отличаются от чата</li><li>Установка, доступ и оплата</li><li>Первая задача: агент создаёт файл в вашей папке</li></ul><div class="out"><div class="l">С чем вы выходите</div><p>ИИ-агент работает на вашем ноутбуке с вашими файлами.</p></div></div></div>
+      <div class="les"><div class="top"><span class="dt">15 октября, чт</span><span class="ttl">Контекст: агент и ваши документы</span><span class="who">Александр Долгов</span></div><div class="body"><span></span><ul><li>Почему один и тот же агент одному пишет общие слова, а другому делает работу</li><li>Какие документы давать агенту и какие нет</li><li>Файл правил: кто вы, что за компания, что агенту запрещено</li></ul><div class="out"><div class="l">С чем вы выходите</div><p>Рабочая папка и файл правил. Агент знает вашу компанию и ваши требования.</p></div></div></div>
+      <div class="les"><div class="top"><span class="dt">20 октября, вт</span><span class="ttl">Командная работа с агентом</span><span class="who">Данил Письменный</span></div><div class="body"><span></span><ul><li>Общее рабочее пространство для людей и агентов</li><li>История версий: кто что изменил и как вернуть как было</li><li>Как нескольким людям делать один продукт и не мешать друг другу</li></ul><div class="out"><div class="l">С чем вы выходите</div><p>Среда, в которой команда и агенты работают над одним продуктом.</p></div></div></div>
+      <div class="les"><div class="top"><span class="dt">22 октября, чт</span><span class="ttl">Второй мозг</span><span class="who">Александр Долгов</span></div><div class="body"><span></span><ul><li>Память агента живёт в файлах: журнал решений и база знаний</li><li>Агент собирает базу знаний по вашим документам, вы её проверяете</li><li>Как ловить уверенные ошибки: у каждого утверждения есть источник</li></ul><div class="out"><div class="l">С чем вы выходите</div><p>Система, которая накапливает знание о проекте и не даёт агенту выдумывать.</p></div></div></div>
+      <div class="les"><div class="top"><span class="dt">27 октября, вт</span><span class="ttl">Как устроен продукт</span><span class="who">Данил Письменный</span></div><div class="body"><span></span><ul><li>Из чего состоит любой цифровой продукт: интерфейс, логика, данные, сервер</li><li>Где продукт живёт и что значит «опубликовать»</li><li>Как говорить об этом с агентом и с подрядчиком на одном языке</li></ul><div class="out"><div class="l">С чем вы выходите</div><p>Схема своего продукта и первая страница, открытая по ссылке.</p></div></div></div>
+      <div class="les"><div class="top"><span class="dt">29 октября, чт</span><span class="ttl">Продуктовое мышление</span><span class="who">Александр Долгов</span></div><div class="body"><span></span><ul><li>Как найти боль и измерить её цену: время, деньги, ощущения</li><li>Разговор с пользователем и исследование рынка, которое делает агент</li><li>Гипотеза ценности: что войдёт в первую версию и что нет</li></ul><div class="out"><div class="l">С чем вы выходите</div><p>Карта боли и её цена, портрет пользователя, обзор существующих решений с источниками.</p></div></div></div>
+      <div class="les"><div class="top"><span class="dt">3 ноября, вт</span><span class="ttl">Интеграции и границы</span><span class="who">Данил Письменный</span></div><div class="body"><span></span><ul><li>Подключение Telegram, почты, расписания и данных компании</li><li>Что агенту разрешено делать самому и что подтверждает человек</li><li>Безопасность: чужие команды в письмах и документах</li></ul><div class="out"><div class="l">С чем вы выходите</div><p>Продукт подключён к каналам и данным. Понятно, что агенту разрешено.</p></div></div></div>
+      <div class="les"><div class="top"><span class="dt">5 ноября, чт</span><span class="ttl">UX и UI с ИИ</span><span class="who">Александр Долгов</span></div><div class="body"><span></span><ul><li>Сценарий пользователя от входа до результата</li><li>Экраны по описанию и дизайн-система, чтобы продукт выглядел цельно</li><li>Кликабельный прототип и питч на 90 секунд</li></ul><div class="out"><div class="l">С чем вы выходите</div><p>Интерфейс вашего продукта, который можно дать в руки пользователю.</p></div></div></div>
+      <div class="duo" style="margin-top:20px">
+        <div class="ccard"><span class="tag">Как проходит занятие</span><h4>Треть времени вы работаете руками</h4><p>Занятие открывается разбором готового продукта, сделанного с агентами. Затем короткая лекция, показ приёма на экране, ваша практика на своём ноутбуке и разбор того, что получилось. Занятия идут в Zoom и записываются.</p></div>
+        <div class="ccard"><span class="tag">Сколько времени</span><h4>Четыре-пять часов в неделю</h4><p>Два занятия по полтора часа и около часа на задание между ними. Перед каждым занятием приходит текст для подготовки на 10–20 минут.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="wrap">
+      <h2 class="mat-h2">В каких направлениях можно сделать продукт</h2>
+      <div class="dirs">
+        <div class="dir"><h4>Внутренние системы</h4><p>Инструменты для своей компании: то, что сейчас делается руками, держится на одном человеке или теряется между отделами.</p></div>
+        <div class="dir"><h4>Клиентские приложения</h4><p>То, чем пользуются ваши клиенты: запись, расчёт, заказ, личный кабинет, поддержка.</p></div>
+        <div class="dir"><h4>Сервисы с монетизацией</h4><p>Самостоятельный продукт для рынка: со своим пользователем, ценой и способом зарабатывать.</p></div>
+        <div class="dir"><h4>Продукты для себя</h4><p>Личные и семейные задачи: здоровье, финансы, поездки, обучение, порядок в делах.</p></div>
+      </div>
+      <p class="note" style="margin-top:18px">Направление и идею команда выбирает сама. Зарабатывать продукт не обязан: достаточно, чтобы у проблемы была цена, а продукт её снижал.</p>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="wrap">
+      <h2 class="mat-h2">Казань, 6–8 ноября: продуктовый спринт</h2>
+      <p class="mat-p" style="max-width:760px">Отель «Миллениум». Новой теории здесь нет: три дня команды делают продукт, ведущие работают с командами за столами.</p>
+      <div class="dayc"><div class="dh"><span class="dn">Пятница, 6 ноября</span><span class="ds">с 16:00 · проблема и первый тест</span></div><div class="blk2"><div class="bn">Витрина</div><div class="bt">Шесть-семь продуктов в работе из всех четырёх направлений. По каждому: какую боль закрыли, как устроен интерфейс, сколько времени и денег ушло на сборку.</div></div><div class="blk2"><div class="bn">Питчи и команды</div><div class="bt">Каждый за 90 секунд рассказывает о своём продукте: боль, её цена, решение. Команды до трёх человек собираются вокруг идей.</div></div><div class="blk2"><div class="bn">Спринт 1 «Первый пользователь»</div><div class="bt">Человек со стороны проходит сценарий в вашем прототипе. Команда записывает, где он споткнулся, и правит интерфейс.</div></div></div>
+      <div class="dayc"><div class="dh"><span class="dn">Суббота, 7 ноября</span><span class="ds">10:15–17:30 · рабочий прототип</span></div><div class="blk2"><div class="bn">Спринт 2 «Доводка»</div><div class="bt">Интерфейс, логика и данные соединяются в работающий продукт. Агенты пишут код, команда проверяет каждый сценарий. Подключаются каналы: Telegram, почта, расписание.</div></div><div class="blk2"><div class="bn">Спринт 3 «Упаковка»</div><div class="bt">Ценностное предложение, цена проблемы и что продукт возвращает, страница продукта. Для рыночных продуктов ещё модель монетизации.</div></div><div class="blk2"><div class="bn">Репетиция демо</div><div class="bt">Прогон показа в командах, выбор финалистов, финальная версия продукта.</div></div></div>
+      <div class="dayc"><div class="dh"><span class="dn">Воскресенье, 8 ноября</span><span class="ds">с 10:00 · демо</span></div><div class="blk2"><div class="bn">Демо всех продуктов</div><div class="bt">Команда показывает продукт в работе и отвечает на три вопроса: чья это боль, какова её цена и что меняется с продуктом.</div></div><div class="blk2"><div class="bn">Финал на главной сцене</div><div class="bt">Лучшие продукты показывают всему модулю.</div></div></div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="wrap">
+      <h2 class="mat-h2">Спикеры и вечера</h2>
+      <div class="duo">
+        <div class="ccard"><span class="tag">Гостевые спикеры</span><h4>Денис Сметнев и Максим Ноготков</h4><p>Денис Сметнев, основатель Skyeng, и Максим Ноготков, основатель «Связного». Выступления стоят в программе трёх дней в Казани.</p></div>
+        <div class="ccard hot"><span class="tag">Десять лет выпуску</span><h4>Как на модулях Сколково</h4><p>«Что? Где? Когда?» про годы учёбы, концерт, караоке, экскурсия по Казани и капсула времени на следующие десять лет.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="wrap">
+      <h2 class="mat-h2">Кто ведёт</h2>
+      <div class="ppl">
+        <div class="ccard"><h4>Александр Долгов</h4><p>Основатель VEYRA, голосовые ИИ-агенты для бизнеса. Бывший управляющий директор B2G в Skyeng. Учил работе с ИИ сотрудников Банка России, «Газпром нефти», Авито. <b>Ведёт контекст, второй мозг, продуктовое мышление, UX и UI.</b></p></div>
+        <div class="ccard"><h4>Данил Письменный</h4><p>Создатель платформы интернет-магазинов kiiiosk.store, бывший технический руководитель «Самоката». Внедряет ИИ-агентов в компаниях. <b>Ведёт техническую часть: установку, устройство продукта, интеграции и безопасность.</b></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="wrap">
+      <h2 class="mat-h2">Вопросы</h2>
+      <div class="faq"><h4>Нужно ли уметь программировать?</h4><p>Нет. Код пишет агент. От вас нужны постановка задачи, проверка результата и продуктовые решения. Технические слова, без которых не обойтись, мы объясняем на занятиях.</p></div>
+      <div class="faq"><h4>Что нужно из техники и подписок?</h4><p>Ноутбук на Windows или macOS, на который вы можете ставить программы. И одна подписка на ИИ-сервис, около 20 долларов в месяц: её вы оплачиваете сами. Как выбрать программу и получить доступ, описано в материале перед первым занятием.</p></div>
+      <div class="faq"><h4>Что, если я пропустил занятие?</h4><p>Все занятия записываются. Пропущенное можно пройти по записи и задать вопросы на следующем.</p></div>
+      <div class="faq"><h4>У меня нет идеи продукта. Можно участвовать?</h4><p>Да. Идею вы находите на занятии 29 октября, когда разбираете свои рабочие и личные проблемы и считаете их цену. В Казани можно присоединиться к команде с чужой идеей.</p></div>
+      <div class="faq"><h4>Я уже работаю с агентами. Что мне даст модуль?</h4><p>Продуктовую часть: поиск боли, интерфейс, проверку на пользователе. И три дня работы над продуктом в команде. Опытных участников мы просим показать свои решения на витрине.</p></div>
+      <div class="faq"><h4>Что будет с продуктом после модуля?</h4><p>Он остаётся у вас: код, документы и рабочая среда лежат на вашем ноутбуке. Это прототип. До промышленной версии его нужно доводить, и вы будете понимать, что именно доделывать.</p></div>
+
+    </div>
+  </section>
+
+  <section class="blk" style="border-top:0">
+    <div class="wrap">
+      <div class="callout">
+        <h3>Старт 13 октября. Казань 6–8 ноября</h3>
+        <p>Месяц вы учитесь управлять агентами и готовите свой продукт. Три дня в Казани собираете его в команде и показываете в работе.</p>
+        <p style="margin-top:22px"><a href="https://it-park.tech/" style="display:inline-flex;background:#fff;color:#000;border:0;border-radius:999px;padding:14px 26px;font-weight:600;font-size:15.5px">Участвовать →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="pgfoot">ИИ-модуль MBA Сколково · программа на 13 октября 2026 · темы могут уточняться</footer>
+</body>
+</html>
