@@ -1,0 +1,457 @@
+/* ============================================================
+   Hakku 2.0 — Mobile components
+   ----------------------------------------------------------------
+   Мобильный слой компонентов: оболочка продукта V3 (нижние табы +
+   drawer), бургер-навигация комм-режима, таблицы, оверлеи.
+   Требует tokens/tokens.css (включая tokens/mobile.css) + base.css
+   + components.css. Подключается последним — часть правил намеренно
+   перекрывает десктопные внутри @media.
+
+   Спека и приёмка: preview/mobile-*.html (группа «Mobile»),
+   живой прогон — preview/mobile-live-product.html и
+   preview/mobile-live-comm.html на 390 и 320.
+
+   Инвариант: десктоп ≥1280 не меняется. Всё либо внутри @media,
+   либо новые классы, которых не было.
+
+   Состояния переключает потребитель (JS), классы фиксированы:
+     .app-shell.is-drawer-open   — drawer открыт
+     .nav-menu.is-open           — меню лендинга открыто
+     .nav.is-scrolled            — топбар свёрнут при скролле
+     .sheet.is-open / .modal.is-open / .scrim.is-open
+     body.is-locked              — замок прокрутки под оверлеем
+     .burger[aria-expanded]      — иконка бургера ↔ крестик
+     [data-surface="input"]      — экран объявляет себя вводовым
+   ============================================================ */
+
+/* ============================================================
+   1. Платформенные гарантии
+   ============================================================ */
+
+/* Высота — dvh: адресная строка съедает низ, и прижатая панель
+   становится недосягаемой. vh остаётся фоллбэком. */
+.app-shell { min-height: 100vh; min-height: 100dvh; }
+
+/* Замок прокрутки: страница под оверлеем/меню/drawer не едет. */
+body.is-locked { overflow: hidden; overscroll-behavior: none; }
+
+@media (max-width: 768px) {
+  /* Ничто не выезжает за край: медиа по ширине контейнера, длинные
+     русские слова в display-заголовках переносятся, а не режутся. */
+  img, video, canvas, svg:not(.icon):not(.lucide) { max-width: 100%; }
+  .hero, h1, .h1, h2, .h2, h3, .h3 { overflow-wrap: break-word; }
+
+  /* Причина №1 горизонтального скролла: грид- и флекс-элемент по
+     умолчанию не сжимается ниже своего min-content и раздувает
+     колонку — таблица, длинное слово или ряд кнопок утаскивает всю
+     страницу вбок. Явные min-width компонентов это не сбрасывает
+     (специфичность класса выше). */
+  *, *::before, *::after { min-width: 0; }
+
+  /* Поля ввода ≥16px — иначе iOS Safari зумит страницу на фокусе
+     и уводит вёрстку вбок. Это поведение браузера, а не читаемость. */
+  .input, .select, .textarea { font-size: max(16px, var(--t-body)); }
+}
+
+/* ============================================================
+   2. Иконка-кнопка: зона 44 без сдвига оптического ритма
+   ============================================================ */
+.btn-icon {
+  display: inline-grid; place-items: center; flex: none;
+  width: var(--ctl-h, 40px); height: var(--ctl-h, 40px);
+  padding: 0; border: 1px solid transparent; border-radius: var(--r-sm);
+  background: transparent; color: var(--fg-muted);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-brand), color var(--dur-fast) var(--ease-brand);
+}
+.btn-icon:focus-visible { outline: none; box-shadow: var(--focus-ring, 0 0 0 3px rgba(42,62,244,.25)); }
+.btn-icon .icon { color: inherit; }
+.btn-icon-round { border-radius: 50%; }
+.btn-icon-ink   { background: var(--fg); color: var(--surface); }
+/* Иконка-картинка не наследует currentColor: на залитой кнопке её
+   надо инвертировать — тем же приёмом, что активный пункт сайдбара. */
+.btn-icon-ink img.icon { filter: invert(1); }
+[data-theme="dark"] .btn-icon-ink img.icon,
+[data-canvas="ink"] .btn-icon-ink img.icon { filter: none; opacity: 1; }
+/* Кнопка у самого края панели: зона 44 съедает паддинг панели, а
+   рисунок остаётся на оптической линии. Ровно --s-2, не больше:
+   -10px при паддинге 8 даёт 2px горизонтального скролла. */
+.btn-icon-flush:first-child { margin-left: calc(-1 * var(--s-2)); }
+.btn-icon-flush:last-child  { margin-right: calc(-1 * var(--s-2)); }
+
+@media (hover: hover) {
+  .btn-icon:hover { background: var(--ink-04); color: var(--fg); }
+  [data-theme="dark"] .btn-icon:hover, [data-canvas="ink"] .btn-icon:hover { background: var(--paper-04); }
+  .btn-icon-ink:hover { background: var(--fg); filter: brightness(1.35); }
+}
+
+/* ============================================================
+   3. Кнопки на телефоне: первичное действие во всю ширину
+   ============================================================ */
+.btn-block { width: 100%; }
+.btn-row { display: flex; gap: var(--s-2); }
+.btn-row > .btn { flex: 1 1 0; min-width: 0; }
+
+@media (max-width: 480px) {
+  /* Панель действий: первичная кнопка всегда полноширинная */
+  .btn-stack { display: grid; gap: var(--s-2); }
+  .btn-stack > .btn { width: 100%; }
+}
+
+/* Тач-цели у контролов, которые на десктопе меньше 44 */
+@media (max-width: 480px), (pointer: coarse) and (max-width: 1023px) {
+  .toggle button { min-height: var(--ctl-h-sm, 36px); }
+  .tabs button { min-height: var(--ctl-h, 44px); }
+  .checkbox, .radio { width: 20px; height: 20px; }
+  /* Переключатель рисуется 40×24 — зона добирается невидимым полем */
+  .switch::before { content: ""; position: absolute; inset: -10px; }
+  .sidebar .nav-item { min-height: var(--ctl-h, 44px); font-size: var(--t-body); }
+}
+
+/* ============================================================
+   4. Оболочка продукта — V3: 4 нижних таба + drawer
+   ----------------------------------------------------------------
+   ≤767   табы + drawer, композер вытесняет табы на экранах ввода
+   768…1023  табы и бургер уходят, сайдбар 264 закреплён
+   ≥1024  десктопная раскладка без изменений
+
+   Разметка:
+     <div class="app-shell has-tabbar">
+       <aside class="sidebar">…полное дерево…</aside>
+       <div class="scrim" data-drawer-close></div>
+       <main>
+         <div class="nav"><button class="burger btn-icon" aria-expanded="false">…</button>…</div>
+         …
+       </main>
+       <nav class="tabbar"><a class="tab is-active">…</a>…×4</nav>
+     </div>
+   ============================================================ */
+
+/* Бургер и таб-бар не существуют на десктопе */
+.burger { display: none; }
+.tabbar { display: none; }
+
+/* Подпись группы разделов в сайдбаре (в drawer подписывает «в табах») */
+.sidebar .nav-group {
+  font: 500 var(--t-caption)/1 var(--font-body);
+  letter-spacing: .12em; text-transform: uppercase; color: var(--fg-faint);
+  padding: var(--s-3) var(--s-3) var(--s-1);
+}
+/* Кнопка закрытия существует только у drawer */
+@media (min-width: 768px) { .sidebar [data-drawer-close] { display: none; } }
+
+/* Подложка — общая для drawer, меню и оверлеев */
+.scrim {
+  position: fixed; inset: 0; z-index: 65;
+  background: rgba(0,0,0,.5);
+  opacity: 0; visibility: hidden;
+  transition: opacity var(--dur-fast) var(--ease-brand), visibility 0s linear var(--dur-fast);
+}
+.scrim.is-open { opacity: 1; visibility: visible; transition-delay: 0s; }
+
+@media (max-width: 767px) {
+  .app-shell { grid-template-columns: 1fr; }
+
+  /* ---- Сайдбар становится off-canvas drawer ---------------- */
+  .app-shell > .sidebar {
+    position: fixed; top: 0; bottom: 0; left: 0; z-index: 70;
+    width: min(var(--drawer-w), calc(100% - 56px));
+    padding: calc(var(--s-4) + var(--safe-t)) var(--s-3) calc(var(--s-4) + var(--safe-b));
+    overflow-y: auto; overscroll-behavior: contain;
+    border-right: 1px solid var(--border);
+    transform: translateX(-101%); visibility: hidden;
+    transition: transform var(--dur-fast) var(--ease-brand), visibility 0s linear var(--dur-fast);
+  }
+  .app-shell.is-drawer-open > .sidebar { transform: none; visibility: visible; transition-delay: 0s; }
+  .app-shell.is-drawer-open > .scrim  { opacity: 1; visibility: visible; transition-delay: 0s; }
+
+  /* Разделы, уже вынесенные в табы, приглушены под подписью
+     «в табах» — иначе два входа выглядят одинаково значимыми.
+     Текущее место не приглушаем: иначе непонятно, где стоишь. */
+  .sidebar .nav-item.is-in-tabs:not(.is-active) { opacity: .5; }
+
+  .burger { display: inline-grid; }
+
+  /* ---- Топбар: 56, при скролле 48 с тенью ------------------ */
+  .app-shell .nav { padding: 0 var(--s-2) 0 var(--s-4); gap: var(--s-2); }
+  .nav.is-scrolled { height: var(--topbar-h-collapsed); box-shadow: 0 1px 12px rgba(0,0,0,.08); }
+  [data-theme="dark"] .nav.is-scrolled { box-shadow: 0 1px 12px rgba(0,0,0,.6); }
+  .nav-title { flex: 1 1 auto; min-width: 0;
+    font-family: var(--font-display); font-weight: 400; font-size: var(--t-h4);
+    letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  /* ---- Нижний таб-бар ------------------------------------- */
+  .tabbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+    display: flex;
+    padding-bottom: var(--safe-b);
+    background: var(--surface-card);
+    border-top: 1px solid var(--border);
+  }
+  .tabbar .tab {
+    flex: 1 1 0; min-width: 0;
+    height: var(--tabbar-h);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 4px; padding: 0 2px;
+    font: 500 var(--t-caption)/1 var(--font-body);
+    color: var(--fg-faint); text-align: center;
+    cursor: pointer;
+  }
+  .tabbar .tab .icon { color: inherit; }
+  .tabbar .tab.is-active { color: var(--fg); font-weight: 600; }
+  .tabbar .tab:focus-visible { outline: none; box-shadow: var(--focus-ring, 0 0 0 3px rgba(42,62,244,.25)); }
+
+  /* Контент не заезжает под таб-бар */
+  .app-shell:has(> .tabbar) > main,
+  .app-shell.has-tabbar > main { padding-bottom: calc(var(--tabbar-h) + var(--safe-b)); }
+
+  /* ---- Экран ввода объявляет себя сам --------------------- */
+  /* Оболочка не угадывает по маршруту: иначе каждый новый экран
+     Cowork требует правки правила в оболочке. */
+  [data-surface="input"] .tabbar { display: none; }
+  [data-surface="input"] .app-shell:has(> .tabbar) > main,
+  [data-surface="input"] .app-shell.has-tabbar > main { padding-bottom: 0; }
+  [data-surface="input"] .nav { height: var(--topbar-h-collapsed); }
+}
+
+/* Композер — панель ввода, прижатая к низу контентной колонки */
+.composer {
+  position: sticky; bottom: 0; z-index: 40;
+  display: flex; align-items: center; gap: var(--s-2);
+  min-height: var(--composer-h);
+  padding: var(--s-2) var(--s-3) calc(var(--s-2) + var(--safe-b));
+  background: var(--surface-card);
+  border-top: 1px solid var(--border);
+}
+.composer > .input, .composer > .textarea { border-radius: var(--r-pill); }
+.composer > .textarea { min-height: var(--ctl-h, 44px); padding: 10px var(--s-4); }
+
+/* ============================================================
+   5. Навигация комм-режима: бургер + полноэкранное меню
+   ============================================================ */
+.nav-menu { display: none; }
+.burger .icon-x { display: none; }
+.burger[aria-expanded="true"] .icon-menu { display: none; }
+.burger[aria-expanded="true"] .icon-x    { display: block; }
+
+@media (max-width: 767px) {
+  [data-mode="comm"] .nav { padding: 0 var(--s-2) 0 var(--gutter); gap: var(--s-3); }
+  /* Пункты меню на 390 не помещаются даже в две строки — их место
+     занимает одно целевое действие, всё остальное в меню */
+  .nav > .nav-links { display: none; }
+
+  .nav-menu {
+    position: fixed; inset: 0; z-index: 45;   /* ниже sticky .nav (50) */
+    display: flex; flex-direction: column;
+    padding: calc(var(--topbar-h, 56px) + var(--safe-t) + var(--s-2)) var(--gutter) calc(var(--s-3) + var(--safe-b));
+    background: var(--surface);
+    overflow-y: auto; overscroll-behavior: contain;
+    opacity: 0; visibility: hidden; transform: translateY(-8px);
+    transition: opacity var(--dur-fast) var(--ease-brand),
+                transform var(--dur-fast) var(--ease-brand),
+                visibility 0s linear var(--dur-fast);
+  }
+  .nav-menu.is-open { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+  .nav-menu a:not(.btn), .nav-menu .menu-item {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--s-4);
+    min-height: 56px;
+    border-bottom: 1px solid var(--ink-08);
+    font-family: var(--font-display); font-weight: 400; font-size: 1.375rem;
+    letter-spacing: -0.02em; color: var(--fg);
+  }
+  [data-theme="dark"] .nav-menu a:not(.btn), [data-theme="dark"] .nav-menu .menu-item { border-bottom-color: var(--paper-10); }
+  .nav-menu a:not(.btn) > .arrow, .nav-menu .menu-item > .arrow { font-size: var(--t-body); color: var(--fg-faint); }
+  /* CTA прижат к низу над safe-area — до него дотягивается палец */
+  .nav-menu .menu-foot { margin-top: auto; padding-top: var(--s-5); }
+  .nav-menu .menu-foot > .btn { width: 100%; height: var(--ctl-h-lg, 52px); font-size: var(--t-body); }
+}
+
+/* ============================================================
+   6. Таблицы: скролл с липкой колонкой ИЛИ развёртка в карточку
+   ----------------------------------------------------------------
+   Обе раскладки — один и тот же <table>. Переключение классом на
+   обёртке/таблице, не двумя кусками HTML: иначе один из них рано
+   или поздно отстанет от другого.
+
+   До четырёх колонок — .table-cards. От пяти и когда важно
+   сравнение — .table-wrap.table-sticky.
+   Для .table-cards каждому <td> нужен data-label="Заголовок колонки".
+   ============================================================ */
+.table-wrap { overflow-x: auto; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; }
+
+@media (max-width: 767px) {
+  .table-wrap > .table { min-width: max-content; }
+  .table-wrap > .table th, .table-wrap > .table td { white-space: nowrap; }
+
+  /* А · первая колонка липкая, цифры уезжают */
+  .table-sticky th:first-child, .table-sticky td:first-child {
+    position: sticky; left: 0; z-index: 1;
+    background: var(--surface-card);
+    box-shadow: 1px 0 0 var(--border);
+  }
+  .table-sticky.table-striped tbody tr:nth-child(even) td:first-child { background: var(--row-even); }
+
+  /* Б · строка развёрнута в карточку */
+  .table-cards { display: block; }
+  .table-cards thead { display: none; }
+  .table-cards tbody, .table-cards tr, .table-cards td { display: block; }
+  .table-cards tr {
+    padding: var(--s-3) var(--s-4);
+    border-bottom: 1px solid var(--border);
+  }
+  .table-cards td {
+    height: auto; min-height: 28px; padding: 0; border: 0;
+    display: flex; align-items: baseline; justify-content: space-between; gap: var(--s-4);
+    white-space: normal;
+  }
+  .table-cards td::before {
+    content: attr(data-label);
+    flex: none;
+    font: 500 var(--t-caption)/1.4 var(--font-body);
+    letter-spacing: .04em; color: var(--fg-faint);
+  }
+  .table-cards td:first-child {
+    display: block; margin-bottom: var(--s-2);
+    font-family: var(--font-display); font-weight: 400; font-size: var(--t-h4);
+    letter-spacing: -0.01em; color: var(--fg);
+  }
+  .table-cards td:first-child::before { content: none; }
+  .table-cards tr:hover td { background: none; }
+
+  /* Подчёркивающие табы не сжимаются, а прокручиваются */
+  .tabs { overflow-x: auto; scrollbar-width: none; gap: var(--s-4); }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tabs button { flex: none; }
+}
+
+/* ============================================================
+   7. Оверлеи: bottom sheet · полноэкранная модалка · тост
+   ----------------------------------------------------------------
+   Действия над объектом → sheet. Ввод и длинный контент → модалка.
+   Подтверждение результата → тост. Необратимое действие → модалка
+   с явным «Удалить»: свайп закрывает sheet случайно.
+   ============================================================ */
+.sheet {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 70;
+  max-height: 90dvh; overflow-y: auto; overscroll-behavior: contain;
+  padding: var(--s-2) var(--s-4) calc(var(--s-4) + var(--safe-b));
+  background: var(--surface-card);
+  border-top: 1px solid var(--border);
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
+  transform: translateY(101%); visibility: hidden;
+  transition: transform var(--dur-fast) var(--ease-brand), visibility 0s linear var(--dur-fast);
+}
+.sheet.is-open { transform: none; visibility: visible; transition-delay: 0s; }
+.sheet-grab { display: block; width: 40px; height: 4px; margin: 0 auto var(--s-3);
+  border-radius: 2px; background: var(--ink-12); }
+[data-theme="dark"] .sheet-grab { background: var(--paper-16); }
+.sheet-head, .modal-head {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s-3);
+}
+.sheet-title, .modal-title {
+  font-family: var(--font-display); font-weight: 400; font-size: var(--t-h4);
+  letter-spacing: -0.01em; color: var(--fg);
+}
+/* Строка действия внутри sheet — вся строка это цель */
+.sheet-actions { display: grid; gap: var(--s-2); margin-top: var(--s-3); }
+.sheet-actions > * {
+  display: flex; align-items: center; gap: var(--s-3);
+  min-height: var(--row-h, 56px); padding: 10px var(--s-4);
+  border: 1px solid var(--border); border-radius: var(--ctl-radius, 8px);
+  font-size: var(--t-body); color: var(--fg); cursor: pointer;
+}
+
+.modal {
+  position: fixed; inset: 0; z-index: 70;
+  display: flex; flex-direction: column;
+  background: var(--surface-card);
+  opacity: 0; visibility: hidden;
+  transition: opacity var(--dur-fast) var(--ease-brand), visibility 0s linear var(--dur-fast);
+}
+.modal.is-open { opacity: 1; visibility: visible; transition-delay: 0s; }
+.modal-head {
+  flex: none; min-height: 48px;
+  padding: var(--safe-t) var(--s-2) 0 var(--s-4);
+  border-bottom: 1px solid var(--border);
+}
+.modal-body { flex: 1 1 auto; overflow-y: auto; padding: var(--s-4); }
+.modal-foot {
+  flex: none; display: grid; gap: var(--s-2);
+  padding: var(--s-3) var(--s-4) calc(var(--s-3) + var(--safe-b));
+  border-top: 1px solid var(--border);
+}
+/* От планшета модалка становится обычным центрированным диалогом */
+@media (min-width: 768px) {
+  .modal {
+    inset: auto; top: 50%; left: 50%;
+    width: min(560px, calc(100% - 2 * var(--s-6)));
+    max-height: min(720px, 90dvh);
+    transform: translate(-50%, -50%);
+    border: 1px solid var(--border); border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+  .modal-head { padding-top: 0; }
+}
+
+/* Тост — снизу над safe-area: сверху его перекрывает шторка iOS.
+   Живёт 4 секунды, действие отмены внутри. Ошибки формы тостом не
+   показываем — только под полем. */
+.toast {
+  position: fixed; z-index: 80;
+  left: var(--s-4); right: var(--s-4);
+  bottom: calc(var(--s-3) + var(--safe-b));
+  display: flex; align-items: center; gap: var(--s-3);
+  padding: var(--s-3) var(--s-4);
+  background: var(--surface-ink); color: var(--surface);
+  border-radius: var(--r-md);
+  font-size: var(--t-small);
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity var(--dur-fast) var(--ease-brand),
+              transform var(--dur-fast) var(--ease-brand),
+              visibility 0s linear var(--dur-fast);
+}
+.toast.is-open { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.toast .icon { color: inherit; }
+.toast-action { margin-left: auto; font-weight: 600; cursor: pointer; }
+/* Над таб-баром, когда оболочка мобильная */
+@media (max-width: 767px) {
+  .toast-above-tabbar { bottom: calc(var(--tabbar-h) + var(--safe-b) + var(--s-2)); }
+}
+@media (min-width: 768px) {
+  .toast { left: auto; right: var(--s-6); width: min(420px, calc(100% - 2 * var(--s-6))); }
+}
+
+/* ============================================================
+   8. Комм-схлопывание: рельс со snap · голографика
+   ============================================================ */
+@media (max-width: 767px) {
+  /* Логотипы, тарифы, кейсы, тренеры — рельс вместо решётки */
+  .lattice-rail {
+    display: flex; overflow-x: auto;
+    scroll-snap-type: x mandatory; scrollbar-width: none;
+    border-radius: var(--r-md);
+  }
+  .lattice-rail::-webkit-scrollbar { display: none; }
+  .lattice-rail > * { flex: 0 0 78%; scroll-snap-align: start; }
+  /* Рельс выходит в край экрана, но первый элемент стоит на линии
+     гуттера: без scroll-padding snap-точка съедает падинг и рельс
+     открывается уже прокрученным. */
+  .rail {
+    display: flex; gap: var(--s-3); overflow-x: auto;
+    scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter);
+    scroll-padding-inline: var(--gutter);
+  }
+  .rail::-webkit-scrollbar { display: none; }
+  .rail > * { flex: 0 0 auto; scroll-snap-align: start; }
+}
+
+/* Голографический рендер: гасится токенами, не !important по месту */
+.holo, .holo-spin { max-width: var(--holo-max); height: auto; opacity: var(--holo-opacity); }
+
+/* ============================================================
+   9. Motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .scrim, .sheet, .modal, .toast, .nav-menu, .app-shell > .sidebar { transition: none; }
+}

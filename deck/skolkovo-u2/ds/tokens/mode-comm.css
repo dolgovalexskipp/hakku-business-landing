@@ -1,0 +1,36 @@
+/* ============================================================
+   Hakku 2.0 — Communication mode (layer 3 of 4: mode)
+   ----------------------------------------------------------------
+   [data-mode="comm"] — landings, presentations, КП, one-pagers,
+   digital offers. Big editorial typography, generous air, hero
+   graphics (holographic glass renders), marquees.
+
+   The core :root defaults ARE comm-scaled (canon), so this layer
+   mostly documents and pins the comm-specific knobs.
+   ============================================================ */
+
+[data-mode="comm"] {
+  /* Comm держит Inter: решение 2026-07-20 — Manrope только продуктовый веб
+     (Cowork/LMS); шрифт лендингов — отдельное решение. */
+  --font-body: "Inter", system-ui, sans-serif;
+
+  /* Sections are generous; separated by a top hairline */
+  --section-pad:    140px;    /* vertical section padding (desktop) */
+  --section-gap:    var(--s-8);
+
+  /* Hero graphic sizing — holo render sits large, rotated, cropped */
+  --hero-graphic:   520px;    /* nominal size of the holo render */
+
+  /* Deck (presentation) geometry — 16:9 master */
+  --slide-w:        1280px;
+  --slide-h:        720px;
+  --slide-pad:      72px;
+
+  /* Comm type re-pins (same as core defaults; explicit for clarity) */
+  --t-hero:  clamp(3rem, 6.8vw, 5.6rem);  /* @kind font */
+  --t-h1:    clamp(2.4rem, 5vw, 4rem);    /* @kind font */
+}
+
+@media (max-width: 768px) {
+  [data-mode="comm"] { --section-pad: 80px; }
+}

@@ -1,0 +1,123 @@
+/* ============================================================
+   Hakku 2.0 — Presentation master (16:9)
+   Slide geometry + layout classes. Requires ../../hakku.css.
+   Each .slide is a fixed 1280×720 canvas (deck tokens from
+   mode-comm). Theme per slide via data-theme / data-canvas.
+   Export to PDF: Chrome headless --print-to-pdf, @page is set.
+   ============================================================ */
+
+.deck {
+  display: grid;
+  gap: 40px;
+  padding: 40px;
+  background: #e8e8ea;           /* viewer ground, not printed */
+  justify-items: center;
+}
+
+.slide {
+  position: relative;
+  width: var(--slide-w, 1280px);
+  height: var(--slide-h, 720px);
+  padding: var(--slide-pad, 72px);
+  background: var(--surface);
+  color: var(--fg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-md);   /* viewer only, disabled in print */
+}
+
+/* Running header/footer */
+.slide .slide-top {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: var(--s-7);
+}
+.slide .slide-foot {
+  margin-top: auto;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: var(--t-caption); color: var(--fg-faint);
+}
+.slide .brand-line { display: flex; align-items: center; gap: var(--s-3); }
+.slide .brand-line img { height: 22px; display: block; }
+
+/* Holo render placement — large, rotated, cropped off-canvas */
+.slide .holo {
+  position: absolute; right: -140px; top: 50%;
+  width: 560px; transform: translateY(-50%) rotate(-14deg);
+  pointer-events: none;
+}
+.slide .holo-corner {
+  position: absolute; right: -160px; bottom: -160px;
+  width: 480px; transform: rotate(18deg);
+  pointer-events: none;
+}
+
+/* ---- 1 · Title ------------------------------------------- */
+.slide-title .title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 72px; line-height: 1.02; letter-spacing: -0.02em;
+  max-width: 720px;
+}
+.slide-title .subtitle {
+  margin-top: var(--s-5); max-width: 560px;
+  font-size: var(--t-body-lg); color: var(--fg-muted); line-height: 1.5;
+}
+
+/* ---- 2 · Section divider ---------------------------------- */
+.slide-section { justify-content: center; }
+.slide-section .num {
+  font-family: var(--font-display); font-size: 200px; line-height: 1;
+  letter-spacing: -0.02em; color: transparent;
+  -webkit-text-stroke: 1.5px var(--fg-faint);
+}
+.slide-section .title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 56px; letter-spacing: -0.02em; margin-top: var(--s-4);
+}
+
+/* ---- 3 · Content ------------------------------------------ */
+.slide-content .title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 44px; letter-spacing: -0.02em; max-width: 900px;
+  margin-bottom: var(--s-7);
+}
+.slide-content .cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-7); }
+.slide-content .point { padding-top: var(--s-4); border-top: 1px solid var(--border); }
+.slide-content .point h4 { margin-bottom: var(--s-2); }
+.slide-content .point p { font-size: var(--t-small); }
+
+/* ---- 4 · Stats -------------------------------------------- */
+.slide-stats .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  background: var(--border); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.slide-stats .stat { background: var(--surface); padding: var(--s-7) var(--s-6); }
+.slide-stats .stat .numeral { font-size: 88px; }
+.slide-stats .stat .what { margin-top: var(--s-3); font-size: var(--t-small); color: var(--fg-muted); }
+.slide-stats .stat .src { margin-top: var(--s-2); font-size: var(--t-caption); color: var(--fg-faint); }
+
+/* ---- 5 · Case --------------------------------------------- */
+.slide-case .quote {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 36px; line-height: 1.25; letter-spacing: -0.01em;
+  max-width: 860px;
+}
+.slide-case .who { margin-top: var(--s-5); display: flex; align-items: center; gap: var(--s-4); }
+.slide-case .who img { height: 32px; }
+.slide-case .results { margin-top: var(--s-7); display: flex; gap: var(--s-8); }
+.slide-case .results .numeral { font-size: 48px; }
+.slide-case .results .what { font-size: var(--t-caption); color: var(--fg-faint); margin-top: var(--s-2); }
+
+/* ---- 6 · CTA (ink) ---------------------------------------- */
+.slide-cta { justify-content: center; align-items: flex-start; }
+.slide-cta .title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 64px; letter-spacing: -0.02em; max-width: 800px;
+}
+.slide-cta .actions { margin-top: var(--s-7); display: flex; gap: var(--s-4); align-items: center; }
+.slide-cta .contact { margin-top: var(--s-6); font-size: var(--t-small); color: var(--fg-muted); }
+
+/* ---- Print ------------------------------------------------- */
+@page { size: 1280px 720px; margin: 0; }
+@media print {
+  .deck { padding: 0; gap: 0; background: none; }
+  .slide { box-shadow: none; page-break-after: always; }
+}
