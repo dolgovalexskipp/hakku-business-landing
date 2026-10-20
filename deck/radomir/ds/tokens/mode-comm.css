@@ -1,0 +1,35 @@
+/* ============================================================
+   Hakku 2.0 — Communication mode (layer 3 of 4: mode)
+   ----------------------------------------------------------------
+   [data-mode="comm"] — landings, presentations, КП, one-pagers,
+   digital offers. Big editorial typography, generous air, hero
+   graphics (holographic glass renders), marquees.
+
+   The core :root defaults ARE comm-scaled (canon), so this layer
+   mostly documents and pins the comm-specific knobs.
+   ============================================================ */
+
+[data-mode="comm"] {
+  /* Тело comm — Manrope. Решение 2026-09: пин Inter снят, Inter остаётся в фолбэке. */
+  --font-body: "Manrope", "Inter", system-ui, sans-serif;
+
+  --focus-ring: 0 0 0 3px rgba(42,62,244,.25);  /* accessible focus, same as product mode */
+
+  /* 140px давало «почти весь экран между блоками»: .section читает токен
+     как одно значение и сверху, и снизу. Сокращено до 36px, единое
+     на всех ширинах. */
+  --section-pad:    36px;
+  --section-gap:    var(--s-8);
+
+  /* Hero graphic sizing — holo render sits large, rotated, cropped */
+  --hero-graphic:   520px;    /* nominal size of the holo render */
+
+  /* Deck (presentation) geometry — 16:9 master */
+  --slide-w:        1280px;
+  --slide-h:        720px;
+  --slide-pad:      72px;
+
+  /* Comm type re-pins (same as core defaults; explicit for clarity) */
+  --t-hero:  clamp(3rem, 6.8vw, 5.6rem);  /* @kind font */
+  --t-h1:    clamp(2.4rem, 5vw, 4rem);    /* @kind font */
+}

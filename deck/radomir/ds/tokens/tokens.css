@@ -1,0 +1,20 @@
+/* ============================================================
+   Hakku 2.0 — Design tokens (aggregate)
+   Import THIS file (or vendor the tokens/ folder via ds-update.sh).
+   Pure variables + @font-face. Base element styles live in
+   ../components/base.css; single full entry point is ../hakku.css.
+   ----------------------------------------------------------------
+   Usage:
+     <link rel="stylesheet" href="design_system/tokens/tokens.css">
+     <body data-theme="light|dark" data-mode="comm|product">
+   Defaults without attributes: light theme, comm-like canon scale.
+
+   2.9.2 подставляется scripts/ds-update.sh из VERSION — тот же
+   плейсхолдер, что в ../hakku.css, и та же причина: без него эти
+   вложенные импорты кэшируются насмерть отдельно от внешнего hakku.css.
+   ============================================================ */
+@import url("core.css?v=2.9.2");
+@import url("themes.css?v=2.9.2");
+@import url("mode-comm.css?v=2.9.2");
+@import url("mode-product.css?v=2.9.2");
+@import url("mobile.css?v=2.9.2");

@@ -1,0 +1,15 @@
+/* ============================================================
+   Hakku 2.0 — Design System entry point
+   Single stylesheet for consumers to link: tokens (5 layers) +
+   base element styles + component classes + mobile layer.
+
+   2.9.2 — не редактировать руками. scripts/ds-update.sh
+   подставляет сюда содержимое VERSION при каждом вендоринге, поэтому
+   ключ кэш-бастинга не может отстать от релиза. Плейсхолдер — валидный
+   query-string, так что файл, открытый напрямую из этого репозитория
+   (без вендоринга), резолвит импорты по пути и работает как есть.
+   ============================================================ */
+@import url("tokens/tokens.css?v=2.9.2");
+@import url("components/base.css?v=2.9.2");
+@import url("components/components.css?v=2.9.2");
+@import url("components/mobile.css?v=2.9.2");
